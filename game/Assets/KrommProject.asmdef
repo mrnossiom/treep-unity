@@ -1,0 +1,17 @@
+{
+    "name": "KrommProject",
+    "rootNamespace": "KrommProject",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [
+        "LinuxStandalone64",
+        "WindowsStandalone64"
+    ],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
