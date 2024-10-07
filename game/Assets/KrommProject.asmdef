@@ -1,12 +1,18 @@
 {
     "name": "KrommProject",
     "rootNamespace": "KrommProject",
-    "references": [],
-    "includePlatforms": [],
-    "excludePlatforms": [
+    "references": [
+        "GUID:1491147abca9d7d4bb7105af628b223e",
+        "GUID:3b8ed52f1b5c64994af4c4e0aa4b6c4b"
+    ],
+    "includePlatforms": [
+        "Editor",
         "LinuxStandalone64",
+        "macOSStandalone",
+        "WebGL",
         "WindowsStandalone64"
     ],
+    "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],

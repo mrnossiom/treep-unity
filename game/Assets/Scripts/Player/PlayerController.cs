@@ -1,9 +1,8 @@
+using Unity.Netcode;
 using UnityEngine;
 
-namespace KrommProject.Player
-{
-    public enum JumpState
-    {
+namespace KrommProject.Player {
+    public enum JumpState {
         Grounded,
         PrepareToJump,
         Jumping,
@@ -12,8 +11,7 @@ namespace KrommProject.Player
     }
 
     [RequireComponent(typeof(Rigidbody2D), typeof(Rigidbody2D))]
-    public sealed class Controller : MonoBehaviour
-    {
+    public sealed class Controller : NetworkBehaviour {
         // Components
         private Rigidbody2D _body;
         private Collider2D _collider2d;
@@ -50,25 +48,24 @@ namespace KrommProject.Player
         private float _jumpModifier = 1.5f;
         private float _jumpDeceleration = 0.5f;
 
+        public override void OnNetworkSpawn() {
+            if (!IsOwner) Destroy(this);
+        }
 
-        private void Awake()
-        {
+        private void Awake() {
             _body = GetComponent<Rigidbody2D>();
             _collider2d = GetComponent<Collider2D>();
         }
 
-        private void Update()
-        {
-            if (_controlEnabled)
-            {
+        private void Update() {
+            if (_controlEnabled) {
                 _move.x = Input.GetAxis("Horizontal");
                 if (_jumpState == JumpState.Grounded && Input.GetButtonDown("Jump"))
                     _jumpState = JumpState.PrepareToJump;
                 else if (Input.GetButtonUp("Jump")) _stopJump = true;
                 // Schedule<PlayerStopJump>().player = this;
             }
-            else
-            {
+            else {
                 _move.x = 0;
             }
 
@@ -78,11 +75,9 @@ namespace KrommProject.Player
             ComputeVelocity();
         }
 
-        private void UpdateJumpState()
-        {
+        private void UpdateJumpState() {
             _jump = false;
-            switch (_jumpState)
-            {
+            switch (_jumpState) {
                 case JumpState.PrepareToJump:
                     _jumpState = JumpState.Jumping;
                     _jump = true;
@@ -106,15 +101,12 @@ namespace KrommProject.Player
             }
         }
 
-        private void ComputeVelocity()
-        {
-            if (_jump && IsGrounded)
-            {
+        private void ComputeVelocity() {
+            if (_jump && IsGrounded) {
                 velocity.y = _jumpTakeOffSpeed * _jumpModifier;
                 _jump = false;
             }
-            else if (_stopJump)
-            {
+            else if (_stopJump) {
                 _stopJump = false;
                 if (velocity.y > 0) velocity.y = velocity.y * _jumpDeceleration;
             }
@@ -129,8 +121,7 @@ namespace KrommProject.Player
         }
 
 
-        private void FixedUpdate()
-        {
+        private void FixedUpdate() {
             //if already falling, fall faster than the jump speed, otherwise use normal gravity.
             if (velocity.y < 0)
                 velocity += Physics2D.gravity * (gravityModifier * Time.deltaTime);
@@ -155,40 +146,33 @@ namespace KrommProject.Player
         }
 
 
-        private void PerformMovement(Vector2 move, bool yMovement)
-        {
+        private void PerformMovement(Vector2 move, bool yMovement) {
             var distance = move.magnitude;
 
-            if (distance > MinMoveDistance)
-            {
+            if (distance > MinMoveDistance) {
                 //check if we hit anything in current direction of travel
                 var count = _body.Cast(move, _contactFilter, _hitBuffer, distance + ShellRadius);
-                for (var i = 0; i < count; i++)
-                {
+                for (var i = 0; i < count; i++) {
                     var currentNormal = _hitBuffer[i].normal;
 
                     //is this surface flat enough to land on?
-                    if (currentNormal.y > MinGroundNormalY)
-                    {
+                    if (currentNormal.y > MinGroundNormalY) {
                         IsGrounded = true;
                         // if moving up, change the groundNormal to new surface normal.
-                        if (yMovement)
-                        {
+                        if (yMovement) {
                             _groundNormal = currentNormal;
                             currentNormal.x = 0;
                         }
                     }
 
-                    if (IsGrounded)
-                    {
+                    if (IsGrounded) {
                         //how much of our velocity aligns with surface normal?
                         var projection = Vector2.Dot(velocity, currentNormal);
                         if (projection < 0)
                             //slower velocity if moving against the normal (up a hill).
                             velocity = velocity - projection * currentNormal;
                     }
-                    else
-                    {
+                    else {
                         //We are airborne, but hit something, so cancel vertical up and horizontal velocity.
                         velocity.x *= 0;
                         velocity.y = Mathf.Min(velocity.y, 0);
