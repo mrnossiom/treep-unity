@@ -50,6 +50,8 @@ namespace KrommProject.Player {
 
         public override void OnNetworkSpawn() {
             if (!IsOwner) Destroy(this);
+
+            name = "Hello";
         }
 
         private void Awake() {
