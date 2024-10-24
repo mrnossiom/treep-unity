@@ -1,7 +1,7 @@
 using Unity.Netcode;
 using UnityEngine;
 
-namespace KrommProject.Player {
+namespace Treep.Player {
     public enum JumpState {
         Grounded,
         PrepareToJump,

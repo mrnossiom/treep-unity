@@ -1,6 +1,6 @@
 using Unity.Netcode.Components;
 
-namespace KrommProject.Network {
+namespace Treep.Network {
     public class ClientNetworkTransform : NetworkTransform {
         protected override bool OnIsServerAuthoritative() {
             return false;

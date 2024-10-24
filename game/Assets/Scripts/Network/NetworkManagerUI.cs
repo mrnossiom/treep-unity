@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace KrommProject {
+namespace Treep.Network {
     public class NetworkManagerUI : MonoBehaviour {
         [SerializeField] private Button hostButton;
         [SerializeField] private Button clientButton;

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace KrommProject {
+namespace Treep.Network {
     public class InGameNetworkManagerUI : MonoBehaviour {
         [SerializeField] private Button quitButton;
         [SerializeField] private Scene menuScene;
