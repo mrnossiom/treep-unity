@@ -1,10 +1,22 @@
 fileFormatVersion: 2
-guid: d6aa1da63f4c7dc77a64a03ebdd63523
+guid: 5e25ae629f918a5ed80d1aa37f29b85a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2250272332102851610
-    second: treep_0
+      213: -4464201471494240252
+    second: logo-kromm-studio_0
+  - first:
+      213: -7182249761525799649
+    second: logo-kromm-studio_1
+  - first:
+      213: -2354813061192049190
+    second: logo-kromm-studio_2
+  - first:
+      213: 7792364232150976331
+    second: logo-kromm-studio_3
+  - first:
+      213: -7512856730697701355
+    second: logo-kromm-studio_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +125,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: treep_0
+      name: logo-kromm-studio_0
       rect:
         serializedVersion: 2
-        x: 3
+        x: 0
         y: 0
-        width: 321
-        height: 324
+        width: 151
+        height: 170
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +140,96 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6e3ae158c3d65c0e0800000000000000
-      internalID: -2250272332102851610
+      spriteID: 4084fcdf968fb02c0800000000000000
+      internalID: -4464201471494240252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: logo-kromm-studio_1
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 0
+        width: 152
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f15ee1425e5835c90800000000000000
+      internalID: -7182249761525799649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: logo-kromm-studio_2
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 0
+        width: 152
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: add92374ff5025fd0800000000000000
+      internalID: -2354813061192049190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: logo-kromm-studio_3
+      rect:
+        serializedVersion: 2
+        x: 509
+        y: 0
+        width: 152
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4781d1cbf9042c60800000000000000
+      internalID: 7792364232150976331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: logo-kromm-studio_4
+      rect:
+        serializedVersion: 2
+        x: 679
+        y: 0
+        width: 151
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5186c56bb98fcb790800000000000000
+      internalID: -7512856730697701355
       vertices: []
       indices: 
       edges: []
@@ -148,7 +248,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      treep_0: -2250272332102851610
+      logo-kromm-studio_0: -4464201471494240252
+      logo-kromm-studio_1: -7182249761525799649
+      logo-kromm-studio_2: -2354813061192049190
+      logo-kromm-studio_3: 7792364232150976331
+      logo-kromm-studio_4: -7512856730697701355
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
