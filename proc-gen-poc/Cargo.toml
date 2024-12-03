@@ -4,5 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+glam = "0.29.2"
 petgraph = "0.6.5"
 rand = { version = "0.8.5", features = ["small_rng"] }
+raqote = "0.8.5"

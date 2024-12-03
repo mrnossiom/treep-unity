@@ -1,0 +1,49 @@
+use crate::{
+	level::LevelBlueprint,
+	render::render_room_graph,
+	room::{RoomProvider, RoomTemplate},
+};
+use glam::UVec2;
+use petgraph::graph::UnGraph;
+use rand::rngs::SmallRng;
+use rand::seq::SliceRandom;
+
+pub(crate) type EvolvedGraph = UnGraph<PlacedRoom, ()>;
+
+pub(crate) struct PlacedRoom {
+	pub(crate) place: UVec2,
+	pub(crate) template: RoomTemplate<'static>,
+}
+
+pub(crate) struct Evolver<R: RoomProvider> {
+	pub(crate) room_provider: R,
+	pub(crate) level_blueprint: LevelBlueprint,
+	pub(crate) rng: SmallRng,
+
+	pub(crate) evolved: EvolvedGraph,
+}
+
+impl<R: RoomProvider> Evolver<R> {
+	pub(crate) fn find_layout(&mut self) -> Option<EvolvedGraph> {
+		let id = self.level_blueprint.node_indices().next().unwrap();
+		let root = &self.level_blueprint[id];
+
+		let mut templates = self.room_provider.provide_room(&root.kind);
+		templates.shuffle(&mut self.rng);
+
+		for template in templates {
+			self.evolved.add_node(PlacedRoom {
+				place: UVec2::new(0, 0),
+				template,
+			});
+
+			if true {
+				break;
+			}
+		}
+
+		render_room_graph(&self.evolved);
+
+		todo!()
+	}
+}
