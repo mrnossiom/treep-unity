@@ -1,0 +1,18 @@
+{# THIS TEMPLATE SHOULD NOT BE EXTENTED AND IS ONLY USED FOR THE HOME PAGE -#}
+
+{% extends "base.html" -%}
+
+{%- block title -%}
+{%- endblock -%}
+
+{%- block extra_head -%}
+<!-- <meta name="google-site-verification" content="DsVnNWOXsFhm4bcwz4jkfR82fjh2wKwQZKBQcn4VUak" /> -->
+{%- endblock -%}
+
+{% block content %}
+<div class="post">
+  <div class="post-content">
+    {{ section.content | safe }}
+  </div>
+</div>
+{% endblock content %}
