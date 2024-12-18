@@ -14,7 +14,7 @@ pub(crate) enum RoomKind {
 	Exit,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub(crate) enum RoomShape {
 	Rectangle(UVec2),
 }
@@ -31,7 +31,7 @@ impl Door {
 	}
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub(crate) struct RoomTemplate<'a> {
 	pub(crate) name: &'a str,
 	pub(crate) shape: RoomShape,
@@ -46,22 +46,22 @@ impl<'a> RoomTemplate<'a> {
 }
 
 pub(crate) trait RoomProvider {
-	fn provide_room(&self, kind: &RoomKind) -> Vec<RoomTemplate<'static>>;
+	fn provide_of_kind(&self, kind: &RoomKind) -> &[RoomTemplate<'static>];
 }
 
 pub(crate) struct StaticRoomTable;
 
 impl RoomProvider for StaticRoomTable {
-	fn provide_room(&self, kind: &RoomKind) -> Vec<RoomTemplate<'static>> {
+	fn provide_of_kind(&self, kind: &RoomKind) -> &[RoomTemplate<'static>] {
 		use blueprints::*;
 
 		match kind {
-			RoomKind::Spawn => vec![],
-			RoomKind::Normal => vec![BASIC_1_ROOM, BASIC_2_ROOM],
-			RoomKind::Reward => vec![],
-			RoomKind::Shop => vec![],
-			RoomKind::Boss => vec![],
-			RoomKind::Exit => vec![],
+			RoomKind::Spawn => &[],
+			RoomKind::Normal => &[BASIC_1, BASIC_2],
+			RoomKind::Reward => &[],
+			RoomKind::Shop => &[],
+			RoomKind::Boss => &[],
+			RoomKind::Exit => &[],
 		}
 	}
 }
@@ -89,7 +89,7 @@ pub(crate) mod blueprints {
 	/// W       D
 	/// WWWWWWWWW
 	/// ```
-	pub(crate) const BASIC_1_ROOM: RoomTemplate<'static> = RoomTemplate::new(
+	pub(crate) const BASIC_1: RoomTemplate<'static> = RoomTemplate::new(
 		"basic-1",
 		RoomShape::Rectangle(UVec2::new(8, 5)),
 		&[Door::new(UVec2 { x: 0, y: 0 }, UVec2 { x: 0, y: 0 })],
@@ -113,9 +113,32 @@ pub(crate) mod blueprints {
 	/// D    W
 	/// WWWWWW
 	/// ```
-	pub(crate) const BASIC_2_ROOM: RoomTemplate<'static> = RoomTemplate::new(
+	pub(crate) const BASIC_2: RoomTemplate<'static> = RoomTemplate::new(
 		"basic-2",
 		RoomShape::Rectangle(UVec2::new(5, 8)),
 		&[Door::new(UVec2::new(0, 6), UVec2::new(0, 7))],
+	);
+
+	/// # Caracteristics
+	///
+	/// - Size: `(10,4)`
+	/// - Doors:
+	///   - `(0,1)-(0,2)`
+	///   - `(9,1)-(9,2)`
+	///
+	/// # Preview
+	/// ```text
+	/// 0WWWWWWWWW
+	/// D        D
+	/// D        D
+	/// WWWWWWWWWW
+	/// ```
+	pub(crate) const CORRIDOR_1: RoomTemplate<'static> = RoomTemplate::new(
+		"corridor-1",
+		RoomShape::Rectangle(UVec2::new(10, 4)),
+		&[
+			Door::new(UVec2::new(0, 6), UVec2::new(0, 7)),
+			Door::new(UVec2::new(0, 6), UVec2::new(0, 7)),
+		],
 	);
 }

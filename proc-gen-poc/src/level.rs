@@ -55,7 +55,7 @@ pub(crate) mod blueprints {
 
 	/// Basic level graph
 	///
-	/// *(BEGIN)* `spawn` → `one` → `two` → `three` → `boss` → `exit` *(STOP)*
+	/// *(BEGIN)* `room-1` → `room-2` *(STOP)*
 	pub(crate) fn basic_level_graph() -> LevelBlueprint {
 		let one_room = Room::new("room-1", RoomKind::Normal);
 		let two_room = Room::new("room-2", RoomKind::Normal);

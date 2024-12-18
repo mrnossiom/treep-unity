@@ -20,7 +20,7 @@ pub(crate) struct Evolver<R: RoomProvider> {
 	pub(crate) level_blueprint: LevelBlueprint,
 	pub(crate) rng: SmallRng,
 
-	pub(crate) evolved: EvolvedGraph,
+	pub(crate) evolved_graph: EvolvedGraph,
 }
 
 impl<R: RoomProvider> Evolver<R> {
@@ -28,21 +28,27 @@ impl<R: RoomProvider> Evolver<R> {
 		let id = self.level_blueprint.node_indices().next().unwrap();
 		let root = &self.level_blueprint[id];
 
-		let mut templates = self.room_provider.provide_room(&root.kind);
-		templates.shuffle(&mut self.rng);
+		let templates = self.room_provider.provide_of_kind(&root.kind);
+		// TODO: replace with random access struct implementing IntoIterator?
+		let mut indices = (0..templates.len()).collect::<Vec<_>>();
+		indices.shuffle(&mut self.rng);
 
-		for template in templates {
-			self.evolved.add_node(PlacedRoom {
+		for index in indices {
+			let template = &templates[index];
+
+			let placed_room_id = self.evolved_graph.add_node(PlacedRoom {
 				place: UVec2::new(0, 0),
-				template,
+				template: template.clone(),
 			});
 
 			if true {
 				break;
+			} else {
+				self.evolved_graph.remove_node(placed_room_id).unwrap();
 			}
 		}
 
-		render_room_graph(&self.evolved);
+		render_room_graph(&self.evolved_graph);
 
 		todo!()
 	}

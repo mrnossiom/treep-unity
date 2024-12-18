@@ -16,7 +16,7 @@ fn main() {
 		level_blueprint: level::blueprints::basic_level_graph(),
 		rng: SmallRng::seed_from_u64(SEED),
 
-		evolved: EvolvedGraph::new_undirected(),
+		evolved_graph: EvolvedGraph::new_undirected(),
 	};
 
 	let _final_layout = evolver.find_layout().unwrap();
