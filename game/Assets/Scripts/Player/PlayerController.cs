@@ -1,4 +1,3 @@
-using Unity.Netcode;
 using UnityEngine;
 
 namespace Treep.Player {
@@ -10,8 +9,8 @@ namespace Treep.Player {
         Landed
     }
 
-    [RequireComponent(typeof(Rigidbody2D), typeof(Rigidbody2D))]
-    public sealed class Controller : NetworkBehaviour {
+    [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
+    public sealed class Controller : MonoBehaviour {
         // Components
         private Rigidbody2D _body;
         private Collider2D _collider2d;
@@ -47,12 +46,6 @@ namespace Treep.Player {
 
         private float _jumpModifier = 1.5f;
         private float _jumpDeceleration = 0.5f;
-
-        public override void OnNetworkSpawn() {
-            if (!IsOwner) Destroy(this);
-
-            name = "Hello";
-        }
 
         private void Awake() {
             _body = GetComponent<Rigidbody2D>();
