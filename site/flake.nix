@@ -23,6 +23,7 @@
         {
           default = pkgs.mkShell rec {
             nativeBuildInputs = with pkgs; [
+              just
               zola
               act
             ];
