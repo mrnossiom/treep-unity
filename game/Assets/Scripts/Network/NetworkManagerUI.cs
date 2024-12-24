@@ -1,4 +1,4 @@
-using Unity.Netcode;
+using Mirror;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,20 +11,17 @@ namespace Treep.Network {
 
         private void Start() {
             hostButton.onClick.AddListener(() => {
-                Debug.Log("Hosting started...");
-                NetworkManager.Singleton.StartHost();
+                NetworkManager.singleton.StartHost();
                 SceneManager.LoadSceneAsync("Playground", LoadSceneMode.Additive);
                 SceneManager.UnloadSceneAsync("Menu");
             });
             clientButton.onClick.AddListener(() => {
-                Debug.Log("Client started...");
-                NetworkManager.Singleton.StartClient();
+                NetworkManager.singleton.StartClient();
                 SceneManager.LoadSceneAsync("Playground", LoadSceneMode.Additive);
                 SceneManager.UnloadSceneAsync("Menu");
             });
             serverButton.onClick.AddListener(() => {
-                Debug.Log("Server started...");
-                NetworkManager.Singleton.StartServer();
+                NetworkManager.singleton.StartServer();
                 SceneManager.LoadScene("Playground", LoadSceneMode.Additive);
                 SceneManager.UnloadSceneAsync("Menu");
             });

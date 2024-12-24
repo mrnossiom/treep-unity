@@ -1,3 +1,4 @@
+using Mirror;
 using UnityEngine;
 
 namespace Treep.Player {
@@ -10,7 +11,7 @@ namespace Treep.Player {
     }
 
     [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
-    public sealed class Controller : MonoBehaviour {
+    public sealed class Controller : NetworkBehaviour {
         // Components
         private Rigidbody2D _body;
         private Collider2D _collider2d;
@@ -53,6 +54,8 @@ namespace Treep.Player {
         }
 
         private void Update() {
+            if (!isLocalPlayer) return;
+            
             if (_controlEnabled) {
                 _move.x = Input.GetAxis("Horizontal");
                 if (_jumpState == JumpState.Grounded && Input.GetButtonDown("Jump"))
@@ -179,7 +182,7 @@ namespace Treep.Player {
                 }
             }
 
-            _body.position = _body.position + move.normalized * distance;
+            _body.position += move.normalized * distance;
         }
     }
 }

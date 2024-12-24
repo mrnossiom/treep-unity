@@ -1,4 +1,4 @@
-using Unity.Netcode;
+using Mirror;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,8 +10,9 @@ namespace Treep.Network {
 
         private void Start() {
             quitButton.onClick.AddListener(() => {
-                Debug.Log("Quitting session and going back to menu...");
-                NetworkManager.Singleton.Shutdown();
+                NetworkManager.singleton.StopServer();
+                NetworkManager.singleton.StopHost();
+                NetworkManager.singleton.StopClient();
                 SceneManager.LoadSceneAsync("Menu", LoadSceneMode.Additive);
                 SceneManager.UnloadSceneAsync("Playground");
             });
