@@ -434,7 +434,7 @@ MonoBehaviour:
   offlineSceneLoadDelay: 0
   transport: {fileID: 1556541277}
   networkAddress: localhost
-  maxConnections: 100
+  maxConnections: 5
   disconnectInactiveConnections: 0
   disconnectInactiveTimeout: 60
   authenticator: {fileID: 0}
