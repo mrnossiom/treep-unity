@@ -14,33 +14,28 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 5px;
   background-color: #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-  img {
-    height: 30px;
+  .studio-logo {
+    height: 35px;
   }
-}
 
-nav ul {
-  list-style-type: none;
-  display: flex;
+  .game {
+    display: flex;
+    align-items: center;
 
-  li {
-    margin-left: 20px;
-
-    a {
-      text-decoration: none;
-      color: #333;
-      font-weight: 500;
-      transition: color 0.3s;
-      padding: 20px;
-
-      &:hover {
-        color: #00710c;
-      }
+    p {
+      margin-left: 10px;
+      font-size: 20px;
     }
+    
+    img {
+      height: 50px;
+    }
+
+    
   }
 }
 

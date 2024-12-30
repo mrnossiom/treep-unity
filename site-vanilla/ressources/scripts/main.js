@@ -1,2 +1,1 @@
-console.log("JS loaded");
-
+console.log("Script loaded")
