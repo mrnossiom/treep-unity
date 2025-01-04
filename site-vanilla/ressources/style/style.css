@@ -20,11 +20,13 @@ header {
 
   .studio-logo {
     height: 35px;
+    margin-right: 5px;
   }
 
   .game {
     display: flex;
     align-items: center;
+    margin-left: 5px;
 
     p {
       margin-left: 10px;
