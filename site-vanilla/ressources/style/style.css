@@ -7,35 +7,35 @@
 body {
   background-color: #ecf0f1;
   font-family: helvetica, arial, sans-serif;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px;
+  padding: 0.5vh;
   background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 0.1);
 
   .studio-logo {
-    height: 35px;
-    margin-right: 5px;
+    height: 3.5vh;
+    margin-right: 0.2vw;
   }
 
   .game {
     display: flex;
     align-items: center;
-    margin-left: 5px;
+    margin-left: 0.2vw;
 
     p {
-      margin-left: 10px;
-      font-size: 20px;
+      margin-left: 0.5vw;
+      font-size: 1.25rem;
     }
-    
+
     img {
-      height: 50px;
-    }   
+      height: 5vh;
+    }
   }
 }
 
@@ -49,58 +49,76 @@ header {
   background-blend-mode: overlay;
 
   .content h1 {
-    font-size: 48px;
-    margin-bottom: 20px;
+    font-size: 3rem;
+    margin-bottom: 2vh;
   }
 
   .content p {
-    font-size: 19px;
-    margin-bottom: 30px;
+    font-size: 1.2rem;
+    margin-bottom: 3vh;
   }
 }
 
 .dl-button {
   display: inline-block;
-  padding: 15px 40px;
-  background: rgb(117, 44, 0);
+  padding: 2vh 5vw;
   background: linear-gradient(90deg, rgba(117, 44, 0, 1) 0%, rgba(185, 76, 0, 1) 51%, rgba(0, 113, 12, 1) 100%);
   color: #ffffff;
   text-decoration: none;
   font-weight: bold;
-  font-size: 19px;
-  border-radius: 30px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  font-size: 1.2rem;
+  border-radius: 15vw;
+  box-shadow: 0 0.5vh 1.5vh rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease-in-out;
 
   &:hover {
     transform: scale(1.05);
-    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0.6vh 2vh rgba(0, 0, 0, 0.3);
   }
 }
 
 section {
-  padding: 60px 20px;
-  max-width: 1000px;
+  padding: 10vh 5vw;
+  max-width: 80vw;
   margin: 0 auto;
   text-align: center;
 
   h2 {
-    margin-bottom: 30px;
+    margin-bottom: 3vh;
     color: #333;
   }
 }
 
 .download a {
-  margin: 20px;
+  display: inline-block;
+  width: 15vw;
+  height: 6vh;
+  background: linear-gradient(90deg, rgba(117, 44, 0, 1) 0%, rgba(185, 76, 0, 1) 51%, rgba(0, 113, 12, 1) 100%);
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.2rem;
+  border-radius: 3vh;
+  box-shadow: 0 0.5vh 1.5vh rgba(0, 0, 0, 0.2);
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: all 0.3s ease-in-out;
+  margin: 2vh;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0.6vh 2vh rgba(0, 0, 0, 0.3);
+  }
 }
 
 footer {
   text-align: center;
-  padding: 20px;
-  font-size: 14px;
+  padding: 2vh;
+  font-size: 0.9rem;
   background-color: #ffffff;
   color: #888;
-  border-top: 1px solid #ddd;
+  border-top: 0.1vh solid #ddd;
 
   a {
     text-decoration: none;
