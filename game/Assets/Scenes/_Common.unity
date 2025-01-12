@@ -331,8 +331,9 @@ GameObject:
   m_Component:
   - component: {fileID: 569428861}
   - component: {fileID: 569428860}
+  - component: {fileID: 569428862}
   m_Layer: 0
-  m_Name: _LoadPlayground
+  m_Name: _Fixes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -365,6 +366,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &569428862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569428859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d038b46eae0b99ac8bb872c5ecec03a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  font: {fileID: 12800000, guid: 891349ed6c370194a8c6135995d27d32, type: 3}
 --- !u!1 &1556541276
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,6 +390,7 @@ GameObject:
   - component: {fileID: 1556541280}
   - component: {fileID: 1556541279}
   - component: {fileID: 1556541277}
+  - component: {fileID: 1556541281}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -472,6 +487,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1556541281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556541276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6442dc8070ceb41f094e44de0bf87274, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offsetX: 0
+  offsetY: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
