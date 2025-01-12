@@ -1,4 +1,0 @@
-[editor]
-auto-format = false # zola's custom syntax is not supported
-soft-wrap.enable = true # wrapping is useful when editing markdown
-
