@@ -1,3 +1,4 @@
+/* Main style */
 * {
   margin: 0;
   padding: 0;
@@ -12,6 +13,8 @@ body {
   line-height: 1.6;
 }
 
+
+/* Header style */
 header {
   display: flex;
   justify-content: space-between;
@@ -20,9 +23,11 @@ header {
   background-color: #ffffff;
   box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 0.1);
 
-  .studio-logo {
-    height: 3.5vh;
+  a {
     margin-right: 0.2vw;
+    text-decoration: none;
+    color: rgba(0, 113, 12, 1);
+    font-size: 1.25rem;
   }
 
   .game {
@@ -41,6 +46,8 @@ header {
   }
 }
 
+
+/* Banner style */
 .banner {
   display: flex;
   align-items: center;
@@ -51,12 +58,12 @@ header {
   background-blend-mode: overlay;
 
   .content h1 {
-    font-size: 3rem;
+    font-size: 5rem;
     margin-bottom: 2vh;
   }
 
   .content p {
-    font-size: 1.2rem;
+    font-size: 2rem;
     margin-bottom: 3vh;
   }
 }
@@ -68,7 +75,7 @@ header {
   color: #ffffff;
   text-decoration: none;
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 2rem;
   border-radius: 15vw;
   box-shadow: 0 0.5vh 1.5vh rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease-in-out;
@@ -79,24 +86,79 @@ header {
   }
 }
 
-section {
+
+/* About section style */
+.about {
+  padding: 10vh 5vw;
+  max-width: 80vw;
+  margin: 0 auto;
+  color: #333;
+
+  .general {
+    font-size: 1.9rem;
+    text-align: center;
+    margin-bottom: 15vh;
+  }
+  
+  h1 {
+    font-size: 5rem;
+    text-align: center;
+  }
+
+  h3 {
+    font-size: 3rem;
+    margin-bottom: 8vh;
+    text-align: center;
+  }
+
+  .title {
+    font-weight: bold;
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .feat-img {
+    width: 25vw;
+    border-radius: 2rem;
+  }
+
+  .feat-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8vh;
+    font-size: 1.9rem;
+    gap: 2rem;
+  }
+
+  .feat-text {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+
+  .end-msg {
+    text-align: center;
+    margin-top: 10vh;
+    font-size: 1.9rem;
+  }
+}
+
+
+/* Download section style */
+.download {
   padding: 10vh 5vw;
   max-width: 80vw;
   margin: 0 auto;
   text-align: center;
-
-  h2 {
-    margin-bottom: 3vh;
-    color: #333;
-  }
-}
-
-.download {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
-  text-align: center;
+  gap: 2.5rem;
+
+  h1 {
+    font-size: 5rem;
+  }
 }
 
 .download-buttons {
@@ -110,14 +172,14 @@ section {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  width: 15vw;
-  height: 6vh;
+  width: 20vw;
+  height: 8vh;
   background: linear-gradient(90deg, rgba(117, 44, 0, 1) 0%, rgba(185, 76, 0, 1) 51%, rgba(0, 113, 12, 1) 100%);
   color: #ffffff;
   text-decoration: none;
   font-weight: bold;
-  font-size: 1.2rem;
-  border-radius: 3vh;
+  font-size: 2rem;
+  border-radius: 4vh;
   box-shadow: 0 0.5vh 1.5vh rgba(0, 0, 0, 0.2);
   text-align: center;
   white-space: nowrap;
@@ -150,6 +212,8 @@ section {
   }
 }
 
+
+/* Footer style */
 footer {
   text-align: center;
   padding: 2vh;
