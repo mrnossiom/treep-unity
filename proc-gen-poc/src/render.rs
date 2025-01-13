@@ -8,7 +8,10 @@ use svg::{
 	Document, Node,
 };
 
-pub(crate) fn render_room_graph(graph: &EvolvedGraph) -> io::Result<()> {
+pub(crate) fn render_room_graph(
+	graph: &EvolvedGraph,
+	path: impl AsRef<std::path::Path>,
+) -> io::Result<()> {
 	let mut document = Document::new().set("viewBox", (-50, -25, 100, 50));
 
 	for room in graph.node_weights() {
@@ -16,7 +19,7 @@ pub(crate) fn render_room_graph(graph: &EvolvedGraph) -> io::Result<()> {
 		document = document.add(shape);
 	}
 
-	svg::save("target/out/graph.svg", &document)?;
+	svg::save(path, &document)?;
 
 	Ok(())
 }

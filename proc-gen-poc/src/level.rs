@@ -1,19 +1,32 @@
 use crate::room::RoomKind;
-use petgraph::graph::UnGraph;
+use core::fmt;
+use petgraph::{graph::NodeIndex, Graph};
 
-pub(crate) type LevelBlueprint = UnGraph<Room, Connection>;
+pub(crate) type LevelBlueprint = Graph<Room, Connection>;
 
-/// This represent a room instance in the [`LevelGraph`]
+/// This represent a room instance in the [`LevelBlueprint`]
 #[derive(Debug)]
 pub(crate) struct Room {
 	pub(crate) name: &'static str,
 
-	// corners: Vec<Vec2>,
 	pub(crate) kind: RoomKind,
+}
+
+impl fmt::Display for Room {
+	fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+		let Self { name, kind } = self;
+		writeln!(f, r#"🥡 "{name}" {kind:?}"#)
+	}
 }
 
 #[derive(Debug)]
 pub(crate) struct Connection {}
+
+impl fmt::Display for Connection {
+	fn fmt(&self, _: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+		Ok(())
+	}
+}
 
 impl Room {
 	fn new(name: &'static str, kind: RoomKind) -> Self {
@@ -23,6 +36,29 @@ impl Room {
 
 pub(crate) mod blueprints {
 	use super::*;
+	/// Basic level graph
+	///
+	/// *(BEGIN)* `room-1` → `room-2` *(STOP)*
+	pub(crate) fn basic_level_graph() -> (LevelBlueprint, NodeIndex) {
+		let spawn = Room::new("spawn-1", RoomKind::Spawn);
+		let exit = Room::new("exit-1", RoomKind::Exit);
+
+		let corridor_1 = Room::new("corridor-1", RoomKind::Normal);
+		let corridor_2 = Room::new("corridor-2", RoomKind::Normal);
+
+		let mut graph = LevelBlueprint::new();
+
+		let spawn = graph.add_node(spawn);
+		let exit = graph.add_node(exit);
+		let corridor_1 = graph.add_node(corridor_1);
+		let corridor_2 = graph.add_node(corridor_2);
+
+		graph.add_edge(spawn, corridor_1, Connection {});
+		graph.add_edge(corridor_1, corridor_2, Connection {});
+		graph.add_edge(corridor_2, exit, Connection {});
+
+		(graph, spawn)
+	}
 
 	/// Simple level graph
 	///
@@ -35,7 +71,7 @@ pub(crate) mod blueprints {
 		let boss_room = Room::new("boss", RoomKind::Boss);
 		let exit_room = Room::new("exit", RoomKind::Exit);
 
-		let mut graph = LevelBlueprint::new_undirected();
+		let mut graph = LevelBlueprint::new();
 
 		let spawn_room = graph.add_node(spawn_room);
 		let one_room = graph.add_node(one_room);
@@ -49,23 +85,6 @@ pub(crate) mod blueprints {
 		graph.add_edge(two_room, three_room, Connection {});
 		graph.add_edge(two_room, boss_room, Connection {});
 		graph.add_edge(boss_room, exit_room, Connection {});
-
-		graph
-	}
-
-	/// Basic level graph
-	///
-	/// *(BEGIN)* `room-1` → `room-2` *(STOP)*
-	pub(crate) fn basic_level_graph() -> LevelBlueprint {
-		let one_room = Room::new("room-1", RoomKind::Normal);
-		let two_room = Room::new("room-2", RoomKind::Normal);
-
-		let mut graph = LevelBlueprint::new_undirected();
-
-		let one_room = graph.add_node(one_room);
-		let two_room = graph.add_node(two_room);
-
-		graph.add_edge(one_room, two_room, Connection {});
 
 		graph
 	}
