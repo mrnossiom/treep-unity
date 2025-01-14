@@ -162,7 +162,13 @@ namespace Treep.Player {
                             currentNormal.x = 0;
                         }
                     }
-
+                    if (yMovement && currentNormal.y < -MinGroundNormalY)
+                    {
+                        if (velocity.y > 0)
+                        {
+                            velocity.y = 0;
+                        }
+                    }
                     if (IsGrounded) {
                         //how much of our velocity aligns with surface normal?
                         var projection = Vector2.Dot(velocity, currentNormal);
