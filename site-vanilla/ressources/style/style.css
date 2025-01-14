@@ -19,29 +19,29 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5vh;
+  padding: 0.5rem;
   background-color: #ffffff;
   box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 0.1);
 
   a {
-    margin-right: 0.2vw;
+    margin: 1rem;
     text-decoration: none;
-    color: rgba(0, 113, 12, 1);
-    font-size: 1.25rem;
+    color: #333;
+    font-size: 1.5rem;
   }
 
   .game {
     display: flex;
     align-items: center;
-    margin-left: 0.2vw;
+    margin-left: 0.5rem;
 
     p {
-      margin-left: 0.5vw;
+      margin-left: 1rem;
       font-size: 1.25rem;
     }
 
     img {
-      height: 5vh;
+      height: 7vh;
     }
   }
 }
@@ -59,24 +59,23 @@ header {
 
   .content h1 {
     font-size: 5rem;
-    margin-bottom: 2vh;
   }
 
   .content p {
     font-size: 2rem;
-    margin-bottom: 3vh;
+    margin-bottom: 3rem;
   }
 }
 
 .dl-button {
   display: inline-block;
-  padding: 2vh 5vw;
+  padding: 1.5rem 5rem;
   background: linear-gradient(90deg, rgba(117, 44, 0, 1) 0%, rgba(185, 76, 0, 1) 51%, rgba(0, 113, 12, 1) 100%);
   color: #ffffff;
   text-decoration: none;
   font-weight: bold;
   font-size: 2rem;
-  border-radius: 15vw;
+  border-radius: 2rem;
   box-shadow: 0 0.5vh 1.5vh rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease-in-out;
 
@@ -89,7 +88,7 @@ header {
 
 /* About section style */
 .about {
-  padding: 10vh 5vw;
+  padding: 10rem 5rem;
   max-width: 80vw;
   margin: 0 auto;
   color: #333;
@@ -97,9 +96,9 @@ header {
   .general {
     font-size: 1.9rem;
     text-align: center;
-    margin-bottom: 15vh;
+    margin-bottom: 10rem;
   }
-  
+
   h1 {
     font-size: 5rem;
     text-align: center;
@@ -107,7 +106,7 @@ header {
 
   h3 {
     font-size: 3rem;
-    margin-bottom: 8vh;
+    margin-bottom: 5rem;
     text-align: center;
   }
 
@@ -126,7 +125,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 8vh;
+    margin-top: 8rem;
     font-size: 1.9rem;
     gap: 2rem;
   }
@@ -139,7 +138,7 @@ header {
 
   .end-msg {
     text-align: center;
-    margin-top: 10vh;
+    margin-top: 5rem;
     font-size: 1.9rem;
   }
 }
@@ -147,7 +146,7 @@ header {
 
 /* Download section style */
 .download {
-  padding: 10vh 5vw;
+  padding-bottom: 5rem;
   max-width: 80vw;
   margin: 0 auto;
   text-align: center;
@@ -155,6 +154,7 @@ header {
   flex-direction: column;
   align-items: center;
   gap: 2.5rem;
+  color: #333;
 
   h1 {
     font-size: 5rem;
@@ -179,7 +179,7 @@ header {
   text-decoration: none;
   font-weight: bold;
   font-size: 2rem;
-  border-radius: 4vh;
+  border-radius: 4rem;
   box-shadow: 0 0.5vh 1.5vh rgba(0, 0, 0, 0.2);
   text-align: center;
   white-space: nowrap;
@@ -216,7 +216,7 @@ header {
 /* Footer style */
 footer {
   text-align: center;
-  padding: 2vh;
+  padding: 1rem;
   font-size: 0.9rem;
   background-color: #ffffff;
   color: #888;
