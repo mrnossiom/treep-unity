@@ -162,7 +162,13 @@ namespace Treep.Player {
                             currentNormal.x = 0;
                         }
                     }
-
+                    if (yMovement && currentNormal.y < -MinGroundNormalY)
+                    {
+                        if (velocity.y > 0)
+                        {
+                            velocity.y = 0;
+                        }
+                    }
                     if (IsGrounded) {
                         //how much of our velocity aligns with surface normal?
                         var projection = Vector2.Dot(velocity, currentNormal);
@@ -173,7 +179,6 @@ namespace Treep.Player {
                     else {
                         //We are airborne, but hit something, so cancel vertical up and horizontal velocity.
                         velocity.x *= 0;
-                        velocity.y = Mathf.Min(velocity.y, 0);
                     }
 
                     //remove shellDistance from actual move distance.
