@@ -1,31 +1,30 @@
-use core::fmt;
-
 use crate::{
-	level::LevelBlueprint,
-	room::{Door, RoomProvider, RoomShape, RoomTemplate},
+	level::Blueprint,
+	room::{Door, Provider, Shape, Template},
 };
 use glam::IVec2;
 use petgraph::{graph::NodeIndex, Direction, Graph};
 use rand::seq::SliceRandom;
 use rand::RngCore;
+use std::fmt;
 
-pub(crate) type EvolvedGraph<'a> = Graph<PlacedRoom<'a>, Empty>;
+pub type EvolvedGraph<'a> = Graph<PlacedRoom<'a>, Empty>;
 
 #[derive(Debug)]
-pub(crate) struct PlacedRoom<'a> {
+pub struct PlacedRoom<'a> {
 	pub(crate) place: IVec2,
-	pub(crate) template: RoomTemplate<'a>,
+	pub(crate) template: Template<'a>,
 }
 
 impl<'a> PlacedRoom<'a> {
-	pub(crate) fn new(place: IVec2, template: RoomTemplate<'a>) -> Self {
+	pub(crate) const fn new(place: IVec2, template: Template<'a>) -> Self {
 		Self { place, template }
 	}
 
 	/// Return whether the shapes intersect
 	fn has_overlap(&self, other: &Self) -> bool {
 		match (&self.template.shape, &other.template.shape) {
-			(RoomShape::Rectangle(self_rect), RoomShape::Rectangle(other_rect)) => {
+			(Shape::Rectangle(self_rect), Shape::Rectangle(other_rect)) => {
 				let self_rect = self_rect.as_ivec2();
 				let other_rect = other_rect.as_ivec2();
 
@@ -46,7 +45,7 @@ impl fmt::Display for PlacedRoom<'_> {
 }
 
 /// Used to display `Graph`s with empty connections
-pub(crate) struct Empty;
+pub struct Empty;
 
 impl fmt::Display for Empty {
 	fn fmt(&self, _: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -54,8 +53,8 @@ impl fmt::Display for Empty {
 	}
 }
 
-pub(crate) struct Evolver<R: RoomProvider> {
-	pub(crate) level_blueprint: LevelBlueprint,
+pub struct Evolver<R: Provider> {
+	pub(crate) blueprint: Blueprint,
 
 	pub(crate) room_provider: R,
 }
@@ -86,7 +85,7 @@ impl<'a, T> Iterator for RandomAccessIter<'a, T> {
 	}
 }
 
-impl<R: RoomProvider> Evolver<R> {
+impl<R: Provider> Evolver<R> {
 	/// Create and evolves a graph from the given root node in the level blueprint.
 	///
 	/// Returns `None` if graph is not solvable
@@ -97,10 +96,10 @@ impl<R: RoomProvider> Evolver<R> {
 	) -> Option<EvolvedGraph> {
 		let mut evolved_graph = EvolvedGraph::new();
 
-		let root_room = &self.level_blueprint[root_id];
+		let root_room = &self.blueprint[root_id];
 		let root_templates = &self.room_provider.provide_of_kind(&root_room.kind);
 
-		for template in RandomAccessIter::new_with_rng(root_templates, &mut rng) {
+		for template in RandomAccessIter::new_with_rng(root_templates, rng) {
 			let placed_root_room_id =
 				evolved_graph.add_node(PlacedRoom::new(IVec2::ZERO, (*template).clone()));
 
@@ -122,14 +121,14 @@ impl<R: RoomProvider> Evolver<R> {
 	pub(crate) fn evolve_node(
 		&self,
 		graph: &mut EvolvedGraph,
-		mut rng: &mut impl RngCore,
+		rng: &mut impl RngCore,
 		room_id: NodeIndex,
 		placed_room_id: NodeIndex,
 	) -> bool {
 		let placed_room = &graph[placed_room_id];
 		let placed_room_name = placed_room.template.name.to_string();
 
-		for door in RandomAccessIter::new_with_rng(placed_room.template.doors, &mut rng) {
+		for door in RandomAccessIter::new_with_rng(placed_room.template.doors, rng) {
 			log::debug!("testing room '{}' door '{}'", placed_room_name, door.label);
 			if !self.evolve_node_door(graph, rng, room_id, placed_room_id, door) {
 				continue;
@@ -148,13 +147,13 @@ impl<R: RoomProvider> Evolver<R> {
 	pub(crate) fn evolve_node_door(
 		&self,
 		graph: &mut EvolvedGraph,
-		mut rng: &mut impl RngCore,
+		rng: &mut impl RngCore,
 		room_id: NodeIndex,
 		placed_room_id: NodeIndex,
 		door: &Door,
 	) -> bool {
 		let next_rooms = self
-			.level_blueprint
+			.blueprint
 			.neighbors_directed(room_id, Direction::Outgoing)
 			.collect::<Vec<_>>();
 
@@ -168,11 +167,11 @@ impl<R: RoomProvider> Evolver<R> {
 			2.. => todo!("generalize to graph with branches"),
 		};
 
-		let next_room = &self.level_blueprint[next_room_id];
+		let next_room = &self.blueprint[next_room_id];
 		let next_templates = &self.room_provider.provide_of_kind(&next_room.kind);
 
-		for next_template in RandomAccessIter::new_with_rng(next_templates, &mut rng) {
-			for next_door in RandomAccessIter::new_with_rng(next_template.doors, &mut rng) {
+		for next_template in RandomAccessIter::new_with_rng(next_templates, rng) {
+			for next_door in RandomAccessIter::new_with_rng(next_template.doors, rng) {
 				let placed_room = &graph[placed_room_id];
 				log::debug!(
 					"> against '{}' with door '{}' (last: {})",
@@ -186,7 +185,7 @@ impl<R: RoomProvider> Evolver<R> {
 					continue;
 				}
 
-				for delta in door.size.adj_door_deltas() {
+				for delta in door.size.adjacent_deltas() {
 					let placed_room = &graph[placed_room_id];
 					let new_pos =
 						placed_room.place + door.pos.as_ivec2() + delta - next_door.pos.as_ivec2();

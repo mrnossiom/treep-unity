@@ -1,27 +1,49 @@
 use glam::{IVec2, UVec2};
 use std::fmt;
 
+mod doors {
+	use crate::room::DoorSize;
+
+	pub const VERTICAL_5: DoorSize = DoorSize::Vertical(5);
+	pub const HORIZONTAL_3: DoorSize = DoorSize::Horizontal(3);
+}
+
 #[derive(Debug)]
-pub(crate) enum RoomKind {
+pub enum Kind {
 	/// This should be the first room in a level graph
 	Spawn,
 
 	Normal,
-	Reward,
-	Shop,
-	Boss,
-
+	Lobby,
+	// Reward,
+	// Shop,
+	// Boss,
 	/// This should be the last room in a level graph
 	Exit,
 }
 
+impl Kind {
+	pub(crate) const fn variants() -> &'static [Self] {
+		use Kind::{Exit, Lobby, Normal, Spawn};
+		&[Spawn, Normal, Lobby, Exit]
+	}
+}
+
 #[derive(Debug, Clone)]
-pub(crate) enum RoomShape {
+pub enum Shape {
 	/// A rectangle size
 	Rectangle(UVec2),
 }
 
-impl fmt::Display for RoomShape {
+impl Shape {
+	pub(crate) const fn bounding_box(&self) -> UVec2 {
+		match self {
+			Self::Rectangle(rect) => *rect,
+		}
+	}
+}
+
+impl fmt::Display for Shape {
 	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
 		match self {
 			Self::Rectangle(rect) => writeln!(f, "{rect}"),
@@ -30,7 +52,7 @@ impl fmt::Display for RoomShape {
 }
 
 #[derive(Debug)]
-pub(crate) struct Door<'a> {
+pub struct Door<'a> {
 	pub(crate) label: &'a str,
 
 	/// Offset in the Room coordinate space
@@ -55,19 +77,20 @@ impl fmt::Display for Door<'_> {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
-pub(crate) enum DoorSize {
+pub enum DoorSize {
 	Vertical(u8),
 	Horizontal(u8),
 }
 
 impl DoorSize {
-	pub(crate) fn to_uvec2(&self) -> UVec2 {
+	pub const fn to_uvec2(&self) -> UVec2 {
 		match &self {
 			Self::Vertical(size) => UVec2::new(1, *size as u32),
 			Self::Horizontal(size) => UVec2::new(*size as u32, 1),
 		}
 	}
-	pub(crate) fn adj_door_deltas(&self) -> [IVec2; 2] {
+
+	pub(crate) fn adjacent_deltas(&self) -> [IVec2; 2] {
 		let pos = self.to_uvec2().as_ivec2();
 		match &self {
 			Self::Vertical(_) => [pos.with_y(0), -pos.with_y(0)],
@@ -77,20 +100,14 @@ impl DoorSize {
 }
 
 #[derive(Debug, Clone)]
-pub(crate) struct RoomTemplate<'a> {
+pub struct Template<'a> {
 	pub(crate) name: &'a str,
-	pub(crate) shape: RoomShape,
+	pub(crate) shape: Shape,
 	pub(crate) doors: &'a [Door<'a>],
 	// allowed_transformations? (e.g. flip_x)
 }
 
-impl<'a> RoomTemplate<'a> {
-	const fn new(name: &'a str, shape: RoomShape, doors: &'a [Door]) -> Self {
-		Self { name, shape, doors }
-	}
-}
-
-impl fmt::Display for RoomTemplate<'_> {
+impl fmt::Display for Template<'_> {
 	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
 		let Self { name, shape, doors } = self;
 
@@ -102,181 +119,92 @@ impl fmt::Display for RoomTemplate<'_> {
 	}
 }
 
-pub(crate) trait RoomProvider {
-	fn provide_of_kind<'a>(&self, kind: &RoomKind) -> &[&RoomTemplate<'a>];
-
-	fn store<'a>(&self) -> &[&RoomTemplate<'a>];
+pub trait Provider {
+	fn provide_of_kind<'a>(&self, kind: &Kind) -> &[&Template<'a>];
 }
 
-pub(crate) struct StaticRoomTable;
+pub struct StaticRoomTable;
 
-impl RoomProvider for StaticRoomTable {
-	fn provide_of_kind<'a>(&self, kind: &RoomKind) -> &[&RoomTemplate<'a>] {
-		use blueprints::*;
-
+impl Provider for StaticRoomTable {
+	fn provide_of_kind<'a>(&self, kind: &Kind) -> &[&Template<'a>] {
 		match kind {
-			RoomKind::Spawn => &[&BASIC_1],
-			RoomKind::Normal => &[
-				&CORRIDOR_1,
-				&CORRIDOR_2,
-				&CORRIDOR_3,
-				&CORRIDOR_4,
-				&CORRIDOR_5,
+			Kind::Spawn => &[&blueprints::SPAWN_1],
+			Kind::Normal => &[
+				&blueprints::CORRIDOR_1,
+				&blueprints::CORNER_1,
+				&blueprints::CORNER_2,
+				&blueprints::NORMAL_1,
 			],
-			RoomKind::Reward => &[],
-			RoomKind::Shop => &[],
-			RoomKind::Boss => &[],
-			RoomKind::Exit => &[&BASIC_2],
+			Kind::Lobby => &[&blueprints::LOBBY_1],
+			Kind::Exit => &[&blueprints::EXIT_1],
 		}
 	}
-
-	fn store<'a>(&self) -> &[&RoomTemplate<'a>] {
-		use blueprints::*;
-		&[
-			&BASIC_1,
-			&CORRIDOR_1,
-			&CORRIDOR_2,
-			&CORRIDOR_3,
-			&CORRIDOR_4,
-			&CORRIDOR_5,
-			&BASIC_2,
-		]
-	}
 }
 
-pub(crate) mod blueprints {
-	use super::*;
+pub mod blueprints {
+	use super::doors::{HORIZONTAL_3, VERTICAL_5};
+	use super::{Door, Shape, Template};
 	use glam::UVec2;
 
-	// const SPAWN_ROOM: RoomTemplate<'static> = RoomTemplate::new("spawn-1", (), ());
-	// const BOSS_ROOM: RoomTemplate<'static> = RoomTemplate::new("boss-1", (), ());
-	// const EXIT_ROOM: RoomTemplate<'static> = RoomTemplate::new("exit-1", (), ());
+	macro_rules! room {
+		($name:ident, ($x:expr, $y:expr), [$(($room_label:literal, ($room_x:expr, $room_y:expr), $room_size:expr)),*]) => {
+			pub const $name: Template<'static> = Template {
+				name: stringify!($name),
+				shape: Shape::Rectangle(UVec2::new($x, $y)),
+				doors: &[
+					$(Door::new($room_label, UVec2::new($room_x, $room_y), $room_size)),*
+				],
+			};
+		};
+	}
 
-	/// # Caracteristics
-	///
-	/// - Size: (9,6)
-	/// - Doors:
-	///   - 2 units vertical at (8,3)
-	///
-	/// # Preview
-	/// ```text
-	/// 0WWWWWWWW
-	/// W       W
-	/// W       W
-	/// W       D
-	/// W       D
-	/// WWWWWWWWW
-	/// ```
-	pub(crate) const BASIC_1: RoomTemplate<'static> = RoomTemplate::new(
-		"basic-1",
-		RoomShape::Rectangle(UVec2::new(9, 6)),
-		&[Door::new("right", UVec2::new(8, 3), DoorSize::Vertical(2))],
+	room!(SPAWN_1, (20, 12), [("right", (19, 7 - 1), VERTICAL_5)]);
+
+	room!(EXIT_1, (20, 12), [("left", (0, 7 - 1), VERTICAL_5)]);
+
+	room!(
+		CORRIDOR_1,
+		(20, 8),
+		[
+			("left", (0, 3 - 1), VERTICAL_5),
+			("left", (19, 3 - 1), VERTICAL_5)
+		]
 	);
 
-	/// # Caracteristics
-	///
-	/// - Size: (6,9)
-	/// - Doors:
-	///   - 2 units vertical at (0,6)
-	///
-	/// # Preview
-	/// ```text
-	/// 0WWWWW
-	/// W    W
-	/// W    W
-	/// W    W
-	/// W    W
-	/// W    W
-	/// D    W
-	/// D    W
-	/// WWWWWW
-	/// ```
-	pub(crate) const BASIC_2: RoomTemplate<'static> = RoomTemplate::new(
-		"basic-2",
-		RoomShape::Rectangle(UVec2::new(6, 9)),
-		&[Door::new("left", UVec2::new(0, 6), DoorSize::Vertical(2))],
+	room!(
+		CORNER_1,
+		(20, 20),
+		[
+			("left", (0, 15 - 2), VERTICAL_5),
+			("top", (17 - 2, 0), HORIZONTAL_3)
+		]
 	);
 
-	/// # Caracteristics
-	///
-	/// - Size: (4,5)
-	/// - Doors:
-	///   - 3 units vertical at (0,1)
-	///
-	/// # Preview
-	/// ```text
-	/// 0WWW
-	/// D  W
-	/// D  W
-	/// D  W
-	/// WWWW
-	/// ```
-	pub(crate) const DOOR_UNMATCHED: RoomTemplate<'static> = RoomTemplate::new(
-		"door-unmatched",
-		RoomShape::Rectangle(UVec2::new(4, 5)),
-		&[Door::new(
-			"unmatched",
-			UVec2::new(0, 1),
-			DoorSize::Vertical(3),
-		)],
+	room!(
+		CORNER_2,
+		(30, 8),
+		[
+			("bottom-right", (27 - 4, 7), HORIZONTAL_3),
+			("top-left", (4, 0), HORIZONTAL_3)
+		]
 	);
 
-	/// # Caracteristics
-	///
-	/// - Size: (10,4)
-	/// - Doors:
-	///   - 2 units vertical at (0,1)
-	///   - 2 units vertical at (9,1)
-	///
-	/// # Preview
-	/// ```text
-	/// 0WWWWWWWWW
-	/// D        D
-	/// D        D
-	/// WWWWWWWWWW
-	/// ```
-	pub(crate) const CORRIDOR_1: RoomTemplate<'static> = RoomTemplate::new(
-		"corridor-1",
-		RoomShape::Rectangle(UVec2::new(10, 4)),
-		&[
-			Door::new("left", UVec2::new(0, 1), DoorSize::Vertical(2)),
-			Door::new("right", UVec2::new(9, 1), DoorSize::Vertical(2)),
-		],
+	room!(
+		NORMAL_1,
+		(40, 40),
+		[
+			("bottom", (3, 39), HORIZONTAL_3),
+			("right", (39, 35 - 10), VERTICAL_5)
+		]
 	);
 
-	pub(crate) const CORRIDOR_2: RoomTemplate<'static> = RoomTemplate::new(
-		"corridor-2",
-		RoomShape::Rectangle(UVec2::new(10, 5)),
-		&[
-			Door::new("left", UVec2::new(0, 1), DoorSize::Vertical(2)),
-			Door::new("right", UVec2::new(9, 1), DoorSize::Vertical(2)),
-		],
-	);
-
-	pub(crate) const CORRIDOR_3: RoomTemplate<'static> = RoomTemplate::new(
-		"corridor-3",
-		RoomShape::Rectangle(UVec2::new(4, 6)),
-		&[
-			Door::new("left", UVec2::new(0, 3), DoorSize::Vertical(2)),
-			Door::new("top", UVec2::new(1, 0), DoorSize::Horizontal(2)),
-		],
-	);
-
-	pub(crate) const CORRIDOR_4: RoomTemplate<'static> = RoomTemplate::new(
-		"corridor-4",
-		RoomShape::Rectangle(UVec2::new(10, 4)),
-		&[
-			Door::new("bottom-left", UVec2::new(1, 3), DoorSize::Horizontal(2)),
-			Door::new("bottom-right", UVec2::new(7, 3), DoorSize::Horizontal(2)),
-		],
-	);
-
-	pub(crate) const CORRIDOR_5: RoomTemplate<'static> = RoomTemplate::new(
-		"corridor-5",
-		RoomShape::Rectangle(UVec2::new(4, 6)),
-		&[
-			Door::new("top", UVec2::new(1, 0), DoorSize::Horizontal(2)),
-			Door::new("right", UVec2::new(3, 3), DoorSize::Vertical(2)),
-		],
+	room!(
+		LOBBY_1,
+		(30, 20),
+		[
+			("from", (0, 7), VERTICAL_5),
+			("to-1", (29, 2), VERTICAL_5),
+			("to-2", (29, 13), VERTICAL_5)
+		]
 	);
 }

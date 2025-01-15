@@ -11,14 +11,21 @@ mod room;
 const SEED: u64 = 0xDEAD_BEEF_FFFF_FFFF;
 // const SEED: u64 = 0xDEAD_BEEF_FFFF_FFFF - 1;
 
+// TODO: impl custom shape intersect
+// TODO: mark matched doors to avoid useless computation
+
 fn main() -> Result<(), Box<dyn std::error::Error>> {
 	env_logger::builder().format_timestamp(None).init();
 
-	let (level_blueprint, root) = level::blueprints::next_level_graph();
+	let (blueprint, root) = level::blueprints::basic_level();
 	let evolver = Evolver {
+		blueprint,
 		room_provider: room::StaticRoomTable,
-		level_blueprint,
 	};
+
+	let room_store_render_path = "target/out/rooms.svg";
+	render_room_provider_store(room_store_render_path, &evolver.room_provider)?;
+	println!("Room graph was rendered to `{room_store_render_path}`");
 
 	let mut rng = SmallRng::seed_from_u64(SEED);
 	let evolved_graph = evolver
@@ -27,20 +34,16 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 	println!(
 		"\nBlueprint graph:\n```dot\n{}```\n",
-		Dot::new(&evolver.level_blueprint)
+		Dot::new(&evolver.blueprint)
 	);
 	println!(
 		"\nEvolved graph:\n```dot\n{}```\n",
 		Dot::new(&evolved_graph)
 	);
 
-	let store_render_out = "target/out/all_rooms.svg";
-	render_room_provider_store(store_render_out, room::StaticRoomTable)?;
-	println!("Room graph was rendered to `{store_render_out}`");
-
-	let graph_render_out = "target/out/graph.svg";
-	render_room_graph(graph_render_out, &evolved_graph)?;
-	println!("Room graph was rendered to `{graph_render_out}`");
+	let evolved_render_path = "target/out/evolved.svg";
+	render_room_graph(evolved_render_path, &evolved_graph)?;
+	println!("Room graph was rendered to `{evolved_render_path}`");
 
 	Ok(())
 }

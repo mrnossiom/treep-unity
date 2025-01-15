@@ -10,3 +10,13 @@ log = "0.4"
 petgraph = "0.7"
 rand = { version = "0.8", features = ["small_rng"] }
 svg = "0.18.0"
+
+[lints]
+[lints.rust]
+unsafe_code = "deny"
+[lints.clippy]
+pedantic = { level = "warn", priority = -1 }
+nursery = { level = "warn", priority = -1 }
+
+# missing_docs_in_private_items = "warn"
+# unwrap_used = "warn"
