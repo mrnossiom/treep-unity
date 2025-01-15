@@ -15,3 +15,4 @@ MonoBehaviour:
   kind: 1
   rooms:
   - {fileID: -2202793940928844007, guid: 82847168bf2c0ac2f8997741ca59372f, type: 3}
+  - {fileID: -8587844632787652279, guid: 12c7d85b11da3914a814bbf55ddd2aa4, type: 3}
