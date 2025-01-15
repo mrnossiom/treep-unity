@@ -1,102 +1,80 @@
-
-
 .chronology {
-    
-    padding: 10vh 1vw;
-    max-width: 85vw;
-    margin: 0 auto;
-    color: #333;
+  padding: 10vh 1vw;
+  max-width: 85vw;
+  margin: 0 auto;
+  color: #333;
 
+  details {
+    margin: 1rem;
+    list-style: none;
+    cursor: pointer;
+  }
 
-    /* modif <details> */
-    
-    details{
-        margin: 1rem;
-        list-style: none;
+  summary {
+    list-style: none;
+  }
 
-    }
-    summary{
-        list-style: none;
-        
-    }
+  details[open] p {
+    border-left: 0.2rem solid #333;
+    list-style: none;
+    font-size: 1rem;
+    padding-left: 0.2rem
+  }
 
-    details[open] p {
-        list-style: none;
-        font-size: 1rem;
-        margin-left: 8vh;
-    }
+  .details-content {
+    padding: 3vh;
+  }
 
-    .details-content{
-        padding: 3vh
-        
-    }
-    .details-block {
+  .details-block {
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8vh;
+    font-size: 1.3rem;
+    gap: 2rem;
+    background-color: #ffffff;
+    border-radius: 2rem;
 
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 8vh;
-        font-size: 1.3rem;
-        gap: 2rem;
-        background-color: #ffffff;
-        border-radius: 2rem;
-
-        p {
-            margin: 1rem;
-        }
-        details{
-            margin-top: 2vh;
-
-        }
-    }
-    /* si on veut toucher juste au triangle : summary::marker*/
-
-
-    
-
-    h1 {
-        font-size: 3rem;
-        text-align: center;
+    p {
+      margin: 1rem;
     }
 
-    .title {
-        font-weight: bold;
-        font-size: 2rem;
-        margin-bottom: 1rem;
+    details {
+      margin-top: 2vh;
+    }
+  }
+
+  h1 {
+    font-size: 3rem;
+    text-align: center;
+  }
+
+  .title {
+    font-weight: bold;
+    font-size: 2rem;
+  }
+
+  .chrono-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8vh;
+    font-size: 1.3rem;
+    gap: 2rem;
+    background-color: #ffffff;
+    border-radius: 2rem;
+
+    .progress-img-right {
+      border-radius: 2rem;
     }
 
-    .team-img-right {
-        width: 16vw;
-        border-radius: 0 1rem 1rem 0;
+    p {
+      margin: 1rem;
     }
+  }
 
-    .team-img-left {
-        width: 16vw;
-        border-radius: 1rem 0 0 1rem;
-    }
-
-    .chrono-block {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 8vh;
-        font-size: 1.3rem;
-        gap: 2rem;
-        background-color: #ffffff;
-        border-radius: 2rem;
-
-        p {
-            margin: 1rem;
-        }
-    }
-
-    .team-text-left {
-        display: flex;
-        flex-direction: column;
-        text-align: left;
-    }
-    .team-text-right {
-         display: flex;
-         flex-direction: column;
-         text-align: right;
-     }
+  .grahp-desc {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
 }

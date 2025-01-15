@@ -2,104 +2,93 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Treep</title>
-    <link rel="stylesheet" href="ressources/style/style.css" />
-    <link rel="stylesheet" href="ressources/style/chronology.css" />
-    <link rel="icon" type="image/x-icon" href="ressources/media/treep.png" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Treep</title>
+  <link rel="stylesheet" href="ressources/style/style.css" />
+  <link rel="stylesheet" href="ressources/style/chronology.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="ressources/media/treep.png" />
 </head>
 
 <body>
-    <header>
-        <div class="game">
-            <img src="ressources/media/treep.png" alt="Treep logo" />
-            <a href="index.html">Treep</a>
-        </div>
-        <div class="game">
-            <a href="about.html">About</a>
-            <a href="appendices.html">Appendices</a>
-            <a href="chronology.html">Chronology</a>
-        </div>
-    </header>
+  <header>
+    <div class="game">
+      <img src="ressources/media/treep.png" alt="Treep logo" />
+      <a href="index.html">Treep</a>
+    </div>
+    <div class="game">
+      <a href="about.html">About</a>
+      <a href="chronology.html">Project execution</a>
+      <a href="appendices.html">Appendices</a>
+    </div>
+  </header>
 
-    <section class="about">
+  <section class="chronology">
+    <h1>Advancements</h1>
+    <div class="chrono-block">
+      <div class="graph-desc">
+        <p class="title">Technical support n°1</p>
+        <p>
+          Development progress as the first technical presentation approaches
+        </p>
+      </div>
+      <img class="progress-img-right" src="ressources/media/progress/progress.png"
+        alt="First technical presentation graph"></img>
+    </div>
+  </section>
 
-        <h1>Chronology</h1>
-        <h3>The Treep project was born on a stormy night in early winter.</h3>
-        <div class="general">
-            <p>
-                In Treep, you assume the role of the spirit of an insect colony residing at the base of a magnificent oak tree,
-                threatened by a devastating fungal parasite. Delve into the depths of the tree, confront corrupted insects, and
-                fight to save your colony. Each demise strengthens your foe, yet also provides an opportunity to be reborn with
-                greater power.
-            </p>
-        </div>
-    </section>
-        
-        
-    <section class="chronology">
-        <h1>Chronology</h1>
-        <div class="chrono-block">
-            <div class="team-text-right">
-                <p class="title">Soutenance 1</p>
-                <p>
-                    Bonjour a tous j'ai la flm mais foddrai dire et expliquer le graph
-                </p>
-            </div>
-            <img class="progress-img-right" src="ressources/media/progress/progress%20of%20tasks_1.png" alt="progress soutenance 1"></img>
-        </div>
-        
-    </section>
-    <section class ="chronology">
-        <h1>Problem/Solution</h1>
-        <div class="details-block">
-            <div class="details-content">
-                <details>
-                    <summary>Mouvement</summary>
-                    <p>
-                        Les mouvements devant être utilisables pour chacun des niveaux du jeu, nous avons dû réfléchir pour rendre le code universel. <br>
-                        De plus, nous avons dû éviter les problèmes d’action pouvant empêcher une autre action de fonctionner ainsi qu’adapter le code au fonctionnement en tilemap des niveaux.
-                    </p>
-                </details>
-                <details>
-                    <summary>Assets</summary>
-                    <p>Something small enough to escape casual notice.
-                    </p>
-                </details>
-                <details>
-                    <summary>Génération procédurale</summary>
-                    <p>Something small enough to escape casual notice.
-                    </p>
-                    
-                </details>
-                <details>
-                    <summary>Multijoueur</summary>
-                    <p>Something small enough to escape casual notice.
-                    </p>
-                </details>
-                <details>
-                    <summary>Assets</summary>
-                    <p>Something small enough to escape casual notice.
-                    </p>
-                </details>
-            </div>
-        </div>
-    </section>
+  <section class="chronology">
+    <h1>Problems / Solutions</h1>
+    <div class="details-block">
+      <div class="details-content">
+        <details>
+          <summary>Movements</summary>
+          <p>
+            Les mouvements devant être utilisables pour chacun des niveaux du jeu, nous avons dû réfléchir pour rendre
+            le code universel. <br>
+            De plus, nous avons dû éviter les problèmes d’action pouvant empêcher une autre action de fonctionner ainsi
+            qu’adapter le code au fonctionnement en tilemap des niveaux.
+          </p>
+        </details>
+        <details>
+          <summary>Assets</summary>
+          <p>Something small enough to escape casual notice.
+          </p>
+        </details>
+        <details>
+          <summary>Procedural generation</summary>
+          <p>Something small enough to escape casual notice.
+          </p>
+
+        </details>
+        <details>
+          <summary>Multiplayer</summary>
+          <p>Something small enough to escape casual notice.
+          </p>
+        </details>
+        <details>
+          <summary>Level design</summary>
+          <p>Something small enough to escape casual notice.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
 
 
 
-<footer>
+  <footer>
     <p>&copy; 2024 KROMM Studio - All rights reserved</p>
     <br />
     <p>
-        <a target="_blank" rel="noopener noreferrer" href="https://github.com/mrnossiom/treep">Github</a>
-        -
-        <a target="_blank" rel="noopener noreferrer" href="ressources/media/cdcf-treep-kromm-studio.pdf">Specification</a>
-        <br />
-        <a href="mailto:treep@gmail.com">Contact: treep@gmail.com</a>
+      <a target="_blank" rel="noopener noreferrer" href="https://github.com/mrnossiom/treep">Github</a>
+      -
+      <a target="_blank" rel="noopener noreferrer" href="ressources/media/cdcf-treep-kromm-studio.pdf">Specification</a>
+      <br />
+      <a href="mailto:treep@gmail.com">Contact: treep@gmail.com</a>
     </p>
-</footer>
+  </footer>
 </body>
 
 </html>
