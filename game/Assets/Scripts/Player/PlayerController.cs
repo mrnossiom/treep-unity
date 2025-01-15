@@ -15,6 +15,8 @@ namespace Treep.Player {
         // Components
         private Rigidbody2D _body;
         private Collider2D _collider2d;
+        private SpriteRenderer _spriteRenderer;
+        private Animator _animator;
 
         // Class values
         [SerializeField] private Vector2 velocity;
@@ -53,6 +55,8 @@ namespace Treep.Player {
         private void Awake() {
             _body = GetComponent<Rigidbody2D>();
             _collider2d = GetComponent<Collider2D>();
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _animator = GetComponent<Animator>();
         }
 
         private void Update() {
@@ -60,6 +64,15 @@ namespace Treep.Player {
 
             if (_controlEnabled) {
                 _move.x = Input.GetAxis("Horizontal");
+                _animator.SetBool("IsMoving" ,_move.x != 0);
+                if (_move.x > 0)
+                {
+                    _spriteRenderer.flipX = false;
+                }
+                if (_move.x < 0)
+                {
+                    _spriteRenderer.flipX = true;
+                }
                 if (_jumpState == JumpState.Grounded && Input.GetButtonDown("Jump"))
                     _jumpState = JumpState.PrepareToJump;
                 else if (Input.GetButtonUp("Jump")) _stopJump = true;
@@ -78,6 +91,8 @@ namespace Treep.Player {
             ComputeVelocity();
         }
 
+        
+
         private void UpdateJumpState() {
             _jump = false;
             switch (_jumpState) {
@@ -85,11 +100,15 @@ namespace Treep.Player {
                     _jumpState = JumpState.Jumping;
                     _jump = true;
                     _stopJump = false;
+                    _animator.SetBool("JumpStart" ,true);
+                    _animator.SetBool("JumpEnd" ,false);
                     break;
                 case JumpState.Jumping:
                     if (!IsGrounded)
+                    {
                         _jumpState = JumpState.InFlight;
-
+                        _animator.SetBool("IsJumping" ,true);
+                    }
                     break;
                 case JumpState.InFlight:
                     if (IsGrounded)
@@ -98,6 +117,9 @@ namespace Treep.Player {
                     break;
                 case JumpState.Landed:
                     _jumpState = JumpState.Grounded;
+                    _animator.SetBool("JumpEnd" ,true);
+                    _animator.SetBool("IsJumping" ,false);
+                    _animator.SetBool("JumpStart" ,false);
                     break;
             }
         }
