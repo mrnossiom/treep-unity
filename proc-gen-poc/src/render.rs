@@ -4,7 +4,7 @@ use crate::{
 };
 use std::io;
 use svg::{
-	node::element::{path::Data, Group, Path},
+	node::element::{path::Data, Group, Path, Style, Text},
 	Document, Node,
 };
 
@@ -12,7 +12,17 @@ pub(crate) fn render_room_graph(
 	graph: &EvolvedGraph,
 	path: impl AsRef<std::path::Path>,
 ) -> io::Result<()> {
-	let mut document = Document::new().set("viewBox", (-50, -25, 100, 50));
+	let style = Style::new(
+		"
+		text {
+			font-size: 1px;
+		}
+		",
+	);
+
+	let mut document = Document::new()
+		.set("viewBox", (-50, -25, 100, 50))
+		.add(style);
 
 	for room in graph.node_weights() {
 		let shape = make_room_shape(room);
@@ -48,7 +58,15 @@ fn make_room_shape(room: &PlacedRoom) -> Group {
 		}
 	};
 
-	let mut group = Group::new().set("data-name", room.template.name).add(shape);
+	let name_text = Text::new(room.template.name)
+		.set("x", x + 0.2)
+		.set("y", y + 1.1)
+		.set("fill", "blue");
+
+	let mut group = Group::new()
+		.set("data-name", room.template.name)
+		.add(shape)
+		.add(name_text);
 
 	for door in room.template.doors {
 		let [dx, dy] = door.pos.as_vec2().to_array();
