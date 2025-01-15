@@ -37,7 +37,7 @@
 
   img {
     width: 5vw;
-    border-radius: 1rem;
+    border-radius: 0rem 1rem 1rem 0rem;
   }
 }
 
