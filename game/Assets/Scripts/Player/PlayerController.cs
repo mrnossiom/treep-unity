@@ -73,9 +73,7 @@ namespace Treep.Player {
                 _move.x = 0;
                 _move.y = 0;
             }
-
             UpdateJumpState();
-
             _targetVelocity = Vector2.zero;
             ComputeVelocity();
         }
@@ -124,7 +122,8 @@ namespace Treep.Player {
         private void FixedUpdate() {
             if (IsClimbing) {
                 velocity.y = _move.y * _climbSpeed;
-            } else {
+            } 
+            else {
                 if (velocity.y < 0)
                     velocity += Physics2D.gravity * (gravityModifier * Time.deltaTime);
                 else
@@ -135,12 +134,12 @@ namespace Treep.Player {
             var deltaPosition = velocity * Time.deltaTime;
             var moveAlongGround = new Vector2(_groundNormal.y, -_groundNormal.x);
             var move = moveAlongGround * deltaPosition.x;
-            PerformMovement(move, false);
+            PerformMovement(move);
             move = Vector2.up * deltaPosition.y;
-            PerformMovement(move, true);
+            PerformMovement(move);
         }
 
-        private void PerformMovement(Vector2 move, bool yMovement) {
+        private void PerformMovement(Vector2 move) {
             var distance = move.magnitude;
 
             if (distance > MinMoveDistance) {
@@ -150,13 +149,12 @@ namespace Treep.Player {
 
                     if (currentNormal.y > MinGroundNormalY) {
                         IsGrounded = true;
-                        if (yMovement) {
-                            _groundNormal = currentNormal;
-                            currentNormal.x = 0;
-                        }
+                        _groundNormal = currentNormal;
+                        currentNormal.x = 0;
+                        
                     }
 
-                    if (yMovement && currentNormal.y < -MinGroundNormalY) {
+                    if (currentNormal.y < -MinGroundNormalY) {
                         if (velocity.y > 0)
                             velocity.y = 0;
                     }
@@ -165,29 +163,26 @@ namespace Treep.Player {
                         var projection = Vector2.Dot(velocity, currentNormal);
                         if (projection < 0)
                             velocity = velocity - projection * currentNormal;
-                    } else {
+                    }
+                    else {
                         velocity.x *= 0;
                     }
-
                     var modifiedDistance = _hitBuffer[i].distance - ShellRadius;
                     distance = modifiedDistance < distance ? modifiedDistance : distance;
                 }
             }
-
             _body.position += move.normalized * distance;
         }
         private void OnTriggerEnter2D(Collider2D other) {
             if (other.CompareTag("Ladder")) {
                 IsClimbing = true;
-                velocity.y = 0; 
+                velocity.y = 0;
             }
         }
 
         private void OnTriggerExit2D(Collider2D other) {
-            if (other.CompareTag("Ladder")) {
-                IsClimbing = false;
-                velocity.y = 0;
-            }
+            IsClimbing = false;
+            velocity.y = 0;
         }
     }
 }
