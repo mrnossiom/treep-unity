@@ -36,6 +36,7 @@ impl Room {
 
 pub(crate) mod blueprints {
 	use super::*;
+
 	/// Basic level graph
 	///
 	/// *(BEGIN)* `room-1` → `room-2` *(STOP)*
@@ -56,6 +57,37 @@ pub(crate) mod blueprints {
 		graph.add_edge(spawn, corridor_1, Connection {});
 		graph.add_edge(corridor_1, corridor_2, Connection {});
 		graph.add_edge(corridor_2, exit, Connection {});
+
+		(graph, spawn)
+	}
+
+	/// More advanced level graph
+	///
+	// / *(BEGIN)* `room-1` → `room-2` *(STOP)*
+	pub(crate) fn next_level_graph() -> (LevelBlueprint, NodeIndex) {
+		let spawn = Room::new("spawn-1", RoomKind::Spawn);
+		let exit = Room::new("exit-1", RoomKind::Exit);
+
+		let normal_1 = Room::new("normal-1", RoomKind::Normal);
+		let normal_2 = Room::new("normal-2", RoomKind::Normal);
+		let normal_3 = Room::new("normal-3", RoomKind::Normal);
+		let normal_4 = Room::new("normal-4", RoomKind::Normal);
+
+		let mut graph = LevelBlueprint::new();
+
+		let spawn = graph.add_node(spawn);
+		let exit = graph.add_node(exit);
+		let normal_1 = graph.add_node(normal_1);
+		let normal_2 = graph.add_node(normal_2);
+		let normal_3 = graph.add_node(normal_3);
+		let normal_4 = graph.add_node(normal_4);
+
+		graph.add_edge(spawn, normal_1, Connection {});
+		graph.add_edge(normal_1, normal_2, Connection {});
+		graph.add_edge(normal_2, normal_3, Connection {});
+		graph.add_edge(normal_3, normal_4, Connection {});
+		graph.add_edge(normal_4, exit, Connection {});
+		// graph.add_edge(normal_3, exit, Connection {});
 
 		(graph, spawn)
 	}

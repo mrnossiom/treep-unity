@@ -102,7 +102,7 @@ impl<R: RoomProvider> Evolver<R> {
 
 		for template in RandomAccessIter::new_with_rng(root_templates, &mut rng) {
 			let placed_root_room_id =
-				evolved_graph.add_node(PlacedRoom::new(IVec2::ZERO, template.clone()));
+				evolved_graph.add_node(PlacedRoom::new(IVec2::ZERO, (*template).clone()));
 
 			if !self.evolve_node(&mut evolved_graph, &mut rng, root_id, placed_root_room_id) {
 				evolved_graph.remove_node(placed_root_room_id).unwrap();
@@ -193,7 +193,7 @@ impl<R: RoomProvider> Evolver<R> {
 
 					let next_placed_room = PlacedRoom {
 						place: new_pos,
-						template: next_template.clone(),
+						template: (*next_template).clone(),
 					};
 
 					if next_placed_room.has_overlap(placed_room)

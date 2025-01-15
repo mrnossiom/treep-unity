@@ -1,7 +1,8 @@
 use crate::{
 	evolver::{EvolvedGraph, PlacedRoom},
-	room::RoomShape,
+	room::{RoomProvider, RoomShape},
 };
+use glam::IVec2;
 use std::io;
 use svg::{
 	node::element::{path::Data, Group, Path, Style, Text},
@@ -9,8 +10,8 @@ use svg::{
 };
 
 pub(crate) fn render_room_graph(
-	graph: &EvolvedGraph,
 	path: impl AsRef<std::path::Path>,
+	graph: &EvolvedGraph,
 ) -> io::Result<()> {
 	let style = Style::new(
 		"
@@ -21,7 +22,7 @@ pub(crate) fn render_room_graph(
 	);
 
 	let mut document = Document::new()
-		.set("viewBox", (-50, -25, 100, 50))
+		.set("viewBox", (-75, -25, 150, 50))
 		.add(style);
 
 	for room in graph.node_weights() {
@@ -91,4 +92,33 @@ fn make_room_shape(room: &PlacedRoom) -> Group {
 	}
 
 	group
+}
+
+pub(crate) fn render_room_provider_store(
+	path: impl AsRef<std::path::Path>,
+	provider: impl RoomProvider,
+) -> io::Result<()> {
+	let style = Style::new(
+		"
+		text {
+			font-size: 1px;
+		}
+		",
+	);
+
+	let rooms = provider.store();
+
+	let mut document = Document::new()
+		.set("viewBox", (-10, 0, 25 * rooms.len(), 50))
+		.add(style);
+
+	for (i, room) in rooms.iter().enumerate() {
+		let r = PlacedRoom::new(IVec2::new(i as i32 * 20, 0), (*room).clone());
+		let shape = make_room_shape(&r);
+		document = document.add(shape);
+	}
+
+	svg::save(path, &document)?;
+
+	Ok(())
 }
