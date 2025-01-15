@@ -73,8 +73,15 @@ namespace Treep.Player {
                 {
                     _spriteRenderer.flipX = true;
                 }
+
                 if (_jumpState == JumpState.Grounded && Input.GetButtonDown("Jump"))
+                {
+                    _animator.SetBool("JumpStart" ,true);
+                    _animator.SetBool("IsJumping" ,false);
+                    _animator.SetBool("JumpEnd" ,false);
                     _jumpState = JumpState.PrepareToJump;
+                }
+                
                 else if (Input.GetButtonUp("Jump")) _stopJump = true;
                 if (IsClimbing) {
                     _move.y = Input.GetAxis("Vertical"); 
@@ -100,26 +107,24 @@ namespace Treep.Player {
                     _jumpState = JumpState.Jumping;
                     _jump = true;
                     _stopJump = false;
-                    _animator.SetBool("JumpStart" ,true);
-                    _animator.SetBool("JumpEnd" ,false);
                     break;
                 case JumpState.Jumping:
+                    _animator.SetBool("JumpStart" ,false);
                     if (!IsGrounded)
                     {
                         _jumpState = JumpState.InFlight;
-                        _animator.SetBool("IsJumping" ,true);
                     }
                     break;
                 case JumpState.InFlight:
+                    _animator.SetBool("IsJumping" ,true);
                     if (IsGrounded)
+                    {
                         _jumpState = JumpState.Landed;
-
+                    }
                     break;
                 case JumpState.Landed:
                     _jumpState = JumpState.Grounded;
                     _animator.SetBool("JumpEnd" ,true);
-                    _animator.SetBool("IsJumping" ,false);
-                    _animator.SetBool("JumpStart" ,false);
                     break;
             }
         }
@@ -195,16 +200,21 @@ namespace Treep.Player {
             }
             _body.position += move.normalized * distance;
         }
-        private void OnTriggerEnter2D(Collider2D other) {
-            if (other.CompareTag("Ladder")) {
+        private void OnTriggerEnter2D(Collider2D other) 
+        {
+            if (other.CompareTag("Ladder")) 
+            {
                 IsClimbing = true;
                 velocity.y = 0;
             }
         }
-
-        private void OnTriggerExit2D(Collider2D other) {
-            IsClimbing = false;
-            velocity.y = 0;
+        private void OnTriggerExit2D(Collider2D other) 
+        {
+            if (other.CompareTag("Ladder"))
+            {
+                IsClimbing = false;
+                velocity.y = 0;
+            }
         }
     }
 }
