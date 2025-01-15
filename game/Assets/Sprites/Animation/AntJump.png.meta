@@ -125,111 +125,111 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: new-ant-jump_0
+      name: AntJump_0
       rect:
         serializedVersion: 2
-        x: 10
-        y: 63
-        width: 40
-        height: 56
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b6820d22cf40e1980800000000000000
-      internalID: -8566403960249767829
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: new-ant-jump_1
-      rect:
-        serializedVersion: 2
-        x: 73
-        y: 63
-        width: 41
-        height: 50
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 69c42b0ff93d32860800000000000000
-      internalID: 7504074088020855958
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: new-ant-jump_2
-      rect:
-        serializedVersion: 2
-        x: 139
+        x: 11
         y: 64
         width: 38
-        height: 55
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 23ea44fb9a7d3ecb0800000000000000
-      internalID: -4835784450807386574
+      spriteID: 9b783d7400175d8688a6427a94b6529c
+      internalID: 1574361180
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: new-ant-jump_3
+      name: AntJump_1
       rect:
         serializedVersion: 2
-        x: 201
-        y: 63
-        width: 42
-        height: 49
+        x: 74
+        y: 64
+        width: 39
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d4b827f70616e8d60800000000000000
-      internalID: 7894354263910026061
+      spriteID: b93d01218adfe81dbb9be755e7fe3e7b
+      internalID: -1226705010
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: new-ant-jump_4
+      name: AntJump_2
       rect:
         serializedVersion: 2
-        x: 10
-        y: 0
+        x: 140
+        y: 65
+        width: 36
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21e7bf32874ae3585866d2521c5ed1d8
+      internalID: -885770654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AntJump_3
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 64
         width: 40
-        height: 55
+        height: 47
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: da57862d69efde850800000000000000
-      internalID: 6408057768546694573
+      spriteID: e911ee57f366385048530db4292e1892
+      internalID: 582677375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AntJump_4
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 0
+        width: 38
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd466ec20ed4a4238b02ef8f788dd4ed
+      internalID: -1343463778
       vertices: []
       indices: 
       edges: []
@@ -238,7 +238,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 69add20fc165a7ac39f6d22d02b96d06
     internalID: 0
     vertices: []
     indices: 
@@ -248,11 +248,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      new-ant-jump_0: -8566403960249767829
-      new-ant-jump_1: 7504074088020855958
-      new-ant-jump_2: -4835784450807386574
-      new-ant-jump_3: 7894354263910026061
-      new-ant-jump_4: 6408057768546694573
+      AntJump_0: 1574361180
+      AntJump_1: -1226705010
+      AntJump_2: -885770654
+      AntJump_3: 582677375
+      AntJump_4: -1343463778
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
