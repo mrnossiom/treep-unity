@@ -20,6 +20,7 @@ namespace Treep.Player {
         [SerializeField] private Vector2 velocity;
 
         private bool IsGrounded { get; set; }
+        private bool IsClimbing { get; set; }
 
         // Config
         [SerializeField] private float gravityModifier = 1.5f;
@@ -33,7 +34,6 @@ namespace Treep.Player {
         private const float MinMoveDistance = 0.001f;
         private const float ShellRadius = 0.01f;
 
-
         // --- second copy
         private JumpState _jumpState = JumpState.Grounded;
         private bool _stopJump;
@@ -43,10 +43,12 @@ namespace Treep.Player {
         private Vector2 _move;
 
         private float _maxSpeed = 7;
-        private float _jumpTakeOffSpeed = 7;
+        private float _jumpTakeOffSpeed = 6;
 
-        private float _jumpModifier = 1.5f;
+        private float _jumpModifier = 1.2f;
         private float _jumpDeceleration = 0.5f;
+        
+        private float _climbSpeed = 3f;
 
         private void Awake() {
             _body = GetComponent<Rigidbody2D>();
@@ -55,16 +57,21 @@ namespace Treep.Player {
 
         private void Update() {
             if (!isLocalPlayer) return;
-            
+
             if (_controlEnabled) {
                 _move.x = Input.GetAxis("Horizontal");
                 if (_jumpState == JumpState.Grounded && Input.GetButtonDown("Jump"))
                     _jumpState = JumpState.PrepareToJump;
                 else if (Input.GetButtonUp("Jump")) _stopJump = true;
-                // Schedule<PlayerStopJump>().player = this;
+                if (IsClimbing) {
+                    _move.y = Input.GetAxis("Vertical"); 
+                } else {
+                    _move.y = 0;
+                }
             }
             else {
                 _move.x = 0;
+                _move.y = 0;
             }
 
             UpdateJumpState();
@@ -83,13 +90,11 @@ namespace Treep.Player {
                     break;
                 case JumpState.Jumping:
                     if (!IsGrounded)
-                        // Schedule<PlayerJumped>().player = this;
                         _jumpState = JumpState.InFlight;
 
                     break;
                 case JumpState.InFlight:
                     if (IsGrounded)
-                        // Schedule<PlayerLanded>().player = this;
                         _jumpState = JumpState.Landed;
 
                     break;
@@ -109,85 +114,80 @@ namespace Treep.Player {
                 if (velocity.y > 0) velocity.y = velocity.y * _jumpDeceleration;
             }
 
-            // if (_move.x > 0.01f) spriteRenderer.flipX = false;
-            // else if (_move.x < -0.01f) spriteRenderer.flipX = true;
-
-            // animator.SetBool("grounded", IsGrounded);
-            // animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
-
             _targetVelocity = _move * _maxSpeed;
-        }
 
+            if (IsClimbing) {
+                velocity.y = _move.y * _climbSpeed; 
+            }
+        }
 
         private void FixedUpdate() {
-            //if already falling, fall faster than the jump speed, otherwise use normal gravity.
-            if (velocity.y < 0)
-                velocity += Physics2D.gravity * (gravityModifier * Time.deltaTime);
-            else
-                velocity += Physics2D.gravity * Time.deltaTime;
-
+            if (IsClimbing) {
+                velocity.y = _move.y * _climbSpeed;
+            } else {
+                if (velocity.y < 0)
+                    velocity += Physics2D.gravity * (gravityModifier * Time.deltaTime);
+                else
+                    velocity += Physics2D.gravity * Time.deltaTime;
+            }
             velocity.x = _targetVelocity.x;
-
             IsGrounded = false;
-
             var deltaPosition = velocity * Time.deltaTime;
-
             var moveAlongGround = new Vector2(_groundNormal.y, -_groundNormal.x);
-
             var move = moveAlongGround * deltaPosition.x;
-
             PerformMovement(move, false);
-
             move = Vector2.up * deltaPosition.y;
-
             PerformMovement(move, true);
         }
-
 
         private void PerformMovement(Vector2 move, bool yMovement) {
             var distance = move.magnitude;
 
             if (distance > MinMoveDistance) {
-                //check if we hit anything in current direction of travel
                 var count = _body.Cast(move, _contactFilter, _hitBuffer, distance + ShellRadius);
                 for (var i = 0; i < count; i++) {
                     var currentNormal = _hitBuffer[i].normal;
 
-                    //is this surface flat enough to land on?
                     if (currentNormal.y > MinGroundNormalY) {
                         IsGrounded = true;
-                        // if moving up, change the groundNormal to new surface normal.
                         if (yMovement) {
                             _groundNormal = currentNormal;
                             currentNormal.x = 0;
                         }
                     }
-                    if (yMovement && currentNormal.y < -MinGroundNormalY)
-                    {
+
+                    if (yMovement && currentNormal.y < -MinGroundNormalY) {
                         if (velocity.y > 0)
-                        {
                             velocity.y = 0;
-                        }
                     }
+
                     if (IsGrounded) {
-                        //how much of our velocity aligns with surface normal?
                         var projection = Vector2.Dot(velocity, currentNormal);
                         if (projection < 0)
-                            //slower velocity if moving against the normal (up a hill).
                             velocity = velocity - projection * currentNormal;
-                    }
-                    else {
-                        //We are airborne, but hit something, so cancel vertical up and horizontal velocity.
+                    } else {
                         velocity.x *= 0;
                     }
 
-                    //remove shellDistance from actual move distance.
                     var modifiedDistance = _hitBuffer[i].distance - ShellRadius;
                     distance = modifiedDistance < distance ? modifiedDistance : distance;
                 }
             }
 
             _body.position += move.normalized * distance;
+        }
+        private void OnTriggerEnter2D(Collider2D other) {
+            if (other.CompareTag("Ladder")) {
+                IsClimbing = true;
+                velocity.y = 0; 
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D other) {
+            if (other.CompareTag("Ladder")) {
+                IsClimbing = false;
+                velocity.y = 0;
+            }
         }
     }
 }
