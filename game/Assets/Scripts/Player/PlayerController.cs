@@ -15,6 +15,8 @@ namespace Treep.Player {
         // Components
         private Rigidbody2D _body;
         private Collider2D _collider2d;
+        private SpriteRenderer _spriteRenderer;
+        private Animator _animator;
 
         // Class values
         [SerializeField] private Vector2 velocity;
@@ -53,6 +55,8 @@ namespace Treep.Player {
         private void Awake() {
             _body = GetComponent<Rigidbody2D>();
             _collider2d = GetComponent<Collider2D>();
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _animator = GetComponent<Animator>();
         }
 
         private void Update() {
@@ -60,8 +64,24 @@ namespace Treep.Player {
 
             if (_controlEnabled) {
                 _move.x = Input.GetAxis("Horizontal");
+                _animator.SetBool("IsMoving" ,_move.x != 0);
+                if (_move.x > 0)
+                {
+                    _spriteRenderer.flipX = false;
+                }
+                if (_move.x < 0)
+                {
+                    _spriteRenderer.flipX = true;
+                }
+
                 if (_jumpState == JumpState.Grounded && Input.GetButtonDown("Jump"))
+                {
+                    _animator.SetBool("JumpStart" ,true);
+                    _animator.SetBool("IsJumping" ,false);
+                    _animator.SetBool("JumpEnd" ,false);
                     _jumpState = JumpState.PrepareToJump;
+                }
+                
                 else if (Input.GetButtonUp("Jump")) _stopJump = true;
                 if (IsClimbing) {
                     _move.y = Input.GetAxis("Vertical"); 
@@ -78,6 +98,8 @@ namespace Treep.Player {
             ComputeVelocity();
         }
 
+        
+
         private void UpdateJumpState() {
             _jump = false;
             switch (_jumpState) {
@@ -87,17 +109,22 @@ namespace Treep.Player {
                     _stopJump = false;
                     break;
                 case JumpState.Jumping:
+                    _animator.SetBool("JumpStart" ,false);
                     if (!IsGrounded)
+                    {
                         _jumpState = JumpState.InFlight;
-
+                    }
                     break;
                 case JumpState.InFlight:
+                    _animator.SetBool("IsJumping" ,true);
                     if (IsGrounded)
+                    {
                         _jumpState = JumpState.Landed;
-
+                    }
                     break;
                 case JumpState.Landed:
                     _jumpState = JumpState.Grounded;
+                    _animator.SetBool("JumpEnd" ,true);
                     break;
             }
         }
@@ -173,16 +200,21 @@ namespace Treep.Player {
             }
             _body.position += move.normalized * distance;
         }
-        private void OnTriggerEnter2D(Collider2D other) {
-            if (other.CompareTag("Ladder")) {
+        private void OnTriggerEnter2D(Collider2D other) 
+        {
+            if (other.CompareTag("Ladder")) 
+            {
                 IsClimbing = true;
                 velocity.y = 0;
             }
         }
-
-        private void OnTriggerExit2D(Collider2D other) {
-            IsClimbing = false;
-            velocity.y = 0;
+        private void OnTriggerExit2D(Collider2D other) 
+        {
+            if (other.CompareTag("Ladder"))
+            {
+                IsClimbing = false;
+                velocity.y = 0;
+            }
         }
     }
 }
