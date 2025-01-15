@@ -223,7 +223,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   velocity: {x: 0, y: 0}
-  gravityModifier: 1
+  gravityModifier: 1.5
 --- !u!114 &5764404148190817246
 MonoBehaviour:
   m_ObjectHideFlags: 0
