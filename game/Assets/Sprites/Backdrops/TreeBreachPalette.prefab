@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 3351315253912563565}
   - component: {fileID: 8502027525798371005}
   m_Layer: 0
-  m_Name: New Palette
+  m_Name: TreeBreachPalette
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

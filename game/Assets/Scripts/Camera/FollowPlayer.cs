@@ -1,22 +1,18 @@
 using UnityEngine;
 
-namespace Treep
-{
-    public class FollowPlayer : MonoBehaviour
-    {
+namespace Treep.Camera {
+    public class FollowPlayer : MonoBehaviour {
         public Transform player;
         public static FollowPlayer singleton { get; private set; }
 
-        void Awake()
-        {
-            if(singleton == null)
-            {
+        void Awake() {
+            if (singleton == null) {
                 singleton = this;
             }
         }
+
         // Update is called once per frame
-        void Update()
-        {
+        void Update() {
             if (player == null) return;
 
             var pos = transform.position;

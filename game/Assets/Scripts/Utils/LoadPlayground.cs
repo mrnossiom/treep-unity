@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Treep.Misc
-{
+namespace Treep.Utils {
     public class LoadPlayground : MonoBehaviour {
         private void Awake() {
             if (SceneManager.sceneCount == 1) {

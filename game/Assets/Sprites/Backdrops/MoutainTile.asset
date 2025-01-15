@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: first-bc_0
+  m_Name: MoutainTile
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 3757005041523281447, guid: 72307a4b93324934fb2d07bf794d5997, type: 3}
+  m_Sprite: {fileID: -3139490110405111482, guid: 424d1dca33d46e84aa19cf0cbaf42f5d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
