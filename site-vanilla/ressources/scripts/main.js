@@ -1,7 +1,7 @@
 console.log("Script loaded")
 
 // Random image
-var imageNumber = 1;
+var imageNumber = 3;
 var numRand = Math.floor(Math.random() * imageNumber);
 
 var imagePath = `ressources/media/diapo/IMG_${numRand}.png`;
