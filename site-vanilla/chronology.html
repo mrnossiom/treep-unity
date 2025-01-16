@@ -78,6 +78,13 @@
             There was also a problem with gaps between certain tiles in the level, which appeared when the character moved. To solve this problem, we used an Atlas Sprite, which allowed us to assemble our assets to optimize performance and solve position calculation problems at runtime.
           </p>
         </details>
+        <details>
+          <summary>Procedural generation</summary>
+          <p>
+            One of the first PoC challenges for procedural generation was to ensure the validity of the levels produced.
+            One of the first ways of doing this was to show all the information for each part in the graph and check by hand. This method works at first, but becomes limiting as soon as we try to make a level of more than three rooms. To generate a graphical representation, we first used a graphics library to make a pixel-by-pixel image. By default, all image readers smooth pixels, which has an impact on rendering visibility. After some time spent trying to get around this problem, we turned to the much more flexible SVG format.  
+          </p>
+        </details>
       </div>
     </div>
   </section>
