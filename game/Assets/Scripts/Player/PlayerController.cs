@@ -25,7 +25,7 @@ namespace Treep.Player {
         private bool IsClimbing { get; set; }
 
         // Config
-        [SerializeField] private float gravityModifier = 1.5f;
+        [SerializeField] private float gravityModifier = 1f;
 
         private Vector2 _targetVelocity;
         private Vector2 _groundNormal;
@@ -34,7 +34,7 @@ namespace Treep.Player {
 
         private const float MinGroundNormalY = .65f;
         private const float MinMoveDistance = 0.001f;
-        private const float ShellRadius = 0.01f;
+        private const float ShellRadius = 0.02f;
 
         // --- second copy
         private JumpState _jumpState = JumpState.Grounded;
@@ -44,11 +44,11 @@ namespace Treep.Player {
         private bool _jump;
         private Vector2 _move;
 
-        private float _maxSpeed = 7;
-        private float _jumpTakeOffSpeed = 6;
+        private float _maxSpeed = 6;
+        private float _jumpTakeOffSpeed = 7;
 
         private float _jumpModifier = 1.2f;
-        private float _jumpDeceleration = 0.5f;
+        private float _jumpDeceleration = 0.4f;
         
         private float _climbSpeed = 3f;
 
@@ -139,10 +139,30 @@ namespace Treep.Player {
                 if (velocity.y > 0) velocity.y = velocity.y * _jumpDeceleration;
             }
 
+            if (IsClimbing) {
+                velocity.y = _move.y * _climbSpeed;
+            }
+            else {
+                if (velocity.y < 0)
+                    velocity += Physics2D.gravity * (gravityModifier * Time.deltaTime);
+                else
+                    velocity += Physics2D.gravity * Time.deltaTime;
+            }
+
+            if (IsGrounded && !IsClimbing) {
+                if (_move.x != 0 && velocity.y > 0) {
+                    velocity.y = Mathf.Max(velocity.y, 0);
+                }
+            }
+
             _targetVelocity = _move * _maxSpeed;
 
-            if (IsClimbing) {
-                velocity.y = _move.y * _climbSpeed; 
+            if (IsGrounded && _move.x != 0) {
+                velocity.x = Mathf.MoveTowards(velocity.x, _targetVelocity.x, Time.deltaTime * 2f);
+            }
+            else if (!IsGrounded) {
+                
+                velocity.x = Mathf.MoveTowards(velocity.x, 0, Time.deltaTime * 2f);
             }
         }
 
@@ -155,7 +175,12 @@ namespace Treep.Player {
                     velocity += Physics2D.gravity * (gravityModifier * Time.deltaTime);
                 else
                     velocity += Physics2D.gravity * Time.deltaTime;
+
+                if (_move.x != 0 && velocity.y > 0) {
+                    velocity.y = Mathf.Max(velocity.y, 0);
+                }
             }
+
             velocity.x = _targetVelocity.x;
             IsGrounded = false;
             var deltaPosition = velocity * Time.deltaTime;
@@ -165,6 +190,7 @@ namespace Treep.Player {
             move = Vector2.up * deltaPosition.y;
             PerformMovement(move);
         }
+
 
         private void PerformMovement(Vector2 move) {
             var distance = move.magnitude;
