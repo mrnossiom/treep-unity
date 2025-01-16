@@ -45,31 +45,37 @@
         <details>
           <summary>Movements</summary>
           <p>
-            Les mouvements devant être utilisables pour chacun des niveaux du jeu, nous avons dû réfléchir pour rendre
-            le code universel. <br>
-            De plus, nous avons dû éviter les problèmes d’action pouvant empêcher une autre action de fonctionner ainsi
-            qu’adapter le code au fonctionnement en tilemap des niveaux.
+            As the movements had to be usable for each of the game's levels, we had to think in terms of how to make them work.
+            <br>
+            In addition, we had to avoid action problems that could prevent another action from working, and adapt the code to the tilemap operation of the levels. and adapt the code to the tilemap operation of the levels.
           </p>
         </details>
         <details>
           <summary>Assets</summary>
-          <p>Something small enough to escape casual notice.
+          <p>
+            When designing the assets, a number of challenges arose.
+            <br>
+            Firstly, the animations took a long time to create, as Pixel Studio's default mode didn't allow for fast animation. But we found a more advanced mode that optimized the realization of these animations, reducing the time spent on them.
+            <br>
+            Secondly, the assets were too dark. Indeed, without assembling the assets created, we hadn't noticed that the whole was very dark and the colors not very diverse, often tending towards a bark brown.
           </p>
         </details>
         <details>
-          <summary>Procedural generation</summary>
-          <p>Something small enough to escape casual notice.
+          <summary>Web site</summary>
+          <p>As explained above, the design of the website posed no major challenges. The only more difficult part was mastering CSS to find the right color schemes, dimensions and shapes for the different elements of the site.
           </p>
-
         </details>
+        
         <details>
           <summary>Multiplayer</summary>
-          <p>Something small enough to escape casual notice.
+          <p>When we integrated multiplayer into our game, we quickly noticed that the client position that was not in the game was reset to zero as soon as we tried to move. It turns out that the problem lay in Mirror's multiplayer architecture. In this architecture, the host has authority over all game data and controls the movements of other players, who are not allowed to move as they wish. This authority can be delegated to all clients.
           </p>
         </details>
         <details>
           <summary>Level design</summary>
-          <p>Something small enough to escape casual notice.
+          <p>By default, Unity smoothes images so that pixels are not visible. However, in our case, having large pixels is a choice. We had to tell Unity to change the rendering method for our assets.
+            <br>
+            There was also a problem with gaps between certain tiles in the level, which appeared when the character moved. To solve this problem, we used an Atlas Sprite, which allowed us to assemble our assets to optimize performance and solve position calculation problems at runtime.
           </p>
         </details>
       </div>
