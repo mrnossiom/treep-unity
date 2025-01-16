@@ -1,3 +1,5 @@
+@import "/static/style/normalize.css";
+
 .chronology {
   padding: 10vh 1vw;
   max-width: 85vw;

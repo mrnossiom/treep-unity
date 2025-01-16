@@ -4,24 +4,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Treep</title>
-  <link rel="stylesheet" href="ressources/style/style.css">
-  <link rel="icon" type="image/x-icon" href="ressources/media/treep.png">
-  <script src="ressources/scripts/main.js" defer></script>
+
+  <title>Homepage - Treep</title>
+
+  <link rel="stylesheet" href="/static/style/style.css">
+  <script src="/static/scripts/diapo.js" defer></script>
 </head>
 
 <body>
-  <header>
+  <nav>
     <div class="game">
-      <img src="ressources/media/treep.png" alt="Treep logo" />
-      <a href="index.html">Treep</a>
+      <img src="/static/media/treep.png" alt="Treep logo" />
+      <a href="/index.html">Treep</a>
     </div>
+
     <div class="game">
-      <a href="about.html">About</a>
-      <a href="chronology.html">Project execution</a>
-      <a href="appendices.html">Appendices</a>
+      <a href="/about.html">About</a>
+      <a href="/chronology.html">Project execution</a>
+      <a href="/appendices.html">Appendices</a>
     </div>
-  </header>
+  </nav>
 
   <div class="banner">
     <div class="content">
@@ -51,11 +53,11 @@
           playthrough.
         </p>
       </div>
-      <img class="feat-img" src="ressources/media/features-img/feat-proc-gen.png" alt="Procedural generation"></img>
+      <img class="feat-img" src="/static/media/features-img/feat-proc-gen.png" alt="Procedural generation"></img>
     </div>
 
     <div class="feat-block">
-      <img class="feat-img" src="ressources/media/features-img/feat-boss.png" alt="Bosses"></img>
+      <img class="feat-img" src="/static/media/features-img/feat-boss.png" alt="Bosses"></img>
       <div class="feat-text">
         <p class="title">2D Exploration</p>
         <p>
@@ -71,11 +73,11 @@
           Each death penalizes the player by transforming their former body into a relentless enemy.
         </p>
       </div>
-      <img class="feat-img" src="ressources/media/features-img/feat-death.png" alt="Death"></img>
+      <img class="feat-img" src="/static/media/features-img/feat-death.png" alt="Death"></img>
     </div>
 
     <div class="feat-block">
-      <img class="feat-img" src="ressources/media/features-img/feat-multi.png" alt="Multiplayer"></img>
+      <img class="feat-img" src="/static/media/features-img/feat-multi.png" alt="Multiplayer"></img>
       <div class="feat-text">
         <p class="title">Immersive multiplayer</p>
         <p>
@@ -92,11 +94,11 @@
           Encounter enemies that adapt to your actions and combat situations.
         </p>
       </div>
-      <img class="feat-img" src="ressources/media/features-img/feat-ia.png" alt="AI"></img>
+      <img class="feat-img" src="/static/media/features-img/feat-ia.png" alt="AI"></img>
     </div>
 
     <div class="feat-block">
-      <img class="feat-img" src="ressources/media/features-img/feat-music.png" alt="Music"></img>
+      <img class="feat-img" src="/static/media/features-img/feat-music.png" alt="Music"></img>
       <div class="feat-text">
         <p class="title">Immersive universe</p>
         <p>
@@ -116,19 +118,16 @@
   <section id="download" class="download">
     <h1>Download Treep</h1>
     <div class="download-buttons">
-      <a href="url" download="treep-windows" class="dl-button">Windows</a>
-      <a href="url" download="treep-linux" class="dl-button">Linux</a>
-      <a href="url" download="treep-mac" class="dl-button">Mac</a>
+      <a href="/static/binaries/TreepWindows.exe" class="dl-button">Windows</a>
+      <a href="/static/binaries/TreepLinux" class="dl-button">Linux</a>
+      <a href="/static/binaries/TreepMac.app" class="dl-button">Mac</a>
     </div>
   </section>
 
   <footer>
     <p>&copy; 2025 KROMM Studio - All rights reserved</p>
-    <br />
     <p>
-      <a target="_blank" rel="noopener noreferrer" href="https://github.com/mrnossiom/treep">Github</a> -
-      <a target="_blank" rel="noopener noreferrer" href="ressources/media/cdcf-treep-kromm-studio.pdf">Specification</a>
-      <br /> <a href="mailto:treep@gmail.com">Contact: treep@gmail.com</a>
+      Contact: <a href="mailto:treep@gmail.com">treep@gmail.com</a>
     </p>
   </footer>
 </body>

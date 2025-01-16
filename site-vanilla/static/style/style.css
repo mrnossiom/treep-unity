@@ -1,27 +1,17 @@
-/* Main style */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  scroll-behavior: smooth;
-}
+@import "/static/style/normalize.css";
 
 body {
   background-color: #ecf0f1;
-  font-family: helvetica, arial, sans-serif;
-  font-size: 1rem;
-  line-height: 1.6;
 }
 
-
 /* Header style */
-header {
+nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem;
   background-color: #ffffff;
-  box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
 
   a {
     margin: 1rem;
@@ -212,18 +202,18 @@ header {
   }
 }
 
-
 /* Footer style */
 footer {
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+
   text-align: center;
-  padding: 1rem;
   font-size: 0.9rem;
+
+  color: #888888;
   background-color: #ffffff;
-  color: #888;
-  border-top: 0.1vh solid #ddd;
 
   a {
-    text-decoration: none;
     color: #888;
   }
 }
