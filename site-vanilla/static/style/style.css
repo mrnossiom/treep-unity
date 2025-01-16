@@ -1,7 +1,12 @@
 @import "/static/style/normalize.css";
 
+:root {
+  --treep-gradient: linear-gradient(90deg, rgba(117, 44, 0, 1) 0%, rgba(185, 76, 0, 1) 51%, rgba(0, 113, 12, 1) 100%);
+}
+
 body {
   background-color: #ecf0f1;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 /* Header style */
@@ -16,7 +21,7 @@ nav {
   a {
     margin: 1rem;
     text-decoration: none;
-    color: #333;
+    color: #333333;
     font-size: 1.5rem;
   }
 
@@ -60,14 +65,13 @@ nav {
 .dl-button {
   display: inline-block;
   padding: 1.5rem 5rem;
-  background: linear-gradient(90deg, rgba(117, 44, 0, 1) 0%, rgba(185, 76, 0, 1) 51%, rgba(0, 113, 12, 1) 100%);
+  background: var(--treep-gradient);
   color: #ffffff;
   text-decoration: none;
   font-weight: bold;
   font-size: 2rem;
   border-radius: 2rem;
   box-shadow: 0 0.5vh 1.5vh rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease-in-out;
 
   &:hover {
     transform: scale(1.05);
@@ -78,10 +82,8 @@ nav {
 
 /* About section style */
 .about {
-  padding: 10rem 5rem;
-  max-width: 80vw;
-  margin: 0 auto;
-  color: #333;
+  padding: 5rem 10rem;
+  color: #333333;
 
   .general {
     font-size: 1.9rem;
@@ -136,49 +138,46 @@ nav {
 
 /* Download section style */
 .download {
-  padding-bottom: 5rem;
-  max-width: 80vw;
-  margin: 0 auto;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2.5rem;
-  color: #333;
+
+  margin: 0 auto;
+  padding-bottom: 5rem;
+
 
   h1 {
     font-size: 5rem;
+    color: #333333;
   }
-}
 
-.download-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
-}
+  a {
+    width: 11rem;
+    height: 4rem;
 
-.download a {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 20vw;
-  height: 8vh;
-  background: linear-gradient(90deg, rgba(117, 44, 0, 1) 0%, rgba(185, 76, 0, 1) 51%, rgba(0, 113, 12, 1) 100%);
-  color: #ffffff;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 2rem;
-  border-radius: 4rem;
-  box-shadow: 0 0.5vh 1.5vh rgba(0, 0, 0, 0.2);
-  text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-  transition: all 0.3s ease-in-out;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 
-  &:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0.6vh 2vh rgba(0, 0, 0, 0.3);
+    background: var(--treep-gradient);
+    border-radius: 4rem;
+    box-shadow: 0 0.5vh 1.5vh rgba(0, 0, 0, 0.2);
+
+    text-decoration: none;
+
+    font-weight: bold;
+    font-size: 2rem;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0.6vh 2vh rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  .download-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    justify-content: center;
   }
 }
 
@@ -214,6 +213,6 @@ footer {
   background-color: #ffffff;
 
   a {
-    color: #888;
+    color: #888888;
   }
 }
