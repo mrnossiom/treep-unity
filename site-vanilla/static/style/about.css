@@ -1,0 +1,62 @@
+@import "/static/style/normalize.css";
+
+.studio {
+  color: #333333;
+  padding: 5rem 15rem;
+  /* text-align: center; */
+
+  h1 {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.3rem;
+  }
+}
+
+.team {
+  padding: 0 12rem;
+  padding-bottom: 5rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+
+  color: #333333;
+
+  h1 {
+    font-size: 3rem;
+    text-align: center;
+  }
+
+  img {
+    width: 16rem;
+  }
+
+  .team-block {
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+    align-items: center;
+
+    font-size: 1.3rem;
+    background-color: #ffffff;
+    border-radius: 1rem;
+
+    padding: 2rem;
+
+    .team-text {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+
+      .title {
+        font-weight: bold;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+    }
+  }
+}
