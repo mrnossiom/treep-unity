@@ -1,4 +1,4 @@
-@import "/static/style/normalize.css";
+@import "normalize.css";
 
 :root {
   --treep-gradient: linear-gradient(90deg, rgba(117, 44, 0, 1) 0%, rgba(185, 76, 0, 1) 51%, rgba(0, 113, 12, 1) 100%);
