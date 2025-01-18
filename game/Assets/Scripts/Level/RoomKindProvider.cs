@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Treep.Levels {
+namespace Treep.Level {
     [System.Serializable]
     public enum RoomKind {
         Spawn,
