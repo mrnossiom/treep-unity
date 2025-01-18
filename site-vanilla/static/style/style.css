@@ -18,17 +18,20 @@ nav {
   background-color: #ffffff;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
 
-  a {
-    margin: 1rem;
-    text-decoration: none;
-    color: #333333;
-    font-size: 1.5rem;
-  }
 
   .game {
     display: flex;
     align-items: center;
     margin-left: 0.5rem;
+    text-decoration: none;
+    color: #333333;
+
+    a {
+      margin: 1rem;
+      text-decoration: none;
+      color: #333333;
+      font-size: 1.5rem;
+    }
 
     p {
       margin-left: 1rem;
