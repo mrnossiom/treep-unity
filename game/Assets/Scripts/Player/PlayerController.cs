@@ -45,7 +45,7 @@ namespace Treep.Player {
         private Vector2 _move;
 
         private float _maxSpeed = 6;
-        private float _jumpTakeOffSpeed = 7;
+        private float _jumpTakeOffSpeed = 8;
 
         private float _jumpModifier = 1.2f;
         private float _jumpDeceleration = 0.4f;
@@ -219,6 +219,10 @@ namespace Treep.Player {
                     }
                     else {
                         velocity.x *= 0;
+                        if (velocity.y > _jumpTakeOffSpeed)
+                        {
+                            velocity.y = _jumpTakeOffSpeed - 2;
+                        }
                     }
                     var modifiedDistance = _hitBuffer[i].distance - ShellRadius;
                     distance = modifiedDistance < distance ? modifiedDistance : distance;
