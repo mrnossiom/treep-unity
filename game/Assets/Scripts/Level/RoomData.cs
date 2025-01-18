@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,6 +24,17 @@ namespace Treep.Level {
     public class DoorData {
         public Vector2 position = Vector2.one;
         public DoorSize size = DoorSize.Vertical5;
+
+        public Vector2[] AdjacentDeltas() {
+            var delta = size.GetDoorSizeVector();
+            switch (size) {
+                case DoorSize.Vertical5:
+                    delta.y = 0;
+                    return new[] { delta, -delta };
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
     }
 
     public class RoomData : MonoBehaviour {
