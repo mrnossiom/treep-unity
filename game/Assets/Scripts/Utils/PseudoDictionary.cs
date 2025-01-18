@@ -11,72 +11,60 @@ namespace Treep.Utils {
     /// <typeparam name="TValue"></typeparam>
     [System.Serializable]
     public class PseudoDictionary<TKey, TValue> {
-        // PSEUDODICTIONARY ENTRIES
-        // & DICTIONARY CONVERSION
-
-        [SerializeField] List<PseudoKeyValuePair<TKey, TValue>> entries;
+        [SerializeField] private List<PseudoKeyValuePair<TKey, TValue>> entries;
         private Dictionary<TKey, TValue> _actualDictionary = new();
-
-        // COUNT
 
         public int Count {
             get {
-                _actualDictionary = FromPseudoDictionaryToActualDictionary();
+                _actualDictionary = ToActualDictionary();
                 return _actualDictionary.Count;
             }
         }
 
-        // INDEXER
-
         public TValue this[TKey index] {
             get {
-                _actualDictionary = FromPseudoDictionaryToActualDictionary();
+                _actualDictionary = ToActualDictionary();
                 return _actualDictionary[index];
             }
         }
 
-        // FROM DICTIONARY TO PSEUDO
-
         public List<PseudoKeyValuePair<TKey, TValue>>
-            FromActualDictionaryToPseudoDictionary(Dictionary<TKey, TValue> actualDictionary) {
+            FromActualDictionary(Dictionary<TKey, TValue> actualDictionary) {
             List<PseudoKeyValuePair<TKey, TValue>> pseudoDictionary = new();
 
-            foreach (KeyValuePair<TKey, TValue> pair in actualDictionary)
+            foreach (var pair in actualDictionary)
                 pseudoDictionary.Add(new(pair.Key, pair.Value));
 
             return pseudoDictionary;
         }
 
-        public List<PseudoKeyValuePair<TKey, TValue>> FromActualDictionaryToPseudoDictionary()
-            => FromActualDictionaryToPseudoDictionary(_actualDictionary);
+        public List<PseudoKeyValuePair<TKey, TValue>> FromActualDictionary()
+            => FromActualDictionary(_actualDictionary);
 
         // FROM PSEUDO TO DICTIONARY
 
         public Dictionary<TKey, TValue>
-            FromPseudoDictionaryToActualDictionary(List<PseudoKeyValuePair<TKey, TValue>> pseudoDictionary) {
+            ToActualDictionary() {
             Dictionary<TKey, TValue> dictionary = new();
 
-            foreach (PseudoKeyValuePair<TKey, TValue> entry in pseudoDictionary)
+            foreach (var entry in entries)
                 dictionary.Add(entry.Key, entry.Value);
 
             return dictionary;
         }
 
-        public Dictionary<TKey, TValue> FromPseudoDictionaryToActualDictionary()
-            => FromPseudoDictionaryToActualDictionary(entries);
-
         // OPERATIONS
 
         public void Add(TKey key, TValue value) {
-            _actualDictionary = FromPseudoDictionaryToActualDictionary();
+            _actualDictionary = ToActualDictionary();
             _actualDictionary.Add(key, value);
-            entries = FromActualDictionaryToPseudoDictionary();
+            entries = FromActualDictionary();
         }
 
         public void Remove(TKey key) {
-            _actualDictionary = FromPseudoDictionaryToActualDictionary();
+            _actualDictionary = ToActualDictionary();
             _actualDictionary.Remove(key);
-            entries = FromActualDictionaryToPseudoDictionary();
+            entries = FromActualDictionary();
         }
 
         public void Clear() {
@@ -85,21 +73,21 @@ namespace Treep.Utils {
         }
 
         public TValue TryGetValue(TKey key) {
-            _actualDictionary = FromPseudoDictionaryToActualDictionary();
+            _actualDictionary = ToActualDictionary();
             _actualDictionary.TryGetValue(key, out var value);
             return value;
         }
     }
 
     [System.Serializable]
-    public struct PseudoKeyValuePair<T, U> {
-        [SerializeField] public T key;
-        [SerializeField] private U value;
+    public struct PseudoKeyValuePair<TKey, TValue> {
+        [SerializeField] public TKey key;
+        [SerializeField] private TValue value;
 
-        public T Key => key;
-        public U Value => value;
+        public TKey Key => key;
+        public TValue Value => value;
 
-        public PseudoKeyValuePair(T key, U value) {
+        public PseudoKeyValuePair(TKey key, TValue value) {
             this.key = key;
             this.value = value;
         }

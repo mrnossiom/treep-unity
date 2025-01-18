@@ -15,8 +15,8 @@ namespace Treep.Level {
 
     [CreateAssetMenu(fileName = "RoomKindProvider", menuName = "Scriptable Objects/Room Kind Provider")]
     public class RoomKindProvider : ScriptableObject {
-        public RoomKind kind;
+        [SerializeField] public RoomKind kind;
 
-        public List<RoomData> rooms;
+        [SerializeField] public List<RoomData> rooms;
     }
 }

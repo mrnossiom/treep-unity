@@ -315,8 +315,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7c8d0e7c906f3414843c346286bc53e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _blueprint: {fileID: 11400000, guid: 3bf82fa536a00b399ae9a131928fe624, type: 2}
-  _roomProvider: {fileID: 11400000, guid: 432b6fe8c325811d192a8a3745e490bd, type: 2}
+  levelBlueprint: {fileID: 11400000, guid: 3bf82fa536a00b399ae9a131928fe624, type: 2}
+  roomProvider: {fileID: 11400000, guid: 432b6fe8c325811d192a8a3745e490bd, type: 2}
+  seed: 0
 --- !u!4 &353672801
 Transform:
   m_ObjectHideFlags: 0

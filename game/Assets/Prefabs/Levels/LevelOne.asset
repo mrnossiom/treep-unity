@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d94af637ef84237982930e4026aabd9, type: 3}
   m_Name: LevelOne
   m_EditorClassIdentifier: 
+  blueprint: 010000000100000001000000
