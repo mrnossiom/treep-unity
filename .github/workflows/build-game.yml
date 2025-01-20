@@ -10,6 +10,14 @@ on:
 jobs:
   build:
     name: Build Treep
+    strategy:
+      matrix:
+        target:
+          - StandaloneLinux64
+          - StandaloneWindows64
+          - StandaloneOSX
+          # - LinuxHeadlessSimulation # not available?
+          # - WebGL # takes a very long time
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -19,7 +27,7 @@ jobs:
       - uses: actions/cache@v4
         with:
           path: Library
-          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          key: Library-${{ hashFiles('game/Assets/**', 'game/Packages/**', 'game/ProjectSettings/**') }}
           restore-keys: |
             Library-
 
@@ -39,10 +47,9 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           projectPath: game
-          # targetPlatform: WebGL
-          targetPlatform: StandaloneLinux64
+          targetPlatform: ${{ matrix.target }}
 
       - uses: actions/upload-artifact@v3
         with:
-          name: Build
+          name: ${{ matrix.target }} Build
           path: build
