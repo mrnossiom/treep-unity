@@ -1,9 +1,9 @@
-name: Build and deploy site-vanilla GitHub Pages
+name: Deploy `site-vanilla` to GitHub Pages
 
 on:
   push:
-    paths: [ site-vanilla/** ]
     branches: [ main ]
+    paths: [ site-vanilla/** ]
   workflow_dispatch:
 
 permissions:
@@ -12,11 +12,11 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: pages
   cancel-in-progress: false
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
 
