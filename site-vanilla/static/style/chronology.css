@@ -1,5 +1,6 @@
 @import "normalize.css";
 
+/* Main style */
 .chronology {
   padding: 5rem 10rem;
   margin: 0 auto;
@@ -12,23 +13,10 @@
     font-weight: bold;
   }
 
-  .chrono-block {
+  p {
+    text-align: center;
+    margin-top: 3rem;
     font-size: 1.3rem;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    p {
-      margin: 1rem;
-    }
-  }
-
-  .grahp-desc {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
   }
 }
 
@@ -60,10 +48,69 @@
 
     p {
       margin: 1rem;
+      text-align: left;
     }
 
     details {
       margin-top: 2vh;
     }
   }
+}
+
+/* Chart style */
+.chart {
+  width: 80%;
+  margin: auto;
+}
+
+.percentage-line {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  padding-left: 20%;
+}
+
+.percentage {
+  text-align: center;
+  width: 20%;
+  font-size: 1rem;
+  color: gray;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.label {
+  width: 20%;
+  text-align: right;
+  padding-right: 1rem;
+}
+
+.bar {
+  width: 80%;
+  background-color: #ffffff;
+  height: 2rem;
+  position: relative;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  line-height: 2rem;
+  color: white;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.green {
+  background-color: #67c776;
+}
+
+.orange {
+  background-color: #ffa500;
 }
