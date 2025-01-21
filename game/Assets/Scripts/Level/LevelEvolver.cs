@@ -1,7 +1,6 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using JetBrains.Annotations;
-using Mirror.BouncyCastle.Asn1.Esf;
 using UnityEngine;
 using Random = System.Random;
 
@@ -53,32 +52,49 @@ namespace Treep.Level {
     }
 
     public class LevelEvolver {
-        private List<RoomKind> blueprint;
-        private Dictionary<RoomKind, List<RoomData>> roomProviders;
+        private readonly List<RoomKind> _blueprint;
+        private readonly Dictionary<RoomKind, List<RoomData>> _roomProviders;
+
+        private List<PlacedRoom> _placedRooms = new();
+        private List<Vector2> _enemySpawners = new();
+        private List<Vector2> _spawnPoints = new();
+
+        public ReadOnlyCollection<PlacedRoom> PlacedRooms => _placedRooms.AsReadOnly();
+        public ReadOnlyCollection<Vector2> EnemySpawners => _enemySpawners.AsReadOnly();
+        public ReadOnlyCollection<Vector2> SpawnPoints => _spawnPoints.AsReadOnly();
 
         public LevelEvolver(List<RoomKind> blueprint, Dictionary<RoomKind, List<RoomData>> roomProviders) {
-            this.blueprint = blueprint;
-            this.roomProviders = roomProviders;
+            _blueprint = blueprint;
+            _roomProviders = roomProviders;
         }
 
-        public List<PlacedRoom> EvolveRoot(Random rng) {
+        public bool EvolveRoot(Random rng) {
+            var found = false;
+
             var evolved = new List<PlacedRoom>();
-            var currentId = 0;
+            const int rootId = 0;
 
-            var rootData = blueprint[currentId];
+            var rootData = _blueprint[rootId];
 
-            foreach (var template in roomProviders[rootData].RandomOrderAccess(rng)) {
+            foreach (var template in _roomProviders[rootData].RandomOrderAccess(rng)) {
                 evolved.Add(new PlacedRoom(template, Vector2.zero));
 
                 // found a complete level
-                if (EvolveNode(ref evolved, rng, currentId)) return evolved;
+                if (EvolveNode(ref evolved, rng, rootId)) {
+                    found = true;
+                    break;
+                }
 
                 // if we could not evolve with the current template, loop and retry
-                evolved.RemoveAt(currentId);
+                evolved.RemoveAt(rootId);
             }
 
             // level is not solvable
-            return null;
+            if (!found) return false;
+
+            ProcessPlacedRooms(evolved);
+
+            return true;
         }
 
         private bool EvolveNode(ref List<PlacedRoom> evolved, Random rng, int lastId) {
@@ -96,10 +112,10 @@ namespace Treep.Level {
             var lastPlacedRoom = evolved[lastId];
 
             // reached end of blueprint branch
-            if (nextRoomId >= blueprint.Count) return true;
+            if (nextRoomId >= _blueprint.Count) return true;
 
-            var nextRoom = blueprint[nextRoomId];
-            var nextTemplates = roomProviders[nextRoom];
+            var nextRoom = _blueprint[nextRoomId];
+            var nextTemplates = _roomProviders[nextRoom];
 
             foreach (var template in nextTemplates.RandomOrderAccess(rng)) {
                 foreach (var nextDoor in template.doors.RandomOrderAccess(rng)) {
@@ -130,6 +146,20 @@ namespace Treep.Level {
             }
 
             return false;
+        }
+
+        private void ProcessPlacedRooms(List<PlacedRoom> placedRooms) {
+            foreach (var placedRoom in placedRooms) {
+                foreach (var enemySpawner in placedRoom.Template.enemySpawners) {
+                    _enemySpawners.Add(placedRoom.Position + enemySpawner);
+                }
+
+                foreach (var spawnPoint in placedRoom.Template.spawnPoints) {
+                    _spawnPoints.Add(placedRoom.Position + spawnPoint);
+                }
+            }
+
+            _placedRooms = placedRooms;
         }
     }
 }

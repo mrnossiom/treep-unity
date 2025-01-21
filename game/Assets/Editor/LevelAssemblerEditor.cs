@@ -4,26 +4,27 @@ using UnityEngine;
 
 namespace Treep.Editor {
     [CustomEditor(typeof(LevelAssembler))]
-    class LevelAssemblerEditor : UnityEditor.Editor {
+    internal class LevelAssemblerEditor : UnityEditor.Editor {
         public override void OnInspectorGUI() {
-            DrawDefaultInspector();
+            base.OnInspectorGUI();
 
             var levelAssembler = (LevelAssembler)target;
 
             GUILayout.Space(15);
 
+            GUILayout.BeginHorizontal();
+
             if (GUILayout.Button("Generate Level")) {
-                if (levelAssembler.GenerateLevel()) {
-                    Debug.Log("done");
-                }
-                else {
-                    Debug.Log("level is not solvable");
+                if (levelAssembler.GenerateLevel(new System.Random().Next()) is null) {
+                    Debug.LogError($"Level `{levelAssembler.name}` is not solvable!");
                 }
             }
 
             if (GUILayout.Button("Clear")) {
-                levelAssembler.Clear();
+                levelAssembler.ClearChildren();
             }
+
+            GUILayout.EndHorizontal();
         }
     }
 }

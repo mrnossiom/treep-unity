@@ -6,14 +6,13 @@ namespace Treep.Utils {
 
         private bool _fontInitialized = false;
 
-        void OnGUI() {
-            if (!_fontInitialized) {
-                GUI.skin.font = font;
-                GUI.skin.GetStyle("Toggle").font = font;
-                GUI.skin.GetStyle("Label").font = font;
+        private void OnGUI() {
+            if (_fontInitialized) return;
+            _fontInitialized = true;
 
-                _fontInitialized = true;
-            }
+            GUI.skin.font = font;
+            GUI.skin.GetStyle("Toggle").font = font;
+            GUI.skin.GetStyle("Label").font = font;
         }
     }
 }
