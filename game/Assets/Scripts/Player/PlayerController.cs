@@ -18,8 +18,8 @@ namespace Treep.Player {
         private static readonly int JumpEnd = Animator.StringToHash("JumpEnd");
 
         // Components
-        private Collider2D _collider2d;
         private Rigidbody2D _body;
+        private BoxCollider2D _collider2d;
         private SpriteRenderer _spriteRenderer;
         private Animator _animator;
         
@@ -34,7 +34,7 @@ namespace Treep.Player {
         private const float MinMoveDistance = 0.001f;
         private const float ShellRadius = 0.01f;
 
-        [SerializeField] private float gravityModifier = 1.5f;
+        [SerializeField] private float gravityModifier = 2f;
         [SerializeField] private float maxSpeed = 7;
         [SerializeField] private float jumpTakeOffSpeed = 6;
 
@@ -43,27 +43,43 @@ namespace Treep.Player {
 
         [SerializeField] private float climbSpeed = 3f;
 
-        [SerializeField] private bool controlEnabled = true;
-
         // State
         private Vector2 _targetVelocity;
         private Vector2 _groundNormal;
+        private ContactFilter2D _contactFilter;
         private readonly RaycastHit2D[] _hitBuffer = new RaycastHit2D[16];
 
-        private Vector2 _velocity;
+        private const float MinGroundNormalY = .65f;
+        private const float MinMoveDistance = 0.001f;
+        private const float ShellRadius = 0.01f;
 
         private JumpState _jumpState = JumpState.Grounded;
         private bool _stopJump;
+        private bool _controlEnabled = true;
 
         private bool _jump;
         private Vector2 _move;
 
-        private bool IsGrounded { get; set; }
-        private bool IsClimbing { get; set; }
+        private float _maxSpeed = 7;
+        private float _jumpTakeOffSpeed = 8;
+
+        private float _jumpModifier = 1.2f;
+        private float _jumpDeceleration = 0.5f;
+        
+        private float _climbSpeed = 3f;
+
+        private Vector2 _standSize = new Vector2(1.4f, 3.2f);
+        private Vector2 _crouchSize = new Vector2(1.4f, 2.3f);
+        private Vector2 _standOffSet = new Vector2(-0.18f, -0.126588f);
+        private Vector2 _crouchOffSet = new Vector2(-0.18f, -0.5325f);
+        private bool _unCrouch;
+        
 
         private void Awake() {
             _body = GetComponent<Rigidbody2D>();
-            _collider2d = GetComponent<Collider2D>();
+            _collider2d = GetComponent<BoxCollider2D>();
+            _collider2d.size = _standSize;
+            _collider2d.offset = _standOffSet;
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _animator = GetComponent<Animator>();
 
@@ -85,11 +101,32 @@ namespace Treep.Player {
         private void Update() {
             if (!isLocalPlayer) return;
 
-            if (controlEnabled) {
+            if (_controlEnabled) {
                 _move.x = Input.GetAxis("Horizontal");
                 _animator.SetBool(IsMoving, _move.x != 0);
                 
                 if (_move.x < 0 != this._isFlipped) CmdSetFlip(_move.x < 0);
+
+                if (Input.GetKeyDown(KeyCode.C))
+                {
+                    _collider2d.size = _crouchSize;
+                    _collider2d.offset = _crouchOffSet;
+                    _animator.SetBool("IsCrouching" ,true);
+                }
+                
+                if (Input.GetKeyUp(KeyCode.C))
+                {
+                    _unCrouch = true;
+                    
+                }
+
+                if (_unCrouch && CanStandUp())
+                {
+                    _collider2d.size = _standSize;
+                    _collider2d.offset = _standOffSet;
+                    _animator.SetBool("IsCrouching" ,false);
+                    _unCrouch = false;
+                }
 
                 if (_jumpState == JumpState.Grounded && Input.GetButtonDown("Jump")) {
                     _animator.SetBool(JumpStart, true);
@@ -101,9 +138,8 @@ namespace Treep.Player {
                 else if (Input.GetButtonUp("Jump")) _stopJump = true;
 
                 if (IsClimbing) {
-                    _move.y = Input.GetAxis("Vertical");
-                }
-                else {
+                    _move.y = Input.GetAxis("Vertical"); 
+                } else {
                     _move.y = 0;
                 }
             }
@@ -115,6 +151,13 @@ namespace Treep.Player {
             UpdateJumpState();
             _targetVelocity = Vector2.zero;
             ComputeVelocity();
+        }
+        
+        private bool CanStandUp() {
+            Vector2 direction = Vector2.up;
+            float checkHeight = 1f;
+            int hitCount = _body.Cast(direction, _contactFilter, _hitBuffer, checkHeight);
+            return hitCount == 0;
         }
 
 
@@ -207,6 +250,10 @@ namespace Treep.Player {
                             _velocity = _velocity - projection * currentNormal;
                     }
                     else {
+                        if (velocity.y > _jumpTakeOffSpeed)
+                        {
+                            velocity.y = _jumpTakeOffSpeed;
+                        }
                         _velocity.x *= 0;
                     }
 
