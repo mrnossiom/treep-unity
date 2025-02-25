@@ -1,3 +1,4 @@
+using System;
 using Mirror;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
@@ -9,6 +10,14 @@ namespace Treep.Player {
         Jumping,
         InFlight,
         Landed
+    }
+
+    public enum Looking
+    {
+        Top,
+        Right,
+        Bottom,
+        Left,
     }
 
     [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
@@ -56,7 +65,7 @@ namespace Treep.Player {
         private bool _controlEnabled = true;
 
         private bool _jump;
-        private Vector2 _move;
+        public Vector2 _move;
         public bool IsGrounded { get; set; }
 
         private float _maxSpeed = 7;
@@ -78,6 +87,13 @@ namespace Treep.Player {
 
         private bool IsClimbing { get; set; }
 
+        public Looking looking;
+        
+        
+        void Start()
+        {
+            transform.position += new Vector3(3, 5, 0);
+        }
         private void Awake() {
             _body = GetComponent<Rigidbody2D>();
             _collider2d = GetComponent<BoxCollider2D>();
@@ -106,20 +122,42 @@ namespace Treep.Player {
 
             if (_controlEnabled) {
                 _move.x = Input.GetAxis("Horizontal");
-                _animator.SetBool(IsMoving, _move.x != 0);
+                _move.y = Input.GetAxis("Vertical");
+                _animator.SetBool("IsMoving" ,_move.x != 0);
                 
-                if (_move.x < 0 != this._isFlipped) CmdSetFlip(_move.x < 0);
+                if (_move.y != 0) // si on cible le haut ou le bas 
+                {
+                    if (_move.y > 0) // cible top
+                    {
+                        looking = Looking.Top; 
+                    }
+                    else if (_move.y < 0) // cible bottom
+                    {
+                        looking = Looking.Bottom;
+                    }
 
-                if (Input.GetKeyDown(KeyCode.C)) {
-                    _collider2d.size = _crouchSize;
-                    _collider2d.offset = _crouchOffSet;
-                    _animator.SetBool(IsCrouching ,true);
-                }
-                
-                if (Input.GetKeyUp(KeyCode.C)) {
-                    _unCrouch = true;
+                    if (_move.x != 0) 
+                    {
+                        _spriteRenderer.flipX = _move.x < 0;
+                    }
                     
                 }
+                else // le player vas que a gauche ou a droite (ou rien)
+                {
+                    if (_move.x > 0)
+                    {
+                        _spriteRenderer.flipX = false;
+                    }
+                    else if (_move.x < 0)
+                    {
+                        _spriteRenderer.flipX = true;
+                    }
+                    looking = _spriteRenderer.flipX ? Looking.Left : Looking.Right;
+                }
+
+                
+                
+                
 
                 if (_unCrouch && CanStandUp(1.2f)) {
                     _collider2d.size = _standSize;
@@ -164,7 +202,10 @@ namespace Treep.Player {
             UpdateJumpState();
             _targetVelocity = Vector2.zero;
             ComputeVelocity();
+            
         }
+
+        
 
         
 
@@ -355,8 +396,5 @@ namespace Treep.Player {
             IsClimbing = false;
             _velocity.y = 0;
         }
-
-
-
     }
 }
