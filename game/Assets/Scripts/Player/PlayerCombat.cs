@@ -1,116 +1,100 @@
-using System;
-using System.Collections;
-using Mirror;
+using Treep.IA;
 using Treep.Weapon;
 using UnityEngine;
-namespace Treep.Player
-{
-    public class PlayerCombat : MonoBehaviour
-    {
-        
+using UnityEngine.Serialization;
+
+namespace Treep.Player {
+    public class PlayerCombat : MonoBehaviour {
         // Attack
         public Transform attackPointRight;
         public Transform attackPointLeft;
         public Transform attackPointTop;
         public Transform attackPointBottom;
         public Vector2 attackPoint;
-        
-        public LayerMask ennemyLayerMask;
-        
+
+        [FormerlySerializedAs("ennemyLayerMask")]
+        public LayerMask enemyLayerMask;
+
         private float nextAttackTime = 0;
-        private Controller ContollerScript;
+        private Controller ControllerScript;
         private Looking currentLooking;
 
         public int PVMax = 10;
         private int PV { get; set; }
 
-        private IWeapon _currentWeapon;
-        
+        private ICloseWeapon _currentCloseWeapon;
 
-        public void Awake()
-        {
-            ContollerScript = GetComponent<Controller>();
-            currentLooking = ContollerScript.looking;
-            PV = PVMax;
-            _currentWeapon = new Stick();
+
+        public void Awake() {
+            this.ControllerScript = this.GetComponent<Controller>();
+            this.currentLooking = this.ControllerScript.looking;
+            this.PV = this.PVMax;
+            this._currentCloseWeapon = new Stick();
         }
-        
 
-        public void Update()
-        {
-            UpdateAttackPoint();
-            if (Time.time >= nextAttackTime)
-            {
-                
-                if (Input.GetKeyDown(KeyCode.KeypadEnter))
-                {
-                    Attack();
-                    nextAttackTime = Time.time + 1f / _currentWeapon.AttackRate;
+
+        public void Update() {
+            this.UpdateAttackPoint();
+            if (Time.time >= this.nextAttackTime) {
+                if (Input.GetKeyDown(KeyCode.KeypadEnter)) {
+                    this.Attack();
+                    this.nextAttackTime = Time.time + 1f / this._currentCloseWeapon.AttackRate;
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.P))
-            {
-                Debug.Log($"{_currentWeapon}");
-                Debug.Log($"{PV}");
-                Debug.Log(attackPoint);
-
+            if (Input.GetKeyDown(KeyCode.P)) {
+                Debug.Log($"{this._currentCloseWeapon}");
+                Debug.Log($"{this.PV}");
+                Debug.Log(this.attackPoint);
             }
         }
-        
 
-        private void UpdateAttackPoint()
-        {
-            currentLooking = ContollerScript.looking;
-            switch (currentLooking)
-            {
-                case Looking.Right :
-                    attackPoint = attackPointRight.position;
+
+        private void UpdateAttackPoint() {
+            this.currentLooking = this.ControllerScript.looking;
+            switch (this.currentLooking) {
+                case Looking.Right:
+                    this.attackPoint = this.attackPointRight.position;
                     break;
-                case Looking.Left :
-                    attackPoint = attackPointLeft.position;
+                case Looking.Left:
+                    this.attackPoint = this.attackPointLeft.position;
                     break;
-                case Looking.Top :
-                    attackPoint = attackPointTop.position;
+                case Looking.Top:
+                    this.attackPoint = this.attackPointTop.position;
                     break;
-                case Looking.Bottom :
-                    attackPoint = attackPointBottom.position;
+                case Looking.Bottom:
+                    this.attackPoint = this.attackPointBottom.position;
                     break;
-                    
             }
-           
         }
-        
-        private void Attack()
-        {
-            Debug.Log($"Player attack");
+
+        private void Attack() {
             // animation
             //_animator.SetTrigger("Attack");
-            
+
             //check enemy
-            Collider2D[] hitEnnemys =  Physics2D.OverlapCircleAll(attackPoint, _currentWeapon.AttackRange, ennemyLayerMask);
+            var hitEnnemys = Physics2D.OverlapCircleAll(this.attackPoint, this._currentCloseWeapon.AttackRange,
+                this.enemyLayerMask);
             //Damage to ennemy
-            foreach (var ennemy in hitEnnemys)
-            {
-                Debug.Log($"{ennemy.name} took {_currentWeapon.Damage} damage");
-                ennemy.GetComponent<IEnemy>().GetHitted(_currentWeapon.Damage);
+            foreach (var ennemy in hitEnnemys) {
+                Debug.Log($"{ennemy.name} took {this._currentCloseWeapon.Damage} damage");
+                ennemy.GetComponent<IEnemy>().GetHitted(this._currentCloseWeapon.Damage);
             }
         }
-        
-        public void OnDrawGizmosSelected()
-        {
-            if (attackPointRight == null 
-                || attackPointLeft == null
-                || attackPointTop == null
-                || attackPointBottom == null)
+
+        public void OnDrawGizmosSelected() {
+            if (this.attackPointRight == null
+                || this.attackPointLeft == null
+                || this.attackPointTop == null
+                || this.attackPointBottom == null) {
                 return;
-            
+            }
+
             //Gizmos.DrawWireSphere(attackPointRight.position, attackRange);
             //Gizmos.DrawWireSphere(attackPointLeft.position, attackRange);
             //Gizmos.DrawWireSphere(attackPointTop.position, attackRange);
             //Gizmos.DrawWireSphere(attackPointBottom.position, attackRange);
-            Gizmos.DrawWireSphere(attackPoint, _currentWeapon.AttackRange);
-            
+            Gizmos.DrawWireSphere(this.attackPoint, this._currentCloseWeapon.AttackRange);
         }
     }
 }
