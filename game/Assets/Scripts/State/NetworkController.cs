@@ -35,12 +35,13 @@ namespace Treep.State {
         }
         
         public void CheckAllPlayersReady() {
-            var players = GameObject.FindObjectsByType<Player.Player>(FindObjectsSortMode.None);
+            var players = FindObjectsByType<Player.Player>(FindObjectsSortMode.None);
             if (players.All(player => player.isReady) && players.Length != 0) StartGame();
         }
         
         void StartGame() {
-            Debug.Log("Game is starting...");
+            GameStateManager gameStateManager = FindAnyObjectByType<GameStateManager>();
+            gameStateManager.stateKind = GameStateKind.Level;
         }
 
         public override void Update() {
