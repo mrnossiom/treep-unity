@@ -1,3 +1,4 @@
+using System;
 using Mirror;
 using TMPro;
 using Unity.Cinemachine;
@@ -12,12 +13,11 @@ namespace Treep.Player {
 
         [SerializeField] private TextMeshPro username;
 
-        public string Username {
-            get => username.text;
-            set => username.text = value;
-        }
+        [SyncVar(hook = nameof(OnUsernameChanged))]
+        public string Username;
 
-        public string Color { get; set; }
+        [SyncVar(hook = nameof(OnColorChanged))]
+        public string Color;
 
         private void Awake() {
             _rigidbody2d = GetComponent<Rigidbody2D>();
@@ -33,5 +33,15 @@ namespace Treep.Player {
         public void SetSimultated(bool simulated) {
             _rigidbody2d.simulated = simulated;
         }
+        
+        void OnUsernameChanged(string oldUsername, string newUsername) {
+            if (username != null) username.text = newUsername;
+        }
+        
+        void OnColorChanged(string oldColor, string newColor)
+        {
+            throw new NotImplementedException();
+        }
+        
     }
 }
