@@ -974,7 +974,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1161755630}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1563174123}
+        m_TargetAssemblyTypeName: Treep.Interface.HudController, Treep
+        m_MethodName: OnReadyButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1161755630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1303,6 +1315,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 384926048}
+  readyButton: {fileID: 1161755629}
+  readyButtonText: {fileID: 173328407}
 --- !u!114 &1563174124
 MonoBehaviour:
   m_ObjectHideFlags: 0

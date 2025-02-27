@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Mirror;
 using UnityEngine;
 
@@ -23,12 +26,25 @@ namespace Treep.State {
             var playerObj = Object.Instantiate(this.playerPrefab);
             var player = playerObj.GetComponent<Player.Player>();
 
-            player.SetSimultated(false);
-            player.Username = message.Username;
-            player.Color = message.Color;
+            player.SetSimulated(false);
+            player.username = message.Username;
+            player.color = message.Color;
 
             NetworkServer.AddPlayerForConnection(conn, playerObj);
             playerObj.GetComponent<NetworkIdentity>().AssignClientAuthority(conn);
+        }
+        
+        public void CheckAllPlayersReady() {
+            var players = GameObject.FindObjectsByType<Player.Player>(FindObjectsSortMode.None);
+            if (players.All(player => player.isReady) && players.Length != 0) StartGame();
+        }
+        
+        void StartGame() {
+            Debug.Log("Game is starting...");
+        }
+
+        public override void Update() {
+            CheckAllPlayersReady();
         }
     }
 

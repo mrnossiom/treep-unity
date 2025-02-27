@@ -11,13 +11,16 @@ namespace Treep.Player {
 
         private Rigidbody2D _rigidbody2d;
 
-        [SerializeField] private TextMeshPro username;
+        [SerializeField] private TextMeshPro usernameText;
 
         [SyncVar(hook = nameof(OnUsernameChanged))]
-        public string Username;
+        public string username;
 
         [SyncVar(hook = nameof(OnColorChanged))]
-        public string Color;
+        public string color;
+        
+        [SyncVar]
+        public bool isReady = false;
 
         private void Awake() {
             _rigidbody2d = GetComponent<Rigidbody2D>();
@@ -30,17 +33,21 @@ namespace Treep.Player {
             cinemachineCamera.Target.TrackingTarget = transform;
         }
 
-        public void SetSimultated(bool simulated) {
+        public void SetSimulated(bool simulated) {
             _rigidbody2d.simulated = simulated;
         }
         
         void OnUsernameChanged(string oldUsername, string newUsername) {
-            if (username != null) username.text = newUsername;
+            if (usernameText != null) usernameText.text = newUsername;
         }
         
-        void OnColorChanged(string oldColor, string newColor)
-        {
+        void OnColorChanged(string oldColor, string newColor) {
             throw new NotImplementedException();
+        }
+        
+        [Command]
+        public void CmdSetReady(bool ready) {
+            isReady = ready;
         }
         
     }
