@@ -9,7 +9,7 @@ namespace Treep.Weapon {
             this.Damage = 1;
             this.Durability = -1;
             this.AttackRange = 1.5f;
-            this.AttackRate = 2f;
+            this.AttackRate = 4f;
         }
 
         public override string ToString() {
