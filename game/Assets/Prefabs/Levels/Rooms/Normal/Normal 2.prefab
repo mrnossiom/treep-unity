@@ -51,7 +51,11 @@ MonoBehaviour:
     size: 0
   - position: {x: 0, y: 70}
     size: 0
-  enemySpawners: []
+  enemySpawners:
+  - {x: 6, y: 3}
+  - {x: 11, y: 3}
+  - {x: 33, y: 34}
+  - {x: 33, y: 54}
   spawnPoints: []
 --- !u!1 &2635150134697267651
 GameObject:
