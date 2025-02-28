@@ -8,7 +8,7 @@ namespace Treep.Editor {
         public override void OnInspectorGUI() {
             base.OnInspectorGUI();
 
-            var levelAssembler = (LevelAssembler)target;
+            var levelAssembler = (LevelAssembler)this.target;
 
             GUILayout.Space(15);
 

@@ -1,11 +1,12 @@
 using Mirror;
+using UnityEngine;
 
 namespace Treep.State {
     public class NetworkController : NetworkManager {
         public override void OnStartServer() {
             base.OnStartServer();
 
-            NetworkServer.RegisterHandler<CreateCharacterMessage>(OnCreateCharacter);
+            NetworkServer.RegisterHandler<CreateCharacterMessage>(this.OnCreateCharacter);
         }
 
         public override void OnClientConnect() {
@@ -13,13 +14,13 @@ namespace Treep.State {
 
             var characterMessage = new CreateCharacterMessage {
                 Username = Settings.Singleton.username,
-                Color = Settings.Singleton.color,
+                Color = Settings.Singleton.color
             };
             NetworkClient.Send(characterMessage);
         }
 
-        void OnCreateCharacter(NetworkConnectionToClient conn, CreateCharacterMessage message) {
-            var playerObj = Instantiate(playerPrefab);
+        private void OnCreateCharacter(NetworkConnectionToClient conn, CreateCharacterMessage message) {
+            var playerObj = Object.Instantiate(this.playerPrefab);
             var player = playerObj.GetComponent<Player.Player>();
 
             player.SetSimultated(false);
