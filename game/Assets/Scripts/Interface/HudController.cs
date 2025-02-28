@@ -1,35 +1,21 @@
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
-using Mirror;
+using Treep.State;
 
 namespace Treep.Interface {
     public class HudController : MonoBehaviour {
         [SerializeField] private PauseMenu pauseMenu;
-        [SerializeField] private Button readyButton;
-        [SerializeField] private TextMeshProUGUI readyButtonText;
-
-        private bool isReady;
-
-        public void OnReadyButtonClicked() {
-            if (NetworkClient.localPlayer != null) {
-                var player = NetworkClient.localPlayer.GetComponent<Treep.Player.Player>();
-                
-                if (player != null) {
-                    isReady = !isReady;
-                    player.CmdSetReady(isReady);
-                    UpdateReadyButtonText(isReady);
-                }
-            }
-        }
-
-        private void UpdateReadyButtonText(bool ready) {
-            if (readyButtonText != null) readyButtonText.text = ready ? "Annuler" : "Prêt";
-        }
+        [SerializeField] private LobbyMenu lobbyMenu;
+        
+        private GameStateManager gameStateManager;
         
         void Update() {
             if (Input.GetKeyDown(KeyCode.Escape)) {
                 pauseMenu.gameObject.SetActive(!pauseMenu.gameObject.activeSelf);
+            }
+            
+            gameStateManager = FindAnyObjectByType<GameStateManager>();
+            if (gameStateManager is not null && gameStateManager.stateKind == GameStateKind.Level) {
+                lobbyMenu.gameObject.SetActive(false);
             }
         }
     }

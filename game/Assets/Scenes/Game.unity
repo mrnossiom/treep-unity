@@ -547,8 +547,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 31203776}
-  readyButton: {fileID: 783233810}
-  readyButtonText: {fileID: 1752477441}
+  lobbyMenu: {fileID: 737733577}
 --- !u!1 &585743548
 GameObject:
   m_ObjectHideFlags: 0
@@ -683,8 +682,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 737733576}
+  - component: {fileID: 737733577}
   m_Layer: 0
-  m_Name: Lobby Overlay
+  m_Name: Lobby Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -710,6 +710,20 @@ RectTransform:
   m_AnchoredPosition: {x: -0.000061035156, y: 0.000030517578}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &737733577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 737733575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 659ef6f18d1c480d804bed9826a00b84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  readyButton: {fileID: 783233810}
+  readyButtonText: {fileID: 1752477441}
 --- !u!1 &783233808
 GameObject:
   m_ObjectHideFlags: 0
@@ -793,8 +807,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 549621776}
-        m_TargetAssemblyTypeName: Treep.Interface.HudController, Treep
+      - m_Target: {fileID: 737733577}
+        m_TargetAssemblyTypeName: Treep.Interface.LobbyMenu, Treep
         m_MethodName: OnReadyButtonClicked
         m_Mode: 1
         m_Arguments:

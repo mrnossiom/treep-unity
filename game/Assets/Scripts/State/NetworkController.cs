@@ -6,6 +6,8 @@ using UnityEngine;
 
 namespace Treep.State {
     public class NetworkController : NetworkManager {
+        [SerializeField] public GameStateManager gameStateManager;
+        
         public override void OnStartServer() {
             base.OnStartServer();
 
@@ -34,17 +36,19 @@ namespace Treep.State {
             playerObj.GetComponent<NetworkIdentity>().AssignClientAuthority(conn);
         }
         
-        public void CheckAllPlayersReady() {
+        private void CheckAllPlayersReady() {
             var players = FindObjectsByType<Player.Player>(FindObjectsSortMode.None);
             if (players.All(player => player.isReady) && players.Length != 0) StartGame();
         }
         
         void StartGame() {
-            GameStateManager gameStateManager = FindAnyObjectByType<GameStateManager>();
+            //GameStateManager gameStateManager = FindAnyObjectByType<GameStateManager>();
             gameStateManager.stateKind = GameStateKind.Level;
         }
 
         public override void Update() {
+            gameStateManager = FindAnyObjectByType<GameStateManager>();
+            
             CheckAllPlayersReady();
         }
     }
