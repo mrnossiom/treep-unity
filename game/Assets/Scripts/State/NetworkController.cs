@@ -42,7 +42,6 @@ namespace Treep.State {
         }
         
         void StartGame() {
-            //GameStateManager gameStateManager = FindAnyObjectByType<GameStateManager>();
             gameStateManager.stateKind = GameStateKind.Level;
         }
 

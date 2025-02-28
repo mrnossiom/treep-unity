@@ -24,7 +24,7 @@ namespace Treep.Player {
         private Animator _animator;
         
         [SyncVar(hook = nameof(OnSpriteFlip))]
-        private bool isFlipped;
+        private bool _isFlipped;
 
         private ContactFilter2D _contactFilter;
         private TagHandle _ladderTag;
@@ -79,7 +79,7 @@ namespace Treep.Player {
         
         [Command]
         private void CmdSetFlip(bool flip) {
-            isFlipped = flip;
+            this._isFlipped = flip;
         }
 
         private void Update() {
@@ -89,7 +89,7 @@ namespace Treep.Player {
                 _move.x = Input.GetAxis("Horizontal");
                 _animator.SetBool(IsMoving, _move.x != 0);
                 
-                if (_move.x < 0 != isFlipped) CmdSetFlip(_move.x < 0);
+                if (_move.x < 0 != this._isFlipped) CmdSetFlip(_move.x < 0);
 
                 if (_jumpState == JumpState.Grounded && Input.GetButtonDown("Jump")) {
                     _animator.SetBool(JumpStart, true);
