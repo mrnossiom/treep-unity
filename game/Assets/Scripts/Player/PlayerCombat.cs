@@ -23,6 +23,7 @@ namespace Treep.Player {
         private int PV { get; set; }
 
         private ICloseWeapon _currentCloseWeapon;
+        private Animator _animator;
 
 
         public void Awake() {
@@ -30,8 +31,8 @@ namespace Treep.Player {
             this.currentLooking = this.ControllerScript.looking;
             this.PV = this.PVMax;
             this._currentCloseWeapon = new Stick();
+            this._animator = this.GetComponent<Animator>();
         }
-
 
         public void Update() {
             this.UpdateAttackPoint();
@@ -70,7 +71,7 @@ namespace Treep.Player {
 
         private void Attack() {
             // animation
-            //_animator.SetTrigger("Attack");
+            this._animator.SetTrigger("isAttacking");
 
             //check enemy
             var hitEnnemys = Physics2D.OverlapCircleAll(this.attackPoint, this._currentCloseWeapon.AttackRange,

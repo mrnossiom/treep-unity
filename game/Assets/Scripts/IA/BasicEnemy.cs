@@ -1,3 +1,4 @@
+using Treep.IA;
 using UnityEngine;
 
 namespace Treep.IA {
@@ -11,6 +12,7 @@ namespace Treep.IA {
 
         public int PV { get; set; }
 
+
         public void Awake() {
             this._body = this.GetComponent<Rigidbody2D>();
             this._collider2d = this.GetComponent<Collider2D>();
@@ -18,20 +20,24 @@ namespace Treep.IA {
             this._animator = this.GetComponent<Animator>();
         }
 
+        // Start is called once before the first execution of Update after the MonoBehaviour is created
         private void Start() {
             this.PV = this.PVMax;
+            this.transform.position += new Vector3(5, 5, 0);
+            this.transform.name = "Ennemy 1";
         }
 
+        // Update is called once per frame v
         private void Update() { }
 
         public void GetHitted(int damageTook) {
-            Debug.Log($"{this} took {damageTook} damage now Pv = {this.PV - damageTook}");
+            Debug.Log($"{this.ToString()} took {damageTook} damage now Pv = {this.PV - damageTook}");
             this.PV -= damageTook;
             if (this.PV <= 0) {
                 this.Die();
             }
             else {
-                // hurt animation
+                //hurt animation
             }
         }
 
@@ -43,8 +49,11 @@ namespace Treep.IA {
             this.enabled = false;
         }
 
+
         public override string ToString() {
-            return $"{this.transform.name}";
+            return $"name : {this.transform.name}" +
+                   $"PV : {this.PV}" +
+                   $"Degats : ";
         }
     }
 }
