@@ -1,6 +1,9 @@
 using System;
+using System.Numerics;
 using Mirror;
 using UnityEngine;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 namespace Treep.Player {
     public enum JumpState {
