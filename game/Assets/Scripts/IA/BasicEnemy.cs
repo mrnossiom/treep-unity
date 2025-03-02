@@ -30,6 +30,8 @@ namespace Treep.IA {
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         private void Start() {
             this.PV = this.PVMax;
+            this.transform.position += new Vector3(5, 5, 0);
+            this.transform.name = "Ennemy 1";
             this._contactFilter.useLayerMask = true;
             this._contactFilter.layerMask = LayerMask.GetMask("Wall");
         }
@@ -37,8 +39,10 @@ namespace Treep.IA {
         // Update is called once per frame v
         private void FixedUpdate() {
             if (this._moveEnabled) {
+                this._animator.SetBool("GetHit", false);
                 if (this.IsWall() && this.PV > 0) {
                     this._direction = this._direction * -1;
+                    this._spriteRenderer.flipX = this._direction < 0;
                 }
 
                 this._body.linearVelocity = new Vector2(this._direction * this.speed, this._body.linearVelocity.y);
@@ -59,7 +63,7 @@ namespace Treep.IA {
                 this.Die();
             }
             else {
-                //hurt animation
+                this._animator.SetBool("GetHit", true);
             }
         }
 
