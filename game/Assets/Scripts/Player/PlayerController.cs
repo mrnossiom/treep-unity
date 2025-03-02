@@ -147,8 +147,10 @@ namespace Treep.Player {
                 else if (Input.GetButtonUp("Jump")) _stopJump = true;
 
                 if (IsClimbing) {
-                    _move.y = Input.GetAxis("Vertical"); 
-                } else {
+                    
+                    _move.y = Input.GetAxis("Vertical");
+                } 
+                else {
                     _move.y = 0;
                 }
 
@@ -346,11 +348,15 @@ namespace Treep.Player {
             _velocity.y = 0;
         }
 
+
         private void OnTriggerExit2D(Collider2D other) {
             if (!other.CompareTag(_ladderTag)) return;
 
             IsClimbing = false;
             _velocity.y = 0;
         }
+
+
+
     }
 }
