@@ -5,7 +5,6 @@ using UnityEngine.Serialization;
 
 namespace Treep.Player {
     public class PlayerCombat : MonoBehaviour {
-        // Attack
         public Transform attackPointRight;
         public Transform attackPointLeft;
         public Transform attackPointTop;
@@ -17,9 +16,11 @@ namespace Treep.Player {
 
         private float nextAttackTime = 0;
         private Controller ControllerScript;
-        private Looking currentLooking;
+        public KeyCode AttackKey = KeyCode.L;
 
-        public int PVMax = 10;
+        [FormerlySerializedAs("PVMax")] public int MaxPV = 10;
+
+        private Looking currentLooking;
         private int PV { get; set; }
 
         private ICloseWeapon _currentCloseWeapon;
@@ -29,7 +30,7 @@ namespace Treep.Player {
         public void Awake() {
             this.ControllerScript = this.GetComponent<Controller>();
             this.currentLooking = this.ControllerScript.looking;
-            this.PV = this.PVMax;
+            this.PV = this.MaxPV;
             this._currentCloseWeapon = new Stick();
             this._animator = this.GetComponent<Animator>();
         }
@@ -37,7 +38,7 @@ namespace Treep.Player {
         public void Update() {
             this.UpdateAttackPoint();
             if (Time.time >= this.nextAttackTime) {
-                if (Input.GetKeyDown(KeyCode.KeypadEnter)) {
+                if (Input.GetKeyDown(this.AttackKey)) {
                     this.Attack();
                     this.nextAttackTime = Time.time + 1f / this._currentCloseWeapon.AttackRate;
                 }
@@ -49,7 +50,6 @@ namespace Treep.Player {
                 Debug.Log(this.attackPoint);
             }
         }
-
 
         private void UpdateAttackPoint() {
             this.currentLooking = this.ControllerScript.looking;
