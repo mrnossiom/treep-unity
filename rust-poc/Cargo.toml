@@ -1,0 +1,45 @@
+[package]
+name = "treep"
+version = "0.0.0"
+edition = "2024"
+
+[dependencies]
+bevy = { version = "0.15", features = ["dynamic_linking", "file_watcher"] }
+bevy-inspector-egui = "0.29.1"
+bevy_aseprite_ultra = "0.4"
+bevy_ecs_ldtk = "0.11"
+bevy_rapier2d = { version = "0.29", features = ["debug-render-2d"] }
+
+[features]
+default = []
+debug = []
+# TODO: setups bevy_inspector_egui's Manual UI
+editor = []
+
+[lints]
+[lints.rust]
+[lints.clippy]
+pedantic = { level = "warn", priority = -1 }
+nursery = { level = "warn", priority = -1 }
+# cargo = { level = "warn", priority = -1 }
+
+# missing_docs_in_private_items = "warn"
+unwrap_used = "warn"
+
+cast_possible_truncation = "allow"
+cast_possible_wrap = "allow"
+cast_precision_loss = "allow"
+enum_glob_use = "allow"
+multiple_crate_versions = "allow"
+needless_pass_by_value = "allow"
+redundant_pub_crate = "allow"
+too_many_lines = "allow"
+type_complexity = "allow"
+[lints.rustdoc]
+broken_intra_doc_links = "warn"
+
+[profile.dev]
+opt-level = 1
+
+[profile.dev.package."*"]
+opt-level = 3
