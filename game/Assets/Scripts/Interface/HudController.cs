@@ -14,7 +14,7 @@ namespace Treep.Interface {
             }
             
             gameStateManager = FindAnyObjectByType<GameStateManager>();
-            if (gameStateManager is not null && gameStateManager.stateKind == GameStateKind.Level) {
+            if (gameStateManager is not null && gameStateManager.StateKind == GameStateKind.Level) {
                 lobbyMenu.gameObject.SetActive(false);
             }
         }

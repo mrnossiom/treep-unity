@@ -581,8 +581,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  stateKind: 0
-  lobbyLevel: {fileID: 3660792868845834921, guid: 29bdd20315cb0a70888602fbfea1697b, type: 3}
+  lobbyLevel: {fileID: 3660792868845834921, guid: 302a742a174d35105b9285e282cfc63a, type: 3}
   worldOneLevel: {fileID: 3660792868845834921, guid: 302a742a174d35105b9285e282cfc63a, type: 3}
 --- !u!4 &585743550
 Transform:
@@ -978,63 +977,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 935170486}
   m_CullTransparentMesh: 1
---- !u!1001 &1074430473
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 272731871452432302, guid: e5f46a540bcb3e24bb16e535eaae4981, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.16
-      objectReference: {fileID: 0}
-    - target: {fileID: 272731871452432302, guid: e5f46a540bcb3e24bb16e535eaae4981, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -4.48
-      objectReference: {fileID: 0}
-    - target: {fileID: 272731871452432302, guid: e5f46a540bcb3e24bb16e535eaae4981, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 272731871452432302, guid: e5f46a540bcb3e24bb16e535eaae4981, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 272731871452432302, guid: e5f46a540bcb3e24bb16e535eaae4981, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 272731871452432302, guid: e5f46a540bcb3e24bb16e535eaae4981, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 272731871452432302, guid: e5f46a540bcb3e24bb16e535eaae4981, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 272731871452432302, guid: e5f46a540bcb3e24bb16e535eaae4981, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 272731871452432302, guid: e5f46a540bcb3e24bb16e535eaae4981, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 272731871452432302, guid: e5f46a540bcb3e24bb16e535eaae4981, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3947771317662583674, guid: e5f46a540bcb3e24bb16e535eaae4981, type: 3}
-      propertyPath: m_Name
-      value: Testing floor
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e5f46a540bcb3e24bb16e535eaae4981, type: 3}
 --- !u!1 &1341530928
 GameObject:
   m_ObjectHideFlags: 0
@@ -1757,4 +1699,3 @@ SceneRoots:
   - {fileID: 126754743}
   - {fileID: 549621775}
   - {fileID: 125750586}
-  - {fileID: 1074430473}

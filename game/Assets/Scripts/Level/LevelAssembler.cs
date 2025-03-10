@@ -4,8 +4,7 @@ using Mirror;
 using UnityEngine;
 
 namespace Treep.Level {
-    [RequireComponent(typeof(NetworkIdentity))]
-    public class LevelAssembler : NetworkBehaviour {
+    public class LevelAssembler : MonoBehaviour {
         [SerializeField] private RoomProvider roomProvider;
 
         // TODO: non-linear level blueprint and evolver

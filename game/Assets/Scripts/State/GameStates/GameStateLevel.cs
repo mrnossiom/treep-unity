@@ -21,7 +21,7 @@ namespace Treep.State.GameStates {
 
             var player = NetworkClient.connection.identity.transform;
             player.position = (Vector3)spawnPoint;
-            player.GetComponent<Player.Player>().SetSimultated(true);
+            player.GetComponent<Player.Player>().SetSimulated(true);
 
             this._container = target;
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Mirror;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Treep.State {
     public class NetworkController : NetworkManager {
@@ -25,7 +26,7 @@ namespace Treep.State {
         }
 
         private void OnCreateCharacter(NetworkConnectionToClient conn, CreateCharacterMessage message) {
-            var playerObj = Object.Instantiate(this.playerPrefab);
+            var playerObj =  Object.Instantiate(this.playerPrefab);
             var player = playerObj.GetComponent<Player.Player>();
 
             player.SetSimulated(false);
@@ -42,7 +43,7 @@ namespace Treep.State {
         }
         
         void StartGame() {
-            gameStateManager.stateKind = GameStateKind.Level;
+            gameStateManager.TriggerState(GameStateKind.Level);
         }
 
         public override void Update() {
