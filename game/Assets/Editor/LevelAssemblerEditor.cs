@@ -5,6 +5,8 @@ using UnityEngine;
 namespace Treep.Editor {
     [CustomEditor(typeof(LevelAssembler))]
     internal class LevelAssemblerEditor : UnityEditor.Editor {
+        private int _seed = 0;
+
         public override void OnInspectorGUI() {
             base.OnInspectorGUI();
 
@@ -12,10 +14,13 @@ namespace Treep.Editor {
 
             GUILayout.Space(15);
 
+
             GUILayout.BeginHorizontal();
 
             if (GUILayout.Button("Generate Level")) {
-                if (levelAssembler.GenerateLevel(new System.Random().Next()) is null) {
+                this._seed = new System.Random().Next();
+                Debug.Log($"Seed = {this._seed}");
+                if (levelAssembler.GenerateLevel(this._seed) is null) {
                     Debug.LogError($"Level `{levelAssembler.name}` is not solvable!");
                 }
             }
@@ -23,6 +28,7 @@ namespace Treep.Editor {
             if (GUILayout.Button("Clear")) {
                 levelAssembler.ClearChildren();
             }
+
 
             GUILayout.EndHorizontal();
         }

@@ -1,3 +1,4 @@
+using System;
 using Mirror;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
@@ -11,21 +12,31 @@ namespace Treep.Player {
         Landed
     }
 
+    public enum Looking {
+        Top,
+        Right,
+        Bottom,
+        Left
+    }
+
     [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
     public sealed class PlayerController : NetworkBehaviour {
-        private static readonly int IsMoving = Animator.StringToHash("IsMoving");
-        private static readonly int JumpStart = Animator.StringToHash("JumpStart");
-        private static readonly int IsJumping = Animator.StringToHash("IsJumping");
-        private static readonly int JumpEnd = Animator.StringToHash("JumpEnd");
-        private static readonly int IsCrouching = Animator.StringToHash("IsCrouching");
+        private static readonly int AnimIsMoving = Animator.StringToHash("IsMoving");
+        private static readonly int AnimJumpStart = Animator.StringToHash("JumpStart");
+        private static readonly int AnimIsJumping = Animator.StringToHash("IsJumping");
+        private static readonly int AnimJumpEnd = Animator.StringToHash("JumpEnd");
+        private static readonly int AnimIsCrouching = Animator.StringToHash("IsCrouching");
+        private static readonly int AnimIsClimbing = Animator.StringToHash("IsClimbing");
+        private static readonly int AnimClimbSpeed = Animator.StringToHash("ClimbSpeed");
+        private static readonly int AnimIsDashing = Animator.StringToHash("IsDashing");
 
         // Components
         private Rigidbody2D _body;
         private BoxCollider2D _collider2d;
         private SpriteRenderer _spriteRenderer;
         private Animator _animator;
-        
-        [SyncVar(hook = nameof(OnSpriteFlip))]
+
+        [SyncVar(hook = nameof(PlayerController.OnSpriteFlip))]
         private bool _isFlipped;
 
         private ContactFilter2D _contactFilter;
@@ -56,18 +67,18 @@ namespace Treep.Player {
         private bool _controlEnabled = true;
 
         private bool _jump;
-        private Vector2 _move;
+        public Vector2 _move;
         public bool IsGrounded { get; set; }
 
         private float _maxSpeed = 7;
 
 
-        private Vector2 _standSize = new Vector2(1.4f, 3.2f);
-        private Vector2 _crouchSize = new Vector2(1.4f, 2.3f);
-        private Vector2 _standOffSet = new Vector2(-0.18f, -0.126588f);
-        private Vector2 _crouchOffSet = new Vector2(-0.18f, -0.5325f);
+        private Vector2 _standSize = new(1.4f, 3.2f);
+        private Vector2 _crouchSize = new(1.4f, 2.3f);
+        private Vector2 _standOffSet = new(-0.18f, -0.126588f);
+        private Vector2 _crouchOffSet = new(-0.18f, -0.5325f);
         private bool _unCrouch;
-        
+
         private bool _isDashing;
         private bool _dashAvailable;
         private float _dashSpeed;
@@ -78,285 +89,329 @@ namespace Treep.Player {
 
         private bool IsClimbing { get; set; }
 
+        public Looking looking;
+
+
+        private void Start() {
+            this.transform.position += new Vector3(3, 5, 0);
+        }
+
         private void Awake() {
-            _body = GetComponent<Rigidbody2D>();
-            _collider2d = GetComponent<BoxCollider2D>();
-            _collider2d.size = _standSize;
-            _collider2d.offset = _standOffSet;
-            _spriteRenderer = GetComponent<SpriteRenderer>();
-            _animator = GetComponent<Animator>();
+            this._body = this.GetComponent<Rigidbody2D>();
+            this._collider2d = this.GetComponent<BoxCollider2D>();
+            this._collider2d.size = this._standSize;
+            this._collider2d.offset = this._standOffSet;
+            this._spriteRenderer = this.GetComponent<SpriteRenderer>();
+            this._animator = this.GetComponent<Animator>();
 
-            _ladderTag = TagHandle.GetExistingTag("Ladder");
+            this._ladderTag = TagHandle.GetExistingTag("Ladder");
 
-            _contactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer));
+            this._contactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(this.gameObject.layer));
         }
-        
-        private void OnSpriteFlip(bool _, bool newValue)
-        {
-            _spriteRenderer.flipX = newValue;
+
+        private void OnSpriteFlip(bool _, bool newValue) {
+            this._spriteRenderer.flipX = newValue;
         }
-        
+
         [Command]
         private void CmdSetFlip(bool flip) {
             this._isFlipped = flip;
         }
 
         private void Update() {
-            if (!isLocalPlayer) return;
+            if (!this.isLocalPlayer) return;
 
-            if (_controlEnabled) {
-                _move.x = Input.GetAxis("Horizontal");
-                _animator.SetBool(IsMoving, _move.x != 0);
-                
-                if (_move.x < 0 != this._isFlipped) CmdSetFlip(_move.x < 0);
-
-                if (Input.GetKeyDown(KeyCode.C)) {
-                    _collider2d.size = _crouchSize;
-                    _collider2d.offset = _crouchOffSet;
-                    _animator.SetBool(IsCrouching ,true);
-                }
-                
-                if (Input.GetKeyUp(KeyCode.C)) {
-                    _unCrouch = true;
-                    
-                }
-
-                if (_unCrouch && CanStandUp(1.2f)) {
-                    _collider2d.size = _standSize;
-                    _collider2d.offset = _standOffSet;
-                    _animator.SetBool(PlayerController.IsCrouching ,false);
-                    _unCrouch = false;
-                }
-
-                if (_jumpState == JumpState.Grounded && Input.GetButtonDown("Jump")) {
-                    _animator.SetBool(JumpStart, true);
-                    _animator.SetBool(IsJumping, false);
-                    _animator.SetBool(JumpEnd, false);
-                    _jumpState = JumpState.PrepareToJump;
-                }
-
-                else if (Input.GetButtonUp("Jump")) _stopJump = true;
-
-                if (IsClimbing) {
-                    
-                    _move.y = Input.GetAxis("Vertical");
-                } 
-                else {
-                    _move.y = 0;
-                }
-
-                if (IsGrounded)
-                {
-                    _dashAvailable = true;
-                }
-                if (Input.GetKeyDown(KeyCode.LeftShift) && !_isDashing && _dashAvailable) {
-                    StartDash();
-                }
+            if (this._controlEnabled) {
+                this.UpdateLooking();
+                this.UpdateCrouch();
+                this.UpdateJump();
+                this.UpdateClimb();
+                this.UpdateDash();
             }
             else {
-                _move.x = 0;
-                _move.y = 0;
+                this._move.x = 0;
+                this._move.y = 0;
             }
-            if (_isDashing) {
-                HandleDash();
-            }
-            
-            UpdateJumpState();
-            _targetVelocity = Vector2.zero;
-            ComputeVelocity();
+
+            this._targetVelocity = Vector2.zero;
+            this.ComputeVelocity();
         }
 
-        
+        private void UpdateDash() {
+            if (this.IsGrounded) {
+                this._dashAvailable = true;
+            }
 
-        private void StartDash()
-        {
-            _isDashing = true;
-            _dashAvailable = false;
-    
-            if (_move.x != 0)
-            {
-                _dashDirection = new Vector2(_move.x, 0).normalized;
+            if (Input.GetKeyDown(KeyCode.LeftShift) && !this._isDashing && this._dashAvailable) {
+                this._animator.SetTrigger(PlayerController.AnimIsDashing);
+                this.StartDash();
             }
-            else
-            {
-                _dashDirection = _spriteRenderer.flipX ? Vector2.left : Vector2.right;
+
+            if (this._isDashing) {
+                this.HandleDash();
             }
-    
-            _dashSpeed = 8f;
-            _dashTime = _dashDuration;
         }
 
-        private void HandleDash()
-        {
-            if (_dashTime > 0)
+        private void UpdateClimb() {
+            this._animator.SetBool(PlayerController.AnimIsClimbing, this.IsClimbing);
+
+            this._animator.SetFloat(PlayerController.AnimClimbSpeed, this._move.y);
+            /*
+            if (!this.IsClimbing) {
+                this._move.y = Input.GetAxis("Vertical");
+            }
+            else {
+                this._move.y = 0;
+            }
+            */
+        }
+
+        private void UpdateJump() {
+            if (this._jumpState == JumpState.Grounded && Input.GetButtonDown("Jump")) {
+                this._animator.SetBool(PlayerController.AnimJumpStart, true);
+                this._animator.SetBool(PlayerController.AnimIsJumping, false);
+                this._animator.SetBool(PlayerController.AnimJumpEnd, false);
+                this._jumpState = JumpState.PrepareToJump;
+            }
+            else if (Input.GetButtonUp("Jump")) this._stopJump = true;
+
+            this.UpdateJumpState();
+        }
+
+        private void UpdateLooking() {
+            this._move.x = Input.GetAxis("Horizontal");
+            this._move.y = Input.GetAxis("Vertical");
+            this._animator.SetBool("IsMoving", this._move.x != 0);
+
+            if (this._move.y != 0) // si on cible le haut ou le bas 
             {
-                int obstacleCount = _body.Cast(_dashDirection, _contactFilter, _hitBuffer, 0.3f);
-        
-                if (obstacleCount > 0)
+                if (this._move.y > 0) // cible top
                 {
-                    _isDashing = false;
-                    _dashTime = 0;
-                    _body.linearVelocity = Vector2.zero;
-                    _velocity = Vector2.zero;
+                    this.looking = Looking.Top;
+                }
+                else if (this._move.y < 0) // cible bottom
+                {
+                    this.looking = Looking.Bottom;
+                }
+
+                if (this._move.x != 0) {
+                    this._spriteRenderer.flipX = this._move.x < 0;
+                }
+            }
+            else // le player vas que a gauche ou a droite (ou rien)
+            {
+                if (this._move.x > 0) {
+                    this._spriteRenderer.flipX = false;
+                }
+                else if (this._move.x < 0) {
+                    this._spriteRenderer.flipX = true;
+                }
+
+                this.looking = this._spriteRenderer.flipX ? Looking.Left : Looking.Right;
+            }
+        }
+
+        private void UpdateCrouch() {
+            if (Input.GetKeyDown(KeyCode.C)) {
+                this._collider2d.size = this._crouchSize;
+                this._collider2d.offset = this._crouchOffSet;
+                this._animator.SetBool(PlayerController.AnimIsCrouching, true);
+            }
+
+            if (Input.GetKeyUp(KeyCode.C)) {
+                this._unCrouch = true;
+            }
+
+            if (this._unCrouch && this.CanStandUp(1.2f)) {
+                this._collider2d.size = this._standSize;
+                this._collider2d.offset = this._standOffSet;
+                this._animator.SetBool(PlayerController.AnimIsCrouching, false);
+                this._unCrouch = false;
+            }
+        }
+
+
+        private void StartDash() {
+            this._isDashing = true;
+            this._dashAvailable = false;
+
+            if (this._move.x != 0) {
+                this._dashDirection = new Vector2(this._move.x, 0).normalized;
+            }
+            else {
+                this._dashDirection = this._spriteRenderer.flipX ? Vector2.left : Vector2.right;
+            }
+
+            this._dashSpeed = 8f;
+            this._dashTime = this._dashDuration;
+        }
+
+        private void HandleDash() {
+            if (this._dashTime > 0) {
+                var obstacleCount = this._body.Cast(this._dashDirection, this._contactFilter, this._hitBuffer, 0.3f);
+
+                if (obstacleCount > 0) {
+                    this._isDashing = false;
+                    this._dashTime = 0;
+                    this._body.linearVelocity = Vector2.zero;
+                    this._velocity = Vector2.zero;
                     return;
                 }
-        
-                _body.linearVelocity = _dashDirection * _dashSpeed;
-                _dashTime -= Time.deltaTime;
+
+                this._body.linearVelocity = this._dashDirection * this._dashSpeed;
+                this._dashTime -= Time.deltaTime;
             }
-            else
-            {
-                _isDashing = false;
-                _body.linearVelocity = Vector2.zero;
-                _velocity = Vector2.zero;
+            else {
+                this._isDashing = false;
+                this._body.linearVelocity = Vector2.zero;
+                this._velocity = Vector2.zero;
             }
         }
-        
+
         private bool CanStandUp(float checkHeight) {
-            Vector2 direction = Vector2.up;
-            Vector2 topLeft = new Vector2((float)-0.2, 1).normalized;
-            Vector2 topRight = new Vector2((float)0.2, 1).normalized;
-            int hitCount = _body.Cast(direction, _contactFilter, _hitBuffer, checkHeight);
-            hitCount += _body.Cast(topLeft, _contactFilter, _hitBuffer, checkHeight);
-            hitCount += _body.Cast(topRight, _contactFilter, _hitBuffer, checkHeight);
+            var direction = Vector2.up;
+            var topLeft = new Vector2((float)-0.2, 1).normalized;
+            var topRight = new Vector2((float)0.2, 1).normalized;
+            var hitCount = this._body.Cast(direction, this._contactFilter, this._hitBuffer, checkHeight);
+            hitCount += this._body.Cast(topLeft, this._contactFilter, this._hitBuffer, checkHeight);
+            hitCount += this._body.Cast(topRight, this._contactFilter, this._hitBuffer, checkHeight);
             return hitCount == 0;
         }
 
         private void UpdateJumpState() {
-            _jump = false;
+            this._jump = false;
 
-            switch (_jumpState) {
+            switch (this._jumpState) {
                 case JumpState.PrepareToJump:
-                    _jumpState = JumpState.Jumping;
-                    _jump = true;
-                    _stopJump = false;
+                    this._jumpState = JumpState.Jumping;
+                    this._jump = true;
+                    this._stopJump = false;
                     break;
                 case JumpState.Jumping:
-                    _animator.SetBool(JumpStart, false);
-                    if (!IsGrounded) _jumpState = JumpState.InFlight;
+                    this._animator.SetBool(PlayerController.AnimJumpStart, false);
+                    if (!this.IsGrounded) this._jumpState = JumpState.InFlight;
                     break;
                 case JumpState.InFlight:
-                    _animator.SetBool(IsJumping, true);
-                    if (IsGrounded) _jumpState = JumpState.Landed;
+                    this._animator.SetBool(PlayerController.AnimIsJumping, true);
+                    if (this.IsGrounded) this._jumpState = JumpState.Landed;
                     break;
                 case JumpState.Landed:
-                    _jumpState = JumpState.Grounded;
-                    _animator.SetBool(JumpEnd, true);
+                    this._jumpState = JumpState.Grounded;
+                    this._animator.SetBool(PlayerController.AnimJumpEnd, true);
                     break;
             }
         }
 
         private void ComputeVelocity() {
-            if (_jump && IsGrounded) {
-                _velocity.y = jumpTakeOffSpeed * jumpModifier;
-                _jump = false;
+            if (this._jump && this.IsGrounded) {
+                this._velocity.y = this.jumpTakeOffSpeed * this.jumpModifier;
+                this._jump = false;
             }
-            else if (_stopJump) {
-                _stopJump = false;
-                if (_velocity.y > 0) {
-                    _velocity.y *= jumpDeceleration;
+            else if (this._stopJump) {
+                this._stopJump = false;
+                if (this._velocity.y > 0) {
+                    this._velocity.y *= this.jumpDeceleration;
                 }
             }
 
-            _targetVelocity = _move * maxSpeed;
+            this._targetVelocity = this._move * this.maxSpeed;
 
-            if (IsClimbing) {
-                _velocity.y = _move.y * climbSpeed;
+            if (this.IsClimbing) {
+                this._velocity.y = this._move.y * this.climbSpeed;
             }
 
-            _velocity.x = Mathf.Clamp(_velocity.x, -_maxSpeed, _maxSpeed);
-            _velocity.y = Mathf.Clamp(_velocity.y, -8f, jumpTakeOffSpeed);
+            this._velocity.x = Mathf.Clamp(this._velocity.x, -this._maxSpeed, this._maxSpeed);
+            this._velocity.y = Mathf.Clamp(this._velocity.y, -8f, this.jumpTakeOffSpeed);
         }
 
 
         private void FixedUpdate() {
-            if (IsClimbing) {
-                _velocity.y = _move.y * climbSpeed;
+            if (this.IsClimbing) {
+                this._velocity.y = this._move.y * this.climbSpeed;
             }
             else {
-                if (_velocity.y < 0)
-                    _velocity += Physics2D.gravity * (gravityModifier * Time.deltaTime);
-                else
-                    _velocity += Physics2D.gravity * Time.deltaTime;
+                if (this._velocity.y < 0) {
+                    this._velocity += Physics2D.gravity * (this.gravityModifier * Time.deltaTime);
+                }
+                else {
+                    this._velocity += Physics2D.gravity * Time.deltaTime;
+                }
             }
 
-            _velocity.x = _targetVelocity.x;
+            this._velocity.x = this._targetVelocity.x;
 
-            IsGrounded = false;
+            this.IsGrounded = false;
 
-            var deltaPosition = _velocity * Time.deltaTime;
-            var moveAlongGround = new Vector2(_groundNormal.y, -_groundNormal.x);
+            var deltaPosition = this._velocity * Time.deltaTime;
+            var moveAlongGround = new Vector2(this._groundNormal.y, -this._groundNormal.x);
             var move = moveAlongGround * deltaPosition.x;
 
-            PerformMovement(move);
+            this.PerformMovement(move);
 
             move = Vector2.up * deltaPosition.y;
-            PerformMovement(move);
+            this.PerformMovement(move);
         }
 
         private void PerformMovement(Vector2 move) {
             var distance = move.magnitude;
-            if (distance > MinMoveDistance) {
-                var count = _body.Cast(move, _contactFilter, _hitBuffer, distance + ShellRadius);
+            if (distance > PlayerController.MinMoveDistance) {
+                var count = this._body.Cast(move, this._contactFilter, this._hitBuffer,
+                    distance + PlayerController.ShellRadius);
                 for (var i = 0; i < count; i++) {
-                    var currentNormal = _hitBuffer[i].normal;
+                    var currentNormal = this._hitBuffer[i].normal;
 
-                    if (currentNormal.y > MinGroundNormalY) {
-                        IsGrounded = true;
-                        _groundNormal = currentNormal;
+                    if (currentNormal.y > PlayerController.MinGroundNormalY) {
+                        this.IsGrounded = true;
+                        this._groundNormal = currentNormal;
                         currentNormal.x = 0;
 
-                        if (_velocity.y < 0) {
-                            _velocity.y = 0;
+                        if (this._velocity.y < 0) {
+                            this._velocity.y = 0;
                         }
                     }
 
-                    if (currentNormal.y < -MinGroundNormalY && _velocity.y > 0) {
-                        _velocity.y = 0;
+                    if (currentNormal.y < -PlayerController.MinGroundNormalY && this._velocity.y > 0) {
+                        this._velocity.y = 0;
                     }
 
-                    if (IsGrounded) {
-                        var projection = Vector2.Dot(_velocity, currentNormal);
-                        if (projection < 0)
-                            _velocity -= projection * currentNormal;
+                    if (this.IsGrounded) {
+                        var projection = Vector2.Dot(this._velocity, currentNormal);
+                        if (projection < 0) this._velocity -= projection * currentNormal;
                     }
                     else {
-                        _velocity.x *= 0;
+                        this._velocity.x *= 0;
                     }
 
-                    var modifiedDistance = _hitBuffer[i].distance - ShellRadius;
+                    var modifiedDistance = this._hitBuffer[i].distance - PlayerController.ShellRadius;
                     distance = Mathf.Min(distance, modifiedDistance);
                 }
             }
 
-            _body.position += move.normalized * distance;
+            this._body.position += move.normalized * distance;
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
-        {
+        private void OnTriggerEnter2D(Collider2D other) {
             if (other.CompareTag("Ladder")) {
-                Vector2 contactPoint = other.ClosestPoint(transform.position);
-                if ((contactPoint.x - (int)contactPoint.x  < 0.5 && contactPoint.x - (int)contactPoint.x > 0.02 )|| contactPoint.x - (int)contactPoint.x > 0.98) {
+                var contactPoint = other.ClosestPoint(this.transform.position);
+                if ((contactPoint.x - (int)contactPoint.x < 0.5 && contactPoint.x - (int)contactPoint.x > 0.02) ||
+                    contactPoint.x - (int)contactPoint.x > 0.98) {
                     this._spriteRenderer.flipX = true;
                 }
                 else {
                     this._spriteRenderer.flipX = false;
                 }
-                
-                IsClimbing = true;
-                _velocity.y = 0;
+
+                this.IsClimbing = true;
+                this._velocity.y = 0;
             }
         }
 
 
         private void OnTriggerExit2D(Collider2D other) {
-            if (!other.CompareTag(_ladderTag)) return;
+            if (!other.CompareTag(this._ladderTag)) return;
 
-            IsClimbing = false;
-            _velocity.y = 0;
+            this.IsClimbing = false;
+            this._velocity.y = 0;
         }
-
-
-
     }
 }

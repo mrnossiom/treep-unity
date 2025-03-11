@@ -14,8 +14,8 @@ TagManager:
   - Ladder
   - Water
   - UI
-  - 
-  - 
+  - EnemyLayer
+  - PlayersLayer
   - 
   - 
   - Player
