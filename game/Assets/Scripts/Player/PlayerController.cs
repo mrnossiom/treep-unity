@@ -47,12 +47,12 @@ namespace Treep.Player {
         private const float MinMoveDistance = 0.001f;
         private const float ShellRadius = 0.01f;
 
-        [SerializeField] private float gravityModifier = 1f;
+        [SerializeField] private float gravityModifier = 2f;
         [SerializeField] private float maxSpeed = 7;
         [SerializeField] private float jumpTakeOffSpeed = 6;
 
         [SerializeField] private float jumpModifier = 1.2f;
-        [SerializeField] private float jumpDeceleration = 0.5f;
+        [SerializeField] private float jumpDeceleration = 1f;
 
         [SerializeField] private float climbSpeed = 3f;
 

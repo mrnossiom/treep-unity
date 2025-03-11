@@ -2,6 +2,7 @@ using Treep.IA;
 using Treep.Weapon;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = System.Random;
 
 namespace Treep.Player {
     public class PlayerCombat : MonoBehaviour {
@@ -9,7 +10,8 @@ namespace Treep.Player {
         public Transform attackPointLeft;
         public Transform attackPointTop;
         public Transform attackPointBottom;
-        public Vector2 attackPoint;
+        public Transform attackPoint;
+        private Animator _attackAnimator;
 
         [FormerlySerializedAs("ennemyLayerMask")]
         public LayerMask enemyLayerMask;
@@ -26,15 +28,16 @@ namespace Treep.Player {
         private Looking currentLooking;
 
         private float nextAttackTime;
-        private int PV { get; set; }
+        private int Pv { get; set; }
 
 
         public void Awake() {
             this.ControllerScript = this.GetComponent<PlayerController>();
             this.currentLooking = this.ControllerScript.looking;
-            this.PV = this.MaxPV;
+            this.Pv = this.MaxPV;
             this._currentCloseWeapon = new Stick();
             this._animator = this.GetComponent<Animator>();
+            this._attackAnimator = this.attackPoint.GetComponent<Animator>();
         }
 
         public void Update() {
@@ -49,8 +52,8 @@ namespace Treep.Player {
 
             if (Input.GetKeyDown(KeyCode.P)) {
                 Debug.Log($"{this._currentCloseWeapon}");
-                Debug.Log($"{this.PV}");
-                Debug.Log(this.attackPoint);
+                Debug.Log($"{this.Pv}");
+                Debug.Log(this.attackPoint.position);
             }
         }
 
@@ -63,23 +66,23 @@ namespace Treep.Player {
             }
 
 
-            Gizmos.DrawWireSphere(this.attackPoint, this._currentCloseWeapon.AttackRange);
+            Gizmos.DrawWireSphere(this.attackPoint.position, this._currentCloseWeapon.AttackRange);
         }
 
         private void UpdateAttackPoint() {
             this.currentLooking = this.ControllerScript.looking;
             switch (this.currentLooking) {
                 case Looking.Right:
-                    this.attackPoint = this.attackPointRight.position;
+                    this.attackPoint.position = this.attackPointRight.position;
                     break;
                 case Looking.Left:
-                    this.attackPoint = this.attackPointLeft.position;
+                    this.attackPoint.position = this.attackPointLeft.position;
                     break;
                 case Looking.Top:
-                    this.attackPoint = this.attackPointTop.position;
+                    this.attackPoint.position = this.attackPointTop.position;
                     break;
                 case Looking.Bottom:
-                    this.attackPoint = this.attackPointBottom.position;
+                    this.attackPoint.position = this.attackPointBottom.position;
                     break;
             }
         }
@@ -88,8 +91,11 @@ namespace Treep.Player {
             // animation
             this._animator.SetTrigger("isCloseAttacking");
 
+            this._attackAnimator.SetInteger("Random", new Random().Next(6));
+            this._attackAnimator.SetTrigger("Attack");
+
             //check enemy
-            var hitEnnemys = Physics2D.OverlapCircleAll(this.attackPoint, this._currentCloseWeapon.AttackRange,
+            var hitEnnemys = Physics2D.OverlapCircleAll(this.attackPoint.position, this._currentCloseWeapon.AttackRange,
                 this.enemyLayerMask);
             //Damage to ennemy
             foreach (var ennemy in hitEnnemys) {

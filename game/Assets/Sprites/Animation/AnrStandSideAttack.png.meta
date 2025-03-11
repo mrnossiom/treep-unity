@@ -115,10 +115,10 @@ TextureImporter:
       name: AnrStandSideAttack_0
       rect:
         serializedVersion: 2
-        x: 15
-        y: 68
-        width: 40
-        height: 56
+        x: 0
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,10 +137,10 @@ TextureImporter:
       name: AnrStandSideAttack_1
       rect:
         serializedVersion: 2
-        x: 82
-        y: 68
-        width: 38
-        height: 56
+        x: 64
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -159,10 +159,10 @@ TextureImporter:
       name: AnrStandSideAttack_2
       rect:
         serializedVersion: 2
-        x: 144
-        y: 68
-        width: 34
-        height: 57
+        x: 128
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,10 +181,10 @@ TextureImporter:
       name: AnrStandSideAttack_3
       rect:
         serializedVersion: 2
-        x: 15
-        y: 4
-        width: 47
-        height: 54
+        x: 0
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,10 +203,10 @@ TextureImporter:
       name: AnrStandSideAttack_4
       rect:
         serializedVersion: 2
-        x: 78
-        y: 4
-        width: 49
-        height: 55
+        x: 64
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -225,7 +225,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 42221f55f0864171e8ccaa9a6cc0970b
     internalID: 0
     vertices: []
     indices: 

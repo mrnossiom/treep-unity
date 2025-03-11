@@ -1,22 +1,19 @@
 fileFormatVersion: 2
-guid: 556398e0f1b8106499e6dd82e5f9666d
+guid: 7974f3da791780240aae591d2c8e970c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5535775686167156913
-    second: dash-effect_0
+      213: 18792607188996058
+    second: small-slash-02_0
   - first:
-      213: 2486860578580206317
-    second: dash-effect_1
+      213: 8588996871449075924
+    second: small-slash-02_1
   - first:
-      213: -1534852527149933183
-    second: dash-effect_2
+      213: 3791984534364895618
+    second: small-slash-02_2
   - first:
-      213: 1250749023782372209
-    second: dash-effect_3
-  - first:
-      213: 2773212143397268322
-    second: dash-effect_4
+      213: 7097398991738583046
+    second: small-slash-02_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -112,57 +109,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: dash-effect_0
-      rect:
-        serializedVersion: 2
-        x: 19
-        y: 73
-        width: 17
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f4723cdd759fc23b0800000000000000
-      internalID: -5535775686167156913
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: dash-effect_1
-      rect:
-        serializedVersion: 2
-        x: 66
-        y: 74
-        width: 24
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: de21230358a138220800000000000000
-      internalID: 2486860578580206317
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: dash-effect_2
+      name: small-slash-02_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 13
-        width: 17
-        height: 22
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 18d1e9032cb13bae0800000000000000
-      internalID: -1534852527149933183
+      spriteID: adf47e3d6c3c24000800000000000000
+      internalID: 18792607188996058
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dash-effect_3
+      name: small-slash-02_1
       rect:
         serializedVersion: 2
-        x: 2
-        y: 30
-        width: 10
-        height: 9
+        x: 64
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,20 +146,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 17307b14c9d8b5110800000000000000
-      internalID: 1250749023782372209
+      spriteID: 4d0e9abe52f323770800000000000000
+      internalID: 8588996871449075924
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dash-effect_4
+      name: small-slash-02_2
       rect:
         serializedVersion: 2
-        x: 63
-        y: 15
-        width: 10
-        height: 19
+        x: 0
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -215,8 +168,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 26b6ef550cd6c7620800000000000000
-      internalID: 2773212143397268322
+      spriteID: 289389cd7d5df9430800000000000000
+      internalID: 3791984534364895618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small-slash-02_3
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6083bc387c60f7260800000000000000
+      internalID: 7097398991738583046
       vertices: []
       indices: 
       edges: []
@@ -225,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 90ddbda2b33a187b8b74251f5783fd5f
     internalID: 0
     vertices: []
     indices: 
@@ -235,11 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      dash-effect_0: -5535775686167156913
-      dash-effect_1: 2486860578580206317
-      dash-effect_2: -1534852527149933183
-      dash-effect_3: 1250749023782372209
-      dash-effect_4: 2773212143397268322
+      small-slash-02_0: 18792607188996058
+      small-slash-02_1: 8588996871449075924
+      small-slash-02_2: 3791984534364895618
+      small-slash-02_3: 7097398991738583046
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
