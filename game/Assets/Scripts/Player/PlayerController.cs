@@ -1,9 +1,6 @@
-using System;
-using System.Numerics;
 using Mirror;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
 
 namespace Treep.Player {
     public enum JumpState {
@@ -20,6 +17,7 @@ namespace Treep.Player {
         private static readonly int JumpStart = Animator.StringToHash("JumpStart");
         private static readonly int IsJumping = Animator.StringToHash("IsJumping");
         private static readonly int JumpEnd = Animator.StringToHash("JumpEnd");
+        private static readonly int IsCrouching = Animator.StringToHash("IsCrouching");
 
         // Components
         private Rigidbody2D _body;
@@ -50,29 +48,19 @@ namespace Treep.Player {
         // State
         private Vector2 _targetVelocity;
         private Vector2 _groundNormal;
-        private ContactFilter2D _contactFilter;
         private readonly RaycastHit2D[] _hitBuffer = new RaycastHit2D[16];
 
-        private const float MinGroundNormalY = .65f;
-        private const float MinMoveDistance = 0.001f;
-        private const float ShellRadius = 0.01f;
 
         private JumpState _jumpState = JumpState.Grounded;
         private bool _stopJump;
         private bool _controlEnabled = true;
 
         private bool _jump;
-        private Vector2 _jumpStartPos;
         private Vector2 _move;
+        public bool IsGrounded { get; set; }
 
         private float _maxSpeed = 7;
-            
-        [SerializeField]private float _jumpTakeOffSpeed = 6;
 
-        [SerializeField]private float _jumpModifier = 1.2f;
-        [SerializeField]private float _jumpDeceleration = 0.5f;
-        
-        private float _climbSpeed = 3f;
 
         private Vector2 _standSize = new Vector2(1.4f, 3.2f);
         private Vector2 _crouchSize = new Vector2(1.4f, 2.3f);
@@ -81,11 +69,14 @@ namespace Treep.Player {
         private bool _unCrouch;
         
         private bool _isDashing;
-        private bool _dashAvailable = false;
+        private bool _dashAvailable;
         private float _dashSpeed;
         private float _dashDuration = 0.2f;
         private Vector2 _dashDirection;
         private float _dashTime;
+        private Vector2 _velocity;
+
+        private bool IsClimbing { get; set; }
 
         private void Awake() {
             _body = GetComponent<Rigidbody2D>();
@@ -100,7 +91,7 @@ namespace Treep.Player {
             _contactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer));
         }
         
-        private void OnSpriteFlip(bool oldValuve, bool newValue)
+        private void OnSpriteFlip(bool _, bool newValue)
         {
             _spriteRenderer.flipX = newValue;
         }
@@ -122,7 +113,7 @@ namespace Treep.Player {
                 if (Input.GetKeyDown(KeyCode.C)) {
                     _collider2d.size = _crouchSize;
                     _collider2d.offset = _crouchOffSet;
-                    _animator.SetBool("IsCrouching" ,true);
+                    _animator.SetBool(IsCrouching ,true);
                 }
                 
                 if (Input.GetKeyUp(KeyCode.C)) {
@@ -133,7 +124,7 @@ namespace Treep.Player {
                 if (_unCrouch && CanStandUp(1.2f)) {
                     _collider2d.size = _standSize;
                     _collider2d.offset = _standOffSet;
-                    _animator.SetBool("IsCrouching" ,false);
+                    _animator.SetBool(PlayerController.IsCrouching ,false);
                     _unCrouch = false;
                 }
 
@@ -174,7 +165,9 @@ namespace Treep.Player {
             _targetVelocity = Vector2.zero;
             ComputeVelocity();
         }
+
         
+
         private void StartDash()
         {
             _isDashing = true;
@@ -204,7 +197,7 @@ namespace Treep.Player {
                     _isDashing = false;
                     _dashTime = 0;
                     _body.linearVelocity = Vector2.zero;
-                    velocity = Vector2.zero;
+                    _velocity = Vector2.zero;
                     return;
                 }
         
@@ -215,7 +208,7 @@ namespace Treep.Player {
             {
                 _isDashing = false;
                 _body.linearVelocity = Vector2.zero;
-                velocity = Vector2.zero;
+                _velocity = Vector2.zero;
             }
         }
         
@@ -237,7 +230,6 @@ namespace Treep.Player {
                     _jumpState = JumpState.Jumping;
                     _jump = true;
                     _stopJump = false;
-                    _jumpStartPos = _body.position;
                     break;
                 case JumpState.Jumping:
                     _animator.SetBool(JumpStart, false);
@@ -261,8 +253,8 @@ namespace Treep.Player {
             }
             else if (_stopJump) {
                 _stopJump = false;
-                if (velocity.y > 0) {
-                    velocity.y *= _jumpDeceleration;
+                if (_velocity.y > 0) {
+                    _velocity.y *= jumpDeceleration;
                 }
             }
 
@@ -272,8 +264,8 @@ namespace Treep.Player {
                 _velocity.y = _move.y * climbSpeed;
             }
 
-            velocity.x = Mathf.Clamp(velocity.x, -_maxSpeed, _maxSpeed);
-            velocity.y = Mathf.Clamp(velocity.y, -8f, _jumpTakeOffSpeed);
+            _velocity.x = Mathf.Clamp(_velocity.x, -_maxSpeed, _maxSpeed);
+            _velocity.y = Mathf.Clamp(_velocity.y, -8f, jumpTakeOffSpeed);
         }
 
 
@@ -288,7 +280,7 @@ namespace Treep.Player {
                     _velocity += Physics2D.gravity * Time.deltaTime;
             }
 
-            velocity.x = _targetVelocity.x;
+            _velocity.x = _targetVelocity.x;
 
             IsGrounded = false;
 
@@ -314,19 +306,19 @@ namespace Treep.Player {
                         _groundNormal = currentNormal;
                         currentNormal.x = 0;
 
-                        if (velocity.y < 0) {
-                            velocity.y = 0;
+                        if (_velocity.y < 0) {
+                            _velocity.y = 0;
                         }
                     }
 
-                    if (currentNormal.y < -MinGroundNormalY && velocity.y > 0) {
-                        velocity.y = 0;
+                    if (currentNormal.y < -MinGroundNormalY && _velocity.y > 0) {
+                        _velocity.y = 0;
                     }
 
                     if (IsGrounded) {
                         var projection = Vector2.Dot(_velocity, currentNormal);
                         if (projection < 0)
-                            velocity -= projection * currentNormal;
+                            _velocity -= projection * currentNormal;
                     }
                     else {
                         _velocity.x *= 0;
@@ -352,7 +344,7 @@ namespace Treep.Player {
                 }
                 
                 IsClimbing = true;
-                velocity.y = 0;
+                _velocity.y = 0;
             }
         }
 
