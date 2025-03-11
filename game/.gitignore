@@ -12,7 +12,10 @@ obj/
 
 *.sln
 *.csproj
+
 *.pidb.meta
 *.pdb.meta
 *.mdb.meta
 *.unitypackage
+
+/game.sln.DotSettings.user

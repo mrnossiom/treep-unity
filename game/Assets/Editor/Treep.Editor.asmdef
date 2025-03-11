@@ -1,18 +1,19 @@
 {
-    "name": "Treep.Editor",
-    "rootNamespace": "Treep",
-    "references": [
-        "GUID:b016eca1fc394a7d49c171ece571ede8"
-    ],
-    "includePlatforms": [
-        "Editor"
-    ],
-    "excludePlatforms": [],
-    "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
-    "autoReferenced": true,
-    "defineConstraints": [],
-    "versionDefines": [],
-    "noEngineReferences": false
+  "name": "Treep.Editor",
+  "rootNamespace": "Treep",
+  "references": [
+    "GUID:b016eca1fc394a7d49c171ece571ede8",
+    "GUID:30817c1a0e6d646d99c048fc403f5979"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
 }

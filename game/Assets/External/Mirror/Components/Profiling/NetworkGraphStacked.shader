@@ -79,16 +79,16 @@ Shader "Mirror/NetworkGraphStacked"
             };
 
             sampler2D _MainTex; // we dont use this, but unitys ui library expects the shader to have a texture
-            fixed4 _Color;
-            fixed4 _TextureSampleAdd;
-            float4 _ClipRect;
-            float4 _MainTex_ST;
+            fixed4    _Color;
+            fixed4    _TextureSampleAdd;
+            float4    _ClipRect;
+            float4    _MainTex_ST;
 
-            uint _Width;
-            uint _CategoryCount;
-            uint _MaxValue;
-            uint _DataStart;
-            half _GraphData[64 /* max. 64 points */ * 8 /* max 8 categories */];
+            uint  _Width;
+            uint  _CategoryCount;
+            uint  _MaxValue;
+            uint  _DataStart;
+            half  _GraphData[64 /* max. 64 points */ * 8 /* max 8 categories */];
             half4 _CategoryColors[8 /* max 8 categories */];
 
             v2f vert(appdata_t v)
@@ -107,7 +107,7 @@ Shader "Mirror/NetworkGraphStacked"
 
             fixed4 frag(v2f IN) : SV_Target
             {
-                uint w = ((uint)(IN.texcoord.x * _Width) + _DataStart) % _Width;
+                uint  w = ((uint)(IN.texcoord.x * _Width) + _DataStart) % _Width;
                 half4 color = half4(0, 0, 0, 0);
                 float totalValue = 0;
                 for (uint c = 0; c < _CategoryCount; c++)

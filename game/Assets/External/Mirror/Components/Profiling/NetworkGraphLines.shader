@@ -80,17 +80,17 @@ Shader "Mirror/NetworkGraphLines"
             };
 
             sampler2D _MainTex; // we dont use this, but unitys ui library expects the shader to have a texture
-            fixed4 _Color;
-            fixed4 _TextureSampleAdd;
-            float4 _ClipRect;
-            float4 _MainTex_ST;
+            fixed4    _Color;
+            fixed4    _TextureSampleAdd;
+            float4    _ClipRect;
+            float4    _MainTex_ST;
 
-            uint _Width;
-            half _LineWidth;
-            uint _CategoryCount;
-            uint _MaxValue;
-            uint _DataStart;
-            half _GraphData[64 /* max. 128 points */ * 8 /* max 8 categories */];
+            uint  _Width;
+            half  _LineWidth;
+            uint  _CategoryCount;
+            uint  _MaxValue;
+            uint  _DataStart;
+            half  _GraphData[64 /* max. 128 points */ * 8 /* max 8 categories */];
             half4 _CategoryColors[8 /* max 8 categories */];
 
             v2f vert(appdata_t v)
@@ -112,7 +112,7 @@ Shader "Mirror/NetworkGraphLines"
             {
                 float2 ab = b - a;
                 float2 ap = p - a;
-                float t = saturate(dot(ap, ab) / dot(ab, ab));
+                float  t = saturate(dot(ap, ab) / dot(ab, ab));
                 // Clamp t between 0 and 1 to ensure we stay within the segment
                 float2 closestPoint = a + t * ab; // Find the closest point on the line segment
                 return length(p - closestPoint); // Return the distance from p to the closest point on the line
@@ -120,14 +120,14 @@ Shader "Mirror/NetworkGraphLines"
 
             fixed4 frag(v2f IN) : SV_Target
             {
-                uint wCur = (uint)(IN.texcoord.x * _Width);
-                uint wMin = wCur == 0 ? 0 : wCur - 1;
-                uint wMax = wCur == _Width - 1 ? wCur : wCur + 1;
+                uint   wCur = (uint)(IN.texcoord.x * _Width);
+                uint   wMin = wCur == 0 ? 0 : wCur - 1;
+                uint   wMax = wCur == _Width - 1 ? wCur : wCur + 1;
                 float2 screenSize = _ScreenParams.xy;
                 // this scaling only works if the object is flat and not rotated - but thats fine
                 float2 pixelScale = float2(1 / ddx(IN.texcoord.x), 1 / ddy(IN.texcoord.y));
                 float2 screenSpaceUV = IN.texcoord * pixelScale;
-                half4 color = half4(0, 0, 0, 0);
+                half4  color = half4(0, 0, 0, 0);
                 // Loop through the graph's points
                 bool colored = false;
                 for (uint wNonOffset = wMin; wNonOffset < wMax && !colored; wNonOffset++)
@@ -148,8 +148,9 @@ Shader "Mirror/NetworkGraphLines"
                         float2 pointCurrent = float2(texPosCurrentX, categoryValueCurrent);
                         float2 pointNext = float2(texPosPrevX, categoryValueNext);
 
-                        float distance = distanceToLineSegment(screenSpaceUV, pointCurrent * pixelScale,
-                                                               pointNext * pixelScale);
+                        float distance = distanceToLineSegment(screenSpaceUV,
+                                                                                         pointCurrent * pixelScale,
+                                                                                         pointNext * pixelScale);
 
                         if (distance < _LineWidth)
                         {

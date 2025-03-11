@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Ladder
+  - PlayerVirtualCamera
   layers:
   - Default
   - TransparentFX
@@ -16,7 +17,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Player
   - 
   - 
   - 
