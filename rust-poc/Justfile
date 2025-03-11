@@ -1,6 +1,9 @@
 _default:
 	@just --list --unsorted --list-heading '' --list-prefix '—— '
 
-# Start a developement tunnel to the local server
-run NAME:
-	cargo run -F bevy/dynamic_linking
+run:
+	cargo run
+
+debug:
+	cargo run -F debug
+

@@ -1,56 +1,81 @@
-use bevy::{prelude::*, sprite::Anchor};
+//! Player
+
+use crate::{GameState, ground::GroundDetection, utils::despawn_screen};
+use bevy::prelude::*;
 use bevy_aseprite_ultra::prelude::*;
 use bevy_rapier2d::prelude::*;
 
-use crate::GameState;
-
-pub(crate) fn plugin(app: &mut App) {
-	app
+pub fn plugin(app: &mut App) {
+	app.register_type::<GroundDetection>()
 		// Setup and cleanup on change game state
 		.add_systems(OnEnter(GameState::InRoom), (setup_player,))
+		.add_systems(OnExit(GameState::InRoom), (despawn_screen::<Player>,))
 		.add_systems(
 			Update,
 			(player_movement,).run_if(in_state(GameState::InRoom)),
 		);
 }
 
+const PLAYER_RUN_SPEED: f32 = 200.0;
+const PLAYER_GROUND_SWITCH_COEF: f32 = 0.8;
+const PLAYER_AIR_SWITCH_COEF: f32 = 0.1;
+const PLAYER_FALLING_GAVITY_SCALE: f32 = 1.8;
+
 #[derive(Component)]
+#[require(Name(|| Name::new("Player")))]
 pub(crate) struct Player;
 
 pub(crate) fn setup_player(mut commands: Commands, asset_server: Res<AssetServer>) {
 	commands.spawn((
 		Player,
-		Name::new("Player"),
+		// sprite
 		AseSpriteAnimation {
 			animation: Animation::tag("walk-left"),
 			aseprite: asset_server.load("ant-run.aseprite"),
 		},
-		Sprite {
-			anchor: Anchor::BottomCenter,
-			..default()
-		},
+		// position and physics
 		Transform::default(),
-		RigidBody::Dynamic,
-		// RigidBody::KinematicVelocityBased,
 		Velocity::zero(),
+		LockedAxes::ROTATION_LOCKED,
 		Friction {
-			coefficient: 0.0,
+			coefficient: 0.,
 			combine_rule: CoefficientCombineRule::Min,
 		},
-		LockedAxes::ROTATION_LOCKED,
-		Collider::cuboid(10., 20.),
+		// controller
+		Collider::cuboid(10., 30.),
+		RigidBody::Dynamic,
+		GravityScale::default(),
+		KinematicCharacterController::default(),
+		GroundDetection::default(),
+		Ccd::enabled(),
 	));
 }
 
 pub fn player_movement(
 	input: Res<ButtonInput<KeyCode>>,
-	mut query: Query<&mut Velocity, With<Player>>,
+	mut query: Query<
+		(
+			&mut Velocity,
+			&mut GravityScale,
+			// &mut Climber,
+			&GroundDetection,
+		),
+		With<Player>,
+	>,
 ) {
-	for mut velocity in &mut query {
+	for (mut velocity, mut gravity_scale, GroundDetection { on_ground }) in &mut query {
 		let right = if input.pressed(KeyCode::KeyD) { 1. } else { 0. };
 		let left = if input.pressed(KeyCode::KeyA) { 1. } else { 0. };
 
-		velocity.linvel.x = (right - left) * 200.;
+		let target_speed = (right - left) * PLAYER_RUN_SPEED;
+		velocity.linvel.x = velocity.linvel.x.lerp(
+			target_speed,
+			if *on_ground {
+				PLAYER_GROUND_SWITCH_COEF
+			} else {
+				PLAYER_AIR_SWITCH_COEF
+			},
+		);
 
 		// if climber.intersecting_climbables.is_empty() {
 		// 	climber.climbing = false;
@@ -66,10 +91,18 @@ pub fn player_movement(
 		// }
 
 		if input.just_pressed(KeyCode::Space)
-		// && (ground_detection.on_ground || climber.climbing)
-		{
-			velocity.linvel.y = 150.;
+			&& (
+				*on_ground
+				// || climber.climbing
+			) {
+			velocity.linvel.y = 200.;
 			// climber.climbing = false;
+		}
+
+		if velocity.linvel.y < 0.0 {
+			gravity_scale.0 = PLAYER_FALLING_GAVITY_SCALE;
+		} else {
+			gravity_scale.0 = 1.0;
 		}
 	}
 }

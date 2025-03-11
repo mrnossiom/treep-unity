@@ -1,13 +1,13 @@
-use crate::GameState;
 use crate::player::Player;
 use crate::room::RoomState;
+use crate::{DEBUG_MODE, GameState};
 use bevy::color::palettes::css;
 use bevy::prelude::*;
 use bevy::utils::{HashMap, HashSet};
 use bevy_ecs_ldtk::prelude::*;
 use bevy_rapier2d::prelude::*;
 
-pub(crate) fn plugin(app: &mut App) {
+pub fn plugin(app: &mut App) {
 	use RoomState::*;
 
 	app.add_plugins(LdtkPlugin)
@@ -32,7 +32,7 @@ pub(crate) fn plugin(app: &mut App) {
 		.add_systems(OnEnter(Level), (setup_level,))
 		.add_systems(OnExit(Level), || todo!());
 
-	if cfg!(debug_assertions) {
+	if DEBUG_MODE {
 		app.add_systems(
 			Update,
 			(highlight_spawn_point,).run_if(in_state(GameState::InRoom)),

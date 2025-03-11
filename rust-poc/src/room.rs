@@ -1,3 +1,5 @@
+//! Room that can contain multiple players
+
 use crate::{GameState, utils::despawn_screen};
 use bevy::prelude::*;
 
@@ -11,7 +13,7 @@ pub(crate) enum RoomState {
 	Disabled,
 }
 
-pub(crate) fn plugin(app: &mut App) {
+pub fn plugin(app: &mut App) {
 	use RoomState::*;
 
 	app.init_state::<RoomState>()

@@ -2,17 +2,21 @@
 name = "treep"
 version = "0.0.0"
 edition = "2024"
+default-run = "treep"
 
 [dependencies]
-bevy = { version = "0.15", features = ["dynamic_linking", "file_watcher"] }
-bevy-inspector-egui = "0.29.1"
+bevy = "0.15" 
 bevy_aseprite_ultra = "0.4"
 bevy_ecs_ldtk = "0.11"
+bevy-inspector-egui = "0.29"
+bevy_quinnet = "0.14"
 bevy_rapier2d = { version = "0.29", features = ["debug-render-2d"] }
+bevy_replicon = "0.30"
+bevy_replicon_quinnet = "0.9"
 
 [features]
 default = []
-debug = []
+debug = ["bevy/dynamic_linking", "bevy/file_watcher"]
 # TODO: setups bevy_inspector_egui's Manual UI
 editor = []
 
@@ -24,7 +28,7 @@ nursery = { level = "warn", priority = -1 }
 # cargo = { level = "warn", priority = -1 }
 
 # missing_docs_in_private_items = "warn"
-unwrap_used = "warn"
+# unwrap_used = "warn"
 
 cast_possible_truncation = "allow"
 cast_possible_wrap = "allow"
@@ -33,6 +37,7 @@ enum_glob_use = "allow"
 multiple_crate_versions = "allow"
 needless_pass_by_value = "allow"
 redundant_pub_crate = "allow"
+too_many_arguments = "allow"
 too_many_lines = "allow"
 type_complexity = "allow"
 [lints.rustdoc]
