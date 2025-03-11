@@ -1,22 +1,22 @@
 fileFormatVersion: 2
-guid: b95ea2d7e1df3784a8056e9af10593f9
+guid: d90a64ad0ae1abcea9f3b5f0a22fd486
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8566403960249767829
-    second: new-ant-jump_0
+      213: -1310765272185091973
+    second: AntClimb_0
   - first:
-      213: 7504074088020855958
-    second: new-ant-jump_1
+      213: -1338984968479577836
+    second: AntClimb_1
   - first:
-      213: -4835784450807386574
-    second: new-ant-jump_2
+      213: 6330013871109925241
+    second: AntClimb_2
   - first:
-      213: 7894354263910026061
-    second: new-ant-jump_3
+      213: -1495536860800567298
+    second: AntClimb_3
   - first:
-      213: 6408057768546694573
-    second: new-ant-jump_4
+      213: -3209696197169592578
+    second: AntClimb_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -125,111 +125,148 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: AntJump_0
+      name: AntClimb_0
       rect:
         serializedVersion: 2
         x: 10
-        y: 65
-        width: 39
-        height: 54
+        y: 63
+        width: 33
+        height: 56
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 16.5, y: -7}
+        - {x: 16.5, y: 26}
+        - {x: 14.5, y: 28}
+        - {x: -11.5, y: 28}
+        - {x: -16.5, y: 18}
+        - {x: -16.5, y: -4}
+        - {x: -0.5, y: -26}
+        - {x: 14.5, y: -26}
       tessellationDetail: 0
       bones: []
-      spriteID: 9b783d7400175d8688a6427a94b6529c
-      internalID: 1574361180
+      spriteID: b784d7ffde93fcde0800000000000000
+      internalID: -1310765272185091973
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AntJump_1
+      name: AntClimb_1
       rect:
         serializedVersion: 2
-        x: 74
-        y: 65
-        width: 39
-        height: 54
+        x: 72
+        y: 63
+        width: 33
+        height: 56
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 16.5, y: 26}
+        - {x: 13.5, y: 28}
+        - {x: -13.5, y: 28}
+        - {x: -16.5, y: 21}
+        - {x: -16.5, y: -4}
+        - {x: 2.5, y: -27}
+        - {x: 15.5, y: -27}
       tessellationDetail: 0
       bones: []
-      spriteID: b93d01218adfe81dbb9be755e7fe3e7b
-      internalID: -1226705010
+      spriteID: 419ef22f348fa6de0800000000000000
+      internalID: -1338984968479577836
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AntJump_2
+      name: AntClimb_2
       rect:
         serializedVersion: 2
         x: 138
-        y: 67
-        width: 39
-        height: 54
+        y: 64
+        width: 33
+        height: 56
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 16.5, y: -17}
+        - {x: 16.5, y: 25}
+        - {x: 13.5, y: 28}
+        - {x: -13.5, y: 28}
+        - {x: -16.5, y: 21}
+        - {x: -16.5, y: -4}
+        - {x: -6.5, y: -18}
+        - {x: 2.5, y: -27}
+        - {x: 15.5, y: -27}
       tessellationDetail: 0
       bones: []
-      spriteID: 21e7bf32874ae3585866d2521c5ed1d8
-      internalID: -885770654
+      spriteID: 9796dc2f31ab8d750800000000000000
+      internalID: 6330013871109925241
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AntJump_3
+      name: AntClimb_3
       rect:
         serializedVersion: 2
         x: 201
-        y: 66
-        width: 41
-        height: 54
+        y: 63
+        width: 33
+        height: 56
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 16.5, y: 28}
+        - {x: -13.5, y: 28}
+        - {x: -16.5, y: 21}
+        - {x: -16.5, y: -5}
+        - {x: -9.5, y: -15}
+        - {x: 1.5, y: -27}
+        - {x: 15.5, y: -27}
       tessellationDetail: 0
       bones: []
-      spriteID: e911ee57f366385048530db4292e1892
-      internalID: 582677375
+      spriteID: ef7ba771629ce3be0800000000000000
+      internalID: -1495536860800567298
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AntJump_4
+      name: AntClimb_4
       rect:
         serializedVersion: 2
-        x: 11
-        y: 2
-        width: 40
-        height: 54
+        x: 10
+        y: 0
+        width: 33
+        height: 55
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 16.5, y: 27.5}
+        - {x: -12.5, y: 27.5}
+        - {x: -16.5, y: 19.5}
+        - {x: -16.5, y: -5.5}
+        - {x: -0.5, y: -26.5}
+        - {x: 16.5, y: -25.5}
       tessellationDetail: 0
       bones: []
-      spriteID: dd466ec20ed4a4238b02ef8f788dd4ed
-      internalID: -1343463778
+      spriteID: ef6c8ca705ed473d0800000000000000
+      internalID: -3209696197169592578
       vertices: []
       indices: 
       edges: []
@@ -238,7 +275,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 69add20fc165a7ac39f6d22d02b96d06
+    spriteID: dfb2b43da816523d89e7adcd32e8b39d
     internalID: 0
     vertices: []
     indices: 
@@ -248,12 +285,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      AntJump_0: 1574361180
-      AntJump_1: -1226705010
-      AntJump_2: -885770654
-      AntJump_3: 582677375
-      AntJump_4: -1343463778
-      AntJump_5: 737022664
+      AntClimb_0: -1310765272185091973
+      AntClimb_1: -1338984968479577836
+      AntClimb_2: 6330013871109925241
+      AntClimb_3: -1495536860800567298
+      AntClimb_4: -3209696197169592578
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

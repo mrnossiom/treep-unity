@@ -1,5 +1,6 @@
 using Mirror;
 using UnityEngine;
+using Vector2 = UnityEngine.Vector2;
 
 namespace Treep.Player {
     public enum JumpState {
@@ -16,10 +17,11 @@ namespace Treep.Player {
         private static readonly int JumpStart = Animator.StringToHash("JumpStart");
         private static readonly int IsJumping = Animator.StringToHash("IsJumping");
         private static readonly int JumpEnd = Animator.StringToHash("JumpEnd");
+        private static readonly int IsCrouching = Animator.StringToHash("IsCrouching");
 
         // Components
-        private Collider2D _collider2d;
         private Rigidbody2D _body;
+        private BoxCollider2D _collider2d;
         private SpriteRenderer _spriteRenderer;
         private Animator _animator;
         
@@ -34,7 +36,7 @@ namespace Treep.Player {
         private const float MinMoveDistance = 0.001f;
         private const float ShellRadius = 0.01f;
 
-        [SerializeField] private float gravityModifier = 1.5f;
+        [SerializeField] private float gravityModifier = 1f;
         [SerializeField] private float maxSpeed = 7;
         [SerializeField] private float jumpTakeOffSpeed = 6;
 
@@ -43,27 +45,44 @@ namespace Treep.Player {
 
         [SerializeField] private float climbSpeed = 3f;
 
-        [SerializeField] private bool controlEnabled = true;
-
         // State
         private Vector2 _targetVelocity;
         private Vector2 _groundNormal;
         private readonly RaycastHit2D[] _hitBuffer = new RaycastHit2D[16];
 
-        private Vector2 _velocity;
 
         private JumpState _jumpState = JumpState.Grounded;
         private bool _stopJump;
+        private bool _controlEnabled = true;
 
         private bool _jump;
         private Vector2 _move;
+        public bool IsGrounded { get; set; }
 
-        private bool IsGrounded { get; set; }
+        private float _maxSpeed = 7;
+
+
+        private Vector2 _standSize = new Vector2(1.4f, 3.2f);
+        private Vector2 _crouchSize = new Vector2(1.4f, 2.3f);
+        private Vector2 _standOffSet = new Vector2(-0.18f, -0.126588f);
+        private Vector2 _crouchOffSet = new Vector2(-0.18f, -0.5325f);
+        private bool _unCrouch;
+        
+        private bool _isDashing;
+        private bool _dashAvailable;
+        private float _dashSpeed;
+        private float _dashDuration = 0.2f;
+        private Vector2 _dashDirection;
+        private float _dashTime;
+        private Vector2 _velocity;
+
         private bool IsClimbing { get; set; }
 
         private void Awake() {
             _body = GetComponent<Rigidbody2D>();
-            _collider2d = GetComponent<Collider2D>();
+            _collider2d = GetComponent<BoxCollider2D>();
+            _collider2d.size = _standSize;
+            _collider2d.offset = _standOffSet;
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _animator = GetComponent<Animator>();
 
@@ -72,7 +91,7 @@ namespace Treep.Player {
             _contactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer));
         }
         
-        private void OnSpriteFlip(bool oldValuve, bool newValue)
+        private void OnSpriteFlip(bool _, bool newValue)
         {
             _spriteRenderer.flipX = newValue;
         }
@@ -85,11 +104,29 @@ namespace Treep.Player {
         private void Update() {
             if (!isLocalPlayer) return;
 
-            if (controlEnabled) {
+            if (_controlEnabled) {
                 _move.x = Input.GetAxis("Horizontal");
                 _animator.SetBool(IsMoving, _move.x != 0);
                 
                 if (_move.x < 0 != this._isFlipped) CmdSetFlip(_move.x < 0);
+
+                if (Input.GetKeyDown(KeyCode.C)) {
+                    _collider2d.size = _crouchSize;
+                    _collider2d.offset = _crouchOffSet;
+                    _animator.SetBool(IsCrouching ,true);
+                }
+                
+                if (Input.GetKeyUp(KeyCode.C)) {
+                    _unCrouch = true;
+                    
+                }
+
+                if (_unCrouch && CanStandUp(1.2f)) {
+                    _collider2d.size = _standSize;
+                    _collider2d.offset = _standOffSet;
+                    _animator.SetBool(PlayerController.IsCrouching ,false);
+                    _unCrouch = false;
+                }
 
                 if (_jumpState == JumpState.Grounded && Input.GetButtonDown("Jump")) {
                     _animator.SetBool(JumpStart, true);
@@ -101,22 +138,89 @@ namespace Treep.Player {
                 else if (Input.GetButtonUp("Jump")) _stopJump = true;
 
                 if (IsClimbing) {
+                    
                     _move.y = Input.GetAxis("Vertical");
-                }
+                } 
                 else {
                     _move.y = 0;
+                }
+
+                if (IsGrounded)
+                {
+                    _dashAvailable = true;
+                }
+                if (Input.GetKeyDown(KeyCode.LeftShift) && !_isDashing && _dashAvailable) {
+                    StartDash();
                 }
             }
             else {
                 _move.x = 0;
                 _move.y = 0;
             }
-
+            if (_isDashing) {
+                HandleDash();
+            }
+            
             UpdateJumpState();
             _targetVelocity = Vector2.zero;
             ComputeVelocity();
         }
 
+        
+
+        private void StartDash()
+        {
+            _isDashing = true;
+            _dashAvailable = false;
+    
+            if (_move.x != 0)
+            {
+                _dashDirection = new Vector2(_move.x, 0).normalized;
+            }
+            else
+            {
+                _dashDirection = _spriteRenderer.flipX ? Vector2.left : Vector2.right;
+            }
+    
+            _dashSpeed = 8f;
+            _dashTime = _dashDuration;
+        }
+
+        private void HandleDash()
+        {
+            if (_dashTime > 0)
+            {
+                int obstacleCount = _body.Cast(_dashDirection, _contactFilter, _hitBuffer, 0.3f);
+        
+                if (obstacleCount > 0)
+                {
+                    _isDashing = false;
+                    _dashTime = 0;
+                    _body.linearVelocity = Vector2.zero;
+                    _velocity = Vector2.zero;
+                    return;
+                }
+        
+                _body.linearVelocity = _dashDirection * _dashSpeed;
+                _dashTime -= Time.deltaTime;
+            }
+            else
+            {
+                _isDashing = false;
+                _body.linearVelocity = Vector2.zero;
+                _velocity = Vector2.zero;
+            }
+        }
+        
+        private bool CanStandUp(float checkHeight) {
+            Vector2 direction = Vector2.up;
+            Vector2 topLeft = new Vector2((float)-0.2, 1).normalized;
+            Vector2 topRight = new Vector2((float)0.2, 1).normalized;
+            int hitCount = _body.Cast(direction, _contactFilter, _hitBuffer, checkHeight);
+            hitCount += _body.Cast(topLeft, _contactFilter, _hitBuffer, checkHeight);
+            hitCount += _body.Cast(topRight, _contactFilter, _hitBuffer, checkHeight);
+            return hitCount == 0;
+        }
 
         private void UpdateJumpState() {
             _jump = false;
@@ -149,7 +253,9 @@ namespace Treep.Player {
             }
             else if (_stopJump) {
                 _stopJump = false;
-                if (_velocity.y > 0) _velocity.y = _velocity.y * jumpDeceleration;
+                if (_velocity.y > 0) {
+                    _velocity.y *= jumpDeceleration;
+                }
             }
 
             _targetVelocity = _move * maxSpeed;
@@ -157,7 +263,11 @@ namespace Treep.Player {
             if (IsClimbing) {
                 _velocity.y = _move.y * climbSpeed;
             }
+
+            _velocity.x = Mathf.Clamp(_velocity.x, -_maxSpeed, _maxSpeed);
+            _velocity.y = Mathf.Clamp(_velocity.y, -8f, jumpTakeOffSpeed);
         }
+
 
         private void FixedUpdate() {
             if (IsClimbing) {
@@ -171,6 +281,7 @@ namespace Treep.Player {
             }
 
             _velocity.x = _targetVelocity.x;
+
             IsGrounded = false;
 
             var deltaPosition = _velocity * Time.deltaTime;
@@ -178,13 +289,13 @@ namespace Treep.Player {
             var move = moveAlongGround * deltaPosition.x;
 
             PerformMovement(move);
+
             move = Vector2.up * deltaPosition.y;
             PerformMovement(move);
         }
 
         private void PerformMovement(Vector2 move) {
             var distance = move.magnitude;
-
             if (distance > MinMoveDistance) {
                 var count = _body.Cast(move, _contactFilter, _hitBuffer, distance + ShellRadius);
                 for (var i = 0; i < count; i++) {
@@ -194,36 +305,49 @@ namespace Treep.Player {
                         IsGrounded = true;
                         _groundNormal = currentNormal;
                         currentNormal.x = 0;
+
+                        if (_velocity.y < 0) {
+                            _velocity.y = 0;
+                        }
                     }
 
-                    if (currentNormal.y < -MinGroundNormalY) {
-                        if (_velocity.y > 0)
-                            _velocity.y = 0;
+                    if (currentNormal.y < -MinGroundNormalY && _velocity.y > 0) {
+                        _velocity.y = 0;
                     }
 
                     if (IsGrounded) {
                         var projection = Vector2.Dot(_velocity, currentNormal);
                         if (projection < 0)
-                            _velocity = _velocity - projection * currentNormal;
+                            _velocity -= projection * currentNormal;
                     }
                     else {
                         _velocity.x *= 0;
                     }
 
                     var modifiedDistance = _hitBuffer[i].distance - ShellRadius;
-                    distance = modifiedDistance < distance ? modifiedDistance : distance;
+                    distance = Mathf.Min(distance, modifiedDistance);
                 }
             }
 
             _body.position += move.normalized * distance;
         }
 
-        private void OnTriggerEnter2D(Collider2D other) {
-            if (!other.CompareTag(_ladderTag)) return;
-
-            IsClimbing = true;
-            _velocity.y = 0;
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.CompareTag("Ladder")) {
+                Vector2 contactPoint = other.ClosestPoint(transform.position);
+                if ((contactPoint.x - (int)contactPoint.x  < 0.5 && contactPoint.x - (int)contactPoint.x > 0.02 )|| contactPoint.x - (int)contactPoint.x > 0.98) {
+                    this._spriteRenderer.flipX = true;
+                }
+                else {
+                    this._spriteRenderer.flipX = false;
+                }
+                
+                IsClimbing = true;
+                _velocity.y = 0;
+            }
         }
+
 
         private void OnTriggerExit2D(Collider2D other) {
             if (!other.CompareTag(_ladderTag)) return;
@@ -231,5 +355,8 @@ namespace Treep.Player {
             IsClimbing = false;
             _velocity.y = 0;
         }
+
+
+
     }
 }
