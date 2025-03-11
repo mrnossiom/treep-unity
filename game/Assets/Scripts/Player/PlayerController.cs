@@ -1,4 +1,3 @@
-using System;
 using Mirror;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
@@ -87,9 +86,40 @@ namespace Treep.Player {
         private float _dashTime;
         private Vector2 _velocity;
 
+        public Transform _dashEffectPoint; //engros ca c'est en fonction de l'endroit du player
+        public Vector2 dashEffectPos; // et ca c'est overall
+        private Animator _dashAnimator;
+        private SpriteRenderer _dashSpriteRenderer;
+        private SpriteRenderer _closeAttackRenderer;
+        public PlayerCombat scriptPlayerCombat;
+
         private bool IsClimbing { get; set; }
 
         public Looking looking;
+
+        private bool _allSpriteFlipX;
+
+        private bool AllSpriteFlipX {
+            get => this._allSpriteFlipX;
+            set {
+                this._spriteRenderer.flipX = value;
+                this.FlipDashEffectPoint(value);
+                this._closeAttackRenderer.flipX = value;
+                this._allSpriteFlipX = value;
+            }
+        }
+
+        private void FlipDashEffectPoint(bool val) {
+            this._dashSpriteRenderer.flipX = val;
+            if (val) {
+                this._dashEffectPoint.position = new Vector3(this.transform.position.x + this.dashEffectPos.x,
+                    this.transform.position.y);
+            }
+            else {
+                this._dashEffectPoint.position = new Vector3(this.transform.position.x - this.dashEffectPos.x,
+                    this.transform.position.y);
+            }
+        }
 
 
         private void Start() {
@@ -98,6 +128,7 @@ namespace Treep.Player {
 
         private void Awake() {
             this._body = this.GetComponent<Rigidbody2D>();
+
             this._collider2d = this.GetComponent<BoxCollider2D>();
             this._collider2d.size = this._standSize;
             this._collider2d.offset = this._standOffSet;
@@ -107,10 +138,13 @@ namespace Treep.Player {
             this._ladderTag = TagHandle.GetExistingTag("Ladder");
 
             this._contactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(this.gameObject.layer));
+            this._dashAnimator = this._dashEffectPoint.GetComponent<Animator>();
+            this._dashSpriteRenderer = this._dashEffectPoint.GetComponent<SpriteRenderer>();
+            this._closeAttackRenderer = this.scriptPlayerCombat.attackPoint.GetComponent<SpriteRenderer>();
         }
 
         private void OnSpriteFlip(bool _, bool newValue) {
-            this._spriteRenderer.flipX = newValue;
+            this.AllSpriteFlipX = newValue;
         }
 
         [Command]
@@ -142,8 +176,13 @@ namespace Treep.Player {
                 this._dashAvailable = true;
             }
 
+            else if (this._move.x < 0) {
+                this.AllSpriteFlipX = true;
+            }
+
             if (Input.GetKeyDown(KeyCode.LeftShift) && !this._isDashing && this._dashAvailable) {
                 this._animator.SetTrigger(PlayerController.AnimIsDashing);
+                this._dashAnimator.SetTrigger("Dash");
                 this.StartDash();
             }
 
@@ -195,19 +234,19 @@ namespace Treep.Player {
                 }
 
                 if (this._move.x != 0) {
-                    this._spriteRenderer.flipX = this._move.x < 0;
+                    this.AllSpriteFlipX = this._move.x < 0;
                 }
             }
             else // le player vas que a gauche ou a droite (ou rien)
             {
                 if (this._move.x > 0) {
-                    this._spriteRenderer.flipX = false;
+                    this.AllSpriteFlipX = false;
                 }
                 else if (this._move.x < 0) {
-                    this._spriteRenderer.flipX = true;
+                    this.AllSpriteFlipX = true;
                 }
 
-                this.looking = this._spriteRenderer.flipX ? Looking.Left : Looking.Right;
+                this.looking = this.AllSpriteFlipX ? Looking.Left : Looking.Right;
             }
         }
 
@@ -239,7 +278,7 @@ namespace Treep.Player {
                 this._dashDirection = new Vector2(this._move.x, 0).normalized;
             }
             else {
-                this._dashDirection = this._spriteRenderer.flipX ? Vector2.left : Vector2.right;
+                this._dashDirection = this.AllSpriteFlipX ? Vector2.left : Vector2.right;
             }
 
             this._dashSpeed = 8f;
@@ -395,10 +434,10 @@ namespace Treep.Player {
                 var contactPoint = other.ClosestPoint(this.transform.position);
                 if ((contactPoint.x - (int)contactPoint.x < 0.5 && contactPoint.x - (int)contactPoint.x > 0.02) ||
                     contactPoint.x - (int)contactPoint.x > 0.98) {
-                    this._spriteRenderer.flipX = true;
+                    this.AllSpriteFlipX = true;
                 }
                 else {
-                    this._spriteRenderer.flipX = false;
+                    this.AllSpriteFlipX = false;
                 }
 
                 this.IsClimbing = true;

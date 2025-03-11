@@ -118,10 +118,10 @@ TextureImporter:
       name: ennemi-idle_0
       rect:
         serializedVersion: 2
-        x: 13
-        y: 63
-        width: 39
-        height: 56
+        x: 0
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,10 +140,10 @@ TextureImporter:
       name: ennemi-idle_1
       rect:
         serializedVersion: 2
-        x: 77
-        y: 63
-        width: 39
-        height: 55
+        x: 64
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -162,10 +162,10 @@ TextureImporter:
       name: ennemi-idle_2
       rect:
         serializedVersion: 2
-        x: 142
-        y: 63
-        width: 38
-        height: 55
+        x: 128
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,10 +184,10 @@ TextureImporter:
       name: ennemi-idle_3
       rect:
         serializedVersion: 2
-        x: 13
+        x: 0
         y: 0
-        width: 40
-        height: 54
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -206,10 +206,10 @@ TextureImporter:
       name: ennemi-idle_4
       rect:
         serializedVersion: 2
-        x: 77
+        x: 64
         y: 0
-        width: 40
-        height: 53
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -228,10 +228,10 @@ TextureImporter:
       name: ennemi-idle_5
       rect:
         serializedVersion: 2
-        x: 143
+        x: 128
         y: 0
-        width: 37
-        height: 54
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -250,7 +250,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: d3ae2c86f20074139b507f93a9ba6e5d
     internalID: 0
     vertices: []
     indices: 

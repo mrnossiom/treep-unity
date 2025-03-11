@@ -109,10 +109,10 @@ TextureImporter:
       name: ant-dash_0
       rect:
         serializedVersion: 2
-        x: 15
-        y: 68
-        width: 40
-        height: 56
+        x: 0
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,10 +131,10 @@ TextureImporter:
       name: ant-dash_1
       rect:
         serializedVersion: 2
-        x: 77
-        y: 67
-        width: 38
-        height: 54
+        x: 64
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,10 +153,10 @@ TextureImporter:
       name: ant-dash_2
       rect:
         serializedVersion: 2
-        x: 10
-        y: 6
-        width: 42
-        height: 48
+        x: 0
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -175,7 +175,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: ad031fba2a258b62daa16a074522b839
     internalID: 0
     vertices: []
     indices: 

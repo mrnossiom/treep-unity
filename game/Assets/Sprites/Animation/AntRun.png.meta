@@ -143,7 +143,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: new-run_0
+      name: AntRun_0
       rect:
         serializedVersion: 2
         x: 11
@@ -158,14 +158,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5749c911ea247334a9fd2d04bdf4460a
-      internalID: 589841390
+      spriteID: a81f64a76d4eb4a7dba4ff6decea6c0c
+      internalID: -1902924181
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: new-run_1
+      name: AntRun_1
       rect:
         serializedVersion: 2
         x: 74
@@ -180,14 +180,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5e6b8fc365cd1fc4d8ab10687f361811
-      internalID: -1497703495
+      spriteID: dfdd14d87d5f908a988ef8488469ac17
+      internalID: 952985211
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: new-run_2
+      name: AntRun_2
       rect:
         serializedVersion: 2
         x: 137
@@ -202,14 +202,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c3760fa0d4e2904458439df524a22c0c
-      internalID: 31500266
+      spriteID: 9b307e2ff77f7a512ac959eeeef28cbc
+      internalID: -1979290018
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: new-run_3
+      name: AntRun_3
       rect:
         serializedVersion: 2
         x: 199
@@ -224,14 +224,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 79e0349b95a649844a7eb8215575198f
-      internalID: -386700093
+      spriteID: 5e708f10aa41ecb2dbdecf9637801c3e
+      internalID: 833837561
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: new-run_4
+      name: AntRun_4
       rect:
         serializedVersion: 2
         x: 10
@@ -246,14 +246,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 46c88d49c97549344b1ed7e8841b6d59
-      internalID: 691107044
+      spriteID: 1ccf7c22777d7f971be4ae7ffa2438c1
+      internalID: 1458008136
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: new-run_5
+      name: AntRun_5
       rect:
         serializedVersion: 2
         x: 75
@@ -268,14 +268,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e7c94ee4f612d434487a62543491ec8b
-      internalID: -1748673922
+      spriteID: a049fb10527b436c496fe0360665e956
+      internalID: -1912989117
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: new-run_6
+      name: AntRun_6
       rect:
         serializedVersion: 2
         x: 139
@@ -290,14 +290,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 691ad0bb098be5345a61c144951a3a2e
-      internalID: -1141644242
+      spriteID: d118c7898a0829bf8937c3fe9c516887
+      internalID: -38702840
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: new-run_7
+      name: AntRun_7
       rect:
         serializedVersion: 2
         x: 205
@@ -312,14 +312,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1597acbc977946b4681e3613a4c86ee3
-      internalID: 618495648
+      spriteID: da70e840450567b619a4ed76ef33ebf2
+      internalID: -943486538
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: new-run_8
+      name: AntRun_8
       rect:
         serializedVersion: 2
         x: 12
@@ -334,14 +334,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4677a995d3b2f8649bc58a535eb77533
-      internalID: -1880648743
+      spriteID: bcae97b5005e452899dbb471dcd54b9c
+      internalID: 1793314847
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: new-run_9
+      name: AntRun_9
       rect:
         serializedVersion: 2
         x: 73
@@ -356,14 +356,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eaef5ac338887324eb6a40bea9bca607
-      internalID: -1561359431
+      spriteID: 289df0d56cb465870a29fb23f0bfe895
+      internalID: 822161555
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: new-run_10
+      name: AntRun_10
       rect:
         serializedVersion: 2
         x: 139
@@ -378,8 +378,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fe7d13b62cba87641ad13aa1275061a6
-      internalID: 1657320494
+      spriteID: 57afe6a75868ca0b2a8284e77e2f0305
+      internalID: 470762729
       vertices: []
       indices: 
       edges: []
@@ -398,17 +398,17 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      new-run_0: 589841390
-      new-run_1: -1497703495
-      new-run_10: 1657320494
-      new-run_2: 31500266
-      new-run_3: -386700093
-      new-run_4: 691107044
-      new-run_5: -1748673922
-      new-run_6: -1141644242
-      new-run_7: 618495648
-      new-run_8: -1880648743
-      new-run_9: -1561359431
+      AntRun_0: -1902924181
+      AntRun_1: 952985211
+      AntRun_10: 470762729
+      AntRun_2: -1979290018
+      AntRun_3: 833837561
+      AntRun_4: 1458008136
+      AntRun_5: -1912989117
+      AntRun_6: -38702840
+      AntRun_7: -943486538
+      AntRun_8: 1793314847
+      AntRun_9: 822161555
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

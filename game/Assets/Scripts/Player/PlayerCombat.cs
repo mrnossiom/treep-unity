@@ -1,15 +1,17 @@
+using System.Diagnostics;
 using Treep.IA;
 using Treep.Weapon;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Debug = UnityEngine.Debug;
 using Random = System.Random;
 
 namespace Treep.Player {
     public class PlayerCombat : MonoBehaviour {
-        public Transform attackPointRight;
-        public Transform attackPointLeft;
-        public Transform attackPointTop;
-        public Transform attackPointBottom;
+        public Vector2 attackPointRight;
+        public Vector2 attackPointLeft;
+        public Vector2 attackPointTop;
+        public Vector2 attackPointBottom;
         public Transform attackPoint;
         private Animator _attackAnimator;
 
@@ -17,7 +19,7 @@ namespace Treep.Player {
         public LayerMask enemyLayerMask;
 
         public KeyCode CloseAttackKey = KeyCode.L;
-        public KeyCode DistAttackKey = KeyCode.L;
+        public KeyCode DistAttackKey = KeyCode.O;
 
         [FormerlySerializedAs("PVMax")] public int MaxPV = 10;
         private Animator _animator;
@@ -58,31 +60,30 @@ namespace Treep.Player {
         }
 
         public void OnDrawGizmosSelected() {
-            if (this.attackPointRight == null
-                || this.attackPointLeft == null
-                || this.attackPointTop == null
-                || this.attackPointBottom == null) {
+            if (this.attackPoint == null) {
                 return;
             }
 
+            Debug.Log(this._currentCloseWeapon);
+            Debug.Log(this._animator);
 
-            Gizmos.DrawWireSphere(this.attackPoint.position, this._currentCloseWeapon.AttackRange);
+            Gizmos.DrawWireSphere(this.attackPoint.position, 1); // this._currentCloseWeapon.AttackRange);
         }
 
         private void UpdateAttackPoint() {
             this.currentLooking = this.ControllerScript.looking;
             switch (this.currentLooking) {
                 case Looking.Right:
-                    this.attackPoint.position = this.attackPointRight.position;
+                    this.attackPoint.position = this.attackPointRight;
                     break;
                 case Looking.Left:
-                    this.attackPoint.position = this.attackPointLeft.position;
+                    this.attackPoint.position = this.attackPointLeft;
                     break;
                 case Looking.Top:
-                    this.attackPoint.position = this.attackPointTop.position;
+                    this.attackPoint.position = this.attackPointTop;
                     break;
                 case Looking.Bottom:
-                    this.attackPoint.position = this.attackPointBottom.position;
+                    this.attackPoint.position = this.attackPointBottom;
                     break;
             }
         }
