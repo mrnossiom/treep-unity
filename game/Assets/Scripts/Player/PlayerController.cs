@@ -22,6 +22,9 @@ namespace Treep.Player {
         private Rigidbody2D _body;
         private SpriteRenderer _spriteRenderer;
         private Animator _animator;
+        
+        [SyncVar(hook = nameof(OnSpriteFlip))]
+        private bool _isFlipped;
 
         private ContactFilter2D _contactFilter;
         private TagHandle _ladderTag;
@@ -68,6 +71,16 @@ namespace Treep.Player {
 
             _contactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer));
         }
+        
+        private void OnSpriteFlip(bool oldValuve, bool newValue)
+        {
+            _spriteRenderer.flipX = newValue;
+        }
+        
+        [Command]
+        private void CmdSetFlip(bool flip) {
+            this._isFlipped = flip;
+        }
 
         private void Update() {
             if (!isLocalPlayer) return;
@@ -75,9 +88,8 @@ namespace Treep.Player {
             if (controlEnabled) {
                 _move.x = Input.GetAxis("Horizontal");
                 _animator.SetBool(IsMoving, _move.x != 0);
-
-                if (_move.x > 0) _spriteRenderer.flipX = false;
-                else if (_move.x < 0) _spriteRenderer.flipX = true;
+                
+                if (_move.x < 0 != this._isFlipped) CmdSetFlip(_move.x < 0);
 
                 if (_jumpState == JumpState.Grounded && Input.GetButtonDown("Jump")) {
                     _animator.SetBool(JumpStart, true);

@@ -5,8 +5,6 @@ using UnityEngine.UI;
 namespace Treep.Interface {
     public class PauseMenu : MonoBehaviour {
         [SerializeField] private Button closeButton;
-
-
         [SerializeField] private Button quitRoomButton;
 
         private void Awake() {

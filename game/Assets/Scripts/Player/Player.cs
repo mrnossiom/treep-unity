@@ -1,3 +1,4 @@
+using System;
 using Mirror;
 using TMPro;
 using Unity.Cinemachine;
@@ -10,14 +11,16 @@ namespace Treep.Player {
 
         private Rigidbody2D _rigidbody2d;
 
-        [SerializeField] private TextMeshPro username;
+        [SerializeField] private TextMeshPro usernameText;
 
-        public string Username {
-            get => username.text;
-            set => username.text = value;
-        }
+        [SyncVar(hook = nameof(OnUsernameChanged))]
+        public string username;
 
-        public string Color { get; set; }
+        [SyncVar(hook = nameof(OnColorChanged))]
+        public string color;
+        
+        [SyncVar]
+        public bool isReady = false;
 
         private void Awake() {
             _rigidbody2d = GetComponent<Rigidbody2D>();
@@ -30,8 +33,22 @@ namespace Treep.Player {
             cinemachineCamera.Target.TrackingTarget = transform;
         }
 
-        public void SetSimultated(bool simulated) {
+        public void SetSimulated(bool simulated) {
             _rigidbody2d.simulated = simulated;
         }
+        
+        void OnUsernameChanged(string oldUsername, string newUsername) {
+            if (usernameText != null) usernameText.text = newUsername;
+        }
+        
+        void OnColorChanged(string oldColor, string newColor) {
+            throw new NotImplementedException();
+        }
+        
+        [Command]
+        public void CmdSetReady(bool ready) {
+            isReady = ready;
+        }
+        
     }
 }

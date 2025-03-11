@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6446880085546936245}
-  - component: {fileID: 3402204002978238014}
   - component: {fileID: 3660792868845834921}
   m_Layer: 0
   m_Name: Lobby
@@ -33,23 +32,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3402204002978238014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5193586722925575658}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 0
-  _assetId: 2745622718
-  serverOnly: 0
-  visibility: 0
-  hasSpawned: 0
 --- !u!114 &3660792868845834921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,8 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7c8d0e7c906f3414843c346286bc53e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
   roomProvider: {fileID: 11400000, guid: 432b6fe8c325811d192a8a3745e490bd, type: 2}
   levelBlueprint: 00000000
