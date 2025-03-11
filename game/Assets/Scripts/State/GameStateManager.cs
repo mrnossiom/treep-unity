@@ -24,6 +24,7 @@ namespace Treep.State {
         private GameStateKind _stateKind;
 
         private IGameState _currentState;
+        private bool _shouldEnterState;
 
         public GameStateKind StateKind => this._stateKind;
 
@@ -36,7 +37,18 @@ namespace Treep.State {
         private void Awake() {
             this._stateKind = GameStateKind.Lobby;
             this._currentState = new GameStateLobby();
-            this._currentState.OnEnter(this);
+        }
+
+        public override void OnStartClient() {
+            base.OnStartClient();
+            this._shouldEnterState = true;
+        }
+
+        public void Update() {
+            if (this._shouldEnterState && NetworkClient.connection.identity != null) {
+                this._currentState.OnEnter(this);
+                this._shouldEnterState = false;
+            }
         }
 
         [Command(requiresAuthority = false)]

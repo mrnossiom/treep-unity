@@ -8,6 +8,8 @@ using Object = UnityEngine.Object;
 namespace Treep.State {
     public class NetworkController : NetworkManager {
         [SerializeField] public GameStateManager gameStateManager;
+
+        private bool _hasGameStarted;
         
         public override void OnStartServer() {
             base.OnStartServer();
@@ -43,13 +45,14 @@ namespace Treep.State {
         }
         
         void StartGame() {
+            this._hasGameStarted = true;
             gameStateManager.TriggerState(GameStateKind.Level);
         }
 
         public override void Update() {
             gameStateManager = FindAnyObjectByType<GameStateManager>();
             
-            CheckAllPlayersReady();
+            if (!this._hasGameStarted) CheckAllPlayersReady();
         }
     }
 

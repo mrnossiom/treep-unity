@@ -581,7 +581,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  lobbyLevel: {fileID: 3660792868845834921, guid: 302a742a174d35105b9285e282cfc63a, type: 3}
+  lobbyLevel: {fileID: 3660792868845834921, guid: 29bdd20315cb0a70888602fbfea1697b, type: 3}
   worldOneLevel: {fileID: 3660792868845834921, guid: 302a742a174d35105b9285e282cfc63a, type: 3}
 --- !u!4 &585743550
 Transform:
@@ -706,7 +706,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: 0.000030517578}
+  m_AnchoredPosition: {x: -0.000061035156, y: 0.000061035156}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &737733577
