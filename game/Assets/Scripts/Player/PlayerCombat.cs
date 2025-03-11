@@ -21,7 +21,7 @@ namespace Treep.Player {
         private Animator _animator;
 
         private ICloseWeapon _currentCloseWeapon;
-        private Controller ControllerScript;
+        private PlayerController ControllerScript;
 
         private Looking currentLooking;
 
@@ -30,7 +30,7 @@ namespace Treep.Player {
 
 
         public void Awake() {
-            this.ControllerScript = this.GetComponent<Controller>();
+            this.ControllerScript = this.GetComponent<PlayerController>();
             this.currentLooking = this.ControllerScript.looking;
             this.PV = this.MaxPV;
             this._currentCloseWeapon = new Stick();
@@ -62,10 +62,7 @@ namespace Treep.Player {
                 return;
             }
 
-            //Gizmos.DrawWireSphere(attackPointRight.position, attackRange);
-            //Gizmos.DrawWireSphere(attackPointLeft.position, attackRange);
-            //Gizmos.DrawWireSphere(attackPointTop.position, attackRange);
-            //Gizmos.DrawWireSphere(attackPointBottom.position, attackRange);
+
             Gizmos.DrawWireSphere(this.attackPoint, this._currentCloseWeapon.AttackRange);
         }
 
