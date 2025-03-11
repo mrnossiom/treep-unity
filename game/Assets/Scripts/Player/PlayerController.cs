@@ -340,12 +340,20 @@ namespace Treep.Player {
             _body.position += move.normalized * distance;
         }
 
-
-        private void OnTriggerEnter2D(Collider2D other) {
-            if (!other.CompareTag(_ladderTag)) return;
-
-            IsClimbing = true;
-            _velocity.y = 0;
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.CompareTag("Ladder")) {
+                Vector2 contactPoint = other.ClosestPoint(transform.position);
+                if ((contactPoint.x - (int)contactPoint.x  < 0.5 && contactPoint.x - (int)contactPoint.x > 0.02 )|| contactPoint.x - (int)contactPoint.x > 0.98) {
+                    this._spriteRenderer.flipX = true;
+                }
+                else {
+                    this._spriteRenderer.flipX = false;
+                }
+                
+                IsClimbing = true;
+                velocity.y = 0;
+            }
         }
 
 
