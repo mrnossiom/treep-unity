@@ -14,17 +14,19 @@ namespace Treep.Player {
         [FormerlySerializedAs("ennemyLayerMask")]
         public LayerMask enemyLayerMask;
 
-        private float nextAttackTime = 0;
-        private Controller ControllerScript;
-        public KeyCode AttackKey = KeyCode.L;
+        public KeyCode CloseAttackKey = KeyCode.L;
+        public KeyCode DistAttackKey = KeyCode.L;
 
         [FormerlySerializedAs("PVMax")] public int MaxPV = 10;
-
-        private Looking currentLooking;
-        private int PV { get; set; }
+        private Animator _animator;
 
         private ICloseWeapon _currentCloseWeapon;
-        private Animator _animator;
+        private Controller ControllerScript;
+
+        private Looking currentLooking;
+
+        private float nextAttackTime;
+        private int PV { get; set; }
 
 
         public void Awake() {
@@ -37,9 +39,10 @@ namespace Treep.Player {
 
         public void Update() {
             this.UpdateAttackPoint();
+
             if (Time.time >= this.nextAttackTime) {
-                if (Input.GetKeyDown(this.AttackKey)) {
-                    this.Attack();
+                if (Input.GetKeyDown(this.CloseAttackKey)) {
+                    this.CloseAttack();
                     this.nextAttackTime = Time.time + 1f / this._currentCloseWeapon.AttackRate;
                 }
             }
@@ -49,6 +52,21 @@ namespace Treep.Player {
                 Debug.Log($"{this.PV}");
                 Debug.Log(this.attackPoint);
             }
+        }
+
+        public void OnDrawGizmosSelected() {
+            if (this.attackPointRight == null
+                || this.attackPointLeft == null
+                || this.attackPointTop == null
+                || this.attackPointBottom == null) {
+                return;
+            }
+
+            //Gizmos.DrawWireSphere(attackPointRight.position, attackRange);
+            //Gizmos.DrawWireSphere(attackPointLeft.position, attackRange);
+            //Gizmos.DrawWireSphere(attackPointTop.position, attackRange);
+            //Gizmos.DrawWireSphere(attackPointBottom.position, attackRange);
+            Gizmos.DrawWireSphere(this.attackPoint, this._currentCloseWeapon.AttackRange);
         }
 
         private void UpdateAttackPoint() {
@@ -69,9 +87,9 @@ namespace Treep.Player {
             }
         }
 
-        private void Attack() {
+        private void CloseAttack() {
             // animation
-            this._animator.SetTrigger("isAttacking");
+            this._animator.SetTrigger("isCloseAttacking");
 
             //check enemy
             var hitEnnemys = Physics2D.OverlapCircleAll(this.attackPoint, this._currentCloseWeapon.AttackRange,
@@ -83,19 +101,8 @@ namespace Treep.Player {
             }
         }
 
-        public void OnDrawGizmosSelected() {
-            if (this.attackPointRight == null
-                || this.attackPointLeft == null
-                || this.attackPointTop == null
-                || this.attackPointBottom == null) {
-                return;
-            }
-
-            //Gizmos.DrawWireSphere(attackPointRight.position, attackRange);
-            //Gizmos.DrawWireSphere(attackPointLeft.position, attackRange);
-            //Gizmos.DrawWireSphere(attackPointTop.position, attackRange);
-            //Gizmos.DrawWireSphere(attackPointBottom.position, attackRange);
-            Gizmos.DrawWireSphere(this.attackPoint, this._currentCloseWeapon.AttackRange);
+        private void DistAttack() {
+            this._animator.SetTrigger("isDistAttacking");
         }
     }
 }
