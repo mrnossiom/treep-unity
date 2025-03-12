@@ -1,5 +1,7 @@
+using System;
 using Mirror;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Vector2 = UnityEngine.Vector2;
 
 namespace Treep.Player {
@@ -46,15 +48,15 @@ namespace Treep.Player {
         private const float MinMoveDistance = 0.001f;
         private const float ShellRadius = 0.01f;
 
-        [SerializeField] private float gravityModifier = 1f;
+        [SerializeField] private float gravityModifier = 2f;
         [SerializeField] private float maxSpeed = 7;
         [SerializeField] private float jumpTakeOffSpeed = 6;
 
         [SerializeField] private float jumpModifier = 1.2f;
-        [SerializeField] private float jumpDeceleration = 0.5f;
+        [SerializeField] private float jumpDeceleration = 0.4f;
 
         [SerializeField] private float climbSpeed = 3f;
-        private bool _onTopOfLadder;
+        [SerializeField] private bool onTopOfLadder;
 
         // State
         private Vector2 _targetVelocity;
@@ -126,7 +128,6 @@ namespace Treep.Player {
                 this.UpdateJump();
                 this.UpdateClimb();
                 this.UpdateDash();
-                this.UpdateLadder();
             }
             else {
                 this._move.x = 0;
@@ -136,24 +137,14 @@ namespace Treep.Player {
             this._targetVelocity = Vector2.zero;
             this.ComputeVelocity();
         }
-
-        private void UpdateLadder() {
-            Vector2 feetPosition = new Vector2(transform.position.x, transform.position.y - _collider2d.bounds.extents.y);
-            RaycastHit2D hit = Physics2D.Raycast(feetPosition, Vector2.down, 0.1f);
-            if (hit.collider) {
-                
-                if (!hit.collider.CompareTag("Ladder")) {
-                    this._onTopOfLadder = false;
-                }
-            }
-        }
+        
 
         private void UpdateDash() {
             if (this.IsGrounded) {
                 this._dashAvailable = true;
             }
 
-            if (Input.GetKeyDown(KeyCode.LeftShift) && !this._isDashing && this._dashAvailable) {
+            if (Input.GetKeyDown(KeyCode.LeftShift) && !this._isDashing && this._dashAvailable && !IsClimbing) {
                 this._animator.SetTrigger(PlayerController.AnimIsDashing);
                 this.StartDash();
             }
@@ -165,13 +156,8 @@ namespace Treep.Player {
 
         private void UpdateClimb() {
             this._animator.SetBool(PlayerController.AnimIsClimbing, this.IsClimbing);
-
             this._animator.SetFloat(PlayerController.AnimClimbSpeed, this._move.y);
-            if (this._onTopOfLadder) {
-                if (IsGrounded) {
-                    this._onTopOfLadder = false;
-                }
-            }
+
         }
 
         private void UpdateJump() {
@@ -190,7 +176,7 @@ namespace Treep.Player {
             this._move.x = Input.GetAxis("Horizontal");
             this._move.y = Input.GetAxis("Vertical");
             this._animator.SetBool(PlayerController.AnimIsMoving, this._move.x != 0);
-            if (IsClimbing) {
+            if (IsClimbing && !this.onTopOfLadder) {
                 this._move.x = 0;
                 if (Input.GetKeyDown(KeyCode.Space)) {
                     IsClimbing = false;
@@ -250,7 +236,13 @@ namespace Treep.Player {
             this._dashAvailable = false;
 
             if (this._move.x != 0) {
-                this._dashDirection = new Vector2(this._move.x, 0).normalized;
+                if (this._move.y != 0) {
+                    this._dashDirection = new Vector2(this._move.x, this._move.y).normalized;
+                }
+                else {
+                    this._dashDirection = new Vector2(this._move.x, 0).normalized;
+                }
+                
             }
             else {
                 this._dashDirection = this._spriteRenderer.flipX ? Vector2.left : Vector2.right;
@@ -337,10 +329,7 @@ namespace Treep.Player {
 
 
         private void FixedUpdate() {
-            if (_onTopOfLadder) {
-                _velocity.y = 0;
-            }
-            else if (this.IsClimbing) {
+            if (this.IsClimbing) {
                 this._velocity.y = this._move.y * this.climbSpeed;
             }
             else {
@@ -406,42 +395,42 @@ namespace Treep.Player {
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Ladder")) {
+            if (other.CompareTag("Ladder") && !IsGrounded) {
                 Vector2 contactPoint = other.ClosestPoint(transform.position);
                 if (contactPoint.y < this.transform.position.y) {
-                    IsClimbing = false;
-                    _velocity.y = 0;
-                    _onTopOfLadder = true;
-                    this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, 0);
+                    this.onTopOfLadder = true;
+
+                }
+                if(contactPoint.x - (int)contactPoint.x <= 0.03) {
+                    contactPoint = new Vector2(contactPoint.x - 0.05f,contactPoint.y);
+                }
+                if(contactPoint.x - (int)contactPoint.x >= 0.97) {
+                    contactPoint = new Vector2(contactPoint.x + 0.05f,contactPoint.y);
+                }
+                
+                if (contactPoint.x - (int)contactPoint.x  < 0.5 ) {
+                    OnSpriteFlip(false,true);
+                    this._velocity.x = 0;
+                    this.transform.position = new Vector3((int)contactPoint.x+ 0.9f, this.transform.position.y, 0);
+                    
                 }
                 else {
-                    if(contactPoint.x - (int)contactPoint.x <= 0.02) {
-                        contactPoint = new Vector2(contactPoint.x - 0.03f,contactPoint.y);
-                    }
-                    if(contactPoint.x - (int)contactPoint.x >= 0.98) {
-                        contactPoint = new Vector2(contactPoint.x + 0.03f,contactPoint.y);
-                    }
-                
-                    if (contactPoint.x - (int)contactPoint.x  < 0.5 ) {
-                        OnSpriteFlip(false,true);
-                        this.transform.position = new Vector3((int)contactPoint.x+ 0.7f, this.transform.position.y, 0);
-                    }
-                    else {
-                        OnSpriteFlip(true,false);
-                        this.transform.position = new Vector3((int)contactPoint.x+ 0.3f, this.transform.position.y, 0);
-                    }
-                    IsClimbing = true;
-                    _velocity.y = 0;
+                    OnSpriteFlip(true,false);
+                    this._velocity.x = 0;
+                    this.transform.position = new Vector3((int)contactPoint.x + 0.4f, this.transform.position.y, 0);
                 }
+                IsClimbing = true;
+                _velocity.y = 0;
+                
             }
         }
+        
 
 
         private void OnTriggerExit2D(Collider2D other) {
             if (!other.CompareTag(this._ladderTag)) return;
-            this._onTopOfLadder = false;
-
             this.IsClimbing = false;
+            this.onTopOfLadder = false;
             this._velocity.y = 0;
         }
     }

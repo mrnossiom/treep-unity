@@ -251,12 +251,13 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  gravityModifier: 1
+  gravityModifier: 2
   maxSpeed: 7
   jumpTakeOffSpeed: 6
   jumpModifier: 1.2
-  jumpDeceleration: 0.5
+  jumpDeceleration: 0.4
   climbSpeed: 3
+  onTopOfLadder: 0
   _move: {x: 0, y: 0}
   looking: 0
 --- !u!61 &7035845409879027553
