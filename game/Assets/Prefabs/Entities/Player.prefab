@@ -251,7 +251,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  gravityModifier: 1.5
+  gravityModifier: 1
   maxSpeed: 7
   jumpTakeOffSpeed: 6
   jumpModifier: 1.2
