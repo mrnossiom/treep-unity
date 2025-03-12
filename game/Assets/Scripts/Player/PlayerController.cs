@@ -83,10 +83,12 @@ namespace Treep.Player {
         private bool _isDashing;
         private bool _dashAvailable;
         private float _dashSpeed;
-        private float _dashDuration = 0.2f;
+        private float _dashDuration = 0.4f;
         private Vector2 _dashDirection;
         private float _dashTime;
         private Vector2 _velocity;
+        private float _dashCooldown = 0.8f;
+        private float _lastDashTime;
 
         private bool IsClimbing { get; set; }
 
@@ -140,13 +142,14 @@ namespace Treep.Player {
         
 
         private void UpdateDash() {
-            if (this.IsGrounded) {
+            if (this.IsGrounded && Time.time >= _lastDashTime + _dashCooldown) {
                 this._dashAvailable = true;
             }
 
             if (Input.GetKeyDown(KeyCode.LeftShift) && !this._isDashing && this._dashAvailable && !IsClimbing) {
                 this._animator.SetTrigger(PlayerController.AnimIsDashing);
                 this.StartDash();
+                this._lastDashTime = Time.time;
             }
 
             if (this._isDashing) {
