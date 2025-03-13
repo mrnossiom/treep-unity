@@ -45,4 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomProvider: {fileID: 11400000, guid: 432b6fe8c325811d192a8a3745e490bd, type: 2}
+  enemyPrefab: {fileID: 6615744716052060427, guid: 99da362170ba271efbfc5c4481638faf, type: 3}
   levelBlueprint: 0000000001000000010000000100000001000000010000000100000003000000

@@ -69,8 +69,9 @@ namespace Treep.IA {
             return count > 0;
         }
 
-        private void Die() {
+        public void Die() {
             Debug.Log(this + " Dead");
+
             //Die animation 
             this.GetComponent<Collider2D>().enabled = false;
             this.GetComponent<SpriteRenderer>().enabled = false;
@@ -79,7 +80,6 @@ namespace Treep.IA {
 
         private void UpdateHealBar() {
             var raportlife = this.PV / (float)this.PVMax;
-            Debug.Log(raportlife + " rapport life");
             this._pvBar.GetComponent<RectTransform>().localScale = new Vector3(raportlife, 1, 1);
         }
 

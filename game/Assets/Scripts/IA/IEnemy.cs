@@ -3,5 +3,6 @@ namespace Treep.IA {
         public int PV { get; set; }
 
         public void GetHitted(int damageTook);
+        public void Die();
     }
 }
