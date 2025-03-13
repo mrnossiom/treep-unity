@@ -1,0 +1,1858 @@
+fileFormatVersion: 2
+guid: 7742c53cd3e087e468e5e181d9064ced
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3070405101518534080
+    second: treep-anim_0
+  - first:
+      213: 2692957816777579910
+    second: treep-anim_1
+  - first:
+      213: 3840976893442777043
+    second: treep-anim_2
+  - first:
+      213: -6936664392128267329
+    second: treep-anim_3
+  - first:
+      213: -8633195690395407412
+    second: treep-anim_4
+  - first:
+      213: -2410335902355797606
+    second: treep-anim_5
+  - first:
+      213: -2549322781161396384
+    second: treep-anim_6
+  - first:
+      213: 1098126060971819392
+    second: treep-anim_7
+  - first:
+      213: -5310496123808682776
+    second: treep-anim_8
+  - first:
+      213: 1317328145654635492
+    second: treep-anim_9
+  - first:
+      213: 3106903492750253622
+    second: treep-anim_10
+  - first:
+      213: 5052885981174399425
+    second: treep-anim_11
+  - first:
+      213: -2110165169091136891
+    second: treep-anim_12
+  - first:
+      213: 2865147736226386887
+    second: treep-anim_13
+  - first:
+      213: -4868145967819017094
+    second: treep-anim_14
+  - first:
+      213: 5945830105793164036
+    second: treep-anim_15
+  - first:
+      213: -3472953633373499816
+    second: treep-anim_16
+  - first:
+      213: 5950084257275338786
+    second: treep-anim_17
+  - first:
+      213: -7163931401152607272
+    second: treep-anim_18
+  - first:
+      213: -4127469539360218719
+    second: treep-anim_19
+  - first:
+      213: 7117061379170676985
+    second: treep-anim_20
+  - first:
+      213: 1014962215433867831
+    second: treep-anim_21
+  - first:
+      213: 5625683348227930663
+    second: treep-anim_22
+  - first:
+      213: -4855943034693458791
+    second: treep-anim_23
+  - first:
+      213: 2318176698625394449
+    second: treep-anim_24
+  - first:
+      213: -1302165284744801189
+    second: treep-anim_25
+  - first:
+      213: -4143190429576104023
+    second: treep-anim_26
+  - first:
+      213: -6032827002924975792
+    second: treep-anim_27
+  - first:
+      213: 1339525655282725914
+    second: treep-anim_28
+  - first:
+      213: -4914714968041714691
+    second: treep-anim_29
+  - first:
+      213: 5382176933002258551
+    second: treep-anim_30
+  - first:
+      213: -651489159150814121
+    second: treep-anim_31
+  - first:
+      213: 7315426546386849674
+    second: treep-anim_32
+  - first:
+      213: -2020542878166107440
+    second: treep-anim_33
+  - first:
+      213: 2398440907811439337
+    second: treep-anim_34
+  - first:
+      213: 619151805923237110
+    second: treep-anim_35
+  - first:
+      213: -4649964368296168478
+    second: treep-anim_36
+  - first:
+      213: 416217510904083139
+    second: treep-anim_37
+  - first:
+      213: -7119579673704709053
+    second: treep-anim_38
+  - first:
+      213: -5589822730349444068
+    second: treep-anim_39
+  - first:
+      213: -3597651766789640410
+    second: treep-anim_40
+  - first:
+      213: -6336918543431548963
+    second: treep-anim_41
+  - first:
+      213: -2324148257191876551
+    second: treep-anim_42
+  - first:
+      213: 804035099485835068
+    second: treep-anim_43
+  - first:
+      213: -8761930236345970044
+    second: treep-anim_44
+  - first:
+      213: 8858090921207564408
+    second: treep-anim_45
+  - first:
+      213: 808245576439042435
+    second: treep-anim_46
+  - first:
+      213: -5031589394139826916
+    second: treep-anim_47
+  - first:
+      213: -5521288078586374309
+    second: treep-anim_48
+  - first:
+      213: 5436249930750167970
+    second: treep-anim_49
+  - first:
+      213: -502244922437247204
+    second: treep-anim_50
+  - first:
+      213: -1845804175188178620
+    second: treep-anim_51
+  - first:
+      213: -4550683244813847
+    second: treep-anim_52
+  - first:
+      213: -6484177659222572577
+    second: treep-anim_53
+  - first:
+      213: 1400048730326060422
+    second: treep-anim_54
+  - first:
+      213: 8606056035828031387
+    second: treep-anim_55
+  - first:
+      213: -7712994422576050666
+    second: treep-anim_56
+  - first:
+      213: 2741381365421711372
+    second: treep-anim_57
+  - first:
+      213: 7872865167484914292
+    second: treep-anim_58
+  - first:
+      213: 4058457443579398017
+    second: treep-anim_59
+  - first:
+      213: 2636389866877206227
+    second: treep-anim_60
+  - first:
+      213: 6702258738279770353
+    second: treep-anim_61
+  - first:
+      213: -1480483621742258
+    second: treep-anim_62
+  - first:
+      213: -3595536685447707549
+    second: treep-anim_63
+  - first:
+      213: -8579617408479476410
+    second: treep-anim_64
+  - first:
+      213: -4317018786482721791
+    second: treep-anim_65
+  - first:
+      213: 7088570800052639535
+    second: treep-anim_66
+  - first:
+      213: 7261306383914610463
+    second: treep-anim_67
+  - first:
+      213: 7841597723388884630
+    second: treep-anim_68
+  - first:
+      213: 100022061711502110
+    second: treep-anim_69
+  - first:
+      213: -3233276469675889670
+    second: treep-anim_70
+  - first:
+      213: 8934791770685627220
+    second: treep-anim_71
+  - first:
+      213: 6354134040366120912
+    second: treep-anim_72
+  - first:
+      213: -1214569417471241576
+    second: treep-anim_73
+  - first:
+      213: 1127613974999990450
+    second: treep-anim_74
+  - first:
+      213: 4537347913041844180
+    second: treep-anim_75
+  - first:
+      213: -6712214751859395958
+    second: treep-anim_76
+  - first:
+      213: -6132068807045453854
+    second: treep-anim_77
+  - first:
+      213: 1996872652951605586
+    second: treep-anim_78
+  - first:
+      213: -3828797184230705616
+    second: treep-anim_79
+  - first:
+      213: -3689399725858072709
+    second: treep-anim_80
+  - first:
+      213: 3825836990672011832
+    second: treep-anim_81
+  - first:
+      213: 3711214838646812030
+    second: treep-anim_82
+  - first:
+      213: 4607252842612840943
+    second: treep-anim_83
+  - first:
+      213: 2019310661821660251
+    second: treep-anim_84
+  - first:
+      213: -2783611476742153245
+    second: treep-anim_85
+  - first:
+      213: 352298930536501594
+    second: treep-anim_86
+  - first:
+      213: 2956872222268408443
+    second: treep-anim_87
+  - first:
+      213: -7585156727067890942
+    second: treep-anim_88
+  - first:
+      213: -59471456104562436
+    second: treep-anim_89
+  - first:
+      213: 3544839214891135330
+    second: treep-anim_90
+  - first:
+      213: 6797097993094029704
+    second: treep-anim_91
+  - first:
+      213: 8152154161885015691
+    second: treep-anim_92
+  - first:
+      213: -8385632355298692074
+    second: treep-anim_93
+  - first:
+      213: 9090604653020822038
+    second: treep-anim_94
+  - first:
+      213: 3375459214285135211
+    second: treep-anim_95
+  - first:
+      213: 8321547557377705610
+    second: treep-anim_96
+  - first:
+      213: -5241020521592560913
+    second: treep-anim_97
+  - first:
+      213: -1218092244579776677
+    second: treep-anim_98
+  - first:
+      213: -5121221152566853227
+    second: treep-anim_99
+  - first:
+      213: 185111274014034727
+    second: treep-anim_100
+  - first:
+      213: 768138967129043071
+    second: treep-anim_101
+  - first:
+      213: 5013663258209332621
+    second: treep-anim_102
+  - first:
+      213: 5579319816636753464
+    second: treep-anim_103
+  - first:
+      213: 2351688758323337606
+    second: treep-anim_104
+  - first:
+      213: -5262534637116234229
+    second: treep-anim_105
+  - first:
+      213: -2407263793994205236
+    second: treep-anim_106
+  - first:
+      213: -6292839369919907583
+    second: treep-anim_107
+  - first:
+      213: -1318316209357989196
+    second: treep-anim_108
+  - first:
+      213: -6369610475640234248
+    second: treep-anim_109
+  - first:
+      213: -4746606743934407156
+    second: treep-anim_110
+  - first:
+      213: 692091180835334419
+    second: treep-anim_111
+  - first:
+      213: 6557054552390641471
+    second: treep-anim_112
+  - first:
+      213: -1839133338785901439
+    second: treep-anim_113
+  - first:
+      213: -24923661757733508
+    second: treep-anim_114
+  - first:
+      213: 900281386635867428
+    second: treep-anim_115
+  - first:
+      213: 1231015075829437918
+    second: treep-anim_116
+  - first:
+      213: 4718522364839315388
+    second: treep-anim_117
+  - first:
+      213: -1870482522927328926
+    second: treep-anim_118
+  - first:
+      213: 1925366211754828168
+    second: treep-anim_119
+  - first:
+      213: 5616851387055287276
+    second: treep-anim_120
+  - first:
+      213: -5277140434806467850
+    second: treep-anim_121
+  - first:
+      213: -5885246085274896000
+    second: treep-anim_122
+  - first:
+      213: 8798729785787067782
+    second: treep-anim_123
+  - first:
+      213: -2707998688165421831
+    second: treep-anim_124
+  - first:
+      213: -1303553076524372089
+    second: treep-anim_125
+  - first:
+      213: -4107173558725250259
+    second: treep-anim_126
+  - first:
+      213: 388789012072837415
+    second: treep-anim_127
+  - first:
+      213: 4604580323834308035
+    second: treep-anim_128
+  - first:
+      213: -8268997159815616505
+    second: treep-anim_129
+  - first:
+      213: -6616106845929300490
+    second: treep-anim_130
+  - first:
+      213: -1870825100720979221
+    second: treep-anim_131
+  - first:
+      213: 4415566585914389614
+    second: treep-anim_132
+  - first:
+      213: -2661050968595922523
+    second: treep-anim_133
+  - first:
+      213: -3662710551272117932
+    second: treep-anim_134
+  - first:
+      213: 415101456472853906
+    second: treep-anim_135
+  - first:
+      213: -3395073663360585296
+    second: treep-anim_136
+  - first:
+      213: -1460014342579052363
+    second: treep-anim_137
+  - first:
+      213: 5536788077084011722
+    second: treep-anim_138
+  - first:
+      213: 7299812086800833414
+    second: treep-anim_139
+  - first:
+      213: -4313165134407375628
+    second: treep-anim_140
+  - first:
+      213: -1999362931043592601
+    second: treep-anim_141
+  - first:
+      213: 5695307455287017559
+    second: treep-anim_142
+  - first:
+      213: 8634036513372433041
+    second: treep-anim_143
+  - first:
+      213: -5854988598115773655
+    second: treep-anim_144
+  - first:
+      213: -2763810780367882863
+    second: treep-anim_145
+  - first:
+      213: -124461645740626370
+    second: treep-anim_146
+  - first:
+      213: -7695676653554949260
+    second: treep-anim_147
+  - first:
+      213: 7601578950431445251
+    second: treep-anim_148
+  - first:
+      213: -7503514089198998172
+    second: treep-anim_149
+  - first:
+      213: 8232786848296102531
+    second: treep-anim_150
+  - first:
+      213: -1413065786804339132
+    second: treep-anim_151
+  - first:
+      213: -4862864512666865243
+    second: treep-anim_152
+  - first:
+      213: -8572552144185066545
+    second: treep-anim_153
+  - first:
+      213: -6768732822403271684
+    second: treep-anim_154
+  - first:
+      213: 1088801783452115782
+    second: treep-anim_155
+  - first:
+      213: 5232529565094907545
+    second: treep-anim_156
+  - first:
+      213: 373039949623501670
+    second: treep-anim_157
+  - first:
+      213: 2022630381405385589
+    second: treep-anim_158
+  - first:
+      213: 7191370166861059722
+    second: treep-anim_159
+  - first:
+      213: -1137499972274254276
+    second: treep-anim_160
+  - first:
+      213: -7684559342238960628
+    second: treep-anim_161
+  - first:
+      213: 8338678818018965201
+    second: treep-anim_162
+  - first:
+      213: -3618255913617368708
+    second: treep-anim_163
+  - first:
+      213: -8745978856153355510
+    second: treep-anim_164
+  - first:
+      213: 6576862829585654619
+    second: treep-anim_165
+  - first:
+      213: -6406022391234832152
+    second: treep-anim_166
+  - first:
+      213: 7381029767894864665
+    second: treep-anim_167
+  - first:
+      213: -4759472021836770453
+    second: treep-anim_168
+  - first:
+      213: 880815357870328213
+    second: treep-anim_169
+  - first:
+      213: -804427745370091285
+    second: treep-anim_170
+  - first:
+      213: -6277919792101219880
+    second: treep-anim_171
+  - first:
+      213: -6819317176237742788
+    second: treep-anim_172
+  - first:
+      213: -4111550094744268965
+    second: treep-anim_173
+  - first:
+      213: -85156424174364082
+    second: treep-anim_174
+  - first:
+      213: -5020041276175481301
+    second: treep-anim_175
+  - first:
+      213: -8796169726590554846
+    second: treep-anim_176
+  - first:
+      213: 4659658826435803190
+    second: treep-anim_177
+  - first:
+      213: -7117901078601565581
+    second: treep-anim_178
+  - first:
+      213: 3144661405928794829
+    second: treep-anim_179
+  - first:
+      213: -7489560585631892817
+    second: treep-anim_180
+  - first:
+      213: 8452530693786391230
+    second: treep-anim_181
+  - first:
+      213: 6870633846279544561
+    second: treep-anim_182
+  - first:
+      213: -2135345996066227152
+    second: treep-anim_183
+  - first:
+      213: 1375080079682229777
+    second: treep-anim_184
+  - first:
+      213: -7959168614790688164
+    second: treep-anim_185
+  - first:
+      213: 8117700637579488625
+    second: treep-anim_186
+  - first:
+      213: 6136251857819138751
+    second: treep-anim_187
+  - first:
+      213: 6913859877278971063
+    second: treep-anim_188
+  - first:
+      213: 621317143463368259
+    second: treep-anim_189
+  - first:
+      213: 1778980932719024979
+    second: treep-anim_190
+  - first:
+      213: 7962980923721533295
+    second: treep-anim_191
+  - first:
+      213: 8769008917469143822
+    second: treep-anim_192
+  - first:
+      213: -2822925407497788799
+    second: treep-anim_193
+  - first:
+      213: 5544483130908885535
+    second: treep-anim_194
+  - first:
+      213: 5475434479059583538
+    second: treep-anim_195
+  - first:
+      213: 6000857871289509381
+    second: treep-anim_196
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: treep-anim_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 342
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60d1d029576a10544bae400b2ca03324
+      internalID: -272223987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_1
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 342
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 785853fc44896f041baea0655101f90f
+      internalID: 629859119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_2
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 342
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c73b73c075afdf4080cce00bc0445e8
+      internalID: 1678472827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_3
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 342
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5f4465b29f13a94b944ffc17ca8bd25
+      internalID: -1712898152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_4
+      rect:
+        serializedVersion: 2
+        x: 696
+        y: 342
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43d96b0c1fcb8e94d9f0fae95bb3ad1b
+      internalID: -129200279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_5
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 342
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64592471fa8fe5d448d6a9e18b7c026c
+      internalID: -238678867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_6
+      rect:
+        serializedVersion: 2
+        x: 1044
+        y: 342
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad3aa7ee28eaad94aa212d51cdb66c49
+      internalID: -1768116114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_7
+      rect:
+        serializedVersion: 2
+        x: 1218
+        y: 342
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd8b1e8204aa84647bee1ccb77f7bf98
+      internalID: -282075081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 285
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0381378d03f5eb348ad095cc005fe623
+      internalID: 369963464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_9
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 285
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d5014dcdc0a5334f8f4654555b19796
+      internalID: 502385100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_10
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 285
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0c0e7394590f9b449a1c215daeac7ee
+      internalID: -950096444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_11
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 285
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcc2bc1a7a591ab4b9d478d9f6036252
+      internalID: 321149016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_12
+      rect:
+        serializedVersion: 2
+        x: 696
+        y: 285
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a1295924d569f944bb74788435647aa
+      internalID: -756445552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_13
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 285
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80598b5920585004c8c230a86fad80ba
+      internalID: -916390944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_14
+      rect:
+        serializedVersion: 2
+        x: 1044
+        y: 285
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd761e51fe0e9cf4da33322c5d754e60
+      internalID: 1345522476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_15
+      rect:
+        serializedVersion: 2
+        x: 1218
+        y: 285
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95fb27cf904f1b64f9642c4292248c9c
+      internalID: -1675897970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 228
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1cc13bceb1d244b4d909d518632353b1
+      internalID: 1203493713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_17
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 228
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18c1ff8dc95d27a4bb030d4dfa4736b4
+      internalID: 1495630721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_18
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 228
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9cb765041126d874a994d19b942a9f1d
+      internalID: 1444064319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_19
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 228
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e830501b5f554a4ca9c9aae4991be5c
+      internalID: 1917107198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_20
+      rect:
+        serializedVersion: 2
+        x: 696
+        y: 228
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87f9715322fe52b4ebda0b921e1f34c2
+      internalID: -1907529155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_21
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 228
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0c51785201490a4892eb6935a03335e
+      internalID: 801949603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_22
+      rect:
+        serializedVersion: 2
+        x: 1044
+        y: 228
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec138c5cb396feb4994d53379542d9a0
+      internalID: -924367767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_23
+      rect:
+        serializedVersion: 2
+        x: 1218
+        y: 228
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b7750c531833154bae63e72af125424
+      internalID: 385328423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 171
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54fbb108b27f16e47a5306617335f50a
+      internalID: -2014624138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_25
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 171
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ebd7ebd0ac8f1e442b7380d5737818e7
+      internalID: 1803581249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_26
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 171
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6d721dec0476ea44ac8879ff3e9dc92
+      internalID: 763366648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_27
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 171
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b176113a9ba770c4093abf52f82372b4
+      internalID: 1747465001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_28
+      rect:
+        serializedVersion: 2
+        x: 696
+        y: 171
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae37580846e9c08489b8ce65eadb79bb
+      internalID: -732878864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_29
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 171
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0451c760ef5df540aad8ffec5979af3
+      internalID: -714788403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_30
+      rect:
+        serializedVersion: 2
+        x: 1044
+        y: 171
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f392585c7648f44895290ea2d80e603
+      internalID: 1970120764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_31
+      rect:
+        serializedVersion: 2
+        x: 1218
+        y: 171
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7ce819ccbfd07a4f92fd06d9ba2283b
+      internalID: -873581355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_32
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 114
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b941a8fb1ff8ee44881786dcadd6aeae
+      internalID: 690865948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_33
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 114
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c76896b065f4c3f4d94df1e561be3a73
+      internalID: 1170081045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_34
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 114
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11f59f6ba09b40c429426afb359e09b6
+      internalID: 1301461238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_35
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 114
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cdd053cc578661645b2912648afa19c0
+      internalID: 994291032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_36
+      rect:
+        serializedVersion: 2
+        x: 696
+        y: 114
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8ebe4a145c45a14bab12253a1b97f09
+      internalID: 943195326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_37
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 114
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98a1a083c3d56a941abc7908db1620b8
+      internalID: -1552202439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_38
+      rect:
+        serializedVersion: 2
+        x: 1044
+        y: 114
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6a16929ab345ba4ca1009d8085e60b0
+      internalID: -1768709675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_39
+      rect:
+        serializedVersion: 2
+        x: 1218
+        y: 114
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 863694483b680364eb37172f6b6da804
+      internalID: 647956155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_40
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 57
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88f8f2a3650829d46be64a03d7524078
+      internalID: 815315117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_41
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 57
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4960ab7424ad344b8a5ea78959467a9
+      internalID: 913947252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_42
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 57
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cfa8cdc885fea640adf982802d4611b
+      internalID: -390714296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_43
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 57
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30e7762f8ecea8748b25f91ad27ab55c
+      internalID: 1863060050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_44
+      rect:
+        serializedVersion: 2
+        x: 696
+        y: 57
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed6c32e85e1d8c6478e4437c488cec6d
+      internalID: 987828420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_45
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 57
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c64521d42bcd444281fcde67cd1aca5
+      internalID: 1358602215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_46
+      rect:
+        serializedVersion: 2
+        x: 1044
+        y: 57
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92077ac4778574f4684c99e74aa02577
+      internalID: -752614040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_47
+      rect:
+        serializedVersion: 2
+        x: 1218
+        y: 57
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9109b4825273de4480079ab16d98db8
+      internalID: -1726256600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_48
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7047709fe7d1894987c9f069ff1b2ae
+      internalID: 1597363388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treep-anim_49
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 0
+        width: 174
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f908f226cd91824ea2e191a6f5d7c04
+      internalID: 827997286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 70983ac90a770fd4d8695c8b67d17d06
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      treep-anim_0: -272223987
+      treep-anim_1: 629859119
+      treep-anim_10: -950096444
+      treep-anim_11: 321149016
+      treep-anim_12: -756445552
+      treep-anim_13: -916390944
+      treep-anim_14: 1345522476
+      treep-anim_15: -1675897970
+      treep-anim_16: 1203493713
+      treep-anim_17: 1495630721
+      treep-anim_18: 1444064319
+      treep-anim_19: 1917107198
+      treep-anim_2: 1678472827
+      treep-anim_20: -1907529155
+      treep-anim_21: 801949603
+      treep-anim_22: -924367767
+      treep-anim_23: 385328423
+      treep-anim_24: -2014624138
+      treep-anim_25: 1803581249
+      treep-anim_26: 763366648
+      treep-anim_27: 1747465001
+      treep-anim_28: -732878864
+      treep-anim_29: -714788403
+      treep-anim_3: -1712898152
+      treep-anim_30: 1970120764
+      treep-anim_31: -873581355
+      treep-anim_32: 690865948
+      treep-anim_33: 1170081045
+      treep-anim_34: 1301461238
+      treep-anim_35: 994291032
+      treep-anim_36: 943195326
+      treep-anim_37: -1552202439
+      treep-anim_38: -1768709675
+      treep-anim_39: 647956155
+      treep-anim_4: -129200279
+      treep-anim_40: 815315117
+      treep-anim_41: 913947252
+      treep-anim_42: -390714296
+      treep-anim_43: 1863060050
+      treep-anim_44: 987828420
+      treep-anim_45: 1358602215
+      treep-anim_46: -752614040
+      treep-anim_47: -1726256600
+      treep-anim_48: 1597363388
+      treep-anim_49: 827997286
+      treep-anim_5: -238678867
+      treep-anim_6: -1768116114
+      treep-anim_7: -282075081
+      treep-anim_8: 369963464
+      treep-anim_9: 502385100
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
