@@ -249,12 +249,13 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  gravityModifier: 1.5
+  gravityModifier: 2
   maxSpeed: 7
   jumpTakeOffSpeed: 6
   jumpModifier: 1.2
-  jumpDeceleration: 0.5
+  jumpDeceleration: 0.4
   climbSpeed: 3
+  onTopOfLadder: 0
   _move: {x: 0, y: 0}
   _dashEffectPoint: {fileID: 5114994484247730810}
   dashEffectPos: {x: 1.5, y: -1}
@@ -325,7 +326,7 @@ MonoBehaviour:
   attackPoint: {fileID: 122930105409942492}
   enemyLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   CloseAttackKey: 108
   DistAttackKey: 108
   MaxPV: 10
