@@ -1,21 +1,25 @@
+using System.Diagnostics;
 using Treep.IA;
 using Treep.Weapon;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Debug = UnityEngine.Debug;
+using Random = System.Random;
 
 namespace Treep.Player {
     public class PlayerCombat : MonoBehaviour {
-        public Transform attackPointRight;
-        public Transform attackPointLeft;
-        public Transform attackPointTop;
-        public Transform attackPointBottom;
-        public Vector2 attackPoint;
+        public Vector2 attackPointRight;
+        public Vector2 attackPointLeft;
+        public Vector2 attackPointTop;
+        public Vector2 attackPointBottom;
+        public Transform attackPoint;
+        private Animator _attackAnimator;
 
         [FormerlySerializedAs("ennemyLayerMask")]
         public LayerMask enemyLayerMask;
 
         public KeyCode CloseAttackKey = KeyCode.L;
-        public KeyCode DistAttackKey = KeyCode.L;
+        public KeyCode DistAttackKey = KeyCode.O;
 
         [FormerlySerializedAs("PVMax")] public int MaxPV = 10;
         private Animator _animator;
@@ -26,15 +30,16 @@ namespace Treep.Player {
         private Looking currentLooking;
 
         private float nextAttackTime;
-        private int PV { get; set; }
+        private int Pv { get; set; }
 
 
         public void Awake() {
             this.ControllerScript = this.GetComponent<PlayerController>();
             this.currentLooking = this.ControllerScript.looking;
-            this.PV = this.MaxPV;
+            this.Pv = this.MaxPV;
             this._currentCloseWeapon = new Stick();
             this._animator = this.GetComponent<Animator>();
+            this._attackAnimator = this.attackPoint.GetComponent<Animator>();
         }
 
         public void Update() {
@@ -49,37 +54,36 @@ namespace Treep.Player {
 
             if (Input.GetKeyDown(KeyCode.P)) {
                 Debug.Log($"{this._currentCloseWeapon}");
-                Debug.Log($"{this.PV}");
-                Debug.Log(this.attackPoint);
+                Debug.Log($"{this.Pv}");
+                Debug.Log(this.attackPoint.position);
             }
         }
 
         public void OnDrawGizmosSelected() {
-            if (this.attackPointRight == null
-                || this.attackPointLeft == null
-                || this.attackPointTop == null
-                || this.attackPointBottom == null) {
+            if (this.attackPoint == null) {
                 return;
             }
 
+            Debug.Log(this._currentCloseWeapon);
+            Debug.Log(this._animator);
 
-            Gizmos.DrawWireSphere(this.attackPoint, this._currentCloseWeapon.AttackRange);
+            Gizmos.DrawWireSphere(this.attackPoint.position, 1); // this._currentCloseWeapon.AttackRange);
         }
 
         private void UpdateAttackPoint() {
             this.currentLooking = this.ControllerScript.looking;
             switch (this.currentLooking) {
                 case Looking.Right:
-                    this.attackPoint = this.attackPointRight.position;
+                    this.attackPoint.position = this.attackPointRight + (Vector2)this.transform.position;
                     break;
                 case Looking.Left:
-                    this.attackPoint = this.attackPointLeft.position;
+                    this.attackPoint.position = this.attackPointLeft + (Vector2)this.transform.position;
                     break;
                 case Looking.Top:
-                    this.attackPoint = this.attackPointTop.position;
+                    this.attackPoint.position = this.attackPointTop + (Vector2)this.transform.position;
                     break;
                 case Looking.Bottom:
-                    this.attackPoint = this.attackPointBottom.position;
+                    this.attackPoint.position = this.attackPointBottom + (Vector2)this.transform.position;
                     break;
             }
         }
@@ -88,8 +92,11 @@ namespace Treep.Player {
             // animation
             this._animator.SetTrigger("isCloseAttacking");
 
+            this._attackAnimator.SetInteger("Random", new Random().Next(6));
+            this._attackAnimator.SetTrigger("Attack");
+
             //check enemy
-            var hitEnnemys = Physics2D.OverlapCircleAll(this.attackPoint, this._currentCloseWeapon.AttackRange,
+            var hitEnnemys = Physics2D.OverlapCircleAll(this.attackPoint.position, this._currentCloseWeapon.AttackRange,
                 this.enemyLayerMask);
             //Damage to ennemy
             foreach (var ennemy in hitEnnemys) {

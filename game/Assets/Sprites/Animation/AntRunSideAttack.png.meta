@@ -115,10 +115,10 @@ TextureImporter:
       name: AntRunSideAttack_0
       rect:
         serializedVersion: 2
-        x: 15
-        y: 68
-        width: 40
-        height: 56
+        x: 0
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,10 +137,10 @@ TextureImporter:
       name: AntRunSideAttack_1
       rect:
         serializedVersion: 2
-        x: 78
-        y: 69
-        width: 42
-        height: 55
+        x: 64
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -159,10 +159,10 @@ TextureImporter:
       name: AntRunSideAttack_2
       rect:
         serializedVersion: 2
-        x: 141
-        y: 71
-        width: 37
-        height: 54
+        x: 128
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,10 +181,10 @@ TextureImporter:
       name: AntRunSideAttack_3
       rect:
         serializedVersion: 2
-        x: 13
-        y: 9
-        width: 49
-        height: 49
+        x: 0
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,10 +203,10 @@ TextureImporter:
       name: AntRunSideAttack_4
       rect:
         serializedVersion: 2
-        x: 77
-        y: 6
-        width: 50
-        height: 53
+        x: 64
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -225,7 +225,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 2b8edf0660fa5936b8b19ba509e5f2df
     internalID: 0
     vertices: []
     indices: 

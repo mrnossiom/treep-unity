@@ -128,12 +128,12 @@ TextureImporter:
       name: AntClimb_0
       rect:
         serializedVersion: 2
-        x: 10
-        y: 63
-        width: 33
-        height: 56
+        x: 0
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -158,12 +158,12 @@ TextureImporter:
       name: AntClimb_1
       rect:
         serializedVersion: 2
-        x: 72
-        y: 63
-        width: 33
-        height: 56
+        x: 64
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -187,12 +187,12 @@ TextureImporter:
       name: AntClimb_2
       rect:
         serializedVersion: 2
-        x: 138
+        x: 128
         y: 64
-        width: 33
-        height: 56
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -218,12 +218,12 @@ TextureImporter:
       name: AntClimb_3
       rect:
         serializedVersion: 2
-        x: 201
-        y: 63
-        width: 33
-        height: 56
+        x: 192
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -247,12 +247,12 @@ TextureImporter:
       name: AntClimb_4
       rect:
         serializedVersion: 2
-        x: 10
+        x: 0
         y: 0
-        width: 33
-        height: 55
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []

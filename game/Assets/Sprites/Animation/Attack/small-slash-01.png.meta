@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 7974f3da791780240aae591d2c8e970c
+guid: dece50010ed74064bbab46352d73108b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 18792607188996058
-    second: small-slash-02_0
+      213: -861283769587862517
+    second: small-slash-01_0
   - first:
-      213: 8588996871449075924
-    second: small-slash-02_1
+      213: 7084120282717820526
+    second: small-slash-01_1
   - first:
-      213: 3791984534364895618
-    second: small-slash-02_2
+      213: -6818860838451970757
+    second: small-slash-01_2
   - first:
-      213: 7097398991738583046
-    second: small-slash-02_3
+      213: 8260259773217216266
+    second: small-slash-01_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -60,7 +60,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -109,13 +109,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: small-slash-02_0
+      name: small-slash-01_0
       rect:
         serializedVersion: 2
-        x: 45
-        y: 91
-        width: 7
-        height: 8
+        x: 0
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: adf47e3d6c3c24000800000000000000
-      internalID: 18792607188996058
+      spriteID: b04f7ee89fa1c04f0800000000000000
+      internalID: -861283769587862517
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: small-slash-02_1
+      name: small-slash-01_1
       rect:
         serializedVersion: 2
-        x: 96
-        y: 85
-        width: 22
-        height: 15
+        x: 64
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -146,20 +146,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4d0e9abe52f323770800000000000000
-      internalID: 8588996871449075924
+      spriteID: e6619852dd9df4260800000000000000
+      internalID: 7084120282717820526
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: small-slash-02_2
+      name: small-slash-01_2
       rect:
         serializedVersion: 2
-        x: 27
-        y: 20
-        width: 22
-        height: 13
+        x: 0
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,20 +168,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 289389cd7d5df9430800000000000000
-      internalID: 3791984534364895618
+      spriteID: b3d7f3ff13a8e51a0800000000000000
+      internalID: -6818860838451970757
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: small-slash-02_3
+      name: small-slash-01_3
       rect:
         serializedVersion: 2
-        x: 91
-        y: 20
-        width: 13
-        height: 10
+        x: 64
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -190,8 +190,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6083bc387c60f7260800000000000000
-      internalID: 7097398991738583046
+      spriteID: a079f0fbf7652a270800000000000000
+      internalID: 8260259773217216266
       vertices: []
       indices: 
       edges: []
@@ -200,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 46e53be6a3c667d13ab60b98210ddd73
     internalID: 0
     vertices: []
     indices: 
@@ -210,10 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      small-slash-02_0: 18792607188996058
-      small-slash-02_1: 8588996871449075924
-      small-slash-02_2: 3791984534364895618
-      small-slash-02_3: 7097398991738583046
+      small-slash-01_0: -861283769587862517
+      small-slash-01_1: 7084120282717820526
+      small-slash-01_2: -6818860838451970757
+      small-slash-01_3: 8260259773217216266
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
