@@ -6,41 +6,48 @@ using UnityEngine;
 namespace Treep.Level {
     public class LevelAssembler : MonoBehaviour {
         [SerializeField] private RoomProvider roomProvider;
+        [SerializeField] private GameObject enemyPrefab;
 
         // TODO: non-linear level blueprint and evolver
         [SerializeField] private List<RoomKind> levelBlueprint;
 
-        public List<RoomKind> LevelBlueprint => levelBlueprint;
-        public RoomProvider RoomProvider => roomProvider;
+        public List<RoomKind> LevelBlueprint => this.levelBlueprint;
+        public RoomProvider RoomProvider => this.roomProvider;
 
         public Vector2? GenerateLevel(int seed) {
-            var roomsBook = roomProvider.CollectRooms();
+            var roomsBook = this.roomProvider.CollectRooms();
 
             var rng = new System.Random(seed);
 
-            var evolver = new LevelEvolver(levelBlueprint, roomsBook);
+            var evolver = new LevelEvolver(this.levelBlueprint, roomsBook);
             if (!evolver.EvolveRoot(rng)) return null;
 
-            PlaceLevelRooms(evolver.PlacedRooms);
+            this.PlaceLevelRooms(evolver.PlacedRooms);
 
             if (evolver.SpawnPoints.Count == 0) {
                 Debug.LogError("No spawn point");
                 return null;
             }
 
+            foreach (var enemySpawnerpos in evolver.EnemySpawners) {
+                // + Vector2.up because enemy spawn in the ground
+                Object.Instantiate(this.enemyPrefab, enemySpawnerpos + Vector2.up, Quaternion.identity);
+            }
+
+
             return evolver.SpawnPoints.First();
         }
 
         public void ClearChildren() {
-            while (transform.childCount > 0) {
-                DestroyImmediate(transform.GetChild(0).gameObject);
+            while (this.transform.childCount > 0) {
+                Object.DestroyImmediate(this.transform.GetChild(0).gameObject);
             }
         }
 
         private void PlaceLevelRooms(IEnumerable<PlacedRoom> rooms) {
-            ClearChildren();
+            this.ClearChildren();
             foreach (var room in rooms) {
-                Instantiate(room.Template, room.Position, Quaternion.identity, transform);
+                Object.Instantiate(room.Template, room.Position, Quaternion.identity, this.transform);
             }
         }
     }
