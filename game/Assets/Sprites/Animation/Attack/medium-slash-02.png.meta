@@ -49,7 +49,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -63,7 +63,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -115,10 +115,10 @@ TextureImporter:
       name: medium-slash-02_0
       rect:
         serializedVersion: 2
-        x: 22
-        y: 74
-        width: 10
-        height: 7
+        x: 0
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,10 +137,10 @@ TextureImporter:
       name: medium-slash-02_1
       rect:
         serializedVersion: 2
-        x: 90
-        y: 76
-        width: 18
-        height: 20
+        x: 64
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -159,10 +159,10 @@ TextureImporter:
       name: medium-slash-02_2
       rect:
         serializedVersion: 2
-        x: 31
-        y: 15
-        width: 11
-        height: 9
+        x: 0
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,10 +181,10 @@ TextureImporter:
       name: medium-slash-02_3
       rect:
         serializedVersion: 2
-        x: 34
-        y: 20
-        width: 12
-        height: 18
+        x: 64
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -199,33 +199,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: medium-slash-02_4
-      rect:
-        serializedVersion: 2
-        x: 99
-        y: 21
-        width: 10
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: cf369f9dddba0ddb0800000000000000
-      internalID: -4769123036052233220
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 6751f3a74d0de95b1ae7be2fda69bfac
     internalID: 0
     vertices: []
     indices: 
@@ -239,7 +217,6 @@ TextureImporter:
       medium-slash-02_1: 582062523148819116
       medium-slash-02_2: -6795522069310166345
       medium-slash-02_3: -8311308257116644739
-      medium-slash-02_4: -4769123036052233220
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
