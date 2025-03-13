@@ -132,12 +132,23 @@ TextureImporter:
         y: 64
         width: 64
         height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.49999997, y: 0.42078388}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 5, y: -29}
+        - {x: 9, y: -22}
+        - {x: 19, y: 0}
+        - {x: 19, y: 19}
+        - {x: 18, y: 19}
+        - {x: 9, y: 24}
+        - {x: -19, y: 24}
+        - {x: -23, y: 14}
+        - {x: -23, y: -16}
+        - {x: -17, y: -32}
+        - {x: 5, y: -32}
       tessellationDetail: 0
       bones: []
       spriteID: 9b783d7400175d8688a6427a94b6529c
@@ -154,12 +165,20 @@ TextureImporter:
         y: 64
         width: 64
         height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.50000024, y: 0.42912245}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 19, y: -4}
+        - {x: 19, y: 15}
+        - {x: -4, y: 18}
+        - {x: -17, y: 18}
+        - {x: -24, y: 13}
+        - {x: -24, y: -26}
+        - {x: -22, y: -32}
+        - {x: 8, y: -32}
       tessellationDetail: 0
       bones: []
       spriteID: b93d01218adfe81dbb9be755e7fe3e7b
@@ -176,8 +195,8 @@ TextureImporter:
         y: 64
         width: 64
         height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.41661453}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -198,8 +217,8 @@ TextureImporter:
         y: 64
         width: 64
         height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4249531}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -220,8 +239,8 @@ TextureImporter:
         y: 0
         width: 64
         height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5041692, y: 0.42078376}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
