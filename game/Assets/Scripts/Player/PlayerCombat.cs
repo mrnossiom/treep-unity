@@ -74,16 +74,16 @@ namespace Treep.Player {
             this.currentLooking = this.ControllerScript.looking;
             switch (this.currentLooking) {
                 case Looking.Right:
-                    this.attackPoint.position = this.attackPointRight;
+                    this.attackPoint.position = this.attackPointRight + (Vector2)this.transform.position;
                     break;
                 case Looking.Left:
-                    this.attackPoint.position = this.attackPointLeft;
+                    this.attackPoint.position = this.attackPointLeft + (Vector2)this.transform.position;
                     break;
                 case Looking.Top:
-                    this.attackPoint.position = this.attackPointTop;
+                    this.attackPoint.position = this.attackPointTop + (Vector2)this.transform.position;
                     break;
                 case Looking.Bottom:
-                    this.attackPoint.position = this.attackPointBottom;
+                    this.attackPoint.position = this.attackPointBottom + (Vector2)this.transform.position;
                     break;
             }
         }
