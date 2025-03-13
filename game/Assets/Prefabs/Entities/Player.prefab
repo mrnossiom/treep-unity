@@ -257,7 +257,7 @@ MonoBehaviour:
   climbSpeed: 3
   _move: {x: 0, y: 0}
   _dashEffectPoint: {fileID: 5114994484247730810}
-  dashEffectPos: {x: 1.5, y: 0}
+  dashEffectPos: {x: 1.5, y: -1}
   scriptPlayerCombat: {fileID: 5569680993926345568}
   looking: 0
 --- !u!61 &7035845409879027553
@@ -356,7 +356,7 @@ Transform:
   m_GameObject: {fileID: 4159794861375604947}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.5, y: 0, z: 0}
+  m_LocalPosition: {x: 1.5, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

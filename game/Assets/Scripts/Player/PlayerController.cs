@@ -88,6 +88,8 @@ namespace Treep.Player {
 
         public Transform _dashEffectPoint; //engros ca c'est en fonction de l'endroit du player
         public Vector2 dashEffectPos; // et ca c'est overall
+        private Vector2 _currentDashEffectPos; // et ca c'est overall
+
         private Animator _dashAnimator;
         private SpriteRenderer _dashSpriteRenderer;
         private SpriteRenderer _closeAttackRenderer;
@@ -103,21 +105,9 @@ namespace Treep.Player {
             get => this._allSpriteFlipX;
             set {
                 this._spriteRenderer.flipX = value;
-                this.FlipDashEffectPoint(value);
+                this._dashSpriteRenderer.flipX = value;
                 this._closeAttackRenderer.flipX = value;
                 this._allSpriteFlipX = value;
-            }
-        }
-
-        private void FlipDashEffectPoint(bool val) {
-            this._dashSpriteRenderer.flipX = val;
-            if (val) {
-                this._dashEffectPoint.position = new Vector3(this.transform.position.x + this.dashEffectPos.x,
-                    this.transform.position.y);
-            }
-            else {
-                this._dashEffectPoint.position = new Vector3(this.transform.position.x - this.dashEffectPos.x,
-                    this.transform.position.y);
             }
         }
 
@@ -182,6 +172,12 @@ namespace Treep.Player {
 
             if (Input.GetKeyDown(KeyCode.LeftShift) && !this._isDashing && this._dashAvailable) {
                 this._animator.SetTrigger(PlayerController.AnimIsDashing);
+                this._currentDashEffectPos = this.AllSpriteFlipX
+                    ? new Vector3(this.transform.position.x + this.dashEffectPos.x,
+                        this.transform.position.y + this.dashEffectPos.y)
+                    : new Vector3(this.transform.position.x - this.dashEffectPos.x,
+                        this.transform.position.y + this.dashEffectPos.y);
+
                 this._dashAnimator.SetTrigger("Dash");
                 this.StartDash();
             }
@@ -189,6 +185,9 @@ namespace Treep.Player {
             if (this._isDashing) {
                 this.HandleDash();
             }
+
+            this._dashEffectPoint.position
+                = new Vector3(this._currentDashEffectPos.x, this._currentDashEffectPos.y);
         }
 
         private void UpdateClimb() {
