@@ -1,25 +1,19 @@
 fileFormatVersion: 2
-guid: aa2e85611a107ac48ac1d428a5d596d5
+guid: 7974f3da791780240aae591d2c8e970c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5168745611003023813
-    second: ennemi-idle_0
+      213: 18792607188996058
+    second: small-slash-02_0
   - first:
-      213: -4685809006366205653
-    second: ennemi-idle_1
+      213: 8588996871449075924
+    second: small-slash-02_1
   - first:
-      213: -2022015510392451203
-    second: ennemi-idle_2
+      213: 3791984534364895618
+    second: small-slash-02_2
   - first:
-      213: -3883953610545259491
-    second: ennemi-idle_3
-  - first:
-      213: 4351883384719144234
-    second: ennemi-idle_4
-  - first:
-      213: -6309673795496953268
-    second: ennemi-idle_5
+      213: 7097398991738583046
+    second: small-slash-02_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -115,7 +109,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ennemi-idle_0
+      name: small-slash-02_0
       rect:
         serializedVersion: 2
         x: 0
@@ -130,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5c1d13e7fb21bb740800000000000000
-      internalID: 5168745611003023813
+      spriteID: adf47e3d6c3c24000800000000000000
+      internalID: 18792607188996058
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ennemi-idle_1
+      name: small-slash-02_1
       rect:
         serializedVersion: 2
         x: 64
@@ -152,36 +146,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b2957320989a8feb0800000000000000
-      internalID: -4685809006366205653
+      spriteID: 4d0e9abe52f323770800000000000000
+      internalID: 8588996871449075924
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ennemi-idle_2
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d7f4abc3b9b50f3e0800000000000000
-      internalID: -2022015510392451203
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ennemi-idle_3
+      name: small-slash-02_2
       rect:
         serializedVersion: 2
         x: 0
@@ -196,14 +168,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d1c9a5fe4cc691ac0800000000000000
-      internalID: -3883953610545259491
+      spriteID: 289389cd7d5df9430800000000000000
+      internalID: 3791984534364895618
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ennemi-idle_4
+      name: small-slash-02_3
       rect:
         serializedVersion: 2
         x: 64
@@ -218,30 +190,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a25fb1291eef46c30800000000000000
-      internalID: 4351883384719144234
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ennemi-idle_5
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c4a30d2fc198f68a0800000000000000
-      internalID: -6309673795496953268
+      spriteID: 6083bc387c60f7260800000000000000
+      internalID: 7097398991738583046
       vertices: []
       indices: 
       edges: []
@@ -250,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: d3ae2c86f20074139b507f93a9ba6e5d
+    spriteID: 90ddbda2b33a187b8b74251f5783fd5f
     internalID: 0
     vertices: []
     indices: 
@@ -260,12 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ennemi-idle_0: 5168745611003023813
-      ennemi-idle_1: -4685809006366205653
-      ennemi-idle_2: -2022015510392451203
-      ennemi-idle_3: -3883953610545259491
-      ennemi-idle_4: 4351883384719144234
-      ennemi-idle_5: -6309673795496953268
+      small-slash-02_0: 18792607188996058
+      small-slash-02_1: 8588996871449075924
+      small-slash-02_2: 3791984534364895618
+      small-slash-02_3: 7097398991738583046
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -71,7 +71,6 @@ namespace Treep.Player {
         private bool _jump;
         public Vector2 _move;
         public bool IsGrounded { get; set; }
-        
 
 
         private Vector2 _standSize = new(1.4f, 3.2f);
@@ -90,9 +89,30 @@ namespace Treep.Player {
         private float _dashCooldown = 0.8f;
         private float _lastDashTime;
 
+        public Transform _dashEffectPoint; //engros ca c'est en fonction de l'endroit du player
+        public Vector2 dashEffectPos; // et ca c'est overall
+        private Vector2 _currentDashEffectPos; // et ca c'est current pos
+
+        private Animator _dashAnimator;
+        private SpriteRenderer _dashSpriteRenderer;
+        private SpriteRenderer _closeAttackRenderer;
+        public PlayerCombat scriptPlayerCombat;
+
         private bool IsClimbing { get; set; }
 
         public Looking looking;
+
+        private bool _allSpriteFlipX;
+
+        private bool AllSpriteFlipX {
+            get => this._allSpriteFlipX;
+            set {
+                this._spriteRenderer.flipX = value;
+                this._dashSpriteRenderer.flipX = value;
+                this._closeAttackRenderer.flipX = value;
+                this._allSpriteFlipX = value;
+            }
+        }
 
 
         private void Start() {
@@ -110,10 +130,13 @@ namespace Treep.Player {
             this._ladderTag = TagHandle.GetExistingTag("Ladder");
 
             this._contactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(this.gameObject.layer));
+            this._dashAnimator = this._dashEffectPoint.GetComponent<Animator>();
+            this._dashSpriteRenderer = this._dashEffectPoint.GetComponent<SpriteRenderer>();
+            this._closeAttackRenderer = this.scriptPlayerCombat.attackPoint.GetComponent<SpriteRenderer>();
         }
 
         private void OnSpriteFlip(bool _, bool newValue) {
-            this._spriteRenderer.flipX = newValue;
+            this.AllSpriteFlipX = newValue;
         }
 
         [Command]
@@ -139,15 +162,20 @@ namespace Treep.Player {
             this._targetVelocity = Vector2.zero;
             this.ComputeVelocity();
         }
-        
 
         private void UpdateDash() {
-            if (this.IsGrounded && Time.time >= _lastDashTime + _dashCooldown) {
+            if (this.IsGrounded && Time.time >= this._lastDashTime + this._dashCooldown) {
                 this._dashAvailable = true;
             }
 
-            if (Input.GetKeyDown(KeyCode.LeftShift) && !this._isDashing && this._dashAvailable && !IsClimbing) {
+            if (Input.GetKeyDown(KeyCode.LeftShift) && !this._isDashing && this._dashAvailable) {
                 this._animator.SetTrigger(PlayerController.AnimIsDashing);
+                this._dashAnimator.SetTrigger("Dash");
+                this._currentDashEffectPos = this.AllSpriteFlipX
+                    ? new Vector3(this.transform.position.x + this.dashEffectPos.x,
+                        this.transform.position.y + this.dashEffectPos.y)
+                    : new Vector3(this.transform.position.x - this.dashEffectPos.x,
+                        this.transform.position.y + this.dashEffectPos.y);
                 this.StartDash();
                 this._lastDashTime = Time.time;
             }
@@ -155,12 +183,16 @@ namespace Treep.Player {
             if (this._isDashing) {
                 this.HandleDash();
             }
+
+            this._dashEffectPoint.position
+                = new Vector3(this._currentDashEffectPos.x,
+                    this._currentDashEffectPos.y);
         }
 
         private void UpdateClimb() {
             this._animator.SetBool(PlayerController.AnimIsClimbing, this.IsClimbing);
-            this._animator.SetFloat(PlayerController.AnimClimbSpeed, this._move.y);
 
+            this._animator.SetFloat(PlayerController.AnimClimbSpeed, this._move.y);
         }
 
         private void UpdateJump() {
@@ -179,10 +211,10 @@ namespace Treep.Player {
             this._move.x = Input.GetAxis("Horizontal");
             this._move.y = Input.GetAxis("Vertical");
             this._animator.SetBool(PlayerController.AnimIsMoving, this._move.x != 0);
-            if (IsClimbing && !this.onTopOfLadder) {
+            if (this.IsClimbing && !this.onTopOfLadder) {
                 this._move.x = 0;
                 if (Input.GetKeyDown(KeyCode.Space)) {
-                    IsClimbing = false;
+                    this.IsClimbing = false;
                 }
             }
 
@@ -197,20 +229,20 @@ namespace Treep.Player {
                     this.looking = Looking.Bottom;
                 }
 
-                if (this._move.x != 0 && !IsClimbing) {
-                    this._spriteRenderer.flipX = this._move.x < 0;
+                if (this._move.x != 0 && !this.IsClimbing) {
+                    this.AllSpriteFlipX = this._move.x < 0;
                 }
             }
             else // le player vas que a gauche ou a droite (ou rien)
             {
-                if (this._move.x > 0 && !IsClimbing) {
-                    this._spriteRenderer.flipX = false;
+                if (this._move.x > 0 && !this.IsClimbing) {
+                    this.AllSpriteFlipX = false;
                 }
-                else if (this._move.x < 0 && !IsClimbing) {
-                    this._spriteRenderer.flipX = true;
+                else if (this._move.x < 0 && !this.IsClimbing) {
+                    this.AllSpriteFlipX = true;
                 }
 
-                this.looking = this._spriteRenderer.flipX ? Looking.Left : Looking.Right;
+                this.looking = this.AllSpriteFlipX ? Looking.Left : Looking.Right;
             }
         }
 
@@ -245,10 +277,9 @@ namespace Treep.Player {
                 else {
                     this._dashDirection = new Vector2(this._move.x, 0).normalized;
                 }
-                
             }
             else {
-                this._dashDirection = this._spriteRenderer.flipX ? Vector2.left : Vector2.right;
+                this._dashDirection = this.AllSpriteFlipX ? Vector2.left : Vector2.right;
             }
 
             this._dashSpeed = 8f;
@@ -396,42 +427,41 @@ namespace Treep.Player {
             this._body.position += move.normalized * distance;
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            if (other.CompareTag("Ladder") && !IsGrounded) {
-                Vector2 contactPoint = other.ClosestPoint(transform.position);
+        private void OnTriggerEnter2D(Collider2D other) {
+            if (other.CompareTag("Ladder") && !this.IsGrounded) {
+                var contactPoint = other.ClosestPoint(this.transform.position);
                 if (contactPoint.y < this.transform.position.y) {
                     this.onTopOfLadder = true;
+                }
 
+                if (contactPoint.x - (int)contactPoint.x <= 0.03) {
+                    contactPoint = new Vector2(contactPoint.x - 0.05f, contactPoint.y);
                 }
-                if(contactPoint.x - (int)contactPoint.x <= 0.03) {
-                    contactPoint = new Vector2(contactPoint.x - 0.05f,contactPoint.y);
+
+                if (contactPoint.x - (int)contactPoint.x >= 0.97) {
+                    contactPoint = new Vector2(contactPoint.x + 0.05f, contactPoint.y);
                 }
-                if(contactPoint.x - (int)contactPoint.x >= 0.97) {
-                    contactPoint = new Vector2(contactPoint.x + 0.05f,contactPoint.y);
-                }
-                
-                if (contactPoint.x - (int)contactPoint.x  < 0.5 ) {
-                    OnSpriteFlip(false,true);
+
+                if (contactPoint.x - (int)contactPoint.x < 0.5) {
+                    this.OnSpriteFlip(false, true);
                     this._velocity.x = 0;
-                    this.transform.position = new Vector3((int)contactPoint.x+ 0.9f, this.transform.position.y, 0);
-                    
+                    this.transform.position = new Vector3((int)contactPoint.x + 0.9f, this.transform.position.y, 0);
                 }
                 else {
-                    OnSpriteFlip(true,false);
+                    this.OnSpriteFlip(true, false);
                     this._velocity.x = 0;
                     this.transform.position = new Vector3((int)contactPoint.x + 0.4f, this.transform.position.y, 0);
                 }
-                IsClimbing = true;
-                _velocity.y = 0;
-                
+
+                this.IsClimbing = true;
+                this._velocity.y = 0;
             }
         }
-        
 
 
         private void OnTriggerExit2D(Collider2D other) {
             if (!other.CompareTag(this._ladderTag)) return;
+
             this.IsClimbing = false;
             this.onTopOfLadder = false;
             this._velocity.y = 0;

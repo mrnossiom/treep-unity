@@ -128,12 +128,12 @@ TextureImporter:
       name: AntJump_0
       rect:
         serializedVersion: 2
-        x: 10
-        y: 65
-        width: 39
-        height: 54
+        x: 0
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -150,12 +150,12 @@ TextureImporter:
       name: AntJump_1
       rect:
         serializedVersion: 2
-        x: 74
-        y: 65
-        width: 39
-        height: 54
+        x: 64
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -172,12 +172,12 @@ TextureImporter:
       name: AntJump_2
       rect:
         serializedVersion: 2
-        x: 138
-        y: 67
-        width: 39
-        height: 54
+        x: 128
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -194,12 +194,12 @@ TextureImporter:
       name: AntJump_3
       rect:
         serializedVersion: 2
-        x: 201
-        y: 66
-        width: 41
-        height: 54
+        x: 192
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -216,12 +216,12 @@ TextureImporter:
       name: AntJump_4
       rect:
         serializedVersion: 2
-        x: 11
-        y: 2
-        width: 40
-        height: 54
+        x: 0
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -253,7 +253,6 @@ TextureImporter:
       AntJump_2: -885770654
       AntJump_3: 582677375
       AntJump_4: -1343463778
-      AntJump_5: 737022664
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
