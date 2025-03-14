@@ -31,7 +31,7 @@ namespace Treep.Level {
 
             foreach (var enemySpawnerpos in evolver.EnemySpawners) {
                 // + Vector2.up because enemy spawn in the ground
-                Object.Instantiate(this.enemyPrefab, enemySpawnerpos + Vector2.up, Quaternion.identity);
+                Object.Instantiate(this.enemyPrefab, enemySpawnerpos + new Vector2(0, 2), Quaternion.identity);
             }
 
 
