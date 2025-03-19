@@ -22,7 +22,7 @@ pub struct GroundDetection {
 	pub on_ground: bool,
 }
 
-pub fn spawn_ground_sensor(
+fn spawn_ground_sensor(
 	mut commands: Commands,
 	detect_ground_for: Query<(Entity, &Collider), Added<GroundDetection>>,
 ) {
@@ -54,7 +54,7 @@ pub fn spawn_ground_sensor(
 	}
 }
 
-pub fn ground_detection(
+fn ground_detection(
 	mut ground_sensors: Query<&mut GroundSensor>,
 	mut collisions: EventReader<CollisionEvent>,
 	collidables: Query<Entity, (With<Collider>, Without<Sensor>)>,
@@ -87,7 +87,7 @@ pub fn ground_detection(
 	}
 }
 
-pub fn update_on_ground(
+fn update_on_ground(
 	mut ground_detectors: Query<&mut GroundDetection>,
 	ground_sensors: Query<&GroundSensor, Changed<GroundSensor>>,
 ) {

@@ -1,6 +1,7 @@
-use crate::player::Player;
-use crate::room::RoomState;
-use crate::{DEBUG_MODE, GameState};
+use crate::{
+	cli::DEBUG_LEVEL,
+	shared::{RoomState, player::Player},
+};
 use bevy::color::palettes::css;
 use bevy::prelude::*;
 use bevy::utils::{HashMap, HashSet};
@@ -25,18 +26,21 @@ pub fn plugin(app: &mut App) {
 	app.add_systems(Startup, load_level)
 		.add_systems(
 			Update,
-			(spawn_wall_collision, tp_to_new_spawn_point).run_if(in_state(GameState::InRoom)),
+			(
+				spawn_wall_collision,
+				tp_to_new_spawn_point,
+				tp_new_to_spawn_point,
+			),
 		)
 		.add_systems(OnEnter(Lobby), (setup_lobby,))
 		.add_systems(OnExit(Lobby), || todo!())
 		.add_systems(OnEnter(Level), (setup_level,))
 		.add_systems(OnExit(Level), || todo!());
 
-	if DEBUG_MODE {
-		app.add_systems(
-			Update,
-			(highlight_spawn_point,).run_if(in_state(GameState::InRoom)),
-		);
+	if let Some(level) = DEBUG_LEVEL.get().copied() {
+		if level >= 2 {
+			app.add_systems(Update, (highlight_spawn_point,));
+		}
 	}
 }
 
@@ -76,14 +80,28 @@ fn setup_lobby(mut commands: Commands) {
 	commands.insert_resource(LevelSelection::index(0));
 }
 
+fn tp_new_to_spawn_point(
+	spawn_points: Query<&Transform, (With<SpawnPoint>, Without<Player>)>,
+	mut players: Query<&mut Transform, Added<Player>>,
+) {
+	let Some(first_spawn_point) = spawn_points.iter().next() else {
+		return;
+	};
+
+	for mut player in &mut players {
+		player.translation = first_spawn_point.translation;
+	}
+}
 fn tp_to_new_spawn_point(
 	spawn_points: Query<&Transform, (Added<SpawnPoint>, Without<Player>)>,
 	mut players: Query<&mut Transform, With<Player>>,
 ) {
-	for spawn_point in &spawn_points {
-		for mut player in &mut players {
-			player.translation = spawn_point.translation;
-		}
+	let Some(first_spawn_point) = spawn_points.iter().next() else {
+		return;
+	};
+
+	for mut player in &mut players {
+		player.translation = first_spawn_point.translation;
 	}
 }
 
@@ -100,7 +118,7 @@ fn highlight_spawn_point(
 	}
 }
 
-pub fn spawn_wall_collision(
+fn spawn_wall_collision(
 	mut commands: Commands,
 	wall_query: Query<(&GridCoords, &Parent), Added<Wall>>,
 	parent_query: Query<&Parent, Without<Wall>>,

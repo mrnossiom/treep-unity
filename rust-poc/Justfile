@@ -1,9 +1,18 @@
+base := "/tmp/treep"
+
 _default:
 	@just --list --unsorted --list-heading '' --list-prefix '—— '
 
-run:
-	cargo run
+# Run the game for developement
+run *ARGS:
+	cargo run -F development {{ARGS}}
 
-debug:
-	cargo run -F debug
+setup-many:
+	mkdir -p {{base}}
+	mkfifo {{base}}/server {{base}}/client1 {{base}}/client2
 
+# Start a server and two clients
+many *ARGS:
+	@just run -- server {{ARGS}} 2>{{base}}/server &
+	@just run -- client {{ARGS}} 2>{{base}}/client1 &
+	@just run -- client {{ARGS}} 2>{{base}}/client2 &

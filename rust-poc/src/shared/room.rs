@@ -1,49 +1,37 @@
 //! Room that can contain multiple players
 
-use crate::{GameState, utils::despawn_screen};
+use crate::shared::RoomState;
 use bevy::prelude::*;
-
-#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Hash, Reflect, States)]
-pub(crate) enum RoomState {
-	Lobby,
-
-	Level,
-
-	#[default]
-	Disabled,
-}
 
 pub fn plugin(app: &mut App) {
 	use RoomState::*;
 
 	app.init_state::<RoomState>()
+		.enable_state_scoped_entities::<RoomState>()
 		// Setup and cleanup on change game state
-		.add_systems(
-			OnEnter(GameState::InRoom),
-			|mut menu_state: ResMut<NextState<RoomState>>| menu_state.set(Lobby),
-		)
-		.add_systems(
-			OnExit(GameState::InRoom),
-			|mut menu_state: ResMut<NextState<RoomState>>| menu_state.set(Disabled),
-		)
+		// .add_systems(
+		// 	OnEnter(GameState::InRoom),
+		// 	|mut menu_state: ResMut<NextState<RoomState>>| menu_state.set(Lobby),
+		// )
+		// .add_systems(
+		// 	OnExit(GameState::InRoom),
+		// 	|mut menu_state: ResMut<NextState<RoomState>>| menu_state.set(Disabled),
+		// )
 		// Main menu
-		.add_systems(OnEnter(Lobby), lobby::setup_ui)
-		.add_systems(OnExit(Lobby), despawn_screen::<lobby::OnLobbyScreen>);
+		.add_systems(OnEnter(Lobby), lobby::setup_ui);
 }
 
 mod lobby {
+	use super::RoomState;
 	use bevy::color::palettes::basic;
 	use bevy::prelude::*;
-
-	#[derive(Component)]
-	pub(crate) struct OnLobbyScreen;
 
 	pub(crate) fn setup_ui(mut commands: Commands) {
 		let large_text_font = TextFont::from_font_size(33.);
 
 		commands
 			.spawn((
-				OnLobbyScreen,
+				StateScoped(RoomState::Lobby),
 				Node {
 					width: Val::Percent(100.),
 					height: Val::Percent(100.),

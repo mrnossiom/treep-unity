@@ -2,23 +2,38 @@
 name = "treep"
 version = "0.0.0"
 edition = "2024"
+
 default-run = "treep"
 
 [dependencies]
-bevy = "0.15" 
+bevy = "0.15"
 bevy_aseprite_ultra = "0.4"
-bevy_ecs_ldtk = "0.11"
-bevy-inspector-egui = "0.29"
-bevy_quinnet = "0.14"
+bevy_ecs_ldtk = { version = "0.11", default-features = false, features = [
+  "derive",
+  "internal_levels",
+] }
+bevy-inspector-egui = "0.30"
+bevy_quinnet = "0.15"
 bevy_rapier2d = { version = "0.29", features = ["debug-render-2d"] }
-bevy_replicon = "0.30"
-bevy_replicon_quinnet = "0.9"
+bevy_replicon = "0.31"
+bevy_replicon_quinnet = "0.10"
+serde = { version = "1", features = ["derive"] }
+clap = { version = "4", features = ["derive"] }
 
 [features]
-default = []
-debug = ["bevy/dynamic_linking", "bevy/file_watcher"]
+default = ["client", "server"]
+
+development = [
+  "bevy/dynamic_linking",
+  "bevy/file_watcher",
+  "bevy/bevy_dev_tools",
+]
 # TODO: setups bevy_inspector_egui's Manual UI
-editor = []
+# editor = ["developement"]
+
+client = ["bevy_ecs_ldtk/render"]
+server = []
+
 
 [lints]
 [lints.rust]
