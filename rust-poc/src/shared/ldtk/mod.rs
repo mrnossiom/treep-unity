@@ -4,8 +4,8 @@
 //! - `World` → `Level`
 //! - `Level` → `Room`
 
-use bevy::{log, prelude::*, utils::HashMap};
-use std::str::FromStr;
+use bevy::{prelude::*, utils::HashMap};
+use std::{path::PathBuf, str::FromStr};
 
 /// Automatically generated from the ldtk.io JSON Schema.
 /// Taken from <https://ldtk.io/files/quicktype/LdtkJson.rs>.
@@ -42,28 +42,26 @@ pub struct Level {
 	/// Arbitrary name
 	identifier: String,
 	/// Level rooms separated by type
-	rooms: HashMap<RoomType, Vec<Room>>,
-
-	/// Background image layers for paralax
-	background: Vec<()>,
+	rooms: HashMap<RoomKind, Vec<Room>>,
+	// TODO: background image layers for parallax
 }
 
 impl TryFrom<types::World> for Level {
 	type Error = &'static str;
 	fn try_from(world: types::World) -> Result<Self, Self::Error> {
-		let mut rooms = HashMap::<RoomType, Vec<Room>>::new();
+		let mut rooms = HashMap::<RoomKind, Vec<Room>>::new();
 
 		for room in world.levels {
-			let level_kind_field = room
+			let room_kind_field = room
 				.field_instances
 				.iter()
-				.find(|field| field.identifier == "level_kind")
-				.expect("`level_kind` should be present");
+				.find(|field| field.identifier == "room_kind")
+				.expect("`room_kind` should be present");
 
-			let level_kind = level_kind_field.value.clone().unwrap();
+			let room_kind = room_kind_field.value.clone().unwrap();
 
 			rooms
-				.entry(level_kind.try_into()?)
+				.entry(room_kind.try_into()?)
 				.or_default()
 				.push(room.try_into()?);
 		}
@@ -72,14 +70,12 @@ impl TryFrom<types::World> for Level {
 			iid: world.iid,
 			identifier: world.identifier,
 			rooms,
-			// TODO
-			background: vec![],
 		})
 	}
 }
 
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
-pub enum RoomType {
+pub enum RoomKind {
 	Lobby,
 	Spawn,
 	Normal,
@@ -88,7 +84,7 @@ pub enum RoomType {
 	Exit,
 }
 
-impl TryFrom<serde_json::Value> for RoomType {
+impl TryFrom<serde_json::Value> for RoomKind {
 	type Error = &'static str;
 	fn try_from(value: serde_json::Value) -> Result<Self, Self::Error> {
 		if let serde_json::Value::String(s) = value {
@@ -99,7 +95,7 @@ impl TryFrom<serde_json::Value> for RoomType {
 	}
 }
 
-impl FromStr for RoomType {
+impl FromStr for RoomKind {
 	type Err = &'static str;
 	fn from_str(s: &str) -> Result<Self, Self::Err> {
 		match s {

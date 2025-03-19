@@ -1,12 +1,12 @@
-use crate::{
+use crate::shared::generation::{
 	evolver::{EvolvedGraph, PlacedRoom},
 	room::{self, Provider, Shape},
 };
 use glam::IVec2;
 use std::io;
 use svg::{
-	node::element::{path::Data, Group, Path, Style, Text},
 	Document, Node,
+	node::element::{Group, Path, Style, Text, path::Data},
 };
 
 pub fn render_room_graph(

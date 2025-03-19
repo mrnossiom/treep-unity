@@ -1,12 +1,11 @@
-use crate::evolver::Evolver;
 use petgraph::dot::Dot;
-use rand::{rngs::SmallRng, SeedableRng};
-use render::{render_room_graph, render_room_provider_store};
-
-mod evolver;
-mod level;
-mod render;
-mod room;
+use rand::{SeedableRng, rngs::SmallRng};
+use treep::shared::generation::{
+	evolver::Evolver,
+	level,
+	render::{render_room_graph, render_room_provider_store},
+	room,
+};
 
 const SEED: u64 = 0xDEAD_BEEF_FFFF_FFFF;
 // const SEED: u64 = 0xDEAD_BEEF_FFFF_FFFF - 1;

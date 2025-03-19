@@ -2,7 +2,7 @@ use glam::{IVec2, UVec2};
 use std::fmt;
 
 mod doors {
-	use crate::room::DoorSize;
+	use crate::shared::generation::room::DoorSize;
 
 	pub const VERTICAL_5: DoorSize = DoorSize::Vertical(5);
 	pub const HORIZONTAL_3: DoorSize = DoorSize::Horizontal(3);

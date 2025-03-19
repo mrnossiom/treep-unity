@@ -37,15 +37,14 @@
 
             buildInputs = with pkgs; [
               alsa-lib
-              udev
-
-              wayland
               libxkbcommon
+              udev
               vulkan-loader
+              wayland
               xorg.libX11
-              xorg.libXrandr
               xorg.libXcursor
               xorg.libXi
+              xorg.libXrandr
             ];
 
             RUST_SRC_PATH = pkgs.rustPlatform.rustLibSrc;

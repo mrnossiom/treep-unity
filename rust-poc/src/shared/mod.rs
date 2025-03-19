@@ -1,10 +1,11 @@
 use bevy::prelude::*;
 
+pub mod generation;
 pub(crate) mod ground;
+mod ldtk;
 pub(crate) mod level;
 pub(crate) mod player;
 pub(crate) mod room;
-mod ldtk;
 
 #[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Hash, Reflect, States)]
 pub(crate) enum RoomState {

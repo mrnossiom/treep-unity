@@ -1,11 +1,11 @@
-use crate::{
+use crate::shared::generation::{
 	level::Blueprint,
 	room::{Door, Provider, Shape, Template},
 };
 use glam::IVec2;
-use petgraph::{graph::NodeIndex, Direction, Graph};
-use rand::seq::SliceRandom;
+use petgraph::{Direction, Graph, graph::NodeIndex};
 use rand::RngCore;
+use rand::seq::SliceRandom;
 use std::fmt;
 
 pub type EvolvedGraph<'a> = Graph<PlacedRoom<'a>, Empty>;
@@ -54,9 +54,9 @@ impl fmt::Display for Empty {
 }
 
 pub struct Evolver<R: Provider> {
-	pub(crate) blueprint: Blueprint,
+	pub blueprint: Blueprint,
 
-	pub(crate) room_provider: R,
+	pub room_provider: R,
 }
 
 /// Access slices by reference in a pseudo random manner.
@@ -89,7 +89,7 @@ impl<R: Provider> Evolver<R> {
 	/// Create and evolves a graph from the given root node in the level blueprint.
 	///
 	/// Returns `None` if graph is not solvable
-	pub(crate) fn evolve_root(
+	pub fn evolve_root(
 		&self,
 		root_id: NodeIndex,
 		mut rng: &mut impl RngCore,

@@ -1,5 +1,5 @@
-use crate::room::Kind;
-use petgraph::{graph::NodeIndex, Graph};
+use crate::shared::generation::room::Kind;
+use petgraph::{Graph, graph::NodeIndex};
 use std::fmt;
 
 pub type Blueprint = Graph<Room, Connection>;

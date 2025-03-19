@@ -6,7 +6,6 @@ edition = "2024"
 default-run = "treep"
 
 [dependencies]
-bevy = "0.15"
 bevy_aseprite_ultra = "0.4"
 bevy_ecs_tilemap = { version = "0.15", default-features = false }
 bevy-inspector-egui = "0.30"
@@ -15,9 +14,37 @@ bevy_rapier2d = { version = "0.29", features = ["debug-render-2d"] }
 bevy_replicon = "0.31"
 bevy_replicon_quinnet = "0.10"
 clap = { version = "4", features = ["derive"] }
+glam = "0.30"
+petgraph = "0.7"
+rand = "0.9"
+rand_xoshiro = "0.7"
 serde_json = "1"
 serde = { version = "1", features = ["derive"] }
+svg = "0.18"
 thiserror = "2"
+log = "0.4.26"
+env_logger = "0.11.7"
+
+[dependencies.bevy]
+version = "0.15"
+default-features = false
+features = [
+  "bevy_asset",
+  "bevy_audio",
+  "bevy_color",
+  "bevy_core_pipeline",
+  "bevy_picking",
+  "bevy_render",
+  "bevy_sprite",
+  "bevy_state",
+  "bevy_text",
+  "bevy_ui",
+  "bevy_window",
+  "multi_threaded",
+  "png",
+
+  "wayland",
+]
 
 [features]
 default = ["client", "server"]

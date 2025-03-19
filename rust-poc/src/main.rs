@@ -18,7 +18,7 @@ use bevy_replicon_quinnet::{
 	client::RepliconQuinnetClientPlugin, server::RepliconQuinnetServerPlugin,
 };
 use std::{process::Termination, time::Duration};
-use treep::{Args, Mode};
+use treep::cli::{Args, Mode};
 
 fn main() -> impl Termination {
 	let args = Args::parse_and_set_globals();
@@ -69,7 +69,7 @@ fn client_plugins(app: &mut App) -> &mut App {
 			RepliconQuinnetClientPlugin,
 		))
 		// Game
-		.add_plugins(treep::client_plugin)
+		.add_plugins(treep::client::plugin)
 }
 
 #[cfg(feature = "server")]
@@ -98,5 +98,5 @@ fn server_plugins(app: &mut App) -> &mut App {
 			RepliconQuinnetServerPlugin,
 		))
 		// Game
-		.add_plugins(treep::server_plugin)
+		.add_plugins(treep::server::plugin)
 }
