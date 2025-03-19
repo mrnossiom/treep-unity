@@ -17,8 +17,7 @@ pub fn plugin(app: &mut App) {
 		.add_observer(apply_player_movement)
 		.add_observer(spawn_clients)
 		// player
-		.register_type::<GroundDetection>()
-		.add_systems(Update, (read_input, update_player_animation));
+		.register_type::<GroundDetection>();
 }
 
 const PLAYER_RUN_SPEED: f32 = 200.0;
@@ -57,18 +56,6 @@ pub(crate) struct NetworkPlayer(pub Entity);
 // update animation locally based on lightweight player animation state
 #[require(AseSpriteAnimation)]
 pub(crate) struct Player;
-
-fn update_player_animation(
-	mut new_players: Query<&mut AseSpriteAnimation, Added<Player>>,
-	asset_server: Res<AssetServer>,
-) {
-	for mut animation in &mut new_players {
-		*animation = AseSpriteAnimation {
-			animation: Animation::tag("walk-left"),
-			aseprite: asset_server.load("ant.aseprite"),
-		}
-	}
-}
 
 /// Spawns a new box whenever a client connects.
 fn spawn_clients(trigger: Trigger<OnAdd, ConnectedClient>, mut commands: Commands) {
@@ -131,19 +118,6 @@ fn apply_player_movement(
 	} else {
 		gravity_scale.0 = 1.0;
 	}
-}
-
-fn read_input(mut commands: Commands, input: Res<ButtonInput<KeyCode>>) {
-	let right = if input.pressed(KeyCode::KeyD) { 1. } else { 0. };
-	let left = if input.pressed(KeyCode::KeyA) { 1. } else { 0. };
-	let jumped = input.just_pressed(KeyCode::Space);
-
-	let horizontal_delta = right - left;
-
-	commands.client_trigger(MovePlayer {
-		horizontal_delta,
-		jumped,
-	});
 }
 
 /// A movement event for the controlled box.

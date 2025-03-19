@@ -1,33 +1,34 @@
 use crate::{
 	cli::DEBUG_LEVEL,
-	shared::{RoomState, player::Player},
+	shared::{RoomState, ldtk::LdtkPlugin, player::Player},
 };
-use bevy::color::palettes::css;
 use bevy::prelude::*;
 use bevy::utils::{HashMap, HashSet};
-use bevy_ecs_ldtk::prelude::*;
+use bevy::{color::palettes::css, log};
 use bevy_rapier2d::prelude::*;
+
+use super::ldtk::LevelCollection;
 
 pub fn plugin(app: &mut App) {
 	use RoomState::*;
 
-	app.add_plugins(LdtkPlugin)
-		.insert_resource(LdtkSettings {
-			level_background: LevelBackground::Nonexistent,
-			..default()
-		})
-		// Register markers for entities
-		.register_ldtk_entity_for_layer::<SpawnPoint>("entities", "spawn")
-		// Register markers for cells
-		.register_ldtk_int_cell_for_layer::<Wall>("interactables", 1)
-		.register_ldtk_int_cell_for_layer::<Wall>("interactables", 2)
-		.register_ldtk_int_cell_for_layer::<Wall>("interactables", 3);
+	app.add_plugins(LdtkPlugin);
+	// .insert_resource(LdtkSettings {
+	// 	level_background: LevelBackground::Nonexistent,
+	// 	..default()
+	// })
+	// Register markers for entities
+	// .register_ldtk_entity_for_layer::<SpawnPoint>("entities", "spawn")
+	// Register markers for cells
+	// .register_ldtk_int_cell_for_layer::<Wall>("interactables", 1)
+	// .register_ldtk_int_cell_for_layer::<Wall>("interactables", 2)
+	// .register_ldtk_int_cell_for_layer::<Wall>("interactables", 3);
 
 	app.add_systems(Startup, load_level)
 		.add_systems(
 			Update,
 			(
-				spawn_wall_collision,
+				// spawn_wall_collision,
 				tp_to_new_spawn_point,
 				tp_new_to_spawn_point,
 			),
@@ -47,37 +48,39 @@ pub fn plugin(app: &mut App) {
 #[derive(Component, Default)]
 struct SpawnPoint;
 
-impl LdtkEntity for SpawnPoint {
-	fn bundle_entity(
-		_: &EntityInstance,
-		_: &LayerInstance,
-		_: Option<&Handle<Image>>,
-		_: Option<&TilesetDefinition>,
-		_: &AssetServer,
-		_: &mut Assets<TextureAtlasLayout>,
-	) -> Self {
-		Self
-	}
-}
+// impl LdtkEntity for SpawnPoint {
+// 	fn bundle_entity(
+// 		_: &EntityInstance,
+// 		_: &LayerInstance,
+// 		_: Option<&Handle<Image>>,
+// 		_: Option<&TilesetDefinition>,
+// 		_: &AssetServer,
+// 		_: &mut Assets<TextureAtlasLayout>,
+// 	) -> Self {
+// 		Self
+// 	}
+// }
 
 #[derive(Copy, Clone, Eq, PartialEq, Debug, Default, Component)]
 pub struct Wall;
 
-impl LdtkIntCell for Wall {
-	fn bundle_int_cell(_: IntGridCell, _: &LayerInstance) -> Self {
-		Self
-	}
-}
+// impl LdtkIntCell for Wall {
+// 	fn bundle_int_cell(_: IntGridCell, _: &LayerInstance) -> Self {
+// 		Self
+// 	}
+// }
 
 fn load_level(mut commands: Commands, asset_server: Res<AssetServer>) {
-	commands.spawn(LdtkWorldBundle {
-		ldtk_handle: asset_server.load("world.ldtk").into(),
-		..default()
-	});
+	let _map = asset_server.load::<LevelCollection>("world.ldtk");
+
+	// commands.spawn(LdtkWorldBundle {
+	// 	ldtk_handle: .into(),
+	// 	..default()
+	// });
 }
 
 fn setup_lobby(mut commands: Commands) {
-	commands.insert_resource(LevelSelection::index(0));
+	// commands.insert_resource(LevelSelection::index(0));
 }
 
 fn tp_new_to_spawn_point(
@@ -106,7 +109,7 @@ fn tp_to_new_spawn_point(
 }
 
 fn setup_level(mut commands: Commands) {
-	commands.insert_resource(LevelSelection::index(1));
+	// commands.insert_resource(LevelSelection::index(1));
 }
 
 fn highlight_spawn_point(
@@ -118,6 +121,7 @@ fn highlight_spawn_point(
 	}
 }
 
+#[cfg(feature = "off")]
 fn spawn_wall_collision(
 	mut commands: Commands,
 	wall_query: Query<(&GridCoords, &Parent), Added<Wall>>,
