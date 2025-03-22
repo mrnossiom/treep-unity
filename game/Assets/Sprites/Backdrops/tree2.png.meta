@@ -1,10 +1,55 @@
 fileFormatVersion: 2
-guid: 572a4b32f8e608b4da0c753d761923ec
+guid: 9f10b86e424ea714cb978c7204084ccf
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6224885648455465140
-    second: Sky 1_0
+      213: -6861365922197683907
+    second: tree2_0
+  - first:
+      213: -4436173783040097349
+    second: tree2_1
+  - first:
+      213: 6587825804762373774
+    second: tree2_2
+  - first:
+      213: -1273807055975018829
+    second: tree2_3
+  - first:
+      213: -3433904043363418335
+    second: tree2_4
+  - first:
+      213: -6338516117011312444
+    second: tree2_5
+  - first:
+      213: -2093925253378480609
+    second: tree2_6
+  - first:
+      213: 2633037849397125762
+    second: tree2_7
+  - first:
+      213: 5150626223529656221
+    second: tree2_8
+  - first:
+      213: 1480705578717738408
+    second: tree2_9
+  - first:
+      213: -2519819843876316210
+    second: tree2_10
+  - first:
+      213: 5630433747119455795
+    second: tree2_11
+  - first:
+      213: -2706454179715423768
+    second: tree2_12
+  - first:
+      213: -2173329391541370557
+    second: tree2_13
+  - first:
+      213: 245060050777234018
+    second: tree2_14
+  - first:
+      213: -3759526050523365036
+    second: tree2_15
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +145,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sky 1_0
+      name: tree2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -113,10 +158,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c47826ccb73cc99a0800000000000000
-      internalID: -6224885648455465140
+      spriteID: 98ecadeda111c544495b52b996f68e76
+      internalID: -2061832542
       vertices: []
       indices: 
       edges: []
@@ -125,7 +170,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: e071d2144d0ff46438d8073fa57f8a87
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +180,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Sky 1_0: -6224885648455465140
+      tree2_0: -2061832542
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
