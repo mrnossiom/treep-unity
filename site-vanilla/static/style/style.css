@@ -54,21 +54,39 @@ nav {
 
 /* Banner style */
 .banner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
+  overflow: hidden;
+
   text-align: center;
   height: 80vh;
   color: #ffffff;
-  background-blend-mode: overlay;
 
-  .content h1 {
-    font-size: 5rem;
+  .main-title {}
+
+  .blured-image {
+    height: 100%;
+    filter: blur(0.5rem);
   }
 
-  .content p {
-    font-size: 2rem;
-    margin-bottom: 3rem;
+  .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    display: flex-column;
+    align-items: center;
+    justify-content: center;
+
+    h1 {
+      font-size: 5rem;
+    }
+
+    p {
+      font-size: 2rem;
+      margin-bottom: 3rem;
+    }
   }
 }
 
