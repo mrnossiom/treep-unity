@@ -58,14 +58,17 @@ nav {
   overflow: hidden;
 
   text-align: center;
-  height: 80vh;
+  height: 95vh;
   color: #ffffff;
 
-  .main-title {}
+  .main-title {
+    margin-top: 12.5vh;
+  }
 
   .blured-image {
     height: 100%;
-    filter: blur(0.5rem);
+    /* backdrop-filter: blur(0.5rem); */
+    filter: blur(0.3rem);
   }
 
   .content {
