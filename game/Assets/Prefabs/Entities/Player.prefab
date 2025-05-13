@@ -319,10 +319,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc7d538b36074ee3bcd5562dd160f6cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPointRight: {x: 1.5, y: 0}
-  attackPointLeft: {x: -1.5, y: 0}
-  attackPointTop: {x: 0, y: 1.75}
-  attackPointBottom: {x: 0, y: -2}
   attackPoint: {fileID: 122930105409942492}
   enemyLayerMask:
     serializedVersion: 2
@@ -643,7 +639,7 @@ Transform:
   m_GameObject: {fileID: 9065433702049088459}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.31, y: 0.23, z: 0.2}
+  m_LocalPosition: {x: 1.329, y: 0.259, z: 0.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

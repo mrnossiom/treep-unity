@@ -191,7 +191,6 @@ namespace Treep.Player {
 
         private void UpdateClimb() {
             this._animator.SetBool(PlayerController.AnimIsClimbing, this.IsClimbing);
-
             this._animator.SetFloat(PlayerController.AnimClimbSpeed, this._move.y);
         }
 
