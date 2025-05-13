@@ -309,7 +309,15 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      small-attack-weapon=stick_0: -5209676328212645114
+      small-attack-weapon=stick_1: -9031757842146623266
+      small-attack-weapon=stick_2: 2466503419207678575
+      small-attack-weapon=stick_3: -5971672124228644397
+      small-attack-weapon=stick_4: 1889516830530061594
+      small-attack-weapon=stick_5: 5851315544775269187
+      small-attack-weapon=stick_6: -7478496665025607212
+      small-attack-weapon=stick_7: 2682230229719967662
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

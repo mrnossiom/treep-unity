@@ -9,7 +9,6 @@ namespace Treep.Weapon {
         public int Damage { get; set; }
         public float AttackRate { get; set; }
         public WeaponHitBox HitBox { get; set; } = null;
-
         protected CircleCollider2D Top { get; set; }
         protected CircleCollider2D Bottom { get; set; }
         protected CircleCollider2D Left { get; set; }

@@ -434,7 +434,20 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      dash-attack-weapon=stick_0: 5834225960288991443
+      dash-attack-weapon=stick_1: 354494901824994917
+      dash-attack-weapon=stick_10: 6588802199113908336
+      dash-attack-weapon=stick_11: 7690987919994188928
+      dash-attack-weapon=stick_12: 7805143865930440404
+      dash-attack-weapon=stick_2: -348910533089279869
+      dash-attack-weapon=stick_3: -4707593203613001962
+      dash-attack-weapon=stick_4: 4512107373522892669
+      dash-attack-weapon=stick_5: -1802125564346892830
+      dash-attack-weapon=stick_6: 6678024336287651419
+      dash-attack-weapon=stick_7: -1188340107001804320
+      dash-attack-weapon=stick_8: 416326881148175897
+      dash-attack-weapon=stick_9: 975927420939305550
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
