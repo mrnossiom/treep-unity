@@ -1,22 +1,25 @@
 fileFormatVersion: 2
-guid: 398cc68f0e5403046a89320addf8d1c7
+guid: 15dff7e1dc079274987e26fb7f7b583d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3143353788242917093
-    second: hand-attack-upperarm_0
+      213: 3981916413005214421
+    second: enemy-idle-body_0
   - first:
-      213: 738707816005115202
-    second: hand-attack-upperarm_1
+      213: -7439881960330997000
+    second: enemy-idle-body_1
   - first:
-      213: 7189721098809860929
-    second: hand-attack-upperarm_2
+      213: 7334619281477930898
+    second: enemy-idle-body_2
   - first:
-      213: 3256775502194240835
-    second: hand-attack-upperarm_3
+      213: -5148016282864636677
+    second: enemy-idle-body_3
   - first:
-      213: -3118120246379426807
-    second: hand-attack-upperarm_4
+      213: -6398050697651183808
+    second: enemy-idle-body_4
+  - first:
+      213: -6125693538417682019
+    second: enemy-idle-body_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -112,13 +115,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: hand-attack-upperarm_0
+      name: enemy-idle-body_0
       rect:
         serializedVersion: 2
-        x: 43
-        y: 145
-        width: 33
-        height: 38
+        x: 22
+        y: 63
+        width: 19
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -127,20 +130,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b19076042609064d0800000000000000
-      internalID: -3143353788242917093
+      spriteID: 5d2397a61eb924730800000000000000
+      internalID: 3981916413005214421
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: hand-attack-upperarm_1
+      name: enemy-idle-body_1
       rect:
         serializedVersion: 2
-        x: 171
-        y: 145
-        width: 34
-        height: 37
+        x: 86
+        y: 63
+        width: 19
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -149,20 +152,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 24d1ac548da604a00800000000000000
-      internalID: 738707816005115202
+      spriteID: 8f252a776ca30c890800000000000000
+      internalID: -7439881960330997000
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: hand-attack-upperarm_2
+      name: enemy-idle-body_2
       rect:
         serializedVersion: 2
-        x: 299
-        y: 145
-        width: 35
-        height: 37
+        x: 151
+        y: 63
+        width: 19
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,20 +174,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 14361b02f3507c360800000000000000
-      internalID: 7189721098809860929
+      spriteID: 29f0933406dc9c560800000000000000
+      internalID: 7334619281477930898
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: hand-attack-upperarm_3
+      name: enemy-idle-body_3
       rect:
         serializedVersion: 2
-        x: 46
-        y: 23
-        width: 30
-        height: 32
+        x: 23
+        y: 0
+        width: 19
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,20 +196,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 34d6b796014623d20800000000000000
-      internalID: 3256775502194240835
+      spriteID: bfc2de157729e88b0800000000000000
+      internalID: -5148016282864636677
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: hand-attack-upperarm_4
+      name: enemy-idle-body_4
       rect:
         serializedVersion: 2
-        x: 174
-        y: 26
-        width: 31
-        height: 30
+        x: 86
+        y: 0
+        width: 19
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -215,8 +218,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 90cc99b08263ab4d0800000000000000
-      internalID: -3118120246379426807
+      spriteID: 04f9f8fe9ce8537a0800000000000000
+      internalID: -6398050697651183808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-idle-body_5
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 0
+        width: 19
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9955bf9e2a2dfaa0800000000000000
+      internalID: -6125693538417682019
       vertices: []
       indices: 
       edges: []
@@ -234,12 +259,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      hand-attack-upperarm_0: -3143353788242917093
-      hand-attack-upperarm_1: 738707816005115202
-      hand-attack-upperarm_2: 7189721098809860929
-      hand-attack-upperarm_3: 3256775502194240835
-      hand-attack-upperarm_4: -3118120246379426807
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

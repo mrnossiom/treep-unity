@@ -234,7 +234,12 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      hand-attack-weapon=none_0: 7778315117796788215
+      hand-attack-weapon=none_1: 5007766108061081180
+      hand-attack-weapon=none_2: 123478469193342137
+      hand-attack-weapon=none_3: 2879899198386419196
+      hand-attack-weapon=none_4: -6978271350546902148
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

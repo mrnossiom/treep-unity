@@ -384,7 +384,18 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      run-weapon=stick_0: -5867543828619663124
+      run-weapon=stick_1: 3729363894922264356
+      run-weapon=stick_10: -891241914219412179
+      run-weapon=stick_2: 2722668945304384451
+      run-weapon=stick_3: 8759847803481699676
+      run-weapon=stick_4: 4959376170315303427
+      run-weapon=stick_5: -1606739148910415419
+      run-weapon=stick_6: -6449689632070822717
+      run-weapon=stick_7: 8911795666065940712
+      run-weapon=stick_8: 7581710392272797762
+      run-weapon=stick_9: -2709604143710346820
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

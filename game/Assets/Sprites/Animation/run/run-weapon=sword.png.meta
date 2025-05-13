@@ -384,7 +384,18 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      run-weapon=sword_0: -528999673262899727
+      run-weapon=sword_1: 9053788941236664744
+      run-weapon=sword_10: 6165642588158730491
+      run-weapon=sword_2: -3446448549378945410
+      run-weapon=sword_3: 5875849510251255392
+      run-weapon=sword_4: 5486421356193248786
+      run-weapon=sword_5: 1706492000851085775
+      run-weapon=sword_6: -1030261400912170881
+      run-weapon=sword_7: -1847246446774485390
+      run-weapon=sword_8: 8108347653481531109
+      run-weapon=sword_9: 4553308316622938391
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

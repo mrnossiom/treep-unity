@@ -1,22 +1,31 @@
 fileFormatVersion: 2
-guid: 398cc68f0e5403046a89320addf8d1c7
+guid: 5fec87e63a2ab9a4280a41973568fb7d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3143353788242917093
-    second: hand-attack-upperarm_0
+      213: -159364661178901305
+    second: enemy-walk-body_0
   - first:
-      213: 738707816005115202
-    second: hand-attack-upperarm_1
+      213: -3451969040527319707
+    second: enemy-walk-body_1
   - first:
-      213: 7189721098809860929
-    second: hand-attack-upperarm_2
+      213: -1612491266162131599
+    second: enemy-walk-body_2
   - first:
-      213: 3256775502194240835
-    second: hand-attack-upperarm_3
+      213: 8873874070145241233
+    second: enemy-walk-body_3
   - first:
-      213: -3118120246379426807
-    second: hand-attack-upperarm_4
+      213: 1594478188132759306
+    second: enemy-walk-body_4
+  - first:
+      213: -7680770663123246020
+    second: enemy-walk-body_5
+  - first:
+      213: -1755018219772037855
+    second: enemy-walk-body_6
+  - first:
+      213: 3465173795431648102
+    second: enemy-walk-body_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -112,13 +121,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: hand-attack-upperarm_0
+      name: enemy-walk-body_0
       rect:
         serializedVersion: 2
-        x: 43
-        y: 145
-        width: 33
-        height: 38
+        x: 22
+        y: 127
+        width: 19
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -127,20 +136,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b19076042609064d0800000000000000
-      internalID: -3143353788242917093
+      spriteID: 7cc5eac5fa2d9cdf0800000000000000
+      internalID: -159364661178901305
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: hand-attack-upperarm_1
+      name: enemy-walk-body_1
       rect:
         serializedVersion: 2
-        x: 171
-        y: 145
-        width: 34
-        height: 37
+        x: 86
+        y: 127
+        width: 19
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -149,20 +158,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 24d1ac548da604a00800000000000000
-      internalID: 738707816005115202
+      spriteID: 56d19bb62742810d0800000000000000
+      internalID: -3451969040527319707
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: hand-attack-upperarm_2
+      name: enemy-walk-body_2
       rect:
         serializedVersion: 2
-        x: 299
-        y: 145
-        width: 35
-        height: 37
+        x: 151
+        y: 127
+        width: 18
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,20 +180,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 14361b02f3507c360800000000000000
-      internalID: 7189721098809860929
+      spriteID: 17d7cfc9cb74f99e0800000000000000
+      internalID: -1612491266162131599
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: hand-attack-upperarm_3
+      name: enemy-walk-body_3
       rect:
         serializedVersion: 2
-        x: 46
-        y: 23
-        width: 30
-        height: 32
+        x: 23
+        y: 63
+        width: 19
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,20 +202,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 34d6b796014623d20800000000000000
-      internalID: 3256775502194240835
+      spriteID: 1909e847375562b70800000000000000
+      internalID: 8873874070145241233
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: hand-attack-upperarm_4
+      name: enemy-walk-body_4
       rect:
         serializedVersion: 2
-        x: 174
-        y: 26
-        width: 31
-        height: 30
+        x: 86
+        y: 63
+        width: 20
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -215,8 +224,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 90cc99b08263ab4d0800000000000000
-      internalID: -3118120246379426807
+      spriteID: a07f2c5d679b02610800000000000000
+      internalID: 1594478188132759306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-walk-body_5
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 63
+        width: 21
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c342c4fb6cb686590800000000000000
+      internalID: -7680770663123246020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-walk-body_6
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 0
+        width: 21
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12536244a3ce4a7e0800000000000000
+      internalID: -1755018219772037855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-walk-body_7
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 0
+        width: 19
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66b02b92535c61030800000000000000
+      internalID: 3465173795431648102
       vertices: []
       indices: 
       edges: []
@@ -234,12 +309,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      hand-attack-upperarm_0: -3143353788242917093
-      hand-attack-upperarm_1: 738707816005115202
-      hand-attack-upperarm_2: 7189721098809860929
-      hand-attack-upperarm_3: 3256775502194240835
-      hand-attack-upperarm_4: -3118120246379426807
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
