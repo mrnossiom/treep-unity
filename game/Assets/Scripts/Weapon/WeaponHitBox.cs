@@ -1,17 +1,16 @@
 using System;
 using Treep.Player;
-using UnityEngine;
 
 namespace Treep.Weapon {
     public class WeaponHitBox {
-        public Collider2D Top;
-        public Collider2D Bottom;
-        public Collider2D Left;
-        public Collider2D Right;
+        public IShapesHitbox Top;
+        public IShapesHitbox Bottom;
+        public IShapesHitbox Left;
+        public IShapesHitbox Right;
 
         private Looking _currentlooking;
 
-        public Collider2D Current {
+        public IShapesHitbox Current {
             get {
                 return this._currentlooking switch {
                     Looking.Top => this.Top,
@@ -27,7 +26,7 @@ namespace Treep.Weapon {
             this._currentlooking = looking;
         }
 
-        public WeaponHitBox(Collider2D top, Collider2D bottom, Collider2D left, Collider2D right) {
+        public WeaponHitBox(IShapesHitbox top, IShapesHitbox bottom, IShapesHitbox left, IShapesHitbox right) {
             this.Top = top;
             this.Bottom = bottom;
             this.Left = left;

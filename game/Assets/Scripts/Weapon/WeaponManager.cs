@@ -1,6 +1,6 @@
 using System.Collections.Generic;
+using Treep.Player;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
 
 namespace Treep.Weapon {
     public enum Weapons {
@@ -9,21 +9,25 @@ namespace Treep.Weapon {
     }
 
     public class WeaponManager : MonoBehaviour {
+        public Stick stick;
+        public Spear spear;
         private Dictionary<Weapons, ICloseWeapon> _weapons;
 
         private Weapons _currentWeapon = Weapons.Stick;
-        public ICloseWeapon Weapon => this._weapons[this._currentWeapon];
+        private ICloseWeapon Weapon => this._weapons[this._currentWeapon];
+
+        public int Damage => this.Weapon.Damage;
+        public IShapesHitbox HitBox => this.Weapon.HitBox.Current;
+
+        public float AttackRate => this.Weapon.AttackRate;
 
 
         private void Awake() {
-            var stick = this.gameObject.AddComponent<Stick>();
-            var spear = this.gameObject.AddComponent<Spear>();
             this._weapons = new Dictionary<Weapons, ICloseWeapon>();
-            this._weapons.Add(Weapons.Stick, stick);
-            this._weapons.Add(Weapons.Spear, spear);
+            this._weapons.Add(Weapons.Stick, this.stick);
+            this._weapons.Add(Weapons.Spear, this.spear);
 
-            this._currentWeapon = Weapons.Stick;
-            //this.CurrentWeapon = this.gameObject.AddComponent<Stick>();
+            this._currentWeapon = Weapons.Spear;
         }
 
         public bool SwitchWeapon(Weapons newWeapon) {
@@ -31,13 +35,14 @@ namespace Treep.Weapon {
             return true;
         }
 
+        public void UpdateLooking(Looking currentLooking) {
+            this.Weapon.HitBox?.UpdateLooking(currentLooking);
+        }
+
         public void OnDrawGizmosSelected() {
-            if (this.Weapon.HitBox != null) {
-                Utils.Collider2DGizmoUtility.GizmosDraw2DCollider(this.Weapon.HitBox.Current);
-            }
-            else {
-                Debug.Log("Weapon.HitBox est null");
-            }
+            if (this.Weapon.HitBox == null) return;
+            Gizmos.color = Color.red;
+            this.Weapon.HitBox.Current.DrawGizmo(this.transform.position);
         }
 
         public override string ToString() {

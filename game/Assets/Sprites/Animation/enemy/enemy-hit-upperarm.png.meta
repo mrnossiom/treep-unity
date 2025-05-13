@@ -234,7 +234,12 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      enemy-hit-upperarm_0: -4014767239366212280
+      enemy-hit-upperarm_1: -694728502141671287
+      enemy-hit-upperarm_2: 655410733955454630
+      enemy-hit-upperarm_3: 3894798764439729498
+      enemy-hit-upperarm_4: 9185056260272429313
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

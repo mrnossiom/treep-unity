@@ -1,12 +1,9 @@
-using UnityEngine;
-
 namespace Treep.Weapon {
-    public class Stick : NoHitboxCloseWeapon {
+    public class Stick : CirleHitboxCloseWeapon {
         private void Awake() {
             this.Name = "Stick";
             this.Damage = 1;
             this.AttackRate = 4f;
-
             this.BaseAwake(2f);
         }
 

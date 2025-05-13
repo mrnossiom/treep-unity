@@ -234,7 +234,12 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      enemy-hit-weapon=none_0: 6502677359316359011
+      enemy-hit-weapon=none_1: 2422578447507605173
+      enemy-hit-weapon=none_2: 6632718460298877387
+      enemy-hit-weapon=none_3: 1633238144088131997
+      enemy-hit-weapon=none_4: 5926258339271643187
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

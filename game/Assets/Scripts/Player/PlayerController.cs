@@ -1,7 +1,5 @@
-using System;
 using Mirror;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Vector2 = UnityEngine.Vector2;
 
 namespace Treep.Player {
@@ -122,7 +120,6 @@ namespace Treep.Player {
         private void Awake() {
             this._body = this.GetComponent<Rigidbody2D>();
             this._collider2d = this.GetComponent<BoxCollider2D>();
-            Debug.Log(this._collider2d.transform.position);
             this._collider2d.size = this._standSize;
             this._collider2d.offset = this._standOffSet;
             this._spriteRenderer = this.GetComponent<SpriteRenderer>();
@@ -430,8 +427,7 @@ namespace Treep.Player {
             this._body.position += move.normalized * distance;
         }
 
-        private void OnTriggerEnter2DHitbox(Collider2D other) {
-            //Call when The hitbox of the player collide with something
+        private void OnTriggerEnter2D(Collider2D other) {
             if (other.CompareTag("Ladder") && !this.IsGrounded) {
                 var contactPoint = other.ClosestPoint(this.transform.position);
                 if (contactPoint.y < this.transform.position.y) {
@@ -462,23 +458,11 @@ namespace Treep.Player {
             }
         }
 
-        private void OnTriggerExit2DHitbox(Collider2D other) {
+        private void OnTriggerExit2D(Collider2D other) {
             if (!other.CompareTag(this._ladderTag)) return;
-
             this.IsClimbing = false;
             this.onTopOfLadder = false;
             this._velocity.y = 0;
-        }
-
-        private void OnTriggerEnter2D(Collider2D other) {
-            //While using this methode you also take when the weapons hitbox collide with some other Collider2D 
-
-            // here we check if this is the hitbox who is touching the other (_collider2d = hitbox)
-            if (this._collider2d.IsTouching(other)) this.OnTriggerEnter2DHitbox(other);
-        }
-
-        private void OnTriggerExit2D(Collider2D other) {
-            if (this._collider2d.IsTouching(other)) this.OnTriggerExit2DHitbox(other);
         }
     }
 }

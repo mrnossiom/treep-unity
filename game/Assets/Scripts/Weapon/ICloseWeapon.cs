@@ -1,6 +1,3 @@
-using JetBrains.Annotations;
-using UnityEngine;
-
 namespace Treep.Weapon {
     public interface ICloseWeapon {
         public string Name { get; set; }

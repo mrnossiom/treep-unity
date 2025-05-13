@@ -1,4 +1,4 @@
-using System.Diagnostics;
+using System.Collections.Generic;
 using System.Linq;
 using Treep.IA;
 using Treep.Weapon;
@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using Debug = UnityEngine.Debug;
 using Random = System.Random;
+using Rect = Treep.Weapon.Rect;
 
 namespace Treep.Player {
     public class PlayerCombat : MonoBehaviour {
@@ -19,6 +20,7 @@ namespace Treep.Player {
         [FormerlySerializedAs("ennemyLayerMask")]
         public LayerMask enemyLayerMask;
 
+        public List<GameObject> weapons;
         public KeyCode CloseAttackKey = KeyCode.L;
         public KeyCode DistAttackKey = KeyCode.O;
 
@@ -38,7 +40,8 @@ namespace Treep.Player {
             this.ControllerScript = this.GetComponent<PlayerController>();
             this.currentLooking = this.ControllerScript.looking;
             this.Pv = this.MaxPV;
-            this._weaponManager = this.gameObject.AddComponent<WeaponManager>();
+            this._weaponManager = this.gameObject.GetComponent<WeaponManager>();
+
             this._animator = this.GetComponent<Animator>();
             this._attackAnimator = this.attackPoint.GetComponent<Animator>();
         }
@@ -49,14 +52,8 @@ namespace Treep.Player {
             if (Time.time >= this.nextAttackTime) {
                 if (Input.GetKeyDown(this.CloseAttackKey)) {
                     this.CloseAttack();
-                    this.nextAttackTime = Time.time + 1f / this._weaponManager.Weapon.AttackRate;
+                    this.nextAttackTime = Time.time + 1f / this._weaponManager.AttackRate;
                 }
-            }
-
-            if (Input.GetKeyDown(KeyCode.P)) {
-                Debug.Log($"{this._weaponManager.Weapon}");
-                Debug.Log($"{this.Pv}");
-                Debug.Log(this.attackPoint.position);
             }
         }
 
@@ -78,19 +75,8 @@ namespace Treep.Player {
                     break;
             }
 
-            if (this._weaponManager == null) {
-                Debug.Log("this._weaponManager");
-            }
 
-            if (this._weaponManager.Weapon == null) {
-                Debug.Log("this._weaponManager.Weapon");
-            }
-
-            if (this._weaponManager.Weapon.HitBox == null) {
-                Debug.Log("this._weaponManager.Weapon.HitBox");
-            }
-
-            this._weaponManager.Weapon.HitBox?.UpdateLooking(this.currentLooking);
+            this._weaponManager.UpdateLooking(this.currentLooking);
         }
 
         private void CloseAttack() {
@@ -101,18 +87,12 @@ namespace Treep.Player {
             this._attackAnimator.SetTrigger("Attack");
 
 
-            //check enemy
-            if (this._weaponManager.Weapon.HitBox.Current == null) {
-                Debug.Log(
-                    "this._currentCloseWeapon.HitBox.Current est null (SUS)" +
-                    this._weaponManager.Weapon.ToString());
-            }
-
-            var hitEnnemys = this.GetEnnemyIn(this._weaponManager.Weapon.HitBox.Current);
+            //check eneny
+            var hitEnemys = this.GetEnnemyIn(this._weaponManager.HitBox);
             //Damage to ennemy
-            foreach (var ennemy in hitEnnemys) {
-                Debug.Log($"{ennemy.name} took {this._weaponManager.Weapon.Damage} damage");
-                ennemy.GetComponent<IEnemy>().GetHitted(this._weaponManager.Weapon.Damage);
+            foreach (var ennemy in hitEnemys) {
+                Debug.Log($"{ennemy.name} took {this._weaponManager.Damage} damage");
+                ennemy.GetComponent<IEnemy>().GetHitted(this._weaponManager.Damage);
             }
         }
 
@@ -120,13 +100,54 @@ namespace Treep.Player {
             this._animator.SetTrigger("isDistAttacking");
         }
 
-        public Collider2D[] GetEnnemyIn(Collider2D areaCollider) {
+        public Collider2D[] GetEnnemyIn(IShapesHitbox shape) {
+            var results = new Collider2D[50];
+            var count = 0;
+
             var filter = new ContactFilter2D();
             filter.SetLayerMask(this.enemyLayerMask);
-            var results = new Collider2D[50]; // Taille max des résultats
-            var count = areaCollider.Overlap(filter, results);
-            // Si tu veux exactement le tableau des résultats trouvés
+            filter.useTriggers = true;
+
+            if (shape is Circle circle) {
+                count = Physics2D.OverlapCircle(circle.GetPos(this.transform.position), circle.Radius, filter, results);
+            }
+            else if (shape is Rect rect) {
+                count = Physics2D.OverlapBox(rect.GetPos(this.transform.position), rect.Size, 0f, filter, results);
+            }
+            else {
+                Debug.LogWarning("unknown shape");
+            }
+
             return results.Take(count).ToArray();
+        }
+
+        private void OnDrawGizmos() {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawSphere(this.To3D(PlayerCombat.AttackPointTop) + this.transform.position, 0.1f);
+            Gizmos.DrawSphere(this.To3D(PlayerCombat.AttackPointBottom) + this.transform.position, 0.1f);
+            Gizmos.DrawSphere(this.To3D(PlayerCombat.AttackPointRight) + this.transform.position, 0.1f);
+            Gizmos.DrawSphere(this.To3D(PlayerCombat.AttackPointLeft) + this.transform.position, 0.1f);
+
+            Gizmos.color = Color.black;
+
+            switch (this.currentLooking) {
+                case Looking.Top:
+                    Gizmos.DrawSphere(this.To3D(PlayerCombat.AttackPointTop) + this.transform.position, 0.1f);
+                    break;
+                case Looking.Bottom:
+                    Gizmos.DrawSphere(this.To3D(PlayerCombat.AttackPointBottom) + this.transform.position, 0.1f);
+                    break;
+                case Looking.Right:
+                    Gizmos.DrawSphere(this.To3D(PlayerCombat.AttackPointRight) + this.transform.position, 0.1f);
+                    break;
+                case Looking.Left:
+                    Gizmos.DrawSphere(this.To3D(PlayerCombat.AttackPointLeft) + this.transform.position, 0.1f);
+                    break;
+            }
+        }
+
+        public Vector3 To3D(Vector2 pos) {
+            return new Vector3(pos.x, pos.y, 0f);
         }
     }
 }
