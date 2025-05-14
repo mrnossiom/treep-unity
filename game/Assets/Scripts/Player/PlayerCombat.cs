@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Treep.IA;
@@ -14,6 +15,12 @@ namespace Treep.Player {
         public static Vector2 AttackPointLeft = new(-1.5f, 0f);
         public static Vector2 AttackPointTop = new(0f, 1.75f);
         public static Vector2 AttackPointBottom = new(0f, -1.75f);
+
+        private static readonly int IsCloseAttacking = Animator.StringToHash("isCloseAttacking");
+        private static readonly int Random = Animator.StringToHash("Random");
+        private static readonly int Attack = Animator.StringToHash("Attack");
+        private static readonly int IsDistAttacking = Animator.StringToHash("isDistAttacking");
+
         public Transform attackPoint;
         private Animator _attackAnimator;
 
@@ -30,16 +37,16 @@ namespace Treep.Player {
         private WeaponManager _weaponManager;
         private PlayerController ControllerScript;
 
-        private Looking currentLooking;
+        private LookDirection _currentLookDirection;
 
         private float nextAttackTime;
-        private int Pv { get; set; }
+        private int Health { get; set; }
 
 
         public void Awake() {
             this.ControllerScript = this.GetComponent<PlayerController>();
-            this.currentLooking = this.ControllerScript.looking;
-            this.Pv = this.MaxPV;
+            this._currentLookDirection = this.ControllerScript.lookDirection;
+            this.Health = this.MaxPV;
             this._weaponManager = this.gameObject.GetComponent<WeaponManager>();
 
             this._animator = this.GetComponent<Animator>();
@@ -59,48 +66,47 @@ namespace Treep.Player {
 
 
         private void UpdateAttackPoint() {
-            this.currentLooking = this.ControllerScript.looking;
-            switch (this.currentLooking) {
-                case Looking.Right:
+            this._currentLookDirection = this.ControllerScript.lookDirection;
+            switch (this._currentLookDirection) {
+                case LookDirection.Right:
                     this.attackPoint.position = PlayerCombat.AttackPointRight + (Vector2)this.transform.position;
                     break;
-                case Looking.Left:
+                case LookDirection.Left:
                     this.attackPoint.position = PlayerCombat.AttackPointLeft + (Vector2)this.transform.position;
                     break;
-                case Looking.Top:
+                case LookDirection.Top:
                     this.attackPoint.position = PlayerCombat.AttackPointTop + (Vector2)this.transform.position;
                     break;
-                case Looking.Bottom:
+                case LookDirection.Bottom:
                     this.attackPoint.position = PlayerCombat.AttackPointBottom + (Vector2)this.transform.position;
                     break;
             }
 
 
-            this._weaponManager.UpdateLooking(this.currentLooking);
+            this._weaponManager.UpdateLooking(this._currentLookDirection);
         }
 
         private void CloseAttack() {
-            // animation
-            this._animator.SetTrigger("isCloseAttacking");
+            this._animator.SetTrigger(PlayerCombat.IsCloseAttacking);
 
-            this._attackAnimator.SetInteger("Random", new Random().Next(6));
-            this._attackAnimator.SetTrigger("Attack");
+            this._attackAnimator.SetInteger(PlayerCombat.Random, new Random().Next(6));
+            this._attackAnimator.SetTrigger(PlayerCombat.Attack);
 
 
-            //check eneny
-            var hitEnemys = this.GetEnnemyIn(this._weaponManager.HitBox);
-            //Damage to ennemy
-            foreach (var ennemy in hitEnemys) {
-                Debug.Log($"{ennemy.name} took {this._weaponManager.Damage} damage");
-                ennemy.GetComponent<IEnemy>().GetHitted(this._weaponManager.Damage);
+            // check enemy
+            var enemiesToHit = this.GetEnemyIn(this._weaponManager.HitBox);
+            // Damage to enemy
+            foreach (var enemy in enemiesToHit) {
+                Debug.Log($"{enemy.name} took {this._weaponManager.Damage} damage");
+                enemy.GetComponent<IEnemy>().Hit(this._weaponManager.Damage);
             }
         }
 
         private void DistAttack() {
-            this._animator.SetTrigger("isDistAttacking");
+            this._animator.SetTrigger(PlayerCombat.IsDistAttacking);
         }
 
-        public Collider2D[] GetEnnemyIn(IShapesHitbox shape) {
+        private Collider2D[] GetEnemyIn(IShapesHitbox shape) {
             var results = new Collider2D[50];
             var count = 0;
 
@@ -109,10 +115,12 @@ namespace Treep.Player {
             filter.useTriggers = true;
 
             if (shape is Circle circle) {
-                count = Physics2D.OverlapCircle(circle.GetPos(this.transform.position), circle.Radius, filter, results);
+                count = Physics2D.OverlapCircle(shape.GetGlobalPosition(this.transform.position), circle.Radius,
+                    filter, results);
             }
             else if (shape is Rect rect) {
-                count = Physics2D.OverlapBox(rect.GetPos(this.transform.position), rect.Size, 0f, filter, results);
+                count = Physics2D.OverlapBox(shape.GetGlobalPosition(this.transform.position), rect.Size, 0f, filter,
+                    results);
             }
             else {
                 Debug.LogWarning("unknown shape");
@@ -123,31 +131,29 @@ namespace Treep.Player {
 
         private void OnDrawGizmos() {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawSphere(this.To3D(PlayerCombat.AttackPointTop) + this.transform.position, 0.1f);
-            Gizmos.DrawSphere(this.To3D(PlayerCombat.AttackPointBottom) + this.transform.position, 0.1f);
-            Gizmos.DrawSphere(this.To3D(PlayerCombat.AttackPointRight) + this.transform.position, 0.1f);
-            Gizmos.DrawSphere(this.To3D(PlayerCombat.AttackPointLeft) + this.transform.position, 0.1f);
+            Gizmos.DrawSphere((Vector3)PlayerCombat.AttackPointTop + this.transform.position, 0.1f);
+            Gizmos.DrawSphere((Vector3)PlayerCombat.AttackPointBottom + this.transform.position, 0.1f);
+            Gizmos.DrawSphere((Vector3)PlayerCombat.AttackPointRight + this.transform.position, 0.1f);
+            Gizmos.DrawSphere((Vector3)PlayerCombat.AttackPointLeft + this.transform.position, 0.1f);
 
             Gizmos.color = Color.black;
 
-            switch (this.currentLooking) {
-                case Looking.Top:
-                    Gizmos.DrawSphere(this.To3D(PlayerCombat.AttackPointTop) + this.transform.position, 0.1f);
+            switch (this._currentLookDirection) {
+                case LookDirection.Top:
+                    Gizmos.DrawSphere((Vector3)PlayerCombat.AttackPointTop + this.transform.position, 0.1f);
                     break;
-                case Looking.Bottom:
-                    Gizmos.DrawSphere(this.To3D(PlayerCombat.AttackPointBottom) + this.transform.position, 0.1f);
+                case LookDirection.Bottom:
+                    Gizmos.DrawSphere((Vector3)PlayerCombat.AttackPointBottom + this.transform.position, 0.1f);
                     break;
-                case Looking.Right:
-                    Gizmos.DrawSphere(this.To3D(PlayerCombat.AttackPointRight) + this.transform.position, 0.1f);
+                case LookDirection.Right:
+                    Gizmos.DrawSphere((Vector3)PlayerCombat.AttackPointRight + this.transform.position, 0.1f);
                     break;
-                case Looking.Left:
-                    Gizmos.DrawSphere(this.To3D(PlayerCombat.AttackPointLeft) + this.transform.position, 0.1f);
+                case LookDirection.Left:
+                    Gizmos.DrawSphere((Vector3)PlayerCombat.AttackPointLeft + this.transform.position, 0.1f);
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
-        }
-
-        public Vector3 To3D(Vector2 pos) {
-            return new Vector3(pos.x, pos.y, 0f);
         }
     }
 }

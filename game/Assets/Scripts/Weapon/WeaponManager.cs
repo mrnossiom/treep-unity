@@ -17,7 +17,7 @@ namespace Treep.Weapon {
         private ICloseWeapon Weapon => this._weapons[this._currentWeapon];
 
         public int Damage => this.Weapon.Damage;
-        public IShapesHitbox HitBox => this.Weapon.HitBox.Current;
+        public IShapesHitbox HitBox => this.Weapon.Hitbox.Current;
 
         public float AttackRate => this.Weapon.AttackRate;
 
@@ -35,14 +35,14 @@ namespace Treep.Weapon {
             return true;
         }
 
-        public void UpdateLooking(Looking currentLooking) {
-            this.Weapon.HitBox?.UpdateLooking(currentLooking);
+        public void UpdateLooking(LookDirection currentLookDirection) {
+            this.Weapon.Hitbox?.UpdateLooking(currentLookDirection);
         }
 
         public void OnDrawGizmosSelected() {
-            if (this.Weapon.HitBox == null) return;
+            if (this.Weapon.Hitbox == null) return;
             Gizmos.color = Color.red;
-            this.Weapon.HitBox.Current.DrawGizmo(this.transform.position);
+            this.Weapon.Hitbox.Current.DrawGizmo(this.transform.position);
         }
 
         public override string ToString() {

@@ -1,5 +1,5 @@
 namespace Treep.Weapon {
-    public class Stick : CirleHitboxCloseWeapon {
+    public class Stick : CircleHitboxCloseWeapon {
         private void Awake() {
             this.Name = "Stick";
             this.Damage = 1;

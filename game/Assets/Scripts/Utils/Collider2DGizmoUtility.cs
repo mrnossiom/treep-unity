@@ -72,16 +72,14 @@ namespace Treep.Utils {
             var topCenter = pos + up * (height / 2f - radius);
             var bottomCenter = pos - up * (height / 2f - radius);
 
-            Collider2DGizmoUtility.DrawSemiCircle(topCenter, radius, segments, 0f, dir == CapsuleDirection2D.Vertical);
-            Collider2DGizmoUtility.DrawSemiCircle(bottomCenter, radius, segments, 180f,
-                dir == CapsuleDirection2D.Vertical);
+            Collider2DGizmoUtility.DrawSemiCircle(topCenter, radius, segments, 0f);
+            Collider2DGizmoUtility.DrawSemiCircle(bottomCenter, radius, segments, 180f);
 
             Gizmos.DrawLine(topCenter + right * radius, bottomCenter + right * radius);
             Gizmos.DrawLine(topCenter - right * radius, bottomCenter - right * radius);
         }
 
-        private static void DrawSemiCircle(Vector3 center, float radius, int segments, float startAngle,
-            bool vertical) {
+        private static void DrawSemiCircle(Vector3 center, float radius, int segments, float startAngle) {
             var angleStep = 180f / segments;
             var prevPoint = center + Quaternion.Euler(0, 0, startAngle) * Vector3.right * radius;
             for (var i = 1; i <= segments; i++) {
@@ -103,7 +101,7 @@ namespace Treep.Utils {
 
             if (loop) {
                 Gizmos.DrawLine(
-                    tr.TransformPoint(offset + points[points.Length - 1]),
+                    tr.TransformPoint(offset + points[^1]),
                     tr.TransformPoint(offset + points[0])
                 );
             }

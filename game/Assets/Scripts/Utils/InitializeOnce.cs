@@ -1,26 +1,22 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-namespace Treep.Utils
-{
-    public class InitializeOnce : MonoBehaviour
-    {
+namespace Treep.Utils {
+    public class InitializeOnce : MonoBehaviour {
         [SerializeField] private List<GameObject> objects;
 
-        static bool _initialized = false;
+        private static bool _initialized = false;
 
-        void Awake()
-        {
-            if (_initialized) return;
-            _initialized = true;
+        private void Awake() {
+            if (InitializeOnce._initialized) return;
+            InitializeOnce._initialized = true;
 
-            foreach (var obj in objects)
-            {
-                var target = Instantiate(obj);
-                DontDestroyOnLoad(target);
+            foreach (var target in this.objects.Select(Object.Instantiate)) {
+                Object.DontDestroyOnLoad(target);
             }
 
-            Destroy(gameObject);
+            Object.Destroy(this.gameObject);
         }
     }
 }

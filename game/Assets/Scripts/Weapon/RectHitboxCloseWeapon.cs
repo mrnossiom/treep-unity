@@ -6,34 +6,25 @@ namespace Treep.Weapon {
         public string Name { get; set; }
         public int Damage { get; set; }
         public float AttackRate { get; set; }
-        public WeaponHitBox HitBox { get; set; }
+        public WeaponHitbox Hitbox { get; set; }
 
 
-        public Rect Top { get; set; }
-        public Rect Bottom { get; set; }
-        public Rect Left { get; set; }
-        public Rect Right { get; set; }
+        private Rect Top { get; set; }
+        private Rect Bottom { get; set; }
+        private Rect Left { get; set; }
+        private Rect Right { get; set; }
 
-        protected void BaseAwake((int width, int height) topSize, (int width, int height) rightsize) {
-            this.Top = new Rect(topSize.width, topSize.height);
-            this.Bottom = new Rect(topSize.width, -topSize.height);
-            this.Left = new Rect(-rightsize.width, rightsize.height);
-            this.Right = new Rect(rightsize.width, rightsize.height);
+        protected void SetAttackHitbox(Vector2 topSize, Vector2 rightSize) {
+            this.Top = new Rect(topSize,
+                PlayerCombat.AttackPointTop + new Vector2(0f, topSize.y / 2));
+            this.Bottom = new Rect(new Vector2(topSize.x, -topSize.y),
+                PlayerCombat.AttackPointBottom + new Vector2(0f, -topSize.y / 2));
+            this.Left = new Rect(new Vector2(-rightSize.x, rightSize.y),
+                PlayerCombat.AttackPointLeft + new Vector2(-rightSize.x / 4, 0f));
+            this.Right = new Rect(rightSize,
+                PlayerCombat.AttackPointRight + new Vector2(rightSize.x / 4, 0f));
 
-            this.Top.LocalPos = PlayerCombat.AttackPointTop;
-            this.Top.LocalPos += new Vector2(0f, this.Top.height / 2);
-
-            this.Bottom.LocalPos = PlayerCombat.AttackPointBottom;
-            this.Bottom.LocalPos += new Vector2(0f, this.Bottom.height / 2);
-
-            this.Left.LocalPos = PlayerCombat.AttackPointLeft;
-            this.Left.LocalPos += new Vector2(this.Left.width / 4, 0f);
-
-
-            this.Right.LocalPos = PlayerCombat.AttackPointRight;
-            this.Right.LocalPos += new Vector2(this.Right.width / 4, 0f);
-
-            this.HitBox = new WeaponHitBox(this.Top, this.Bottom, this.Left, this.Right);
+            this.Hitbox = new WeaponHitbox(this.Top, this.Bottom, this.Left, this.Right);
         }
     }
 }

@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 namespace Treep.IA {
     public class BasicEnemy : MonoBehaviour, IEnemy {
+        private static readonly int GetHit = Animator.StringToHash("GetHit");
+
         public int PVMax;
 
         public Rigidbody2D _body;
@@ -28,37 +30,37 @@ namespace Treep.IA {
             this._animator = this.GetComponent<Animator>();
         }
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
         private void Start() {
             this.PV = this.PVMax;
             this._contactFilter.useLayerMask = true;
             this._contactFilter.layerMask = LayerMask.GetMask("Wall");
         }
 
-        // Update is called once per frame v
         private void FixedUpdate() {
-            if (this._moveEnabled) {
-                this._animator.SetBool("GetHit", false);
-                if (this.IsWall() && this.PV > 0) {
-                    this._direction = this._direction * -1;
-                    this._spriteRenderer.flipX = this._direction < 0;
-                }
+            if (!this._moveEnabled) return;
 
-                this._body.linearVelocity = new Vector2(this._direction * this.speed, this._body.linearVelocity.y);
+            this._animator.SetBool(BasicEnemy.GetHit, false);
+
+            if (this.IsWall() && this.PV > 0) {
+                this._direction = this._direction * -1;
+                this._spriteRenderer.flipX = this._direction < 0;
             }
+
+            this._body.linearVelocity = new Vector2(this._direction * this.speed, this._body.linearVelocity.y);
         }
 
         public int PV { get; set; }
 
-        public void GetHitted(int damageTook) {
-            Debug.Log($"{this} took {damageTook} damage now Pv = {this.PV - damageTook}");
+        public void Hit(int damageTook) {
             this.PV -= damageTook;
+
             this.UpdateHealBar();
+
             if (this.PV <= 0) {
                 this.Die();
             }
             else {
-                this._animator.SetBool("GetHit", true);
+                this._animator.SetBool(BasicEnemy.GetHit, true);
             }
         }
 
@@ -70,24 +72,15 @@ namespace Treep.IA {
         }
 
         public void Die() {
-            Debug.Log(this + " Dead");
-
-            //Die animation 
+            // Die animation 
             this.GetComponent<Collider2D>().enabled = false;
             this.GetComponent<SpriteRenderer>().enabled = false;
             this.enabled = false;
         }
 
         private void UpdateHealBar() {
-            var raportlife = this.PV / (float)this.PVMax;
-            this._pvBar.GetComponent<RectTransform>().localScale = new Vector3(raportlife, 1, 1);
-        }
-
-
-        public override string ToString() {
-            return $"name : {this.transform.name}" +
-                   $"PV : {this.PV}" +
-                   "Degats : ";
+            var lifeRatio = this.PV / (float)this.PVMax;
+            this._pvBar.GetComponent<RectTransform>().localScale = new Vector3(lifeRatio, 1, 1);
         }
     }
 }

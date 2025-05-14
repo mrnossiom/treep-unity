@@ -8,6 +8,6 @@ namespace Treep.Weapon {
         /// </summary>
         public float AttackRate { get; set; }
 
-        public WeaponHitBox HitBox { get; set; }
+        public WeaponHitbox Hitbox { get; set; }
     }
 }

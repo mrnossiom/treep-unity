@@ -1,5 +1,6 @@
 using Mirror;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Vector2 = UnityEngine.Vector2;
 
 namespace Treep.Player {
@@ -11,7 +12,7 @@ namespace Treep.Player {
         Landed
     }
 
-    public enum Looking {
+    public enum LookDirection {
         Top,
         Right,
         Bottom,
@@ -98,7 +99,7 @@ namespace Treep.Player {
 
         private bool IsClimbing { get; set; }
 
-        public Looking looking;
+        [FormerlySerializedAs("looking")] public LookDirection lookDirection;
 
         private bool _allSpriteFlipX;
 
@@ -222,11 +223,11 @@ namespace Treep.Player {
             {
                 if (this._move.y > 0) // cible top
                 {
-                    this.looking = Looking.Top;
+                    this.lookDirection = LookDirection.Top;
                 }
                 else if (this._move.y < 0) // cible bottom
                 {
-                    this.looking = Looking.Bottom;
+                    this.lookDirection = LookDirection.Bottom;
                 }
 
                 if (this._move.x != 0 && !this.IsClimbing) {
@@ -242,7 +243,7 @@ namespace Treep.Player {
                     this.AllSpriteFlipX = true;
                 }
 
-                this.looking = this.AllSpriteFlipX ? Looking.Left : Looking.Right;
+                this.lookDirection = this.AllSpriteFlipX ? LookDirection.Left : LookDirection.Right;
             }
         }
 
