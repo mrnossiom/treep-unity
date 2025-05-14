@@ -22,7 +22,6 @@ namespace Treep.State {
 
             var characterMessage = new CreateCharacterMessage {
                 Username = Settings.Singleton.username,
-                Color = Settings.Singleton.color
             };
             NetworkClient.Send(characterMessage);
         }
@@ -33,7 +32,6 @@ namespace Treep.State {
 
             player.SetSimulated(false);
             player.username = message.Username;
-            player.color = message.Color;
 
             NetworkServer.AddPlayerForConnection(conn, playerObj);
             playerObj.GetComponent<NetworkIdentity>().AssignClientAuthority(conn);
