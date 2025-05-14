@@ -16,15 +16,15 @@ namespace Treep.Utils {
 
         public int Count {
             get {
-                _actualDictionary = ToActualDictionary();
-                return _actualDictionary.Count;
+                this._actualDictionary = this.ToActualDictionary();
+                return this._actualDictionary.Count;
             }
         }
 
         public TValue this[TKey index] {
             get {
-                _actualDictionary = ToActualDictionary();
-                return _actualDictionary[index];
+                this._actualDictionary = this.ToActualDictionary();
+                return this._actualDictionary[index];
             }
         }
 
@@ -32,14 +32,16 @@ namespace Treep.Utils {
             FromActualDictionary(Dictionary<TKey, TValue> actualDictionary) {
             List<PseudoKeyValuePair<TKey, TValue>> pseudoDictionary = new();
 
-            foreach (var pair in actualDictionary)
-                pseudoDictionary.Add(new(pair.Key, pair.Value));
+            foreach (var pair in actualDictionary) {
+                pseudoDictionary.Add(new PseudoKeyValuePair<TKey, TValue>(pair.Key, pair.Value));
+            }
 
             return pseudoDictionary;
         }
 
-        public List<PseudoKeyValuePair<TKey, TValue>> FromActualDictionary()
-            => FromActualDictionary(_actualDictionary);
+        public List<PseudoKeyValuePair<TKey, TValue>> FromActualDictionary() {
+            return this.FromActualDictionary(this._actualDictionary);
+        }
 
         // FROM PSEUDO TO DICTIONARY
 
@@ -47,8 +49,9 @@ namespace Treep.Utils {
             ToActualDictionary() {
             Dictionary<TKey, TValue> dictionary = new();
 
-            foreach (var entry in entries)
+            foreach (var entry in this.entries) {
                 dictionary.Add(entry.Key, entry.Value);
+            }
 
             return dictionary;
         }
@@ -56,25 +59,25 @@ namespace Treep.Utils {
         // OPERATIONS
 
         public void Add(TKey key, TValue value) {
-            _actualDictionary = ToActualDictionary();
-            _actualDictionary.Add(key, value);
-            entries = FromActualDictionary();
+            this._actualDictionary = this.ToActualDictionary();
+            this._actualDictionary.Add(key, value);
+            this.entries = this.FromActualDictionary();
         }
 
         public void Remove(TKey key) {
-            _actualDictionary = ToActualDictionary();
-            _actualDictionary.Remove(key);
-            entries = FromActualDictionary();
+            this._actualDictionary = this.ToActualDictionary();
+            this._actualDictionary.Remove(key);
+            this.entries = this.FromActualDictionary();
         }
 
         public void Clear() {
-            _actualDictionary.Clear();
-            entries = new();
+            this._actualDictionary.Clear();
+            this.entries = new List<PseudoKeyValuePair<TKey, TValue>>();
         }
 
         public TValue TryGetValue(TKey key) {
-            _actualDictionary = ToActualDictionary();
-            _actualDictionary.TryGetValue(key, out var value);
+            this._actualDictionary = this.ToActualDictionary();
+            this._actualDictionary.TryGetValue(key, out var value);
             return value;
         }
     }
@@ -84,8 +87,8 @@ namespace Treep.Utils {
         [SerializeField] public TKey key;
         [SerializeField] private TValue value;
 
-        public TKey Key => key;
-        public TValue Value => value;
+        public TKey Key => this.key;
+        public TValue Value => this.value;
 
         public PseudoKeyValuePair(TKey key, TValue value) {
             this.key = key;

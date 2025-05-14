@@ -1,4 +1,3 @@
-using System;
 using Mirror;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -13,7 +12,7 @@ namespace Treep.Player {
         Landed
     }
 
-    public enum Looking {
+    public enum LookDirection {
         Top,
         Right,
         Bottom,
@@ -100,7 +99,7 @@ namespace Treep.Player {
 
         private bool IsClimbing { get; set; }
 
-        public Looking looking;
+        [FormerlySerializedAs("looking")] public LookDirection lookDirection;
 
         private bool _allSpriteFlipX;
 
@@ -153,6 +152,7 @@ namespace Treep.Player {
                 this.UpdateJump();
                 this.UpdateClimb();
                 this.UpdateDash();
+                this.UpdateHitboxCollider();
             }
             else {
                 this._move.x = 0;
@@ -162,6 +162,8 @@ namespace Treep.Player {
             this._targetVelocity = Vector2.zero;
             this.ComputeVelocity();
         }
+
+        private void UpdateHitboxCollider() { }
 
         private void UpdateDash() {
             if (this.IsGrounded && Time.time >= this._lastDashTime + this._dashCooldown) {
@@ -191,7 +193,6 @@ namespace Treep.Player {
 
         private void UpdateClimb() {
             this._animator.SetBool(PlayerController.AnimIsClimbing, this.IsClimbing);
-
             this._animator.SetFloat(PlayerController.AnimClimbSpeed, this._move.y);
         }
 
@@ -222,11 +223,11 @@ namespace Treep.Player {
             {
                 if (this._move.y > 0) // cible top
                 {
-                    this.looking = Looking.Top;
+                    this.lookDirection = LookDirection.Top;
                 }
                 else if (this._move.y < 0) // cible bottom
                 {
-                    this.looking = Looking.Bottom;
+                    this.lookDirection = LookDirection.Bottom;
                 }
 
                 if (this._move.x != 0 && !this.IsClimbing) {
@@ -242,7 +243,7 @@ namespace Treep.Player {
                     this.AllSpriteFlipX = true;
                 }
 
-                this.looking = this.AllSpriteFlipX ? Looking.Left : Looking.Right;
+                this.lookDirection = this.AllSpriteFlipX ? LookDirection.Left : LookDirection.Right;
             }
         }
 
@@ -458,10 +459,8 @@ namespace Treep.Player {
             }
         }
 
-
         private void OnTriggerExit2D(Collider2D other) {
             if (!other.CompareTag(this._ladderTag)) return;
-
             this.IsClimbing = false;
             this.onTopOfLadder = false;
             this._velocity.y = 0;
