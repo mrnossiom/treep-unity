@@ -11,10 +11,12 @@ namespace Treep.Weapon {
     public class WeaponManager : MonoBehaviour {
         public Stick stick;
         public Spear spear;
-        private Dictionary<Weapons, ICloseWeapon> _weapons;
+        private Dictionary<Weapons, ICloseWeapon> _weapons = new();
 
         private Weapons _currentWeapon = Weapons.Stick;
-        private ICloseWeapon Weapon => this._weapons[this._currentWeapon];
+
+        private ICloseWeapon Weapon => this._weapons.Count == 0 ? null : this._weapons[this._currentWeapon];
+
 
         public int Damage => this.Weapon.Damage;
         public IShapesHitbox HitBox => this.Weapon.Hitbox.Current;
@@ -40,7 +42,7 @@ namespace Treep.Weapon {
         }
 
         public void OnDrawGizmosSelected() {
-            if (this.Weapon.Hitbox == null) return;
+            if (this.Weapon == null) return;
             Gizmos.color = Color.red;
             this.Weapon.Hitbox.Current.DrawGizmo(this.transform.position);
         }
