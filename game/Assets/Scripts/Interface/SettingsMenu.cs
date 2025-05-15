@@ -35,16 +35,6 @@ namespace Treep.Interface {
             ApplyVolume("SFXVolume", sfxSlider.value);
         }
 
-        private void OnMusicVolumeChanged(float value) {
-            Settings.Singleton.SetMusicVolume(value);
-            ApplyVolume("MusicVolume", value);
-        }
-
-        private void OnSFXVolumeChanged(float value) {
-            Settings.Singleton.SetSFXVolume(value);
-            ApplyVolume("SFXVolume", value);
-        }
-
         private void ApplyVolume(string param, float value) {
             audioMixer.SetFloat(param, Mathf.Log10(Mathf.Max(value, 0.0001f)) * 20f);
         }
