@@ -8,8 +8,8 @@ namespace Treep.State {
         [SerializeField] public string username;
 
         [Header("Audio Settings")]
-        [Range(0.0001f, 1f)] public float musicVolume = 0.75f;
-        [Range(0.0001f, 1f)] public float sfxVolume = 0.75f;
+        [Range(0f, 1f)] public float musicVolume = 0.75f;
+        [Range(0f, 1f)] public float sfxVolume = 0.75f;
 
         private void Awake() {
             if (Singleton != null && Singleton != this) {
@@ -23,29 +23,35 @@ namespace Treep.State {
             LoadPreferences();
         }
 
-        public void SetMusicVolume(float value) {
-            musicVolume = Mathf.Clamp(value, 0.0001f, 1f);
+        public void SetMusicVolume(float percentValue) {
+            musicVolume = Mathf.Clamp01(percentValue / 100f);
             PlayerPrefs.SetFloat("MusicVolume", musicVolume);
+            PlayerPrefs.Save();
         }
 
-        public void SetSFXVolume(float value) {
-            sfxVolume = Mathf.Clamp(value, 0.0001f, 1f);
+        public void SetSFXVolume(float percentValue) {
+            sfxVolume = Mathf.Clamp01(percentValue / 100f);
             PlayerPrefs.SetFloat("SFXVolume", sfxVolume);
+            PlayerPrefs.Save();
+        }
+
+        public float GetMusicVolumePercent() {
+            return musicVolume * 100f;
+        }
+
+        public float GetSFXVolumePercent() {
+            return sfxVolume * 100f;
         }
 
         public void LoadPreferences() {
             username = PlayerPrefs.GetString("Username", "Player");
-            musicVolume = PlayerPrefs.GetFloat("MusicVolume", 0.75f);
-            sfxVolume = PlayerPrefs.GetFloat("SFXVolume", 0.75f);
+            musicVolume = Mathf.Clamp01(PlayerPrefs.GetFloat("MusicVolume", 0.75f));
+            sfxVolume = Mathf.Clamp01(PlayerPrefs.GetFloat("SFXVolume", 0.75f));
         }
 
         public void SaveUserSettings() {
             PlayerPrefs.SetString("Username", username);
-        }
-
-        public void ResetPreferences() {
-            PlayerPrefs.DeleteAll();
-            LoadPreferences();
+            PlayerPrefs.Save();
         }
     }
 }

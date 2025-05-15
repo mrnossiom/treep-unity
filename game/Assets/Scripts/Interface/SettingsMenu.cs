@@ -17,24 +17,20 @@ namespace Treep.Interface {
         [SerializeField] private AudioMixer audioMixer;
 
         private void Start() {
-            // Close button
             closeButton.onClick.AddListener(() => gameObject.SetActive(false));
-
-            // Username input
+            
             usernameInput.text = Settings.Singleton.username;
             usernameInput.onEndEdit.AddListener(username => {
                 Settings.Singleton.username = username;
                 Settings.Singleton.SaveUserSettings();
             });
+            
+            musicSlider.value = Settings.Singleton.GetMusicVolumePercent();
+            sfxSlider.value = Settings.Singleton.GetSFXVolumePercent();
 
-            // Volume sliders
-            musicSlider.value = Settings.Singleton.musicVolume;
-            sfxSlider.value = Settings.Singleton.sfxVolume;
-
-            musicSlider.onValueChanged.AddListener(OnMusicVolumeChanged);
-            sfxSlider.onValueChanged.AddListener(OnSFXVolumeChanged);
-
-            // Apply on start
+            musicSlider.onValueChanged.AddListener(Settings.Singleton.SetMusicVolume);
+            sfxSlider.onValueChanged.AddListener(Settings.Singleton.SetSFXVolume);
+            
             ApplyVolume("MusicVolume", musicSlider.value);
             ApplyVolume("SFXVolume", sfxSlider.value);
         }
