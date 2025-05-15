@@ -15,9 +15,6 @@ namespace Treep.Player {
 
         [SyncVar(hook = nameof(OnUsernameChanged))]
         public string username;
-
-        [SyncVar(hook = nameof(OnColorChanged))]
-        public string color;
         
         [SyncVar]
         public bool isReady = false;
@@ -39,10 +36,6 @@ namespace Treep.Player {
         
         void OnUsernameChanged(string oldUsername, string newUsername) {
             if (usernameText != null) usernameText.text = newUsername;
-        }
-        
-        void OnColorChanged(string oldColor, string newColor) {
-            throw new NotImplementedException();
         }
         
         [Command]
