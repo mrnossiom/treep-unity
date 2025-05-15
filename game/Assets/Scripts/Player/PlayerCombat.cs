@@ -49,8 +49,13 @@ namespace Treep.Player {
             this.Health = this.MaxPV;
             this._weaponManager = this.gameObject.GetComponent<WeaponManager>();
 
+
             this._animator = this.GetComponent<Animator>();
             this._attackAnimator = this.attackPoint.GetComponent<Animator>();
+        }
+
+        public void SwitchWeapon(Weapons newWeapon) {
+            this._weaponManager.SwitchWeapon(newWeapon);
         }
 
         public void Update() {

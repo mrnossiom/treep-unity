@@ -2,7 +2,7 @@ namespace Treep.Weapon {
     public class Stick : CircleHitboxCloseWeapon {
         private void Awake() {
             this.Name = "Stick";
-            this.Damage = 1;
+            this.Damage = 2;
             this.AttackRate = 4f;
             this.BaseAwake(2f);
         }

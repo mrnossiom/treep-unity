@@ -6,7 +6,7 @@ namespace Treep.Weapon {
 
         private void Awake() {
             this.Name = "Spear";
-            this.Damage = 1;
+            this.Damage = 3;
             this.Durability = 1;
             this.AttackRate = 2f;
 
