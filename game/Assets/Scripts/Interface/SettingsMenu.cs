@@ -8,9 +8,7 @@ namespace Treep.Interface {
     public class SettingsMenu : MonoBehaviour {
         [Header("UI Elements")]
         [SerializeField] private Button closeButton;
-
         [SerializeField] private TMP_InputField usernameInput;
-        [SerializeField] private TMP_InputField colorInput;
 
         [Header("Audio Sliders")]
         [SerializeField] private Slider musicSlider;
