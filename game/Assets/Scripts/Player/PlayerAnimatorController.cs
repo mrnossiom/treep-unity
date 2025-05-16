@@ -75,7 +75,11 @@ namespace Treep {
         private static readonly int AnimIsClimbing = Animator.StringToHash("IsClimbing");
         private static readonly int AnimClimbSpeed = Animator.StringToHash("ClimbSpeed");
         private static readonly int AnimIsDashing = Animator.StringToHash("IsDashing");
-        //private static readonly int AnimWeapon = Animator.StringToHash("CurrentWeapon");
+        private static readonly int AnimWeapon = Animator.StringToHash("CurrentWeapon");
+        private static readonly int IsCloseAttacking = Animator.StringToHash("isCloseAttacking");
+        private static readonly int Random = Animator.StringToHash("Random");
+        private static readonly int Attack = Animator.StringToHash("Attack");
+        private static readonly int IsDistAttacking = Animator.StringToHash("isDistAttacking");
 
 
         private PlayerController _playerController;
@@ -118,11 +122,18 @@ namespace Treep {
             this._playerController = playerController;
         }
 
+        public void Update() {
+            this.UpdateWeapon();
+        }
+
+
+        private void UpdateWeapon() { }
+
 
         public void SwitchWeapon(Weapons newWeapons) {
-            this.WeaponAnimator.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            this.WeaponSpriteRenderer.enabled = false;
             this.CurrentWeapon = newWeapons;
-            this.WeaponAnimator.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            this.WeaponSpriteRenderer.enabled = true;
         }
 
 
@@ -140,11 +151,72 @@ namespace Treep {
         }
 
         public void SetTrigger(int id) {
+            //legacy
             Debug.Log($"Set trigger {id}");
         }
 
         public void SetFloat(int id, float value) {
+            //legacy
             Debug.Log($"Set float {id} {value}");
+        }
+
+
+        //New Animation System
+        public void TriggerJump() {
+            this._headAnimator.SetTrigger("Jump");
+            this._bodyAnimator.SetTrigger("Jump");
+            this.WeaponAnimator.SetTrigger("Jump");
+        }
+
+        public void TriggerAttack(LookDirection lookDirection) {
+            if (lookDirection is LookDirection.Left or LookDirection.Right) {
+                //Side Attack
+                if (this.CurrentWeapon is Weapons.Fist) {
+                    this._headAnimator.SetTrigger("FistSideAttack");
+                    this.WeaponAnimator.SetTrigger("SideAttack");
+                    this._bodyAnimator.SetTrigger("SideAttack");
+                }
+                else {
+                    this._headAnimator.SetTrigger("SideAttack");
+                    this.WeaponAnimator.SetTrigger("SideAttack");
+                    this._bodyAnimator.SetTrigger("SideAttack");
+                }
+            }
+            else {
+                if (lookDirection == LookDirection.Top) {
+                    //Up Attack
+                    throw new NotImplementedException();
+                }
+
+                //Down Attack
+                throw new NotImplementedException();
+            }
+        }
+
+
+        public void TriggerDash() {
+            this._headAnimator.SetTrigger("Dash");
+            this.WeaponAnimator.SetTrigger("Dash");
+            this._bodyAnimator.SetTrigger("Dash");
+        }
+
+        public void UpdateCrouch(bool value) { }
+
+        public void UpdateClimb(bool value, float ClimbSpeed) {
+            this._headAnimator.SetBool("IsCliming", value);
+            this._headAnimator.SetFloat("ClimbSpeed", ClimbSpeed);
+
+            this.WeaponAnimator.SetBool("IsCliming", value);
+            this.WeaponAnimator.SetFloat("ClimbSpeed", ClimbSpeed);
+
+            this._bodyAnimator.SetBool("IsCliming", value);
+            this._bodyAnimator.SetFloat("ClimbSpeed", ClimbSpeed);
+        }
+
+        public void UdpateMouv(bool value) {
+            this._headAnimator.SetBool("IsMoving", value);
+            this.WeaponAnimator.SetBool("IsMoving", value);
+            this._bodyAnimator.SetBool("IsMoving", value);
         }
     }
 }

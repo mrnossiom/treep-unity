@@ -36,6 +36,8 @@ namespace Treep.Player {
 
         private WeaponManager _weaponManager;
         private PlayerController ControllerScript;
+        private PlayerAnimatorController _animatorController;
+
 
         private LookDirection _currentLookDirection;
 
@@ -48,6 +50,8 @@ namespace Treep.Player {
             this._currentLookDirection = this.ControllerScript.lookDirection;
             this.Health = this.MaxPV;
             this._weaponManager = this.gameObject.GetComponent<WeaponManager>();
+
+            this._animatorController = this.GetComponent<PlayerAnimatorController>();
 
 
             this._animator = this.GetComponent<Animator>();
@@ -92,7 +96,7 @@ namespace Treep.Player {
         }
 
         private void CloseAttack() {
-            this._animator.SetTrigger(PlayerCombat.IsCloseAttacking);
+            this._animatorController.TriggerAttack(this._currentLookDirection);
 
             this._attackAnimator.SetInteger(PlayerCombat.Random, new Random().Next(6));
             this._attackAnimator.SetTrigger(PlayerCombat.Attack);
@@ -108,7 +112,7 @@ namespace Treep.Player {
         }
 
         private void DistAttack() {
-            this._animator.SetTrigger(PlayerCombat.IsDistAttacking);
+            this._animatorController.SetTrigger(PlayerCombat.IsDistAttacking);
         }
 
         private Collider2D[] GetEnemyIn(IShapesHitbox shape) {

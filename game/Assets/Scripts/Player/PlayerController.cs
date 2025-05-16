@@ -179,7 +179,7 @@ namespace Treep.Player {
             }
 
             if (Input.GetKeyDown(KeyCode.LeftShift) && !this.IsDashing && this._dashAvailable) {
-                this._animatorController.SetTrigger(PlayerController.AnimIsDashing);
+                this._animatorController.TriggerDash();
                 this._dashAnimator.SetTrigger("Dash");
                 this._currentDashEffectPos = this.AllSpriteFlipX
                     ? new Vector3(this.transform.position.x + this.dashEffectPos.x,
@@ -200,15 +200,14 @@ namespace Treep.Player {
         }
 
         private void UpdateClimb() {
-            this._animatorController.SetBool(PlayerController.AnimIsClimbing, this.IsClimbing);
-            this._animatorController.SetFloat(PlayerController.AnimClimbSpeed, this._move.y);
+            this._animatorController.UpdateClimb(this.IsClimbing, this._move.y);
         }
 
         private void UpdateJump() {
             if (this._jumpState == JumpState.Grounded && Input.GetButtonDown("Jump")) {
-                this._animatorController.SetBool(PlayerController.AnimJumpStart, true);
-                this._animatorController.SetBool(PlayerController.AnimIsJumping, false);
-                this._animatorController.SetBool(PlayerController.AnimJumpEnd, false);
+                //this._animatorController.SetBool(PlayerController.AnimJumpStart, true);
+                //this._animatorController.SetBool(PlayerController.AnimIsJumping, false);
+                //this._animatorController.SetBool(PlayerController.AnimJumpEnd, false);
                 this._jumpState = JumpState.PrepareToJump;
             }
             else if (Input.GetButtonUp("Jump")) this._stopJump = true;
@@ -219,7 +218,7 @@ namespace Treep.Player {
         private void UpdateLooking() {
             this._move.x = Input.GetAxis("Horizontal");
             this._move.y = Input.GetAxis("Vertical");
-            this._animatorController.SetBool(PlayerController.AnimIsMoving, this._move.x != 0);
+            this._animatorController.UdpateMouv(this._move.x != 0);
             if (this.IsClimbing && !this.onTopOfLadder) {
                 this._move.x = 0;
                 if (Input.GetKeyDown(KeyCode.Space)) {
@@ -260,7 +259,7 @@ namespace Treep.Player {
                 this.isCrouching = true;
                 this._collider2d.size = this._crouchSize;
                 this._collider2d.offset = this._crouchOffSet;
-                this._animatorController.SetBool(PlayerController.AnimIsCrouching, true);
+                this._animatorController.UpdateCrouch(true);
             }
 
             if (Input.GetKeyUp(KeyCode.C)) {
@@ -271,7 +270,7 @@ namespace Treep.Player {
                 this.isCrouching = false;
                 this._collider2d.size = this._standSize;
                 this._collider2d.offset = this._standOffSet;
-                this._animatorController.SetBool(PlayerController.AnimIsCrouching, false);
+                this._animatorController.UpdateCrouch(false);
                 this._unCrouch = false;
             }
         }
@@ -339,16 +338,16 @@ namespace Treep.Player {
                     this._stopJump = false;
                     break;
                 case JumpState.Jumping:
-                    this._animatorController.SetBool(PlayerController.AnimJumpStart, false);
+                    //this._animatorController.SetBool(PlayerController.AnimJumpStart, false);
                     if (!this.IsGrounded) this._jumpState = JumpState.InFlight;
                     break;
                 case JumpState.InFlight:
-                    this._animatorController.SetBool(PlayerController.AnimIsJumping, true);
+                    //this._animatorController.SetBool(PlayerController.AnimIsJumping, true);
                     if (this.IsGrounded) this._jumpState = JumpState.Landed;
                     break;
                 case JumpState.Landed:
+                    //this._animatorController.SetBool(PlayerController.AnimJumpEnd, true);
                     this._jumpState = JumpState.Grounded;
-                    this._animatorController.SetBool(PlayerController.AnimJumpEnd, true);
                     break;
             }
         }
