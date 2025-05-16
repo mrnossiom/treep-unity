@@ -71,6 +71,7 @@ namespace Treep.Interface
             actionRef.action.Disable();
             actionRef.action.PerformInteractiveRebinding(bindingIndex)
                 .WithControlsExcluding("Mouse")
+                .WithExpectedControlType("Key")
                 .OnMatchWaitForAnother(0.1f)
                 .OnComplete(operation =>
                 {
