@@ -1,19 +1,28 @@
 using System;
 using System.Collections.Generic;
 using Treep.Player;
+using Treep.Utils;
 using Treep.Weapon;
 using UnityEngine;
 
 namespace Treep {
     public class PlayerAnimatorController : MonoBehaviour {
-        public Animator headAnimator;
-        public List<Animator> weaponsAnimator;
-        public Animator bodyAnimator;
+        [SerializeField] private PseudoDictionary<Weapons, MonoBehaviour> pseudoDictWeapons;
+
+        [SerializeField] private GameObject headGameObject;
+        [SerializeField] private GameObject bodyGameObject;
+
+        public Dictionary<Weapons, ICloseWeapon> DictWeapons { get; private set; } = new();
+
+
+        private Animator _headAnimator;
+        private Dictionary<Weapons, Animator> _weaponsAnimator = new();
+        private Animator _bodyAnimator;
 
 
         private SpriteRenderer _headSpriteRenderer;
         private SpriteRenderer _bodySpriteRenderer;
-        private List<SpriteRenderer> _weaponsSpritesRenderer = new();
+        private Dictionary<Weapons, SpriteRenderer> _weaponsSpritesRenderer = new();
 
 
         private Weapons CurrentWeapon { get; set; }
@@ -25,7 +34,7 @@ namespace Treep {
             set {
                 this._headSpriteRenderer.flipX = value;
                 this._bodySpriteRenderer.flipX = value;
-                foreach (var sr in this._weaponsSpritesRenderer) {
+                foreach (var sr in this._weaponsSpritesRenderer.Values) {
                     sr.flipX = value;
                 }
 
@@ -35,25 +44,25 @@ namespace Treep {
 
         private Animator WeaponAnimator {
             get {
-                if (this.weaponsAnimator.Count < (int)this.CurrentWeapon || // if CurrentWeapon not in weaponAnimator
-                    this.weaponsAnimator[(int)this.CurrentWeapon] is null) {
+                if (this._weaponsAnimator.Count < (int)this.CurrentWeapon || // if CurrentWeapon not in weaponAnimator
+                    this._weaponsAnimator[this.CurrentWeapon] is null) {
                     Debug.LogError($"Weapon {this.CurrentWeapon} animator doesn't exist");
                     return null;
                 }
 
-                return this.weaponsAnimator[(int)this.CurrentWeapon];
+                return this._weaponsAnimator[this.CurrentWeapon];
             }
         }
 
         private SpriteRenderer WeaponSpriteRenderer {
             get {
-                if (this.weaponsAnimator.Count < (int)this.CurrentWeapon || // if CurrentWeapon not in weaponAnimator
-                    this.weaponsAnimator[(int)this.CurrentWeapon] is null) {
+                if (this._weaponsAnimator.Count < (int)this.CurrentWeapon || // if CurrentWeapon not in weaponAnimator
+                    this._weaponsAnimator[this.CurrentWeapon] is null) {
                     Debug.LogError($"Weapon {this.CurrentWeapon} Sprite renderer doesn't exist");
                     return null;
                 }
 
-                return this._weaponsSpritesRenderer[(int)this.CurrentWeapon];
+                return this._weaponsSpritesRenderer[this.CurrentWeapon];
             }
         }
 
@@ -76,16 +85,33 @@ namespace Treep {
 
         public void Awake() {
             this.CurrentWeapon = PlayerController.StartWeapon;
-            foreach (var animator in this.weaponsAnimator) {
-                var sp = animator.gameObject.GetComponent<SpriteRenderer>();
-                sp.enabled = false;
-                this._weaponsSpritesRenderer.Add(sp);
+            foreach (var ele in this.pseudoDictWeapons.ToActualDictionary()) {
+                if (ele.Value is ICloseWeapon weapon) {
+                    this.DictWeapons.Add(ele.Key, weapon);
+                    Debug.Log(" Ajout de " + weapon.ToString());
+                }
+                else {
+                    Debug.LogError(
+                        "Erreur d'ajout de weapon dans Le dict de PlayerAnimatorController type : " + ele.GetType());
+                }
+            }
+
+            foreach (var ele in this.DictWeapons) {
+                this._weaponsAnimator.Add(ele.Key, ele.Value.Animator);
+                this._weaponsSpritesRenderer.Add(ele.Key, ele.Value.SpriteRenderer);
+            }
+
+            foreach (var weapon in this._weaponsSpritesRenderer.Keys) {
+                this._weaponsSpritesRenderer[weapon].enabled = false;
             }
 
             this.WeaponSpriteRenderer.enabled = true;
 
-            this._headSpriteRenderer = this.headAnimator.gameObject.GetComponent<SpriteRenderer>();
-            this._bodySpriteRenderer = this.bodyAnimator.gameObject.GetComponent<SpriteRenderer>();
+            this._headAnimator = this.headGameObject.GetComponent<Animator>();
+            this._headSpriteRenderer = this.headGameObject.GetComponent<SpriteRenderer>();
+
+            this._bodyAnimator = this.bodyGameObject.GetComponent<Animator>();
+            this._bodySpriteRenderer = this.bodyGameObject.GetComponent<SpriteRenderer>();
         }
 
         public void SetPlayerStates(PlayerController playerController) {
@@ -103,14 +129,22 @@ namespace Treep {
         public void SetBool(int id, bool value) {
             //legacy
             if (id == PlayerAnimatorController.AnimIsMoving) {
-                this.headAnimator.SetBool("IsMoving", value);
+                this._headAnimator.SetBool("IsMoving", value);
                 this.WeaponAnimator.SetBool("IsMoving", value);
-                this.bodyAnimator.SetBool("IsMoving", value);
+                this._bodyAnimator.SetBool("IsMoving", value);
             }
 
-            this.headAnimator.SetBool(id, value);
+            this._headAnimator.SetBool(id, value);
             this.WeaponAnimator.SetBool(id, value);
-            this.bodyAnimator.SetBool(id, value);
+            this._bodyAnimator.SetBool(id, value);
+        }
+
+        public void SetTrigger(int id) {
+            Debug.Log($"Set trigger {id}");
+        }
+
+        public void SetFloat(int id, float value) {
+            Debug.Log($"Set float {id} {value}");
         }
     }
 }
