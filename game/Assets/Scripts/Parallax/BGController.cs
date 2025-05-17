@@ -1,38 +1,34 @@
 using System.Collections;
-
 using UnityEngine;
 
-namespace Treep
-{
-    public class BackgroundController : MonoBehaviour
-    {
+namespace Treep {
+    public class BackgroundController : MonoBehaviour {
+        private Vector2 _startPos;
+        private float _length;
 
-        private float startPos, length;
         public GameObject cam;
-        public float backgroundSpeed; //The intensity of the parallax effect 0 -> 1 (0 move a lot and 1 don't move)
+        public float backgroundSpeed; // The intensity of the parallax effect 0 -> 1 (0 move a lot and 1 don't move)
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
-        {
-            startPos = transform.position.x;
-            length = 64; //GetComponent<SpriteRenderer>().size.x is the line to not write magic number, but this line don't work idk why
+        private void Start() {
+            this._startPos = this.transform.position;
+            this._length = 64;
         }
 
-        // Update is called once per frame
-        void FixedUpdate()
-        {
-            float distance = cam.transform.position.x * backgroundSpeed;
-            float movement = cam.transform.position.x * (1 - backgroundSpeed);
+        private void FixedUpdate() {
+            var distance = this.cam.transform.position.x * this.backgroundSpeed;
+            var movement = this.cam.transform.position.x * (1 - this.backgroundSpeed);
 
-            transform.position = new Vector3(startPos + distance, transform.position.y, transform.position.z);
+            this.transform.position = new Vector3(
+                this._startPos.x + distance,
+                this._startPos.y + this.cam.transform.position.y,
+                this.transform.position.z);
 
-            if(movement > startPos + length)
-            {
-                startPos += length;
+
+            if (movement > this._startPos.x + this._length) {
+                this._startPos.x += this._length;
             }
-            else if(movement < startPos - length)
-            {
-                startPos -= length;
+            else if (movement < this._startPos.x - this._length) {
+                this._startPos.x -= this._length;
             }
         }
     }
