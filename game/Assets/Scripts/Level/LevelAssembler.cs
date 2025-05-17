@@ -7,6 +7,8 @@ namespace Treep.Level {
         [SerializeField] private RoomProvider roomProvider;
         [SerializeField] private GameObject enemyPrefab;
 
+        private Bounds bounds;
+
         // TODO: non-linear level blueprint and evolver
         [SerializeField] private List<RoomKind> levelBlueprint;
 
@@ -23,6 +25,7 @@ namespace Treep.Level {
             var evolver = new LevelEvolver(this.levelBlueprint, roomsBook);
             // level is not solvable
             if (!evolver.EvolveRoot(rng)) return null;
+            this.bounds = evolver.Bounds;
 
             if (evolver.SpawnPoints.Count == 0) {
                 Debug.LogError("No spawn point");
