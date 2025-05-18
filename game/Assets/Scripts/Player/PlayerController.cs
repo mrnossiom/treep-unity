@@ -57,7 +57,7 @@ namespace Treep.Player {
         [SerializeField] private float climbSpeed = 3f;
         [SerializeField] private bool onTopOfLadder;
 
-        public static Weapons StartWeapon = Weapons.Stick;
+        public static Weapons StartWeapon = Weapons.Sword;
 
         // State
         private Vector2 _targetVelocity;

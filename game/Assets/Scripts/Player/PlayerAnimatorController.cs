@@ -174,22 +174,21 @@ namespace Treep {
                 if (this.CurrentWeapon is Weapons.Fist) {
                     this._headAnimator.SetTrigger("FistSideAttack");
                     this.WeaponAnimator.SetTrigger("SideAttack");
-                    this._bodyAnimator.SetTrigger("SideAttack");
                 }
                 else {
                     this._headAnimator.SetTrigger("SideAttack");
                     this.WeaponAnimator.SetTrigger("SideAttack");
-                    this._bodyAnimator.SetTrigger("SideAttack");
+                    //this._bodyAnimator.SetTrigger("SideAttack");
                 }
             }
             else {
                 if (lookDirection == LookDirection.Top) {
                     //Up Attack
-                    throw new NotImplementedException();
+                    Debug.LogError($"throw new NotImplementedException");
                 }
 
                 //Down Attack
-                throw new NotImplementedException();
+                Debug.LogError($"throw new NotImplementedException");
             }
         }
 
@@ -200,17 +199,21 @@ namespace Treep {
             this._bodyAnimator.SetTrigger("Dash");
         }
 
-        public void UpdateCrouch(bool value) { }
+        public void UpdateCrouch(bool value) {
+            this._headAnimator.SetBool("IsCrouching", value);
+            this.WeaponAnimator.SetBool("IsCrouching", value);
+            this._bodyAnimator.SetBool("IsCrouching", value);
+        }
 
         public void UpdateClimb(bool value, float ClimbSpeed) {
             this._headAnimator.SetBool("IsCliming", value);
-            this._headAnimator.SetFloat("ClimbSpeed", ClimbSpeed);
+            this._headAnimator.SetFloat("ClimbSpeed", ClimbSpeed / 2);
 
             this.WeaponAnimator.SetBool("IsCliming", value);
-            this.WeaponAnimator.SetFloat("ClimbSpeed", ClimbSpeed);
+            this.WeaponAnimator.SetFloat("ClimbSpeed", ClimbSpeed / 2);
 
             this._bodyAnimator.SetBool("IsCliming", value);
-            this._bodyAnimator.SetFloat("ClimbSpeed", ClimbSpeed);
+            this._bodyAnimator.SetFloat("ClimbSpeed", ClimbSpeed / 2);
         }
 
         public void UdpateMouv(bool value) {
