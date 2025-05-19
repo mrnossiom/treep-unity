@@ -235,7 +235,6 @@ MonoBehaviour:
   syncInterval: 0
   usernameText: {fileID: 3973601283537815932}
   username: 
-  color: 
   isReady: 0
 --- !u!114 &-7027888757281823204
 MonoBehaviour:
@@ -263,7 +262,7 @@ MonoBehaviour:
   _dashEffectPoint: {fileID: 5114994484247730810}
   dashEffectPos: {x: 1.5, y: -1}
   scriptPlayerCombat: {fileID: 5569680993926345568}
-  looking: 0
+  lookDirection: 0
 --- !u!61 &7035845409879027553
 BoxCollider2D:
   m_ObjectHideFlags: 0
