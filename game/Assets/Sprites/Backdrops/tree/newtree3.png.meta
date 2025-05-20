@@ -1,10 +1,52 @@
 fileFormatVersion: 2
-guid: ed76c4cc9e605c648ab2b15c633fde3c
+guid: 2864fc0c9d2d8924191c55294b4cc01c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6946117702425723874
-    second: Mountain 1_0
+      213: -5441535368169358198
+    second: newtree3_0
+  - first:
+      213: -3484006508711153207
+    second: newtree3_1
+  - first:
+      213: -6658748387072184250
+    second: newtree3_2
+  - first:
+      213: 6267695653586502217
+    second: newtree3_3
+  - first:
+      213: 6532863312402951302
+    second: newtree3_4
+  - first:
+      213: -3454902467820108042
+    second: newtree3_5
+  - first:
+      213: -4040585978220335123
+    second: newtree3_6
+  - first:
+      213: -9152458882788479596
+    second: newtree3_7
+  - first:
+      213: 7031965742864162622
+    second: newtree3_8
+  - first:
+      213: 6161110509117100629
+    second: newtree3_9
+  - first:
+      213: -2262235262625081938
+    second: newtree3_10
+  - first:
+      213: -4279918957017433714
+    second: newtree3_11
+  - first:
+      213: 2863652468728688371
+    second: newtree3_12
+  - first:
+      213: 4658551658397675286
+    second: newtree3_13
+  - first:
+      213: -6565128794468620894
+    second: newtree3_14
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +88,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -100,13 +142,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Mountain 1_0
+      name: newtree3_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 1024
-        height: 380
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +157,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2e3432d8f31956060800000000000000
-      internalID: 6946117702425723874
+      spriteID: a8c7a83c968cb74b0800000000000000
+      internalID: -5441535368169358198
       vertices: []
       indices: 
       edges: []
@@ -125,7 +167,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: e9c85718a8b38f948be7c1e38d328269
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +177,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Mountain 1_0: 6946117702425723874
+      newtree3_0: -5441535368169358198
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
