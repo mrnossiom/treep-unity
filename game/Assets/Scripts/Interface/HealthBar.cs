@@ -1,5 +1,4 @@
-using System;
-using System.Linq;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,15 +14,27 @@ namespace Treep.Interface
 
         void Start()
         {
-            localPlayer = FindObjectsByType<Player.Player>(FindObjectsSortMode.None).First(player => player.isLocalPlayer);
+            StartCoroutine(WaitForLocalPlayer());
+        }
+
+        IEnumerator WaitForLocalPlayer()
+        {
+            while (Player.Player.Singleton == null)
+            {
+                yield return null;
+            }
+
+            localPlayer = Player.Player.Singleton;
             displayedHealth = localPlayer.health;
             UpdateFillInstant();
         }
 
         void Update()
         {
+            if (localPlayer == null) return;
+
             float targetHealth = localPlayer.health;
-            
+
             if (Mathf.Abs(displayedHealth - targetHealth) > 0.01f)
             {
                 displayedHealth = Mathf.MoveTowards(displayedHealth, targetHealth, animationSpeed * Time.deltaTime);

@@ -14,7 +14,6 @@ namespace Treep.IA {
         public int speed = 3;
 
         public float detectionDistance = 0.2f;
-        public Image _pvBar;
         private readonly RaycastHit2D[] _hitBuffer = new RaycastHit2D[16];
 
         private readonly bool _moveEnabled = true;
@@ -54,8 +53,6 @@ namespace Treep.IA {
         public void Hit(int damageTook) {
             this.PV -= damageTook;
 
-            this.UpdateHealBar();
-
             if (this.PV <= 0) {
                 this.Die();
             }
@@ -76,11 +73,6 @@ namespace Treep.IA {
             this.GetComponent<Collider2D>().enabled = false;
             this.GetComponent<SpriteRenderer>().enabled = false;
             this.enabled = false;
-        }
-
-        private void UpdateHealBar() {
-            var lifeRatio = this.PV / (float)this.PVMax;
-            this._pvBar.GetComponent<RectTransform>().localScale = new Vector3(lifeRatio, 1, 1);
         }
     }
 }

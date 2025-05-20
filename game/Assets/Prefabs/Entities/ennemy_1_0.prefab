@@ -93,7 +93,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4210290426706370179
 RectTransform:
   m_ObjectHideFlags: 0
@@ -191,6 +191,8 @@ GameObject:
   - component: {fileID: 5074737812209347828}
   - component: {fileID: -7050396365075443685}
   - component: {fileID: -4075812192695044465}
+  - component: {fileID: -116081681810043892}
+  - component: {fileID: 2886113287049327974}
   m_Layer: 6
   m_Name: ennemy_1_0
   m_TagString: Untagged
@@ -281,6 +283,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61b166d68177948bd85896125b82b0cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   PVMax: 5
   _body: {fileID: 5074737812209347828}
   _collider2d: {fileID: -7050396365075443685}
@@ -288,7 +293,6 @@ MonoBehaviour:
   _animator: {fileID: -4075812192695044465}
   speed: 3
   detectionDistance: 0.2
-  _pvBar: {fileID: 3048347759019739256}
 --- !u!50 &5074737812209347828
 Rigidbody2D:
   serializedVersion: 5
@@ -384,3 +388,37 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-116081681810043892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6615744716052060427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  _assetId: 1427626465
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
+--- !u!114 &2886113287049327974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6615744716052060427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0
+  clientAuthority: 0
+  animator: {fileID: -4075812192695044465}

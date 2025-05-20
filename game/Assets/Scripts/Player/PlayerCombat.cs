@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Mirror;
 using Treep.IA;
 using Treep.Weapon;
 using UnityEngine;
@@ -10,7 +11,7 @@ using Random = System.Random;
 using Rect = Treep.Weapon.Rect;
 
 namespace Treep.Player {
-    public class PlayerCombat : MonoBehaviour {
+    public class PlayerCombat : NetworkBehaviour {
         public static Vector2 AttackPointRight = new(1.5f, 0f);
         public static Vector2 AttackPointLeft = new(-1.5f, 0f);
         public static Vector2 AttackPointTop = new(0f, 1.75f);
@@ -58,7 +59,7 @@ namespace Treep.Player {
 
             if (Time.time >= this.nextAttackTime) {
                 if (Input.GetKeyDown(this.CloseAttackKey)) {
-                    this.CloseAttack();
+                    this.CmdCloseAttack();
                     this.nextAttackTime = Time.time + 1f / this._weaponManager.AttackRate;
                 }
             }
@@ -86,24 +87,25 @@ namespace Treep.Player {
             this._weaponManager.UpdateLooking(this._currentLookDirection);
         }
 
-        private void CloseAttack() {
-            this._animator.SetTrigger(PlayerCombat.IsCloseAttacking);
-
-            this._attackAnimator.SetInteger(PlayerCombat.Random, new Random().Next(6));
-            this._attackAnimator.SetTrigger(PlayerCombat.Attack);
-
-
-            // check enemy
+        [Command]
+        private void CmdCloseAttack() {
+            RpcPlayAttackAnimation(); // Tous les clients jouent l'animation
+            DoCloseAttack();          // Le serveur applique les dégâts
+        }
+        
+        [ClientRpc]
+        private void RpcPlayAttackAnimation() {
+            this._animator.SetTrigger(IsCloseAttacking);
+            this._attackAnimator.SetInteger(Random, new System.Random().Next(6));
+            this._attackAnimator.SetTrigger(Attack);
+        }
+        
+        private void DoCloseAttack() {
             var enemiesToHit = this.GetEnemyIn(this._weaponManager.HitBox);
-            // Damage to enemy
             foreach (var enemy in enemiesToHit) {
                 Debug.Log($"{enemy.name} took {this._weaponManager.Damage} damage");
                 enemy.GetComponent<IEnemy>().Hit(this._weaponManager.Damage);
             }
-        }
-
-        private void DistAttack() {
-            this._animator.SetTrigger(PlayerCombat.IsDistAttacking);
         }
 
         private Collider2D[] GetEnemyIn(IShapesHitbox shape) {
