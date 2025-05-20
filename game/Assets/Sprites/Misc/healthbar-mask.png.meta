@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 13e774f34115a1345b032d6f4bd0b68d
+guid: a77068da4ebab044192cd60a7ea22f3a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7453248968131566444
-    second: Untitled 01-03-2025 06-09-41_0
+      213: 8148320996255493429
+    second: healthbar-mask_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,11 +96,24 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Untitled 01-03-2025 06-09-41_0
+      name: healthbar-mask_0
       rect:
         serializedVersion: 2
         x: 0
@@ -108,15 +121,15 @@ TextureImporter:
         width: 75
         height: 18
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 494a8ff6d8db09890800000000000000
-      internalID: -7453248968131566444
+      spriteID: 53d6aa146c6a41170800000000000000
+      internalID: 8148320996255493429
       vertices: []
       indices: 
       edges: []
@@ -125,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 3da82ec2baf1ed14cb8b1efc3f961288
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Untitled 01-03-2025 06-09-41_0: -7453248968131566444
+      healthbar-mask_0: 8148320996255493429
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
