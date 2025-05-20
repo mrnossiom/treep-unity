@@ -27,7 +27,6 @@ namespace Treep.Player {
         [FormerlySerializedAs("ennemyLayerMask")]
         public LayerMask enemyLayerMask;
 
-        public List<GameObject> weapons;
         public KeyCode CloseAttackKey = KeyCode.L;
         public KeyCode DistAttackKey = KeyCode.O;
 

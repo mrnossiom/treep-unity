@@ -96,7 +96,8 @@ namespace Treep {
                 }
                 else {
                     Debug.LogError(
-                        "Erreur d'ajout de weapon dans Le dict de PlayerAnimatorController type : " + ele.GetType());
+                        "Erreur d'ajout de weapon dans Le dict de PlayerAnimatorController type : " +
+                        ele.Value.GetType());
                 }
             }
 
