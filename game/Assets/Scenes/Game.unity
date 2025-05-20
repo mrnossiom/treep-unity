@@ -2488,6 +2488,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 31203776}
   lobbyMenu: {fileID: 737733577}
+  healthBar: {fileID: 1327523545}
 --- !u!1 &553284876
 GameObject:
   m_ObjectHideFlags: 0
@@ -6963,8 +6964,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1327523544}
+  - component: {fileID: 1327523545}
   m_Layer: 5
-  m_Name: HealthBar
+  m_Name: Health Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6990,6 +6992,20 @@ RectTransform:
   m_AnchoredPosition: {x: 100, y: 100}
   m_SizeDelta: {x: 600, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1327523545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1327523543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f684f809312930f41817aa22b45a0f1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fillImage: {fileID: 1574135336}
+  maxHealth: 100
 --- !u!1 &1344611247
 GameObject:
   m_ObjectHideFlags: 0

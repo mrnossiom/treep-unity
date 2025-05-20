@@ -5,6 +5,7 @@ namespace Treep.Interface {
     public class HudController : MonoBehaviour {
         [SerializeField] private PauseMenu pauseMenu;
         [SerializeField] private LobbyMenu lobbyMenu;
+        [SerializeField] private HealthBar healthBar;
         
         private GameStateManager gameStateManager;
         
@@ -16,6 +17,7 @@ namespace Treep.Interface {
             gameStateManager = FindAnyObjectByType<GameStateManager>();
             if (gameStateManager is not null && gameStateManager.StateKind == GameStateKind.Level) {
                 lobbyMenu.gameObject.SetActive(false);
+                healthBar.gameObject.SetActive(true);
             }
         }
     }

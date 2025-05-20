@@ -3,14 +3,18 @@ using Mirror;
 using TMPro;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Treep.Player {
     [RequireComponent(typeof(NetworkIdentity), typeof(Rigidbody2D))]
     public class Player : NetworkBehaviour {
         public static Player Singleton { get; private set; }
+        
+        // TODO: To change
+        public float maxHealth = 100;
+        public float health = 100;
 
         private Rigidbody2D _rigidbody2d;
-
         [SerializeField] private TextMeshPro usernameText;
 
         [SyncVar(hook = nameof(OnUsernameChanged))]
