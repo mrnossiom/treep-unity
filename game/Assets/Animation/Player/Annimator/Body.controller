@@ -102,10 +102,10 @@ AnimatorStateMachine:
     m_Position: {x: 1080, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5649208223654791492}
-    m_Position: {x: 920, y: 340, z: 0}
+    m_Position: {x: 1050, y: 280, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4070340262750164519}
-    m_Position: {x: 660, y: 360, z: 0}
+    m_Position: {x: 540, y: 250, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8079590523853419450}
     m_Position: {x: 450, y: -80, z: 0}
@@ -405,13 +405,13 @@ AnimatorState:
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
   m_Mirror: 0
-  m_SpeedParameterActive: 0
+  m_SpeedParameterActive: 1
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: ba3f74f677d1cd58aaf2fdd3e2c18729, type: 2}
   m_Tag: 
-  m_SpeedParameter: 
+  m_SpeedParameter: CrouchSpeed
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
@@ -515,6 +515,12 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
   - m_Name: IsCrouching
     m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: CrouchSpeed
+    m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -709,7 +715,7 @@ AnimatorState:
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
   m_Mirror: 0
-  m_SpeedParameterActive: 0
+  m_SpeedParameterActive: 1
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0

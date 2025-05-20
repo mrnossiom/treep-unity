@@ -92,7 +92,7 @@ namespace Treep {
             foreach (var ele in this.pseudoDictWeapons.ToActualDictionary()) {
                 if (ele.Value is ICloseWeapon weapon) {
                     this.DictWeapons.Add(ele.Key, weapon);
-                    Debug.Log(" Ajout de " + weapon.ToString());
+                    //Debug.Log(" Ajout de " + weapon.ToString());
                 }
                 else {
                     Debug.LogError(
@@ -201,8 +201,18 @@ namespace Treep {
 
         public void UpdateCrouch(bool value) {
             this._headAnimator.SetBool("IsCrouching", value);
+
             this.WeaponAnimator.SetBool("IsCrouching", value);
+
             this._bodyAnimator.SetBool("IsCrouching", value);
+        }
+
+        public void UpdateSpeedCrouch(float crouchSpeed) {
+            this._headAnimator.SetFloat("CrouchSpeed", crouchSpeed);
+
+            this.WeaponAnimator.SetFloat("CrouchSpeed", crouchSpeed);
+
+            this._bodyAnimator.SetFloat("CrouchSpeed", crouchSpeed);
         }
 
         public void UpdateClimb(bool value, float ClimbSpeed) {

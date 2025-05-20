@@ -125,8 +125,6 @@ namespace Treep.Player {
         }
 
         private void Awake() {
-            Debug.Log("Awake Contoller");
-
             this._body = this.GetComponent<Rigidbody2D>();
             this._collider2d = this.GetComponent<BoxCollider2D>();
             this._collider2d.size = this._standSize;
@@ -273,6 +271,8 @@ namespace Treep.Player {
                 this._animatorController.UpdateCrouch(false);
                 this._unCrouch = false;
             }
+
+            this._animatorController.UpdateSpeedCrouch(this._move.x);
         }
 
 
