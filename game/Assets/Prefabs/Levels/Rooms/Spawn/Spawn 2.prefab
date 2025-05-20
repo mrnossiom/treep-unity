@@ -1140,6 +1140,7 @@ MonoBehaviour:
   enemySpawners:
   - {x: 58, y: 46}
   - {x: 60, y: 2}
+  - {x: 137, y: 5}
   spawnPoints:
   - {x: 10, y: 44}
 --- !u!1 &2635150134697267651
