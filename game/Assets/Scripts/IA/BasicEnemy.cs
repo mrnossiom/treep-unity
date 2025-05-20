@@ -1,4 +1,6 @@
+using Treep.SFX;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 namespace Treep.IA {
@@ -21,6 +23,10 @@ namespace Treep.IA {
         private readonly Vector2 moveDirection = Vector2.right;
         private ContactFilter2D _contactFilter;
         private int _direction = 1;
+
+        [SerializeField] private AudioClip damageSoundClip;
+        [SerializeField] private AudioClip deathSoundClip;
+        [SerializeField] private AudioMixer audioMixer;
 
 
         public void Awake() {
@@ -53,6 +59,7 @@ namespace Treep.IA {
 
         public void Hit(int damageTook) {
             this.PV -= damageTook;
+            
 
             this.UpdateHealBar();
 
@@ -61,6 +68,9 @@ namespace Treep.IA {
             }
             else {
                 this._animator.SetBool(BasicEnemy.GetHit, true);
+                audioMixer.GetFloat("SFXVolume", out var soundLevel);
+                soundLevel = (soundLevel + 80) / 100;
+                SoundFXManager.Instance.PlaySoundFXClip(this.damageSoundClip, this.transform,soundLevel/2);
             }
         }
 
@@ -76,6 +86,9 @@ namespace Treep.IA {
             this.GetComponent<Collider2D>().enabled = false;
             this.GetComponent<SpriteRenderer>().enabled = false;
             this.enabled = false;
+            audioMixer.GetFloat("SFXVolume", out var soundLevel);
+            soundLevel = (soundLevel + 80) / 100;
+            SoundFXManager.Instance.PlaySoundFXClip(this.deathSoundClip, this.transform,soundLevel);
         }
 
         private void UpdateHealBar() {

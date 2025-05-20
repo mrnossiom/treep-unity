@@ -1,6 +1,8 @@
 using Mirror;
 using Treep.Weapon;
+using Treep.SFX;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.Serialization;
 using Vector2 = UnityEngine.Vector2;
 
@@ -33,8 +35,9 @@ namespace Treep.Player {
 
         // Components
         private Rigidbody2D _body;
-
         private BoxCollider2D _collider2d;
+        private SpriteRenderer _spriteRenderer;
+        private Animator _animator;
 
         [SyncVar(hook = nameof(PlayerController.OnSpriteFlip))]
         private bool _isFlipped;
@@ -79,6 +82,7 @@ namespace Treep.Player {
         private Vector2 _standOffSet = new(-0.18f, -0.126588f);
         private Vector2 _crouchOffSet = new(-0.18f, -0.5325f);
         private bool _unCrouch;
+        private bool _isCrouching = false;
 
         public bool IsDashing { get; set; }
         private bool _dashAvailable;
@@ -103,6 +107,14 @@ namespace Treep.Player {
         private PlayerAnimatorController _animatorController;
 
         private bool IsClimbing { get; set; }
+        
+        [SerializeField] private AudioClip ladderSoundClip;
+        [SerializeField] private AudioMixer audioMixer;
+        private AudioSource climbingAudioSource;
+        [SerializeField] private AudioClip walkingSoundClip;
+        private AudioSource walkingAudioSource;
+        [SerializeField] private AudioClip dashSoundClip;
+
 
         [FormerlySerializedAs("looking")] public LookDirection lookDirection;
 
@@ -131,6 +143,8 @@ namespace Treep.Player {
             this._collider2d.offset = this._standOffSet;
             this._animatorController = this.GetComponent<PlayerAnimatorController>();
             this._animatorController.SetPlayerStates(this);
+            this._spriteRenderer = this.GetComponent<SpriteRenderer>();
+            this._animator = this.GetComponent<Animator>();
 
             this._ladderTag = TagHandle.GetExistingTag("Ladder");
 
@@ -157,6 +171,7 @@ namespace Treep.Player {
                 this.UpdateCrouch();
                 this.UpdateJump();
                 this.UpdateClimb();
+                this.UpdateWalkSound();
                 this.UpdateDash();
                 this.UpdateHitboxCollider();
             }
@@ -199,7 +214,48 @@ namespace Treep.Player {
 
         private void UpdateClimb() {
             this._animatorController.UpdateClimb(this.IsClimbing, this._move.y);
+            if (IsClimbing && Mathf.Abs(_move.y) > 0.01f)
+            {
+                if (climbingAudioSource == null)
+                {
+                    audioMixer.GetFloat("SFXVolume", out var soundLevel);
+                    soundLevel = (soundLevel + 80) / 100;
+                    climbingAudioSource = SoundFXManager.Instance.PlayLoopingSound(this.ladderSoundClip, transform , soundLevel);
+                }
+            }
+            else
+            {
+                if (climbingAudioSource != null)
+                {
+                    SoundFXManager.Instance.StopLoopingSound(climbingAudioSource);
+                    climbingAudioSource = null;
+                }
+            }
         }
+        
+        private void UpdateWalkSound()
+        {
+            bool isWalking = IsGrounded && Mathf.Abs(_move.x) > 0.01f && !_isCrouching && !_isDashing && !IsClimbing;
+
+            if (isWalking)
+            {
+                if (walkingAudioSource == null)
+                {
+                    audioMixer.GetFloat("SFXVolume", out var soundLevel);
+                    soundLevel = (soundLevel + 80) / 100; // Normaliser le volume
+                    walkingAudioSource = SoundFXManager.Instance.PlayLoopingSound(walkingSoundClip, transform, soundLevel);
+                }
+            }
+            else
+            {
+                if (walkingAudioSource != null)
+                {
+                    SoundFXManager.Instance.StopLoopingSound(walkingAudioSource);
+                    walkingAudioSource = null;
+                }
+            }
+        }
+
 
         private void UpdateJump() {
             if (this._jumpState == JumpState.Grounded && Input.GetButtonDown("Jump")) {
@@ -258,6 +314,7 @@ namespace Treep.Player {
                 this._collider2d.size = this._crouchSize;
                 this._collider2d.offset = this._crouchOffSet;
                 this._animatorController.UpdateCrouch(true);
+                _isCrouching = true;
             }
 
             if (Input.GetKeyUp(KeyCode.C)) {
@@ -268,6 +325,7 @@ namespace Treep.Player {
                 this.isCrouching = false;
                 this._collider2d.size = this._standSize;
                 this._collider2d.offset = this._standOffSet;
+                _isCrouching = false;
                 this._animatorController.UpdateCrouch(false);
                 this._unCrouch = false;
             }
@@ -279,6 +337,9 @@ namespace Treep.Player {
         private void StartDash() {
             this.IsDashing = true;
             this._dashAvailable = false;
+            audioMixer.GetFloat("SFXVolume", out var soundLevel);
+            soundLevel = (soundLevel + 80) / 100;
+            SoundFXManager.Instance.PlaySoundFXClip(dashSoundClip, this.transform,soundLevel);
 
             if (this._move.x != 0) {
                 if (this._move.y != 0) {
@@ -364,7 +425,14 @@ namespace Treep.Player {
                 }
             }
 
-            this._targetVelocity = this._move * this.maxSpeed;
+            if (this._isCrouching) {
+                this._targetVelocity = (this._move * this.maxSpeed) / 2;
+            }
+            else {
+                this._targetVelocity = this._move * this.maxSpeed;
+            }
+
+            
 
             if (this.IsClimbing) {
                 this._velocity.y = this._move.y * this.climbSpeed;
@@ -373,16 +441,11 @@ namespace Treep.Player {
 
 
         private void FixedUpdate() {
-            if (this.IsClimbing) {
-                this._velocity.y = this._move.y * this.climbSpeed;
+            if (this._velocity.y < 0) {
+                this._velocity += Physics2D.gravity * (this.gravityModifier * Time.deltaTime);
             }
             else {
-                if (this._velocity.y < 0) {
-                    this._velocity += Physics2D.gravity * (this.gravityModifier * Time.deltaTime);
-                }
-                else {
-                    this._velocity += Physics2D.gravity * Time.deltaTime;
-                }
+                this._velocity += Physics2D.gravity * Time.deltaTime;
             }
 
             this._velocity.x = this._targetVelocity.x;
@@ -438,7 +501,7 @@ namespace Treep.Player {
         }
 
         private void OnTriggerEnter2D(Collider2D other) {
-            if (other.CompareTag("Ladder") && !this.IsGrounded) {
+            if (other.CompareTag("Ladder") && !this.IsGrounded && !this._isDashing) {
                 var contactPoint = other.ClosestPoint(this.transform.position);
                 if (contactPoint.y < this.transform.position.y) {
                     this.onTopOfLadder = true;

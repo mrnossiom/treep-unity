@@ -2,8 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Treep.IA;
+using Treep.Interface;
+using Treep.SFX;
 using Treep.Weapon;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.Serialization;
 using Debug = UnityEngine.Debug;
 using Random = System.Random;
@@ -42,6 +45,9 @@ namespace Treep.Player {
 
         private float nextAttackTime;
         private int Health { get; set; }
+        
+        [SerializeField] private AudioClip slashSoundClip;
+        [SerializeField] private AudioMixer audioMixer;
 
 
         public void Awake() {
@@ -67,6 +73,9 @@ namespace Treep.Player {
             if (Time.time >= this.nextAttackTime) {
                 if (Input.GetKeyDown(this.CloseAttackKey)) {
                     this.CloseAttack();
+                    audioMixer.GetFloat("SFXVolume", out var soundLevel);
+                    soundLevel = (soundLevel + 80) / 100;
+                    SoundFXManager.Instance.PlaySoundFXClip(slashSoundClip, this.transform,soundLevel);
                     this.nextAttackTime = Time.time + 1f / this._weaponManager.AttackRate;
                 }
             }
