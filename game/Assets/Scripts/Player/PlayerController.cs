@@ -1,4 +1,5 @@
 using Mirror;
+using Treep.Weapon;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Vector2 = UnityEngine.Vector2;
@@ -32,9 +33,8 @@ namespace Treep.Player {
 
         // Components
         private Rigidbody2D _body;
+
         private BoxCollider2D _collider2d;
-        private SpriteRenderer _spriteRenderer;
-        private Animator _animator;
 
         [SyncVar(hook = nameof(PlayerController.OnSpriteFlip))]
         private bool _isFlipped;
@@ -57,6 +57,8 @@ namespace Treep.Player {
         [SerializeField] private float climbSpeed = 3f;
         [SerializeField] private bool onTopOfLadder;
 
+        public static Weapons StartWeapon = Weapons.Sword;
+
         // State
         private Vector2 _targetVelocity;
         private Vector2 _groundNormal;
@@ -78,7 +80,7 @@ namespace Treep.Player {
         private Vector2 _crouchOffSet = new(-0.18f, -0.5325f);
         private bool _unCrouch;
 
-        private bool _isDashing;
+        public bool IsDashing { get; set; }
         private bool _dashAvailable;
         private float _dashSpeed;
         private float _dashDuration = 0.4f;
@@ -87,6 +89,7 @@ namespace Treep.Player {
         private Vector2 _velocity;
         private float _dashCooldown = 0.8f;
         private float _lastDashTime;
+        public bool isCrouching;
 
         public Transform _dashEffectPoint; //engros ca c'est en fonction de l'endroit du player
         public Vector2 dashEffectPos; // et ca c'est overall
@@ -97,6 +100,8 @@ namespace Treep.Player {
         private SpriteRenderer _closeAttackRenderer;
         public PlayerCombat scriptPlayerCombat;
 
+        private PlayerAnimatorController _animatorController;
+
         private bool IsClimbing { get; set; }
 
         [FormerlySerializedAs("looking")] public LookDirection lookDirection;
@@ -106,7 +111,8 @@ namespace Treep.Player {
         private bool AllSpriteFlipX {
             get => this._allSpriteFlipX;
             set {
-                this._spriteRenderer.flipX = value;
+                //this._spriteRenderer.flipX = value;
+                this._animatorController.FlipX = value;
                 this._dashSpriteRenderer.flipX = value;
                 this._closeAttackRenderer.flipX = value;
                 this._allSpriteFlipX = value;
@@ -123,8 +129,8 @@ namespace Treep.Player {
             this._collider2d = this.GetComponent<BoxCollider2D>();
             this._collider2d.size = this._standSize;
             this._collider2d.offset = this._standOffSet;
-            this._spriteRenderer = this.GetComponent<SpriteRenderer>();
-            this._animator = this.GetComponent<Animator>();
+            this._animatorController = this.GetComponent<PlayerAnimatorController>();
+            this._animatorController.SetPlayerStates(this);
 
             this._ladderTag = TagHandle.GetExistingTag("Ladder");
 
@@ -170,8 +176,8 @@ namespace Treep.Player {
                 this._dashAvailable = true;
             }
 
-            if (Input.GetKeyDown(KeyCode.LeftShift) && !this._isDashing && this._dashAvailable) {
-                this._animator.SetTrigger(PlayerController.AnimIsDashing);
+            if (Input.GetKeyDown(KeyCode.LeftShift) && !this.IsDashing && this._dashAvailable) {
+                this._animatorController.TriggerDash();
                 this._dashAnimator.SetTrigger("Dash");
                 this._currentDashEffectPos = this.AllSpriteFlipX
                     ? new Vector3(this.transform.position.x + this.dashEffectPos.x,
@@ -182,7 +188,7 @@ namespace Treep.Player {
                 this._lastDashTime = Time.time;
             }
 
-            if (this._isDashing) {
+            if (this.IsDashing) {
                 this.HandleDash();
             }
 
@@ -192,15 +198,14 @@ namespace Treep.Player {
         }
 
         private void UpdateClimb() {
-            this._animator.SetBool(PlayerController.AnimIsClimbing, this.IsClimbing);
-            this._animator.SetFloat(PlayerController.AnimClimbSpeed, this._move.y);
+            this._animatorController.UpdateClimb(this.IsClimbing, this._move.y);
         }
 
         private void UpdateJump() {
             if (this._jumpState == JumpState.Grounded && Input.GetButtonDown("Jump")) {
-                this._animator.SetBool(PlayerController.AnimJumpStart, true);
-                this._animator.SetBool(PlayerController.AnimIsJumping, false);
-                this._animator.SetBool(PlayerController.AnimJumpEnd, false);
+                //this._animatorController.SetBool(PlayerController.AnimJumpStart, true);
+                //this._animatorController.SetBool(PlayerController.AnimIsJumping, false);
+                //this._animatorController.SetBool(PlayerController.AnimJumpEnd, false);
                 this._jumpState = JumpState.PrepareToJump;
             }
             else if (Input.GetButtonUp("Jump")) this._stopJump = true;
@@ -211,7 +216,7 @@ namespace Treep.Player {
         private void UpdateLooking() {
             this._move.x = Input.GetAxis("Horizontal");
             this._move.y = Input.GetAxis("Vertical");
-            this._animator.SetBool(PlayerController.AnimIsMoving, this._move.x != 0);
+            this._animatorController.UdpateMouv(this._move.x != 0);
             if (this.IsClimbing && !this.onTopOfLadder) {
                 this._move.x = 0;
                 if (Input.GetKeyDown(KeyCode.Space)) {
@@ -249,9 +254,10 @@ namespace Treep.Player {
 
         private void UpdateCrouch() {
             if (Input.GetKeyDown(KeyCode.C)) {
+                this.isCrouching = true;
                 this._collider2d.size = this._crouchSize;
                 this._collider2d.offset = this._crouchOffSet;
-                this._animator.SetBool(PlayerController.AnimIsCrouching, true);
+                this._animatorController.UpdateCrouch(true);
             }
 
             if (Input.GetKeyUp(KeyCode.C)) {
@@ -259,16 +265,19 @@ namespace Treep.Player {
             }
 
             if (this._unCrouch && this.CanStandUp(1.2f)) {
+                this.isCrouching = false;
                 this._collider2d.size = this._standSize;
                 this._collider2d.offset = this._standOffSet;
-                this._animator.SetBool(PlayerController.AnimIsCrouching, false);
+                this._animatorController.UpdateCrouch(false);
                 this._unCrouch = false;
             }
+
+            this._animatorController.UpdateSpeedCrouch(this._move.x);
         }
 
 
         private void StartDash() {
-            this._isDashing = true;
+            this.IsDashing = true;
             this._dashAvailable = false;
 
             if (this._move.x != 0) {
@@ -292,7 +301,7 @@ namespace Treep.Player {
                 var obstacleCount = this._body.Cast(this._dashDirection, this._contactFilter, this._hitBuffer, 0.3f);
 
                 if (obstacleCount > 0) {
-                    this._isDashing = false;
+                    this.IsDashing = false;
                     this._dashTime = 0;
                     this._body.linearVelocity = Vector2.zero;
                     this._velocity = Vector2.zero;
@@ -303,7 +312,7 @@ namespace Treep.Player {
                 this._dashTime -= Time.deltaTime;
             }
             else {
-                this._isDashing = false;
+                this.IsDashing = false;
                 this._body.linearVelocity = Vector2.zero;
                 this._velocity = Vector2.zero;
             }
@@ -329,16 +338,16 @@ namespace Treep.Player {
                     this._stopJump = false;
                     break;
                 case JumpState.Jumping:
-                    this._animator.SetBool(PlayerController.AnimJumpStart, false);
+                    //this._animatorController.SetBool(PlayerController.AnimJumpStart, false);
                     if (!this.IsGrounded) this._jumpState = JumpState.InFlight;
                     break;
                 case JumpState.InFlight:
-                    this._animator.SetBool(PlayerController.AnimIsJumping, true);
+                    //this._animatorController.SetBool(PlayerController.AnimIsJumping, true);
                     if (this.IsGrounded) this._jumpState = JumpState.Landed;
                     break;
                 case JumpState.Landed:
+                    //this._animatorController.SetBool(PlayerController.AnimJumpEnd, true);
                     this._jumpState = JumpState.Grounded;
-                    this._animator.SetBool(PlayerController.AnimJumpEnd, true);
                     break;
             }
         }

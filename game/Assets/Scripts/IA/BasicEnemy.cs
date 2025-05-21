@@ -80,6 +80,10 @@ namespace Treep.IA {
 
         private void UpdateHealBar() {
             var lifeRatio = this.PV / (float)this.PVMax;
+            if (lifeRatio < 0) {
+                lifeRatio = 0;
+            }
+
             this._pvBar.GetComponent<RectTransform>().localScale = new Vector3(lifeRatio, 1, 1);
         }
     }

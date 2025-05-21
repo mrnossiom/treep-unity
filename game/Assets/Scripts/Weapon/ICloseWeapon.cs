@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Treep.Weapon {
     public interface ICloseWeapon {
         public string Name { get; set; }
@@ -9,5 +11,8 @@ namespace Treep.Weapon {
         public float AttackRate { get; set; }
 
         public WeaponHitbox Hitbox { get; set; }
+
+        public SpriteRenderer SpriteRenderer { get; set; }
+        public Animator Animator { get; set; }
     }
 }

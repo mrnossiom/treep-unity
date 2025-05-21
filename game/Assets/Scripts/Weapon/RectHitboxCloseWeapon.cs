@@ -8,6 +8,10 @@ namespace Treep.Weapon {
         public float AttackRate { get; set; }
         public WeaponHitbox Hitbox { get; set; }
 
+        public SpriteRenderer SpriteRenderer { get; set; }
+
+        public Animator Animator { get; set; }
+
 
         private Rect Top { get; set; }
         private Rect Bottom { get; set; }
@@ -25,6 +29,9 @@ namespace Treep.Weapon {
                 PlayerCombat.AttackPointRight + new Vector2(rightSize.x / 4, 0f));
 
             this.Hitbox = new WeaponHitbox(this.Top, this.Bottom, this.Left, this.Right);
+
+            this.SpriteRenderer = this.GetComponent<SpriteRenderer>();
+            this.Animator = this.GetComponent<Animator>();
         }
     }
 }

@@ -62,15 +62,15 @@ Material:
     m_Ints: []
     m_Floats:
     - _BumpScale: 1
-    - _CornerRadius: 0.134
+    - _CornerRadius: 0.081
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _Fade: 0.22
+    - _Fade: 0.072
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Height: 0
+    - _Height: 0.062
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -81,7 +81,7 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _Width: 0.228
+    - _Width: 0.181
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0, g: 0, b: 0, a: 0.78431374}
