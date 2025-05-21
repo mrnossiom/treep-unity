@@ -27,7 +27,6 @@ namespace Treep.Player {
         [FormerlySerializedAs("ennemyLayerMask")]
         public LayerMask enemyLayerMask;
 
-        public List<GameObject> weapons;
         public KeyCode CloseAttackKey = KeyCode.L;
         public KeyCode DistAttackKey = KeyCode.O;
 
@@ -36,6 +35,8 @@ namespace Treep.Player {
 
         private WeaponManager _weaponManager;
         private PlayerController ControllerScript;
+        private PlayerAnimatorController _animatorController;
+
 
         private LookDirection _currentLookDirection;
 
@@ -49,8 +50,15 @@ namespace Treep.Player {
             this.Health = this.MaxPV;
             this._weaponManager = this.gameObject.GetComponent<WeaponManager>();
 
+            this._animatorController = this.GetComponent<PlayerAnimatorController>();
+
+
             this._animator = this.GetComponent<Animator>();
             this._attackAnimator = this.attackPoint.GetComponent<Animator>();
+        }
+
+        public void SwitchWeapon(Weapons newWeapon) {
+            this._weaponManager.SwitchWeapon(newWeapon);
         }
 
         public void Update() {
@@ -87,7 +95,7 @@ namespace Treep.Player {
         }
 
         private void CloseAttack() {
-            this._animator.SetTrigger(PlayerCombat.IsCloseAttacking);
+            this._animatorController.TriggerAttack(this._currentLookDirection);
 
             this._attackAnimator.SetInteger(PlayerCombat.Random, new Random().Next(6));
             this._attackAnimator.SetTrigger(PlayerCombat.Attack);
@@ -103,7 +111,7 @@ namespace Treep.Player {
         }
 
         private void DistAttack() {
-            this._animator.SetTrigger(PlayerCombat.IsDistAttacking);
+            this._animatorController.SetTrigger(PlayerCombat.IsDistAttacking);
         }
 
         private Collider2D[] GetEnemyIn(IShapesHitbox shape) {

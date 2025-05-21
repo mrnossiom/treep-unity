@@ -4,18 +4,22 @@ using UnityEngine;
 
 namespace Treep.Weapon {
     public enum Weapons {
+        Fist,
         Stick,
+        Sword,
         Spear
     }
 
     public class WeaponManager : MonoBehaviour {
+        public Fist fist;
         public Stick stick;
+        public Sword sword;
         public Spear spear;
         private Dictionary<Weapons, ICloseWeapon> _weapons = new();
 
-        private Weapons _currentWeapon = Weapons.Stick;
+        public Weapons CurrentWeapon { get; private set; }
 
-        private ICloseWeapon Weapon => this._weapons.Count == 0 ? null : this._weapons[this._currentWeapon];
+        private ICloseWeapon Weapon => this._weapons.Count == 0 ? null : this._weapons[this.CurrentWeapon];
 
 
         public int Damage => this.Weapon.Damage;
@@ -26,18 +30,24 @@ namespace Treep.Weapon {
 
         private void Awake() {
             this._weapons = new Dictionary<Weapons, ICloseWeapon>();
+            this._weapons.Add(Weapons.Fist, this.fist);
+            this._weapons.Add(Weapons.Sword, this.sword);
             this._weapons.Add(Weapons.Stick, this.stick);
             this._weapons.Add(Weapons.Spear, this.spear);
 
-            this._currentWeapon = Weapons.Spear;
+            this.CurrentWeapon = PlayerController.StartWeapon;
         }
 
         public bool SwitchWeapon(Weapons newWeapon) {
-            this._currentWeapon = newWeapon;
+            this.CurrentWeapon = newWeapon;
             return true;
         }
 
         public void UpdateLooking(LookDirection currentLookDirection) {
+            if (this.Weapon == null) {
+                Debug.LogError("Weapon est null");
+            }
+
             this.Weapon.Hitbox?.UpdateLooking(currentLookDirection);
         }
 
@@ -48,7 +58,7 @@ namespace Treep.Weapon {
         }
 
         public override string ToString() {
-            return "Current Weapon : " + this._currentWeapon;
+            return "Current Weapon : " + this.CurrentWeapon;
         }
     }
 }
