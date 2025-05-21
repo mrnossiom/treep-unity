@@ -11,6 +11,7 @@ namespace Treep.State {
         [Header("Audio Settings")]
         [Range(0f, 1f)] public float musicVolume = 100f;
         [Range(0f, 1f)] public float sfxVolume = 100f;
+        [Range(0f, 1f)] public float masterVolume = 100f;
         
         [SerializeField] private AudioMixer audioMixer;
 
@@ -38,6 +39,13 @@ namespace Treep.State {
             PlayerPrefs.SetFloat("SFXVolume", sfxVolume);
             PlayerPrefs.Save();
         }
+        
+        public void SetMasterVolume(float percentValue) {
+            sfxVolume = Mathf.Clamp01(percentValue / 100f);
+            audioMixer.SetFloat("MasterVolume", percentValue - 80);
+            PlayerPrefs.SetFloat("MasterVolume", masterVolume);
+            PlayerPrefs.Save();
+        }
 
         public float GetMusicVolumePercent() {
             return musicVolume * 100f;
@@ -46,11 +54,16 @@ namespace Treep.State {
         public float GetSfxVolumePercent() {
             return sfxVolume * 100f;
         }
+        
+        public float GetMasterVolumePercent() {
+            return masterVolume * 100f;
+        }
 
         public void LoadPreferences() {
             username = PlayerPrefs.GetString("Username", "Player");
             audioMixer.SetFloat("MusicVolume", PlayerPrefs.GetFloat("MusicVolume", 100f) - 80);
             audioMixer.SetFloat("SFXVolume", PlayerPrefs.GetFloat("SFXVolume", 100f) - 80);
+            audioMixer.SetFloat("MasterVolume", PlayerPrefs.GetFloat("MasterVolume", 100f) - 80);
         }
 
         public void SaveUserSettings() {
