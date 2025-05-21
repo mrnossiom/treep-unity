@@ -11,12 +11,11 @@ namespace Treep.Interface
         [SerializeField] private Button createGameButton;
         [SerializeField] private Button joinGameButton;
         [SerializeField] private NetworkController networkControllerPrefab;
-
         [SerializeField] private Button startServerButton;
-
         [SerializeField] private Button settingsButton;
         [SerializeField] private SettingsMenu settingsPane;
-
+        [SerializeField] private Button quitButton;
+        
         void Start()
         {
             createGameButton.onClick.AddListener(() =>
@@ -37,6 +36,8 @@ namespace Treep.Interface
             });
 
             settingsButton.onClick.AddListener(() => { settingsPane.gameObject.SetActive(true); });
+            
+            this.quitButton.onClick.AddListener(Application.Quit);
         }
     }
 }
