@@ -44,6 +44,9 @@ TagManager:
   - name: Background
     uniqueID: 578752671
     locked: 0
+  - name: Breach
+    uniqueID: 506119775
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
