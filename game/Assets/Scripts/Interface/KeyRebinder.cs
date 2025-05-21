@@ -9,7 +9,7 @@ namespace Treep.Interface
     {
         [Header("Binding Info")]
         public InputActionReference actionRef;
-        [Tooltip("Name of the composite part (e.g. up, down, left, right). Leave empty if not part of a composite.")]
+        [Tooltip("Name of the composite part")]
         public string compositePartName;
 
         [Header("UI")]
@@ -53,7 +53,7 @@ namespace Treep.Interface
 
             if (bindingIndex == -1)
             {
-                Debug.LogError($"[KeyRebinder] Could not find binding for '{compositePartName}' in action '{actionRef.name}'");
+                Debug.LogError($"Could not find binding for '{compositePartName}' in action '{actionRef.name}'");
             }
         }
 
@@ -61,7 +61,7 @@ namespace Treep.Interface
         {
             if (bindingIndex == -1)
             {
-                Debug.LogError("[KeyRebinder] Invalid binding index.");
+                Debug.LogError("nvalid binding index.");
                 return;
             }
 
@@ -70,7 +70,6 @@ namespace Treep.Interface
             
             actionRef.action.Disable();
             actionRef.action.PerformInteractiveRebinding(bindingIndex)
-                .WithControlsExcluding("Mouse")
                 .OnMatchWaitForAnother(0.1f)
                 .OnComplete(operation =>
                 {
@@ -111,6 +110,5 @@ namespace Treep.Interface
                 actionAsset.LoadBindingOverridesFromJson(rebinds);
             }
         }
-
     }
 }
