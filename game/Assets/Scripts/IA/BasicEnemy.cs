@@ -14,6 +14,7 @@ namespace Treep.IA {
         public SpriteRenderer _spriteRenderer;
         public Animator _animator;
         public int speed = 3;
+        
 
         public float detectionDistance = 0.2f;
         public Image _pvBar;
@@ -84,6 +85,7 @@ namespace Treep.IA {
             // Die animation 
             this.GetComponent<Collider2D>().enabled = false;
             this.GetComponent<SpriteRenderer>().enabled = false;
+            this._pvBar.enabled = false;
             this.enabled = false;
             audioMixer.GetFloat("SFXVolume", out var soundLevel);
             soundLevel = (soundLevel + 80) / 100;
