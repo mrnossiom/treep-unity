@@ -1,49 +1,34 @@
 fileFormatVersion: 2
-guid: 149da42f7c98ee74ea96ac90fb1d9813
+guid: a73ecad5ac614714c9f80bd036932378
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4579556511493083371
-    second: tree3_0
+      213: -8667466294985060184
+    second: tree_0
   - first:
-      213: 8926537203321239021
-    second: tree3_1
+      213: 5281997702118322174
+    second: tree_1
   - first:
-      213: 117158744961322222
-    second: tree3_2
+      213: -3105659087322419395
+    second: tree_2
   - first:
-      213: 7743864127062587644
-    second: tree3_3
+      213: -25497680464327838
+    second: tree_3
   - first:
-      213: 3985237681422740717
-    second: tree3_4
+      213: -2187617102101193605
+    second: tree_4
   - first:
-      213: 5627977974278519881
-    second: tree3_5
+      213: 6962057269733102035
+    second: tree_5
   - first:
-      213: 3781363874561662010
-    second: tree3_6
+      213: -3386072866006247602
+    second: tree_6
   - first:
-      213: 6017989145931365342
-    second: tree3_7
+      213: 2374228815192248797
+    second: tree_7
   - first:
-      213: 9171441759413355029
-    second: tree3_8
-  - first:
-      213: -3712716279548649813
-    second: tree3_9
-  - first:
-      213: -773434464752047001
-    second: tree3_10
-  - first:
-      213: -5174159859395336989
-    second: tree3_11
-  - first:
-      213: 1108427075326356467
-    second: tree3_12
-  - first:
-      213: 3526055570519279706
-    second: tree3_13
+      213: -1328196128117911941
+    second: tree_8
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -114,7 +99,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -139,7 +124,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tree3_0
+      name: tree_0
       rect:
         serializedVersion: 2
         x: 0
@@ -154,8 +139,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 51fa0a7cd952270c0800000000000000
-      internalID: -4579556511493083371
+      spriteID: 8a09eb0b359f6b780800000000000000
+      internalID: -8667466294985060184
       vertices: []
       indices: 
       edges: []
@@ -164,7 +149,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: d2bc492160abf4d4caf6c9e7f37bcef2
+    spriteID: 05b485f2c25d215438c16cf1ff8ef898
     internalID: 0
     vertices: []
     indices: 
@@ -174,7 +159,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      tree3_0: -4579556511493083371
+      tree_0: -8667466294985060184
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

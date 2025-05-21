@@ -1,40 +1,52 @@
 fileFormatVersion: 2
-guid: 180206ddbb93f1243ab11a8fd1353084
+guid: 07ae6c181519bd44fb5398104621c233
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2541579827414792756
-    second: tree1_0
+      213: 8133822466068707676
+    second: newtree2_0
   - first:
-      213: 7209657227957792324
-    second: tree1_1
+      213: 4206843213700978663
+    second: newtree2_1
   - first:
-      213: 1119105973310806021
-    second: tree1_2
+      213: -5075391720740247446
+    second: newtree2_2
   - first:
-      213: 3794882191217770560
-    second: tree1_3
+      213: 807619018806018403
+    second: newtree2_3
   - first:
-      213: 6676945674137800452
-    second: tree1_4
+      213: -5902631191237202287
+    second: newtree2_4
   - first:
-      213: -5491651516655270815
-    second: tree1_5
+      213: 242333046301735577
+    second: newtree2_5
   - first:
-      213: -6991553030406980657
-    second: tree1_6
+      213: -9106639911084431001
+    second: newtree2_6
   - first:
-      213: -4752738424190339139
-    second: tree1_7
+      213: 8304805362424064343
+    second: newtree2_7
   - first:
-      213: -733479751226356912
-    second: tree1_8
+      213: 6853679714675744275
+    second: newtree2_8
   - first:
-      213: -6661843690078999554
-    second: tree1_9
+      213: 7230750727498172825
+    second: newtree2_9
   - first:
-      213: 3297332520569040472
-    second: tree1_10
+      213: 685490340863158841
+    second: newtree2_10
+  - first:
+      213: -5134687135472018444
+    second: newtree2_11
+  - first:
+      213: 696594716648830545
+    second: newtree2_12
+  - first:
+      213: -6856172068838448756
+    second: newtree2_13
+  - first:
+      213: -9207283119597426835
+    second: newtree2_14
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -105,7 +117,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -130,7 +142,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tree1_0
+      name: newtree2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -145,8 +157,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cc584a2ec9e7abcd0800000000000000
-      internalID: -2541579827414792756
+      spriteID: c59fd14207421e070800000000000000
+      internalID: 8133822466068707676
       vertices: []
       indices: 
       edges: []
@@ -155,7 +167,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 36e9e47401459344eb1bedd010731214
+    spriteID: b0ffa666f3ac59b449a30ddf33909425
     internalID: 0
     vertices: []
     indices: 
@@ -165,7 +177,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      tree1_0: -2541579827414792756
+      newtree2_0: 8133822466068707676
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
