@@ -15,7 +15,7 @@ MonoBehaviour:
   roomProviders:
     entries:
     - key: 0
-      value: {fileID: 0}
+      value: {fileID: 11400000, guid: 2c45008369fad254e890ba3f612ca50e, type: 2}
     - key: 1
       value: {fileID: 11400000, guid: 2491f2afb88f30a778677a099e164051, type: 2}
     - key: 3
