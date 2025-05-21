@@ -186,7 +186,7 @@ MonoBehaviour:
   scriptPlayerCombat: {fileID: 5569680993926345568}
   ladderSoundClip: {fileID: 8300000, guid: 926d38144b06cff4c9a56d3e9337ce87, type: 3}
   audioMixer: {fileID: 24100000, guid: ae3cf3e0636b64e409bc8cc3cd6fdbff, type: 2}
-  walkingSoundClip: {fileID: 8300000, guid: 9d49990862aebb588bcc908c5ed09bb0, type: 3}
+  walkingSoundClip: {fileID: 8300000, guid: 9f1ae65e99ec1eeae84e1f66079f39da, type: 3}
   dashSoundClip: {fileID: 8300000, guid: e929e2b3bffbea3659cc0f9897b4c9d1, type: 3}
   lookDirection: 0
 --- !u!61 &7035845409879027553
