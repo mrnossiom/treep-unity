@@ -1,4 +1,5 @@
-﻿using Mirror;
+﻿using System;
+using Mirror;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,8 +23,8 @@ namespace Treep.Interface {
             }
         }
 
-        private void UpdateReadyButtonText(bool ready) {
-            if (readyButtonText != null) readyButtonText.text = ready ? "Annuler" : "Prêt";
+        public void UpdateReadyButtonText(bool ready) {
+            if (readyButtonText != null) readyButtonText.text = ready ? "Cancel" : "Ready";
         }
     }
 }

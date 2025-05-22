@@ -1,44 +1,37 @@
-using System;
-using System.Linq;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Treep.Interface
-{
-    public class HealthBar : MonoBehaviour
-    {
+namespace Treep.Interface {
+    public class HealthBar : MonoBehaviour {
         public Image fillImage;
-        public Player.Player localPlayer;
 
-        private float displayedHealth;
+        private float _displayedHealth;
         public float animationSpeed = 40f;
 
-        void Start()
-        {
-            localPlayer = FindObjectsByType<Player.Player>(FindObjectsSortMode.None).First(player => player.isLocalPlayer);
-            displayedHealth = localPlayer.health;
-            UpdateFillInstant();
+        private void Start() {
+            this._displayedHealth = Player.Player.Singleton.health;
+            this.UpdateFillInstant();
         }
 
-        void Update()
-        {
-            float targetHealth = localPlayer.health;
-            
-            if (Mathf.Abs(displayedHealth - targetHealth) > 0.01f)
-            {
-                displayedHealth = Mathf.MoveTowards(displayedHealth, targetHealth, animationSpeed * Time.deltaTime);
-                UpdateFill();
+        private void Update() {
+            if (Player.Player.Singleton == null) return;
+
+            var targetHealth = Player.Player.Singleton.health;
+
+            if (Mathf.Abs(this._displayedHealth - targetHealth) > 0.01f) {
+                this._displayedHealth = Mathf.MoveTowards(this._displayedHealth, targetHealth,
+                    this.animationSpeed * Time.deltaTime);
+                this.UpdateFill();
             }
         }
 
-        void UpdateFill()
-        {
-            fillImage.fillAmount = displayedHealth / localPlayer.maxHealth;
+        private void UpdateFill() {
+            this.fillImage.fillAmount = this._displayedHealth / Player.Player.Singleton.maxHealth;
         }
 
-        void UpdateFillInstant()
-        {
-            fillImage.fillAmount = localPlayer.health / localPlayer.maxHealth;
+        private void UpdateFillInstant() {
+            this.fillImage.fillAmount = Player.Player.Singleton.health / Player.Player.Singleton.maxHealth;
         }
     }
 }

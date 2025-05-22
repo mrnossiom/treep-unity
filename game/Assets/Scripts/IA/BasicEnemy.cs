@@ -55,9 +55,9 @@ namespace Treep.IA {
             this._body.linearVelocity = new Vector2(this._direction * this.speed, this._body.linearVelocity.y);
         }
 
-        public int PV { get; set; }
+        public float PV { get; set; }
 
-        public void Hit(int damageTook) {
+        public void Hit(float damageTook) {
             this.PV -= damageTook;
 
             this.UpdateHealBar();

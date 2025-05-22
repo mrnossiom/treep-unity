@@ -49,8 +49,7 @@ namespace Treep.State {
                 this._shouldEnterState = false;
             }
         }
-
-        [Command(requiresAuthority = false)]
+        
         public void TriggerState(GameStateKind gameState) {
             this._stateKind = gameState;
         }
