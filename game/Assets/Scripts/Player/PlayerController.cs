@@ -58,7 +58,7 @@ namespace Treep.Player {
         [SerializeField] private float climbSpeed = 3f;
         [SerializeField] private bool onTopOfLadder;
 
-        public static Weapons StartWeapon = Weapons.Stick;
+        public static Weapons StartWeapon;
 
         // State
         private Vector2 _targetVelocity;
@@ -104,7 +104,7 @@ namespace Treep.Player {
 
         private bool IsClimbing { get; set; }
 
-        [FormerlySerializedAs("looking")] public LookDirection lookDirection;
+        public LookDirection lookDirection;
 
         private bool _allSpriteFlipX;
 
@@ -118,10 +118,13 @@ namespace Treep.Player {
                 this._allSpriteFlipX = value;
             }
         }
-
-
+        
         private void Start() {
             this.transform.position += new Vector3(3, 5, 0);
+        }
+        
+        public void InitStartWeapon(Weapons weapon) {
+            StartWeapon = weapon;
         }
 
         private void Awake() {

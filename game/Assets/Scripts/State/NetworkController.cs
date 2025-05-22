@@ -37,6 +37,7 @@ namespace Treep.State {
 
             player.SetSimulated(false);
             player.username = message.Username;
+            player.InitStats();
 
             NetworkServer.AddPlayerForConnection(conn, playerObj);
             playerObj.GetComponent<NetworkIdentity>().AssignClientAuthority(conn);
@@ -55,7 +56,7 @@ namespace Treep.State {
         }
 
         public override void Update() {
-            gameStateManager = FindAnyObjectByType<GameStateManager>();
+            if (this.gameStateManager is null) gameStateManager = FindAnyObjectByType<GameStateManager>();
             if (!_hasGameStarted) CheckAllPlayersReady();
         }
 
@@ -66,6 +67,7 @@ namespace Treep.State {
 
             bool allDead = players.All(p => p.isDead);
             if (allDead) {
+                Debug.Log("All players are dead");
                 RpcReturnToLobby();
             }
         }
@@ -76,6 +78,7 @@ namespace Treep.State {
             var players = FindObjectsByType<Player.Player>(FindObjectsSortMode.None);
 
             foreach (var player in players) {
+                Debug.Log(player.username);
                 RespawnPlayer(player);
             }
         }
