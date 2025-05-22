@@ -192,7 +192,7 @@ GameObject:
   - component: {fileID: -7050396365075443685}
   - component: {fileID: -4075812192695044465}
   m_Layer: 6
-  m_Name: ennemy_1_0
+  m_Name: WalkingEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
