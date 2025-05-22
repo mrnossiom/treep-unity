@@ -34,6 +34,9 @@ namespace Treep.Level {
                 Object.Instantiate(this.enemyPrefab, enemySpawnerPos + new Vector2(0, 2), Quaternion.identity);
             }
 
+            foreach (var enemySpawnerPos in evolver.ExitPoints) {
+                // TODO: make door that ticks GameStateManager
+            }
 
             return evolver.SpawnPoints.First();
         }

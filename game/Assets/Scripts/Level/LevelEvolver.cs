@@ -9,7 +9,7 @@ namespace Treep.Level {
         /// <summary>
         /// Shuffles the element order of the specified list.
         /// </summary>
-        public static void Shuffle<T>(this IList<T> ts, Random rng) {
+        private static void Shuffle<T>(this IList<T> ts, Random rng) {
             var count = ts.Count;
             var last = count - 1;
             for (var i = 0; i < last; ++i) {
@@ -56,12 +56,14 @@ namespace Treep.Level {
         private readonly Dictionary<RoomKind, List<RoomData>> _roomProviders;
 
         private List<PlacedRoom> _placedRooms = new();
-        private List<Vector2> _enemySpawners = new();
-        private List<Vector2> _spawnPoints = new();
+        private readonly List<Vector2> _enemySpawners = new();
+        private readonly List<Vector2> _spawnPoints = new();
+        private readonly List<Vector2> _exitPoints = new();
 
         public ReadOnlyCollection<PlacedRoom> PlacedRooms => this._placedRooms.AsReadOnly();
         public ReadOnlyCollection<Vector2> EnemySpawners => this._enemySpawners.AsReadOnly();
         public ReadOnlyCollection<Vector2> SpawnPoints => this._spawnPoints.AsReadOnly();
+        public ReadOnlyCollection<Vector2> ExitPoints => this._exitPoints.AsReadOnly();
 
         public LevelEvolver(List<RoomKind> blueprint, Dictionary<RoomKind, List<RoomData>> roomProviders) {
             this._blueprint = blueprint;
@@ -156,6 +158,10 @@ namespace Treep.Level {
 
                 foreach (var spawnPoint in placedRoom.Template.spawnPoints) {
                     this._spawnPoints.Add(placedRoom.Position + spawnPoint);
+                }
+
+                foreach (var exitPoint in placedRoom.Template.exitPoints) {
+                    this._exitPoints.Add(placedRoom.Position + exitPoint);
                 }
             }
 
