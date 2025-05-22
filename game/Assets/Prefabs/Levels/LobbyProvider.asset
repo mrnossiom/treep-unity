@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ba12c2a8bd3e4df284c2849332c93ebd, type: 3}
-  m_Name: DefaultRoomProvider
+  m_Name: LobbyProvider
   m_EditorClassIdentifier: 
   roomProviders:
     entries:

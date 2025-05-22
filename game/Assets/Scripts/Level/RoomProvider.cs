@@ -9,7 +9,7 @@ namespace Treep.Level {
         [SerializeField] private PseudoDictionary<RoomKind, RoomKindProvider> roomProviders = new();
 
         public Dictionary<RoomKind, List<RoomData>> CollectRooms() {
-            var providers = roomProviders.ToActualDictionary();
+            var providers = this.roomProviders.ToActualDictionary();
 
             return providers.ToDictionary(provider => provider.Key, provider => provider.Value.rooms);
         }

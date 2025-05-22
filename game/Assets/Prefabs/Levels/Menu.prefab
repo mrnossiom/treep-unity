@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 864153020807672831}
-  - component: {fileID: -8587844632787652279}
   m_Layer: 0
   m_Name: Menu
   m_TagString: Untagged
@@ -33,25 +32,6 @@ Transform:
   - {fileID: 6820679683382828931}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-8587844632787652279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 983041052728658860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2098d6809ce4473832c25102ba2585d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  size: {x: 30, y: 13}
-  doors:
-  - position: {x: 29, y: 1}
-    size: 0
-  enemySpawners: []
-  spawnPoints:
-  - {x: 5, y: 5}
 --- !u!1 &2635150134697267651
 GameObject:
   m_ObjectHideFlags: 0
