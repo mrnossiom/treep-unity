@@ -3,7 +3,6 @@ using Mirror;
 using Treep.Level;
 using Treep.State.GameStates;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Treep.State {
     public enum GameStateKind {

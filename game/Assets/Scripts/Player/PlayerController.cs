@@ -367,25 +367,26 @@ namespace Treep.Player {
                 }
             }
 
-            this._targetVelocity = this._move * this.maxSpeed;
-
+            if (this.isCrouching) {
+                this._targetVelocity = (this._move * this.maxSpeed) / 2;
+            }
+            
+            else {
+                this._targetVelocity = this._move * this.maxSpeed;
+            }
             if (this.IsClimbing) {
                 this._velocity.y = this._move.y * this.climbSpeed;
             }
+            
         }
 
 
         private void FixedUpdate() {
-            if (this.IsClimbing) {
-                this._velocity.y = this._move.y * this.climbSpeed;
+            if (this._velocity.y < 0) {
+                this._velocity += Physics2D.gravity * (this.gravityModifier * Time.deltaTime);
             }
             else {
-                if (this._velocity.y < 0) {
-                    this._velocity += Physics2D.gravity * (this.gravityModifier * Time.deltaTime);
-                }
-                else {
-                    this._velocity += Physics2D.gravity * Time.deltaTime;
-                }
+                this._velocity += Physics2D.gravity * Time.deltaTime;
             }
 
             this._velocity.x = this._targetVelocity.x;
@@ -441,7 +442,7 @@ namespace Treep.Player {
         }
 
         private void OnTriggerEnter2D(Collider2D other) {
-            if (other.CompareTag("Ladder") && !this.IsGrounded) {
+            if (other.CompareTag("Ladder") && !this.IsGrounded && !IsDashing) {
                 var contactPoint = other.ClosestPoint(this.transform.position);
                 if (contactPoint.y < this.transform.position.y) {
                     this.onTopOfLadder = true;

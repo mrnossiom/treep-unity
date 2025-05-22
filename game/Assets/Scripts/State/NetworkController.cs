@@ -26,7 +26,7 @@ namespace Treep.State {
         public override void OnClientConnect() {
             base.OnClientConnect();
             var characterMessage = new CreateCharacterMessage {
-                Username = Settings.Singleton.username,
+                Username = Settings.Singleton.username
             };
             NetworkClient.Send(characterMessage);
         }

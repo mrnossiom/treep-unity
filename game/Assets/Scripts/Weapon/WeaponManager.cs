@@ -59,11 +59,12 @@ namespace Treep.Weapon {
         }
 
         public void UpdateLooking(LookDirection currentLookDirection) {
-            if (this.Weapon == null) {
+            if (this.Weapon is null) {
                 Debug.LogError("Weapon est null");
             }
-
-            this.Weapon.Hitbox?.UpdateLooking(currentLookDirection);
+            else {
+                this.Weapon.Hitbox?.UpdateLooking(currentLookDirection);
+            }
         }
 
         public void OnDrawGizmosSelected() {
@@ -73,7 +74,7 @@ namespace Treep.Weapon {
         }
 
         public override string ToString() {
-            return "Current Weapon : " + this.CurrentWeapon;
+            return "Current Weapon: " + this.CurrentWeapon;
         }
     }
 }

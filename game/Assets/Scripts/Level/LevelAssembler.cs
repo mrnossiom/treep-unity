@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Mirror;
 using UnityEngine;
 
 namespace Treep.Level {
@@ -20,6 +19,7 @@ namespace Treep.Level {
             var rng = new System.Random(seed);
 
             var evolver = new LevelEvolver(this.levelBlueprint, roomsBook);
+            // level is not solvable
             if (!evolver.EvolveRoot(rng)) return null;
 
             this.PlaceLevelRooms(evolver.PlacedRooms);
@@ -29,11 +29,14 @@ namespace Treep.Level {
                 return null;
             }
 
-            foreach (var enemySpawnerpos in evolver.EnemySpawners) {
+            foreach (var enemySpawnerPos in evolver.EnemySpawners) {
                 // + Vector2.up because enemy spawn in the ground
-                Object.Instantiate(this.enemyPrefab, enemySpawnerpos + new Vector2(0, 2), Quaternion.identity);
+                Object.Instantiate(this.enemyPrefab, enemySpawnerPos + new Vector2(0, 2), Quaternion.identity);
             }
 
+            foreach (var enemySpawnerPos in evolver.ExitPoints) {
+                // TODO: make door that ticks GameStateManager
+            }
 
             return evolver.SpawnPoints.First();
         }
