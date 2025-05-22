@@ -16,44 +16,30 @@ namespace Treep.Player {
         public static Vector2 AttackPointTop = new(0f, 1.75f);
         public static Vector2 AttackPointBottom = new(0f, -1.75f);
 
+        public Transform attackPoint;
+        public LayerMask enemyLayerMask;
+
+
+        public KeyCode closeAttackKey = KeyCode.L;
+        public KeyCode distAttackKey = KeyCode.O;
+
         private static readonly int IsCloseAttacking = Animator.StringToHash("isCloseAttacking");
         private static readonly int Random = Animator.StringToHash("Random");
         private static readonly int Attack = Animator.StringToHash("Attack");
         private static readonly int IsDistAttacking = Animator.StringToHash("isDistAttacking");
 
-        public Transform attackPoint;
         private Animator _attackAnimator;
-
-        [FormerlySerializedAs("ennemyLayerMask")]
-        public LayerMask enemyLayerMask;
-
-        public KeyCode CloseAttackKey = KeyCode.L;
-        public KeyCode DistAttackKey = KeyCode.O;
-
-        [FormerlySerializedAs("PVMax")] public int MaxPV = 10;
-        private Animator _animator;
-
         private WeaponManager _weaponManager;
-        private PlayerController ControllerScript;
+        private PlayerController _controllerScript;
         private PlayerAnimatorController _animatorController;
-
-
         private LookDirection _currentLookDirection;
-
-        private float nextAttackTime;
-        private int Health { get; set; }
-
+        private float _nextAttackTime;
 
         public void Awake() {
-            this.ControllerScript = this.GetComponent<PlayerController>();
-            this._currentLookDirection = this.ControllerScript.lookDirection;
-            this.Health = this.MaxPV;
+            this._controllerScript = this.GetComponent<PlayerController>();
+            this._currentLookDirection = this._controllerScript.lookDirection;
             this._weaponManager = this.gameObject.GetComponent<WeaponManager>();
-
             this._animatorController = this.GetComponent<PlayerAnimatorController>();
-
-
-            this._animator = this.GetComponent<Animator>();
             this._attackAnimator = this.attackPoint.GetComponent<Animator>();
         }
 
@@ -64,17 +50,17 @@ namespace Treep.Player {
         public void Update() {
             this.UpdateAttackPoint();
 
-            if (Time.time >= this.nextAttackTime) {
-                if (Input.GetKeyDown(this.CloseAttackKey)) {
+            if (Time.time >= this._nextAttackTime) {
+                if (Input.GetKeyDown(this.closeAttackKey)) {
                     this.CloseAttack();
-                    this.nextAttackTime = Time.time + 1f / this._weaponManager.AttackRate;
+                    this._nextAttackTime = Time.time + 1f / this._weaponManager.AttackRate;
                 }
             }
         }
 
 
         private void UpdateAttackPoint() {
-            this._currentLookDirection = this.ControllerScript.lookDirection;
+            this._currentLookDirection = this._controllerScript.lookDirection;
             switch (this._currentLookDirection) {
                 case LookDirection.Right:
                     this.attackPoint.position = PlayerCombat.AttackPointRight + (Vector2)this.transform.position;

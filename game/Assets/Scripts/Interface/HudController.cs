@@ -18,6 +18,12 @@ namespace Treep.Interface {
             if (gameStateManager is not null && gameStateManager.StateKind == GameStateKind.Level) {
                 lobbyMenu.gameObject.SetActive(false);
                 healthBar.gameObject.SetActive(true);
+                this.lobbyMenu.UpdateReadyButtonText(false);
+            }
+            
+            if (gameStateManager is not null && gameStateManager.StateKind == GameStateKind.Lobby) {
+                lobbyMenu.gameObject.SetActive(true);
+                healthBar.gameObject.SetActive(false);
             }
         }
     }

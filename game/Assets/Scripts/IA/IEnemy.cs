@@ -1,8 +1,8 @@
 namespace Treep.IA {
     public interface IEnemy {
-        public int PV { get; set; }
+        public float PV { get; set; }
 
-        public void Hit(int damageTook);
+        public void Hit(float damageTook);
         public void Die();
     }
 }

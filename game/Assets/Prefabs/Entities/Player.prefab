@@ -154,9 +154,15 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  usernameText: {fileID: 3973601283537815932}
   username: 
   isReady: 0
+  isDead: 0
+  maxHealth: 0
+  health: 0
+  weapon: 0
+  money: 0
+  damageMultiplier: 0
+  usernameText: {fileID: 3973601283537815932}
 --- !u!114 &-7027888757281823204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,10 +253,8 @@ MonoBehaviour:
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  weapons: []
-  CloseAttackKey: 108
-  DistAttackKey: 108
-  MaxPV: 10
+  closeAttackKey: 108
+  distAttackKey: 111
 --- !u!114 &7233276448769679020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,6 +271,7 @@ MonoBehaviour:
   stick: {fileID: 6515450981712233765}
   sword: {fileID: 228346532244123195}
   spear: {fileID: 6616142517127512186}
+  localPlayer: {fileID: 0}
 --- !u!114 &2452710561001478192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -966,6 +971,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 691637449811069611, guid: 403c32c23ffe98878b96063eb1263fa8, type: 3}
+      propertyPath: m_MaskInteraction
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 691637449811069611, guid: 403c32c23ffe98878b96063eb1263fa8, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
@@ -998,6 +1007,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1753688972091636283, guid: 403c32c23ffe98878b96063eb1263fa8, type: 3}
+      propertyPath: m_MaskInteraction
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1753688972091636283, guid: 403c32c23ffe98878b96063eb1263fa8, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
@@ -1020,6 +1033,10 @@ PrefabInstance:
     - target: {fileID: 2628259350394505724, guid: 403c32c23ffe98878b96063eb1263fa8, type: 3}
       propertyPath: m_SortingOrder
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2628259350394505724, guid: 403c32c23ffe98878b96063eb1263fa8, type: 3}
+      propertyPath: m_MaskInteraction
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2628259350394505724, guid: 403c32c23ffe98878b96063eb1263fa8, type: 3}
       propertyPath: m_WasSpriteAssigned
@@ -1072,6 +1089,10 @@ PrefabInstance:
     - target: {fileID: 5961064957878751382, guid: 403c32c23ffe98878b96063eb1263fa8, type: 3}
       propertyPath: m_SortingOrder
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5961064957878751382, guid: 403c32c23ffe98878b96063eb1263fa8, type: 3}
+      propertyPath: m_MaskInteraction
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6656482445143824549, guid: 403c32c23ffe98878b96063eb1263fa8, type: 3}
       propertyPath: m_LocalPosition.x
