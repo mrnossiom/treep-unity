@@ -47,6 +47,9 @@ TagManager:
   - name: Breach
     uniqueID: 506119775
     locked: 0
+  - name: Enemy
+    uniqueID: 2512409105
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
