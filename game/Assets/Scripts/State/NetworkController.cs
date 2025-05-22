@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using Mirror;
 using UnityEngine;
@@ -10,7 +8,7 @@ namespace Treep.State {
         [SerializeField] public GameStateManager gameStateManager;
 
         private bool _hasGameStarted;
-        
+
         public override void OnStartServer() {
             base.OnStartServer();
 
@@ -21,13 +19,13 @@ namespace Treep.State {
             base.OnClientConnect();
 
             var characterMessage = new CreateCharacterMessage {
-                Username = Settings.Singleton.username,
+                Username = Settings.Singleton.username
             };
             NetworkClient.Send(characterMessage);
         }
 
         private void OnCreateCharacter(NetworkConnectionToClient conn, CreateCharacterMessage message) {
-            var playerObj =  Object.Instantiate(this.playerPrefab);
+            var playerObj = Object.Instantiate(this.playerPrefab);
             var player = playerObj.GetComponent<Player.Player>();
 
             player.SetSimulated(false);
@@ -36,21 +34,21 @@ namespace Treep.State {
             NetworkServer.AddPlayerForConnection(conn, playerObj);
             playerObj.GetComponent<NetworkIdentity>().AssignClientAuthority(conn);
         }
-        
+
         private void CheckAllPlayersReady() {
-            var players = FindObjectsByType<Player.Player>(FindObjectsSortMode.None);
-            if (players.All(player => player.isReady) && players.Length != 0) StartGame();
+            var players = Object.FindObjectsByType<Player.Player>(FindObjectsSortMode.None);
+            if (players.All(player => player.isReady) && players.Length != 0) this.StartGame();
         }
-        
-        void StartGame() {
+
+        private void StartGame() {
             this._hasGameStarted = true;
-            gameStateManager.TriggerState(GameStateKind.Level);
+            this.gameStateManager.TriggerState(GameStateKind.Level);
         }
 
         public override void Update() {
-            gameStateManager = FindAnyObjectByType<GameStateManager>();
-            
-            if (!this._hasGameStarted) CheckAllPlayersReady();
+            this.gameStateManager = Object.FindAnyObjectByType<GameStateManager>();
+
+            if (!this._hasGameStarted) this.CheckAllPlayersReady();
         }
     }
 

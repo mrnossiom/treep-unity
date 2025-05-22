@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6446880085546936245}
   - component: {fileID: 3660792868845834921}
   m_Layer: 0
-  m_Name: Level1
+  m_Name: Level2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7c8d0e7c906f3414843c346286bc53e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomProvider: {fileID: 11400000, guid: 801048306d47cb838b12409ed7e4663e, type: 2}
+  roomProvider: {fileID: 11400000, guid: 2da308a766e26b7fbb172906e642d079, type: 2}
   enemyPrefab: {fileID: 6615744716052060427, guid: 99da362170ba271efbfc5c4481638faf, type: 3}
-  levelBlueprint: 0000000001000000010000000100000001000000010000000100000003000000
+  levelBlueprint: 01000000010000000100000001000000
