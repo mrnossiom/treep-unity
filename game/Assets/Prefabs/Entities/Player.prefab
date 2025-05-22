@@ -258,7 +258,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   CloseAttackKey: 108
-  DistAttackKey: 108
+  DistAttackKey: 109
   MaxPV: 10
   slashSoundClip: {fileID: 8300000, guid: 9ec0066d4d93cc51ab701674671b028a, type: 3}
   audioMixer: {fileID: 24100000, guid: ae3cf3e0636b64e409bc8cc3cd6fdbff, type: 2}

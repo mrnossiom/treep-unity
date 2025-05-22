@@ -256,6 +256,7 @@ namespace Treep.Player {
                 //this._animatorController.SetBool(PlayerController.AnimJumpStart, true);
                 //this._animatorController.SetBool(PlayerController.AnimIsJumping, false);
                 //this._animatorController.SetBool(PlayerController.AnimJumpEnd, false);
+                this._animatorController.TriggerJump();
                 this._jumpState = JumpState.PrepareToJump;
             }
             else if (Input.GetButtonUp("Jump")) this._stopJump = true;
