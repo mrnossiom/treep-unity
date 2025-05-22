@@ -1,7 +1,6 @@
-using System.Collections;
 using UnityEngine;
 
-namespace Treep {
+namespace Treep.Utils {
     public class BackgroundController : MonoBehaviour {
         private Vector2 _startPos;
         private float _length;

@@ -22,7 +22,7 @@ namespace Treep.Level {
         /// Returns element in a random order based on given RNG.
         /// </summary>
         public static IEnumerable<T> RandomOrderAccess<T>(this IList<T> list, Random rng) {
-            int[] values = Enumerable.Range(0, list.Count).ToArray();
+            var values = Enumerable.Range(0, list.Count).ToArray();
             values.Shuffle(rng);
 
             foreach (var index in values) {
@@ -36,18 +36,18 @@ namespace Treep.Level {
         public Vector2 Position { get; private set; }
 
         public PlacedRoom(RoomData template, Vector2 position) {
-            Template = template;
-            Position = position;
+            this.Template = template;
+            this.Position = position;
         }
 
         public bool DoOverlap(PlacedRoom lastPlacedRoom) {
-            var selfRect = Template.size;
+            var selfRect = this.Template.size;
             var otherRect = lastPlacedRoom.Template.size;
 
-            return Position.x < lastPlacedRoom.Position.x + otherRect.x
-                   && Position.x + selfRect.x > lastPlacedRoom.Position.x
-                   && Position.y < lastPlacedRoom.Position.y + otherRect.y
-                   && Position.y + selfRect.y > lastPlacedRoom.Position.y;
+            return this.Position.x < lastPlacedRoom.Position.x + otherRect.x
+                   && this.Position.x + selfRect.x > lastPlacedRoom.Position.x
+                   && this.Position.y < lastPlacedRoom.Position.y + otherRect.y
+                   && this.Position.y + selfRect.y > lastPlacedRoom.Position.y;
         }
     }
 
@@ -59,13 +59,13 @@ namespace Treep.Level {
         private List<Vector2> _enemySpawners = new();
         private List<Vector2> _spawnPoints = new();
 
-        public ReadOnlyCollection<PlacedRoom> PlacedRooms => _placedRooms.AsReadOnly();
-        public ReadOnlyCollection<Vector2> EnemySpawners => _enemySpawners.AsReadOnly();
-        public ReadOnlyCollection<Vector2> SpawnPoints => _spawnPoints.AsReadOnly();
+        public ReadOnlyCollection<PlacedRoom> PlacedRooms => this._placedRooms.AsReadOnly();
+        public ReadOnlyCollection<Vector2> EnemySpawners => this._enemySpawners.AsReadOnly();
+        public ReadOnlyCollection<Vector2> SpawnPoints => this._spawnPoints.AsReadOnly();
 
         public LevelEvolver(List<RoomKind> blueprint, Dictionary<RoomKind, List<RoomData>> roomProviders) {
-            _blueprint = blueprint;
-            _roomProviders = roomProviders;
+            this._blueprint = blueprint;
+            this._roomProviders = roomProviders;
         }
 
         public bool EvolveRoot(Random rng) {
@@ -74,13 +74,13 @@ namespace Treep.Level {
             var evolved = new List<PlacedRoom>();
             const int rootId = 0;
 
-            var rootData = _blueprint[rootId];
+            var rootData = this._blueprint[rootId];
 
-            foreach (var template in _roomProviders[rootData].RandomOrderAccess(rng)) {
+            foreach (var template in this._roomProviders[rootData].RandomOrderAccess(rng)) {
                 evolved.Add(new PlacedRoom(template, Vector2.zero));
 
                 // found a complete level
-                if (EvolveNode(ref evolved, rng, rootId)) {
+                if (this.EvolveNode(ref evolved, rng, rootId)) {
                     found = true;
                     break;
                 }
@@ -92,7 +92,7 @@ namespace Treep.Level {
             // level is not solvable
             if (!found) return false;
 
-            ProcessPlacedRooms(evolved);
+            this.ProcessPlacedRooms(evolved);
 
             return true;
         }
@@ -101,7 +101,7 @@ namespace Treep.Level {
             var placedRoom = evolved[lastId];
 
             foreach (var door in placedRoom.Template.doors.RandomOrderAccess(rng)) {
-                if (EvolveNodeDoor(ref evolved, rng, lastId, door)) return true;
+                if (this.EvolveNodeDoor(ref evolved, rng, lastId, door)) return true;
             }
 
             return false;
@@ -112,10 +112,10 @@ namespace Treep.Level {
             var lastPlacedRoom = evolved[lastId];
 
             // reached end of blueprint branch
-            if (nextRoomId >= _blueprint.Count) return true;
+            if (nextRoomId >= this._blueprint.Count) return true;
 
-            var nextRoom = _blueprint[nextRoomId];
-            var nextTemplates = _roomProviders[nextRoom];
+            var nextRoom = this._blueprint[nextRoomId];
+            var nextTemplates = this._roomProviders[nextRoom];
 
             foreach (var template in nextTemplates.RandomOrderAccess(rng)) {
                 foreach (var nextDoor in template.doors.RandomOrderAccess(rng)) {
@@ -136,7 +136,7 @@ namespace Treep.Level {
 
                         evolved.Add(nextPlacedRoom);
 
-                        if (EvolveNode(ref evolved, rng, nextRoomId)) {
+                        if (this.EvolveNode(ref evolved, rng, nextRoomId)) {
                             return true;
                         }
 
@@ -151,15 +151,15 @@ namespace Treep.Level {
         private void ProcessPlacedRooms(List<PlacedRoom> placedRooms) {
             foreach (var placedRoom in placedRooms) {
                 foreach (var enemySpawner in placedRoom.Template.enemySpawners) {
-                    _enemySpawners.Add(placedRoom.Position + enemySpawner);
+                    this._enemySpawners.Add(placedRoom.Position + enemySpawner);
                 }
 
                 foreach (var spawnPoint in placedRoom.Template.spawnPoints) {
-                    _spawnPoints.Add(placedRoom.Position + spawnPoint);
+                    this._spawnPoints.Add(placedRoom.Position + spawnPoint);
                 }
             }
 
-            _placedRooms = placedRooms;
+            this._placedRooms = placedRooms;
         }
     }
 }
