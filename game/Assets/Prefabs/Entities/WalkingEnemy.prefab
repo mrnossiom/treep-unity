@@ -289,6 +289,9 @@ MonoBehaviour:
   speed: 3
   detectionDistance: 0.2
   _pvBar: {fileID: 3048347759019739256}
+  damageSoundClip: {fileID: 8300000, guid: aab7ddafd1d5675f59097baed312fcd9, type: 3}
+  deathSoundClip: {fileID: 8300000, guid: 5091edc8633270bcbb3306d93ef22497, type: 3}
+  audioMixer: {fileID: 24100000, guid: ae3cf3e0636b64e409bc8cc3cd6fdbff, type: 2}
 --- !u!50 &5074737812209347828
 Rigidbody2D:
   serializedVersion: 5
