@@ -2,6 +2,7 @@ using Mirror;
 using Treep.Weapon;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Treep.Player;
 using Vector2 = UnityEngine.Vector2;
 
 namespace Treep.Player {
@@ -57,7 +58,7 @@ namespace Treep.Player {
         [SerializeField] private float climbSpeed = 3f;
         [SerializeField] private bool onTopOfLadder;
 
-        public static Weapons StartWeapon = Weapons.Sword;
+        public static Weapons StartWeapon = Weapons.Stick;
 
         // State
         private Vector2 _targetVelocity;
@@ -68,11 +69,10 @@ namespace Treep.Player {
         private JumpState _jumpState = JumpState.Grounded;
         private bool _stopJump;
         private bool _controlEnabled = true;
-
         private bool _jump;
+
         public Vector2 _move;
         public bool IsGrounded { get; set; }
-
 
         private Vector2 _standSize = new(1.4f, 3.2f);
         private Vector2 _crouchSize = new(1.4f, 2.3f);

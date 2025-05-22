@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Treep.Player;
 using UnityEngine;
 
@@ -21,8 +23,9 @@ namespace Treep.Weapon {
 
         private ICloseWeapon Weapon => this._weapons.Count == 0 ? null : this._weapons[this.CurrentWeapon];
 
+        public Player.Player localPlayer;
 
-        public int Damage => this.Weapon.Damage;
+        public float Damage => this.Weapon.Damage * this.localPlayer.damageMultiplier;
         public IShapesHitbox HitBox => this.Weapon.Hitbox.Current;
 
         public float AttackRate => this.Weapon.AttackRate;
@@ -36,6 +39,18 @@ namespace Treep.Weapon {
             this._weapons.Add(Weapons.Spear, this.spear);
 
             this.CurrentWeapon = PlayerController.StartWeapon;
+            
+            StartCoroutine(WaitForLocalPlayer());
+        }
+        
+        IEnumerator WaitForLocalPlayer()
+        {
+            while (Player.Player.Singleton == null)
+            {
+                yield return null;
+            }
+
+            localPlayer = Player.Player.Singleton;
         }
 
         public bool SwitchWeapon(Weapons newWeapon) {
