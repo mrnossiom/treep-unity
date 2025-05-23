@@ -190,6 +190,10 @@ MonoBehaviour:
   _dashEffectPoint: {fileID: 5114994484247730810}
   dashEffectPos: {x: 1.5, y: -1}
   scriptPlayerCombat: {fileID: 5569680993926345568}
+  ladderSoundClip: {fileID: 8300000, guid: 926d38144b06cff4c9a56d3e9337ce87, type: 3}
+  audioMixer: {fileID: 24100000, guid: ae3cf3e0636b64e409bc8cc3cd6fdbff, type: 2}
+  walkingSoundClip: {fileID: 8300000, guid: 9f1ae65e99ec1eeae84e1f66079f39da, type: 3}
+  dashSoundClip: {fileID: 8300000, guid: e929e2b3bffbea3659cc0f9897b4c9d1, type: 3}
   lookDirection: 0
 --- !u!61 &7035845409879027553
 BoxCollider2D:
@@ -253,8 +257,11 @@ MonoBehaviour:
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  closeAttackKey: 108
-  distAttackKey: 111
+  CloseAttackKey: 108
+  DistAttackKey: 108
+  MaxPV: 10
+  slashSoundClip: {fileID: 8300000, guid: 9ec0066d4d93cc51ab701674671b028a, type: 3}
+  audioMixer: {fileID: 24100000, guid: ae3cf3e0636b64e409bc8cc3cd6fdbff, type: 2}
 --- !u!114 &7233276448769679020
 MonoBehaviour:
   m_ObjectHideFlags: 0

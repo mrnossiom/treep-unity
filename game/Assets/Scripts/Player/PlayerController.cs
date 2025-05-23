@@ -1,6 +1,8 @@
 using Mirror;
+using Treep.SFX;
 using Treep.Weapon;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.Serialization;
 using Treep.Player;
 using Vector2 = UnityEngine.Vector2;
@@ -101,6 +103,13 @@ namespace Treep.Player {
         public PlayerCombat scriptPlayerCombat;
 
         private PlayerAnimatorController _animatorController;
+        
+        [SerializeField] private AudioClip ladderSoundClip;
+        [SerializeField] private AudioMixer audioMixer;
+        private AudioSource climbingAudioSource;
+        [SerializeField] private AudioClip walkingSoundClip;
+        private AudioSource walkingAudioSource;
+        [SerializeField] private AudioClip dashSoundClip;
 
         private bool IsClimbing { get; set; }
 
@@ -160,6 +169,7 @@ namespace Treep.Player {
                 this.UpdateCrouch();
                 this.UpdateJump();
                 this.UpdateClimb();
+                this.UpdateWalkSound();
                 this.UpdateDash();
                 this.UpdateHitboxCollider();
             }
@@ -200,8 +210,48 @@ namespace Treep.Player {
                     this._currentDashEffectPos.y);
         }
 
+       
+        private void UpdateWalkSound()
+        {
+            bool isWalking = IsGrounded && Mathf.Abs(_move.x) > 0.01f && !this.isCrouching&& !IsDashing && !IsClimbing;
+
+            if (isWalking)
+            {
+                if (walkingAudioSource == null)
+                {
+                    audioMixer.GetFloat("SFXVolume", out var soundLevel);
+                    soundLevel = (soundLevel + 80) / 100;
+                    walkingAudioSource = SoundFXManager.Instance.PlayLoopingSound(walkingSoundClip, transform, soundLevel);
+                }
+            }
+            else
+            {
+                if (walkingAudioSource != null)
+                {
+                    SoundFXManager.Instance.StopLoopingSound(walkingAudioSource);
+                    walkingAudioSource = null;
+                }
+            }
+        }
         private void UpdateClimb() {
             this._animatorController.UpdateClimb(this.IsClimbing, this._move.y);
+            if (IsClimbing && Mathf.Abs(_move.y) > 0.01f)
+            {
+                if (climbingAudioSource == null)
+                {
+                    audioMixer.GetFloat("SFXVolume", out var soundLevel);
+                    soundLevel = (soundLevel + 80) / 100;
+                    climbingAudioSource = SoundFXManager.Instance.PlayLoopingSound(this.ladderSoundClip, transform , soundLevel);
+                }
+            }
+            else
+            {
+                if (climbingAudioSource != null)
+                {
+                    SoundFXManager.Instance.StopLoopingSound(climbingAudioSource);
+                    climbingAudioSource = null;
+                }
+            }
         }
 
         private void UpdateJump() {
@@ -282,7 +332,9 @@ namespace Treep.Player {
         private void StartDash() {
             this.IsDashing = true;
             this._dashAvailable = false;
-
+            audioMixer.GetFloat("SFXVolume", out var soundLevel);
+            soundLevel = (soundLevel + 80) / 100;
+            SoundFXManager.Instance.PlaySoundFXClip(dashSoundClip, this.transform,soundLevel);
             if (this._move.x != 0) {
                 if (this._move.y != 0) {
                     this._dashDirection = new Vector2(this._move.x, this._move.y).normalized;
