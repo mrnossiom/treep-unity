@@ -1,6 +1,8 @@
 using Mirror;
+using Treep.SFX;
 using Treep.State;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
@@ -16,26 +18,43 @@ namespace Treep.Interface
         [SerializeField] private SettingsMenu settingsPane;
         [SerializeField] private Button quitButton;
         
+        [SerializeField] private AudioClip buttonPress;
+        [SerializeField] private AudioMixer audioMixer;
+        
         void Start()
         {
             createGameButton.onClick.AddListener(() =>
             {
                 DontDestroyOnLoad(Instantiate(networkControllerPrefab));
                 NetworkManager.singleton.StartHost();
+                this.audioMixer.GetFloat("SFXVolume", out var soundLevel);
+                soundLevel = (soundLevel + 80) / 100;
+                SoundFXManager.Instance.PlaySoundFXClip(this.buttonPress, this.transform, soundLevel);
             });
             joinGameButton.onClick.AddListener(() =>
             {
                 DontDestroyOnLoad(Instantiate(networkControllerPrefab));
                 NetworkManager.singleton.StartClient();
+                this.audioMixer.GetFloat("SFXVolume", out var soundLevel);
+                soundLevel = (soundLevel + 80) / 100;
+                SoundFXManager.Instance.PlaySoundFXClip(this.buttonPress, this.transform, soundLevel);
             });
 
             startServerButton.onClick.AddListener(() =>
             {
                 DontDestroyOnLoad(Instantiate(networkControllerPrefab));
                 NetworkManager.singleton.StartServer();
+                this.audioMixer.GetFloat("SFXVolume", out var soundLevel);
+                soundLevel = (soundLevel + 80) / 100;
+                SoundFXManager.Instance.PlaySoundFXClip(this.buttonPress, this.transform, soundLevel);
             });
 
-            settingsButton.onClick.AddListener(() => { settingsPane.gameObject.SetActive(true); });
+            settingsButton.onClick.AddListener(() => {
+                settingsPane.gameObject.SetActive(true);
+                this.audioMixer.GetFloat("SFXVolume", out var soundLevel);
+                soundLevel = (soundLevel + 80) / 100;
+                SoundFXManager.Instance.PlaySoundFXClip(this.buttonPress, this.transform, soundLevel);
+            });
             
             this.quitButton.onClick.AddListener(Application.Quit);
         }

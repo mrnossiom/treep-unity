@@ -57,13 +57,12 @@ namespace Treep.Player {
 
         public void Update() {
             this.UpdateAttackPoint();
-
             if (Time.time >= this._nextAttackTime) {
                 if (Input.GetKeyDown(this.closeAttackKey)) {
-                    this.CloseAttack();
                     this.audioMixer.GetFloat("SFXVolume", out var soundLevel);
                     soundLevel = (soundLevel + 80) / 100;
                     SoundFXManager.Instance.PlaySoundFXClip(this.slashSoundClip, this.transform, soundLevel);
+                    this.CloseAttack();
                     this._nextAttackTime = Time.time + 1f / this._weaponManager.AttackRate;
                 }
             }
