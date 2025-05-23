@@ -19,6 +19,7 @@ namespace Treep.SFX {
             audioSource.volume = volume;
             audioSource.Play();
             float clipLength = audioSource.clip.length;
+            DontDestroyOnLoad(this.soundFxObject);
             Destroy(audioSource.gameObject, clipLength);
         }
         public AudioSource PlayLoopingSound(AudioClip clip, Transform parent, float volume)
