@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: e885da47c4fb0504f963de90541cdced
+guid: bfdfd2d02e87b074c9cc1952308b075b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6966284944352090230
-    second: bottom4_0
+      213: -235928234576596353
+    second: bottom4 1_0
   - first:
-      213: -6592387021632234404
-    second: bottom4_1
+      213: 4932832428004166383
+    second: bottom4 1_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -103,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bottom4_0
+      name: bottom4 1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 512
-        height: 512
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,8 +118,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 67812487f373da060800000000000000
-      internalID: 6966284944352090230
+      spriteID: f72b3994580d9bcf0800000000000000
+      internalID: -235928234576596353
       vertices: []
       indices: 
       edges: []
@@ -128,7 +128,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: fdce082fa36c90c489772121182fdf4d
+    spriteID: 74aebfe724637d844b112ea973f81a0f
     internalID: 0
     vertices: []
     indices: 
@@ -138,7 +138,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      bottom4_0: 6966284944352090230
+      bottom4 1_0: -235928234576596353
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
