@@ -16,8 +16,9 @@ jobs:
       matrix:
         target:
           - StandaloneLinux64
-          - StandaloneWindows64
-          - StandaloneOSX
+          # - StandaloneWindows64
+          # - StandaloneOSX
+
           # - LinuxHeadlessSimulation # not available?
           # - WebGL # takes a very long time
     runs-on: ubuntu-latest
@@ -42,12 +43,12 @@ jobs:
           projectPath: game
           targetPlatform: ${{ matrix.target }}
 
-      - uses: actions/upload-artifact@v4
-        # lessen the number of artefacts that are uploaded
-        if: |
-          (github.event_name == 'workflow_dispatch') ||
-          (github.event_name == 'push' && matrix.target == 'StandaloneLinux64') ||
-          (github.event_name == 'pull_request' && matrix.target == 'StandaloneLinux64')
-        with:
-          name: ${{ matrix.target }} Build
-          path: build
+      # - uses: actions/upload-artifact@v4
+      #   # lessen the number of artefacts that are uploaded
+      #   if: |
+      #     (github.event_name == 'workflow_dispatch') ||
+      #     (github.event_name == 'push' && matrix.target == 'StandaloneLinux64') ||
+      #     (github.event_name == 'pull_request' && matrix.target == 'StandaloneLinux64')
+      #   with:
+      #     name: ${{ matrix.target }} Build
+      #     path: build
