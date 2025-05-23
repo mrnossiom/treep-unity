@@ -29,6 +29,9 @@ namespace Treep.Interface {
             
             usernameInput.text = Settings.Singleton.username;
             usernameInput.onEndEdit.AddListener(username => {
+                this.audioMixer.GetFloat("SFXVolume", out var soundLevel);
+                soundLevel = (soundLevel + 80) / 100;
+                SoundFXManager.Instance.PlaySoundFXClip(this.buttonPress, this.transform, soundLevel);
                 Settings.Singleton.username = username;
                 Settings.Singleton.SaveUserSettings();
             });

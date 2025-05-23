@@ -56,7 +56,12 @@ namespace Treep.Interface
                 SoundFXManager.Instance.PlaySoundFXClip(this.buttonPress, this.transform, soundLevel);
             });
             
-            this.quitButton.onClick.AddListener(Application.Quit);
+            this.quitButton.onClick.AddListener(() => {
+                this.audioMixer.GetFloat("SFXVolume", out var soundLevel);
+                soundLevel = (soundLevel + 80) / 100;
+                SoundFXManager.Instance.PlaySoundFXClip(this.buttonPress, this.transform, soundLevel);
+                Application.Quit();
+            });
         }
     }
 }
