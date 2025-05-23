@@ -60,7 +60,7 @@ namespace Treep.Player {
         [SerializeField] private float climbSpeed = 3f;
         [SerializeField] private bool onTopOfLadder;
 
-        public static Weapons StartWeapon;
+        public static Weapons StartWeapon = Weapons.Fist;
 
         // State
         private Vector2 _targetVelocity;
@@ -103,7 +103,7 @@ namespace Treep.Player {
         public PlayerCombat scriptPlayerCombat;
 
         private PlayerAnimatorController _animatorController;
-        
+
         [SerializeField] private AudioClip ladderSoundClip;
         [SerializeField] private AudioMixer audioMixer;
         private AudioSource climbingAudioSource;
@@ -127,13 +127,9 @@ namespace Treep.Player {
                 this._allSpriteFlipX = value;
             }
         }
-        
+
         private void Start() {
             this.transform.position += new Vector3(3, 5, 0);
-        }
-        
-        public void InitStartWeapon(Weapons weapon) {
-            StartWeapon = weapon;
         }
 
         private void Awake() {
@@ -210,46 +206,41 @@ namespace Treep.Player {
                     this._currentDashEffectPos.y);
         }
 
-       
-        private void UpdateWalkSound()
-        {
-            bool isWalking = IsGrounded && Mathf.Abs(_move.x) > 0.01f && !this.isCrouching&& !IsDashing && !IsClimbing;
 
-            if (isWalking)
-            {
-                if (walkingAudioSource == null)
-                {
-                    audioMixer.GetFloat("SFXVolume", out var soundLevel);
+        private void UpdateWalkSound() {
+            var isWalking = this.IsGrounded && Mathf.Abs(this._move.x) > 0.01f && !this.isCrouching &&
+                            !this.IsDashing && !this.IsClimbing;
+
+            if (isWalking) {
+                if (this.walkingAudioSource == null) {
+                    this.audioMixer.GetFloat("SFXVolume", out var soundLevel);
                     soundLevel = (soundLevel + 80) / 100;
-                    walkingAudioSource = SoundFXManager.Instance.PlayLoopingSound(walkingSoundClip, transform, soundLevel);
+                    this.walkingAudioSource
+                        = SoundFXManager.Instance.PlayLoopingSound(this.walkingSoundClip, this.transform, soundLevel);
                 }
             }
-            else
-            {
-                if (walkingAudioSource != null)
-                {
-                    SoundFXManager.Instance.StopLoopingSound(walkingAudioSource);
-                    walkingAudioSource = null;
+            else {
+                if (this.walkingAudioSource != null) {
+                    SoundFXManager.Instance.StopLoopingSound(this.walkingAudioSource);
+                    this.walkingAudioSource = null;
                 }
             }
         }
+
         private void UpdateClimb() {
             this._animatorController.UpdateClimb(this.IsClimbing, this._move.y);
-            if (IsClimbing && Mathf.Abs(_move.y) > 0.01f)
-            {
-                if (climbingAudioSource == null)
-                {
-                    audioMixer.GetFloat("SFXVolume", out var soundLevel);
+            if (this.IsClimbing && Mathf.Abs(this._move.y) > 0.01f) {
+                if (this.climbingAudioSource == null) {
+                    this.audioMixer.GetFloat("SFXVolume", out var soundLevel);
                     soundLevel = (soundLevel + 80) / 100;
-                    climbingAudioSource = SoundFXManager.Instance.PlayLoopingSound(this.ladderSoundClip, transform , soundLevel);
+                    this.climbingAudioSource
+                        = SoundFXManager.Instance.PlayLoopingSound(this.ladderSoundClip, this.transform, soundLevel);
                 }
             }
-            else
-            {
-                if (climbingAudioSource != null)
-                {
-                    SoundFXManager.Instance.StopLoopingSound(climbingAudioSource);
-                    climbingAudioSource = null;
+            else {
+                if (this.climbingAudioSource != null) {
+                    SoundFXManager.Instance.StopLoopingSound(this.climbingAudioSource);
+                    this.climbingAudioSource = null;
                 }
             }
         }
@@ -332,9 +323,9 @@ namespace Treep.Player {
         private void StartDash() {
             this.IsDashing = true;
             this._dashAvailable = false;
-            audioMixer.GetFloat("SFXVolume", out var soundLevel);
+            this.audioMixer.GetFloat("SFXVolume", out var soundLevel);
             soundLevel = (soundLevel + 80) / 100;
-            SoundFXManager.Instance.PlaySoundFXClip(dashSoundClip, this.transform,soundLevel);
+            SoundFXManager.Instance.PlaySoundFXClip(this.dashSoundClip, this.transform, soundLevel);
             if (this._move.x != 0) {
                 if (this._move.y != 0) {
                     this._dashDirection = new Vector2(this._move.x, this._move.y).normalized;
@@ -347,8 +338,8 @@ namespace Treep.Player {
                 this._dashDirection = this.AllSpriteFlipX ? Vector2.left : Vector2.right;
             }
 
-            this._dashSpeed = 8f;
-            this._dashTime = this._dashDuration;
+            this._dashSpeed = 8f * Player.Singleton.dashMultiplier;
+            this._dashTime = this._dashDuration * Player.Singleton.dashMultiplier;
         }
 
         private void HandleDash() {
@@ -420,16 +411,16 @@ namespace Treep.Player {
             }
 
             if (this.isCrouching) {
-                this._targetVelocity = (this._move * this.maxSpeed) / 2;
+                this._targetVelocity = this._move * this.maxSpeed / 2;
             }
-            
+
             else {
                 this._targetVelocity = this._move * this.maxSpeed;
             }
+
             if (this.IsClimbing) {
                 this._velocity.y = this._move.y * this.climbSpeed;
             }
-            
         }
 
 
@@ -494,7 +485,7 @@ namespace Treep.Player {
         }
 
         private void OnTriggerEnter2D(Collider2D other) {
-            if (other.CompareTag("Ladder") && !this.IsGrounded && !IsDashing) {
+            if (other.CompareTag("Ladder") && !this.IsGrounded && !this.IsDashing) {
                 var contactPoint = other.ClosestPoint(this.transform.position);
                 if (contactPoint.y < this.transform.position.y) {
                     this.onTopOfLadder = true;

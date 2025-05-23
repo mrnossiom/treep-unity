@@ -4,6 +4,7 @@ using TMPro;
 using Treep.Weapon;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Treep.Player {
     [RequireComponent(typeof(NetworkIdentity), typeof(Rigidbody2D))]
@@ -18,12 +19,18 @@ namespace Treep.Player {
 
         public int maxHealth;
         [SyncVar] public float health;
+
+        [SyncVar(hook = nameof(Player.OnWeaponChanged))]
         public Weapons weapon;
+
         public int money;
         public float damageMultiplier;
+        public float dashMultiplier;
+        public float visionMultiplier;
 
         private WeaponManager _weaponManager;
         private PlayerController _controllerScript;
+        private PlayerAnimatorController _animatorController;
         private Rigidbody2D _rigidbody2d;
         private PlayerCombat _playerCombat;
 
@@ -34,8 +41,9 @@ namespace Treep.Player {
             this._controllerScript = this.GetComponent<PlayerController>();
             this._weaponManager = this.GetComponent<WeaponManager>();
             this._playerCombat = this.GetComponent<PlayerCombat>();
+            this._animatorController = this.GetComponent<PlayerAnimatorController>();
         }
-        
+
         [Server]
         public void InitStats() {
             this.maxHealth = 10;
@@ -43,27 +51,31 @@ namespace Treep.Player {
             this.money = 0;
             this.damageMultiplier = 1f;
             this.weapon = Weapons.Fist;
+            this.dashMultiplier = 1f;
         }
-        
+
         public override void OnStartLocalPlayer() {
             Player.Singleton = this;
             this.maxHealth = 10;
             this.health = this.maxHealth;
             this.money = 0;
             this.damageMultiplier = 1f;
+            this.dashMultiplier = 1f;
+            this.visionMultiplier = 1f;
             this.weapon = Weapons.Fist;
             this._weaponManager.SwitchWeapon(this.weapon);
+
             var cinemachineCamera = GameObject.FindWithTag("PlayerVirtualCamera").GetComponent<CinemachineCamera>();
             cinemachineCamera.Target.TrackingTarget = this.transform;
         }
 
         public void Update() {
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
             if (!this.isLocalPlayer) return;
             if (Input.GetKeyDown(KeyCode.K)) {
                 Player.Singleton.CmdTakeDamage(50f);
             }
-            #endif
+#endif
         }
 
         public void SetSimulated(bool simulated) {
@@ -81,7 +93,6 @@ namespace Treep.Player {
 
         [Command]
         public void CmdTakeDamage(float damage) {
-            //if (!this.isLocalPlayer) return;
             this.TakeDamage(damage);
         }
 
@@ -133,6 +144,26 @@ namespace Treep.Player {
 
             if (this._weaponManager != null) this._weaponManager.enabled = true;
             if (this._playerCombat != null) this._playerCombat.enabled = true;
+        }
+
+        private void OnWeaponChanged(Weapons oldWeapon, Weapons newWeapon) {
+            if (this._weaponManager != null) this._weaponManager.SwitchWeapon(newWeapon);
+            if (this._animatorController != null) this._animatorController.SwitchWeapon(newWeapon);
+        }
+
+        [Command]
+        public void CmdChangeWeapon(Weapons newWeapon) {
+            this.weapon = newWeapon;
+        }
+
+        public void IncreaseVision() {
+            var visionMask = GameObject.FindGameObjectWithTag("PlayerVirtualCamera").transform.Find("Vision");
+            visionMask.localScale *= this.visionMultiplier;
+
+            var shader = GameObject.FindGameObjectWithTag("PlayerVirtualCamera").transform.Find("BlackLayer")
+                .GetComponent<Renderer>().material;
+            shader.SetFloat("_Width", shader.GetFloat("_Width") * this.visionMultiplier);
+            shader.SetFloat("_Height", shader.GetFloat("_Height") * this.visionMultiplier);
         }
     }
 }

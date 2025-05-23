@@ -17,20 +17,15 @@ namespace Treep.Weapon {
         public Stick stick;
         public Sword sword;
         public Spear spear;
-        private Dictionary<Weapons, ICloseWeapon> _weapons = new();
 
         public Weapons CurrentWeapon { get; private set; }
-
-        private ICloseWeapon Weapon => this._weapons.Count == 0 ? null : this._weapons[this.CurrentWeapon];
-
-        public Player.Player localPlayer;
-
-        public float Damage => this.Weapon.Damage * this.localPlayer.damageMultiplier;
+        public float Damage => this.Weapon.Damage * Player.Player.Singleton.damageMultiplier;
         public IShapesHitbox HitBox => this.Weapon.Hitbox.Current;
-
         public float AttackRate => this.Weapon.AttackRate;
-
-
+        
+        private ICloseWeapon Weapon => this._weapons.Count == 0 ? null : this._weapons[this.CurrentWeapon];
+        private Dictionary<Weapons, ICloseWeapon> _weapons = new();
+        
         private void Awake() {
             this._weapons = new Dictionary<Weapons, ICloseWeapon>();
             this._weapons.Add(Weapons.Fist, this.fist);
@@ -39,18 +34,6 @@ namespace Treep.Weapon {
             this._weapons.Add(Weapons.Spear, this.spear);
 
             this.CurrentWeapon = PlayerController.StartWeapon;
-            
-            StartCoroutine(WaitForLocalPlayer());
-        }
-        
-        IEnumerator WaitForLocalPlayer()
-        {
-            while (Player.Player.Singleton == null)
-            {
-                yield return null;
-            }
-
-            localPlayer = Player.Player.Singleton;
         }
 
         public bool SwitchWeapon(Weapons newWeapon) {

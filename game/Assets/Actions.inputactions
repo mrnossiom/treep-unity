@@ -51,36 +51,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Capacity 1",
+                    "name": "Dash",
                     "type": "Button",
                     "id": "2bf3dac9-746d-4604-8021-3c827c5618b3",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Capacity 2",
-                    "type": "Button",
-                    "id": "121ce6a9-c650-47fd-a044-f833b6989d00",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Capacity 3",
-                    "type": "Button",
-                    "id": "b1ae70af-a9fb-4699-834b-7698a1bc532f",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Up",
-                    "type": "Button",
-                    "id": "7d963a80-9d5d-42ac-9354-d263e5efcc6c",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -190,44 +163,11 @@
                 {
                     "name": "",
                     "id": "97ff5b23-2285-4f85-9737-5b4ac26ec739",
-                    "path": "<Keyboard>/1",
+                    "path": "<Keyboard>/shift",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Capacity 1",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6db7c4ad-2b68-4daf-a62e-d237e8545bb4",
-                    "path": "<Keyboard>/2",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Capacity 2",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "705e5a67-e22e-4a46-b3c8-da43d930088e",
-                    "path": "<Keyboard>/3",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Capacity 3",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b44ac21c-8d0e-48ed-b683-6182049d8fa2",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Up",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
