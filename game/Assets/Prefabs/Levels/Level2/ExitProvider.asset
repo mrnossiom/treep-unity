@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: ExitProvider
   m_EditorClassIdentifier: 
   kind: 3
-  rooms: []
+  rooms:
+  - {fileID: -8587844632787652279, guid: 95bdcb11292f7c34e89f5c9cfdfe7ccd, type: 3}
