@@ -53,6 +53,7 @@ MonoBehaviour:
     size: 0
   enemySpawners:
   - {x: 20, y: 28}
+  - {x: 30, y: 28}
   spawnPoints: []
   exitPoints: []
 --- !u!1 &2635150134697267651
