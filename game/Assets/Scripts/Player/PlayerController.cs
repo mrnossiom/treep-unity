@@ -115,16 +115,27 @@ namespace Treep.Player {
 
         public LookDirection lookDirection;
 
+        [SyncVar(hook = nameof(OnFlipChanged))]
         private bool _allSpriteFlipX;
+        
+        private void OnFlipChanged(bool oldValue, bool newValue) {
+            //_spriteRenderer.flipX = newValue;
+            _dashSpriteRenderer.flipX = newValue;
+            _closeAttackRenderer.flipX = newValue;
+            this._animatorController.FlipX = newValue;
+        }
+
+        [Command]
+        private void CmdSetFlipX(bool value) {
+            _allSpriteFlipX = value;
+        }
 
         private bool AllSpriteFlipX {
             get => this._allSpriteFlipX;
             set {
-                //this._spriteRenderer.flipX = value;
-                this._animatorController.FlipX = value;
-                this._dashSpriteRenderer.flipX = value;
-                this._closeAttackRenderer.flipX = value;
-                this._allSpriteFlipX = value;
+                if (isLocalPlayer) {
+                    CmdSetFlipX(value);
+                }
             }
         }
 
@@ -150,11 +161,6 @@ namespace Treep.Player {
 
         private void OnSpriteFlip(bool _, bool newValue) {
             this.AllSpriteFlipX = newValue;
-        }
-
-        [Command]
-        private void CmdSetFlip(bool flip) {
-            this._isFlipped = flip;
         }
 
         private void Update() {
