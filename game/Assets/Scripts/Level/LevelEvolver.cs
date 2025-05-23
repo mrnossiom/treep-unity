@@ -82,7 +82,7 @@ namespace Treep.Level {
                 evolved.Add(new PlacedRoom(template, Vector2.zero));
 
                 // found a complete level
-                if (this.EvolveNode(ref evolved, rng, rootId)) {
+                if (this.EvolveNode(evolved, rng, rootId)) {
                     found = true;
                     break;
                 }
@@ -99,17 +99,13 @@ namespace Treep.Level {
             return true;
         }
 
-        private bool EvolveNode(ref List<PlacedRoom> evolved, Random rng, int lastId) {
+        private bool EvolveNode(List<PlacedRoom> evolved, Random rng, int lastId) {
             var placedRoom = evolved[lastId];
-
-            foreach (var door in placedRoom.Template.doors.RandomOrderAccess(rng)) {
-                if (this.EvolveNodeDoor(ref evolved, rng, lastId, door)) return true;
-            }
-
-            return false;
+            return placedRoom.Template.doors.RandomOrderAccess(rng)
+                .Any(door => this.EvolveNodeDoor(evolved, rng, lastId, door));
         }
 
-        private bool EvolveNodeDoor(ref List<PlacedRoom> evolved, Random rng, int lastId, DoorData lastDoor) {
+        private bool EvolveNodeDoor(List<PlacedRoom> evolved, Random rng, int lastId, DoorData lastDoor) {
             var nextRoomId = lastId + 1;
             var lastPlacedRoom = evolved[lastId];
 
@@ -138,7 +134,7 @@ namespace Treep.Level {
 
                         evolved.Add(nextPlacedRoom);
 
-                        if (this.EvolveNode(ref evolved, rng, nextRoomId)) {
+                        if (this.EvolveNode(evolved, rng, nextRoomId)) {
                             return true;
                         }
 

@@ -8,24 +8,20 @@ using UnityEngine;
 namespace Treep {
     public class PlayerAnimatorController : MonoBehaviour {
         [SerializeField] private PseudoDictionary<Weapons, MonoBehaviour> pseudoDictWeapons;
-
         [SerializeField] private GameObject headGameObject;
         [SerializeField] private GameObject bodyGameObject;
 
         public Dictionary<Weapons, ICloseWeapon> DictWeapons { get; private set; } = new();
 
-
         private Animator _headAnimator;
         private Dictionary<Weapons, Animator> _weaponsAnimator = new();
         private Animator _bodyAnimator;
-
 
         private SpriteRenderer _headSpriteRenderer;
         private SpriteRenderer _bodySpriteRenderer;
         private Dictionary<Weapons, SpriteRenderer> _weaponsSpritesRenderer = new();
 
-
-        private Weapons CurrentWeapon { get; set; }
+        public Weapons CurrentWeapon { get; set; }
 
         private bool _flipX;
 
@@ -122,14 +118,6 @@ namespace Treep {
         public void SetPlayerStates(PlayerController playerController) {
             this._playerController = playerController;
         }
-
-        public void Update() {
-            this.UpdateWeapon();
-        }
-
-
-        private void UpdateWeapon() { }
-
 
         public void SwitchWeapon(Weapons newWeapons) {
             this.WeaponSpriteRenderer.enabled = false;
