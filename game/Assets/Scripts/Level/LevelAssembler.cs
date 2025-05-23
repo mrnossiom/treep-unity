@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Treep.Level {
     public class LevelAssembler : MonoBehaviour {
@@ -66,6 +68,10 @@ namespace Treep.Level {
                 outerMask.position = room.Area.center;
                 outerMask.localScale = room.Area.size;
             }
+        }
+
+        private void OnDrawGizmos() {
+            Gizmos.DrawWireCube(this.bounds.center, this.bounds.center);
         }
     }
 }

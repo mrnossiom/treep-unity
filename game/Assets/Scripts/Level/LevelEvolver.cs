@@ -153,7 +153,8 @@ namespace Treep.Level {
             var bounds = new Bounds();
 
             foreach (var placedRoom in placedRooms) {
-                bounds.Encapsulate(new Bounds(placedRoom.Position, placedRoom.Template.size));
+                var roomVolume = new Rect(placedRoom.Position, placedRoom.Template.size);
+                bounds.Encapsulate(new Bounds(roomVolume.center, roomVolume.size));
 
                 foreach (var enemySpawner in placedRoom.Template.enemySpawners) {
                     this._enemySpawners.Add(placedRoom.Position + enemySpawner);
