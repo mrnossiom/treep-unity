@@ -60,6 +60,7 @@ MonoBehaviour:
   - {x: 6, y: 25}
   - {x: 60, y: 33}
   spawnPoints: []
+  exitPoints: []
 --- !u!1 &2635150134697267651
 GameObject:
   m_ObjectHideFlags: 0

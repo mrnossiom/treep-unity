@@ -513,6 +513,10 @@ namespace Treep.Player {
                 this.IsClimbing = true;
                 this._velocity.y = 0;
             }
+
+            if (other.CompareTag("Spikes")) {
+                Player.Singleton.CmdTakeDamage(50f);
+            }
         }
 
         private void OnTriggerExit2D(Collider2D other) {
