@@ -21,7 +21,6 @@ namespace Treep.Player {
         public Transform attackPoint;
         public LayerMask enemyLayerMask;
 
-
         public KeyCode closeAttackKey = KeyCode.L;
         public KeyCode distAttackKey = KeyCode.O;
 
@@ -37,11 +36,9 @@ namespace Treep.Player {
         private LookDirection _currentLookDirection;
 
         private float _nextAttackTime;
-        private int Health { get; set; }
 
         [SerializeField] private AudioClip slashSoundClip;
         [SerializeField] private AudioMixer audioMixer;
-
 
         public void Awake() {
             this._controllerScript = this.GetComponent<PlayerController>();
