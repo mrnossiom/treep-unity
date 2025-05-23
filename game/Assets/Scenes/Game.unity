@@ -11248,6 +11248,10 @@ MonoBehaviour:
   visionPriceText: {fileID: 1687586937}
   damagePriceText: {fileID: 1593901152}
   dashPriceText: {fileID: 288856916}
+  Kaching: {fileID: 8300000, guid: 7a1a6a338d39ba5e4b40bf5e25ea9323, type: 3}
+  Error: {fileID: 8300000, guid: fe7906b32b1142ed7bfd8128cd06dbf5, type: 3}
+  audioMixer: {fileID: 24100000, guid: ae3cf3e0636b64e409bc8cc3cd6fdbff, type: 2}
+  buttonPress: {fileID: 8300000, guid: d92c8192df1ba123f922e21ce2f4c117, type: 3}
 --- !u!1 &1574135334
 GameObject:
   m_ObjectHideFlags: 0

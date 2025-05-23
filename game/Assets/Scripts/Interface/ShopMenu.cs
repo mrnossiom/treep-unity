@@ -1,7 +1,9 @@
 using TMPro;
+using Treep.SFX;
 using Treep.Weapon;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 namespace Treep {
     public class ShopMenu : MonoBehaviour {
@@ -38,6 +40,11 @@ namespace Treep {
         private int _damagePrice;
         private int _dashPrice;
         private int _inflation;
+        
+        [SerializeField] private AudioClip Kaching;
+        [SerializeField] private AudioClip Error;
+        [SerializeField] private AudioMixer audioMixer;
+        [SerializeField] private AudioClip buttonPress;
 
         public void SetPlayer(Player.Player player) {
             this._currentPlayer = player;
@@ -53,10 +60,22 @@ namespace Treep {
             this._dashPrice = 10;
             this._inflation = 5;
 
-            this.closeButton.onClick.AddListener(() => this.gameObject.SetActive(false));
+            this.closeButton.onClick.AddListener(() => {
+                this.audioMixer.GetFloat("SFXVolume", out var soundLevel);
+                soundLevel = (soundLevel + 80) / 100;
+                SoundFXManager.Instance.PlaySoundFXClip(this.buttonPress, this.transform, soundLevel);
+                this.gameObject.SetActive(false);
+            });
             this.stickButton.onClick.AddListener(() => {
-                if (this._currentPlayer.money < this._stickPrice) return;
-
+                if (this._currentPlayer.money < this._stickPrice) {
+                    this.audioMixer.GetFloat("SFXVolume", out var soundLevel);
+                    soundLevel = (soundLevel + 80) / 100;
+                    SoundFXManager.Instance.PlaySoundFXClip(this.Error, this.transform, soundLevel);
+                    return;
+                };
+                this.audioMixer.GetFloat("SFXVolume", out var soundLevel2);
+                soundLevel2 = (soundLevel2 + 80) / 100;
+                SoundFXManager.Instance.PlaySoundFXClip(this.Kaching, this.transform, soundLevel2);
                 this._currentPlayer.CmdChangeWeapon(Weapons.Stick);
                 this.weapon.text = "Weapon: Stick";
 
@@ -65,8 +84,15 @@ namespace Treep {
                 this._stickPrice += this._inflation;
             });
             this.spearButton.onClick.AddListener(() => {
-                if (this._currentPlayer.money < this._spearPrice) return;
-
+                if (this._currentPlayer.money < this._spearPrice) {
+                    this.audioMixer.GetFloat("SFXVolume", out var soundLevel);
+                    soundLevel = (soundLevel + 80) / 100;
+                    SoundFXManager.Instance.PlaySoundFXClip(this.Error, this.transform, soundLevel);
+                    return;
+                };
+                this.audioMixer.GetFloat("SFXVolume", out var soundLevel2);
+                soundLevel2 = (soundLevel2 + 80) / 100;
+                SoundFXManager.Instance.PlaySoundFXClip(this.Kaching, this.transform, soundLevel2);
                 this._currentPlayer.CmdChangeWeapon(Weapons.Spear);
                 this.weapon.text = "Weapon: Spear";
 
@@ -75,8 +101,15 @@ namespace Treep {
                 this._spearPrice += this._inflation;
             });
             this.swordButton.onClick.AddListener(() => {
-                if (this._currentPlayer.money < this._swordPrice) return;
-
+                if (this._currentPlayer.money < this._swordPrice) {
+                    this.audioMixer.GetFloat("SFXVolume", out var soundLevel);
+                    soundLevel = (soundLevel + 80) / 100;
+                    SoundFXManager.Instance.PlaySoundFXClip(this.Error, this.transform, soundLevel);
+                    return;
+                };
+                this.audioMixer.GetFloat("SFXVolume", out var soundLevel2);
+                soundLevel2 = (soundLevel2 + 80) / 100;
+                SoundFXManager.Instance.PlaySoundFXClip(this.Kaching, this.transform, soundLevel2);
                 this._currentPlayer.CmdChangeWeapon(Weapons.Sword);
                 this.weapon.text = "Weapon: Sword";
 
@@ -85,8 +118,16 @@ namespace Treep {
                 this._swordPrice += this._inflation;
             });
             this.healthButton.onClick.AddListener(() => {
-                if (this._currentPlayer.money < this._healthPrice) return;
-
+                if (this._currentPlayer.money < this._healthPrice) {
+                    this.audioMixer.GetFloat("SFXVolume", out var soundLevel);
+                    soundLevel = (soundLevel + 80) / 100;
+                    SoundFXManager.Instance.PlaySoundFXClip(this.Error, this.transform, soundLevel);
+                    return;
+                    
+                };
+                this.audioMixer.GetFloat("SFXVolume", out var soundLevel2);
+                soundLevel2 = (soundLevel2 + 80) / 100;
+                SoundFXManager.Instance.PlaySoundFXClip(this.Kaching, this.transform, soundLevel2);
                 this._currentPlayer.maxHealth += 5;
                 this._currentPlayer.health = this._currentPlayer.maxHealth;
                 this.healthText.text = $"Max Health: {this._currentPlayer.health.ToString()}";
@@ -97,8 +138,15 @@ namespace Treep {
                 this._healthPrice += this._inflation;
             });
             this.visionButton.onClick.AddListener(() => {
-                if (this._currentPlayer.money < this._visionPrice) return;
-
+                if (this._currentPlayer.money < this._visionPrice) {
+                    this.audioMixer.GetFloat("SFXVolume", out var soundLevel);
+                    soundLevel = (soundLevel + 80) / 100;
+                    SoundFXManager.Instance.PlaySoundFXClip(this.Error, this.transform, soundLevel);
+                    return;
+                };
+                this.audioMixer.GetFloat("SFXVolume", out var soundLevel2);
+                soundLevel2 = (soundLevel2 + 80) / 100;
+                SoundFXManager.Instance.PlaySoundFXClip(this.Kaching, this.transform, soundLevel2);
                 this._currentPlayer.visionMultiplier += (float)0.05;
                 this._currentPlayer.IncreaseVision();
                 this.visionText.text = $"Vision Multiplier: {this._currentPlayer.visionMultiplier.ToString()}";
@@ -109,8 +157,15 @@ namespace Treep {
                 this._visionPrice += this._inflation;
             });
             this.damageButton.onClick.AddListener(() => {
-                if (this._currentPlayer.money < this._damagePrice) return;
-
+                if (this._currentPlayer.money < this._damagePrice) {
+                    this.audioMixer.GetFloat("SFXVolume", out var soundLevel);
+                    soundLevel = (soundLevel + 80) / 100;
+                    SoundFXManager.Instance.PlaySoundFXClip(this.Error, this.transform, soundLevel);
+                    return;
+                };
+                this.audioMixer.GetFloat("SFXVolume", out var soundLevel2);
+                soundLevel2 = (soundLevel2 + 80) / 100;
+                SoundFXManager.Instance.PlaySoundFXClip(this.Kaching, this.transform, soundLevel2);
                 this._currentPlayer.damageMultiplier += (float)0.05;
                 this.damageText.text = $"Damage Multiplier: {this._currentPlayer.damageMultiplier.ToString()}";
                 this.damagePriceText.text = $"Damage Boost - {this._damagePrice} Bones";
@@ -120,8 +175,15 @@ namespace Treep {
                 this._damagePrice += this._inflation;
             });
             this.dashButton.onClick.AddListener(() => {
-                if (this._currentPlayer.money < this._dashPrice) return;
-
+                if (this._currentPlayer.money < this._dashPrice) {
+                    this.audioMixer.GetFloat("SFXVolume", out var soundLevel);
+                    soundLevel = (soundLevel + 80) / 100;
+                    SoundFXManager.Instance.PlaySoundFXClip(this.Error, this.transform, soundLevel);
+                    return;
+                };
+                this.audioMixer.GetFloat("SFXVolume", out var soundLevel2);
+                soundLevel2 = (soundLevel2 + 80) / 100;
+                SoundFXManager.Instance.PlaySoundFXClip(this.Kaching, this.transform, soundLevel2);
                 this._currentPlayer.dashMultiplier += (float)0.05;
                 this.dashText.text = $"Dash Multiplier: {this._currentPlayer.dashMultiplier.ToString()}";
                 this.dashPriceText.text = $"Dash Boost - {this._dashPrice} Bones";

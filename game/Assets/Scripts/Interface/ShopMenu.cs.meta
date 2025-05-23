@@ -1,2 +1,33 @@
 fileFormatVersion: 2
 guid: a9c79133c2d93d8438379bbb74950f7d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - closeButton: {instanceID: 0}
+  - stickButton: {instanceID: 0}
+  - spearButton: {instanceID: 0}
+  - swordButton: {instanceID: 0}
+  - healthButton: {instanceID: 0}
+  - visionButton: {instanceID: 0}
+  - damageButton: {instanceID: 0}
+  - dashButton: {instanceID: 0}
+  - moneyText: {instanceID: 0}
+  - healthText: {instanceID: 0}
+  - visionText: {instanceID: 0}
+  - damageText: {instanceID: 0}
+  - dashText: {instanceID: 0}
+  - weapon: {instanceID: 0}
+  - healthPriceText: {instanceID: 0}
+  - visionPriceText: {instanceID: 0}
+  - damagePriceText: {instanceID: 0}
+  - dashPriceText: {instanceID: 0}
+  - Kaching: {instanceID: 0}
+  - Error: {instanceID: 0}
+  - audioMixer: {instanceID: 0}
+  - buttonPress: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
