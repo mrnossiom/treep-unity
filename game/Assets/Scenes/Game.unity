@@ -425,6 +425,8 @@ MonoBehaviour:
   quitRoomButton: {fileID: 513819343}
   settingsButton: {fileID: 656052831}
   settingsPane: {fileID: 1681477501}
+  buttonPress: {fileID: 8300000, guid: d92c8192df1ba123f922e21ce2f4c117, type: 3}
+  audioMixer: {fileID: 24100000, guid: ae3cf3e0636b64e409bc8cc3cd6fdbff, type: 2}
 --- !u!1 &41357454
 GameObject:
   m_ObjectHideFlags: 0
@@ -15908,4 +15910,4 @@ SceneRoots:
   - {fileID: 549621775}
   - {fileID: 125750586}
   - {fileID: 13573269}
-  - {fileID: 1801545860}
+  - {fileID: 830692099}
