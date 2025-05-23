@@ -34,6 +34,7 @@ namespace Treep.Level {
     public class PlacedRoom {
         public RoomData Template { get; private set; }
         public Vector2 Position { get; private set; }
+        public Rect Area => new(this.Position, this.Template.size);
 
         public PlacedRoom(RoomData template, Vector2 position) {
             this.Template = template;

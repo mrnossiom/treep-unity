@@ -47,3 +47,4 @@ MonoBehaviour:
   roomProvider: {fileID: 11400000, guid: 432b6fe8c325811d192a8a3745e490bd, type: 2}
   enemyPrefab: {fileID: 0}
   levelBlueprint: 00000000
+  levelOuterMask: {fileID: 6012961412606618303, guid: 6c337f00efa91372095a03e52587288b, type: 3}

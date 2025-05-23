@@ -10,6 +10,8 @@ namespace Treep.Level {
         // TODO: non-linear level blueprint and evolver
         [SerializeField] private List<RoomKind> levelBlueprint;
 
+        [SerializeField] private Transform levelOuterMask;
+
         public List<RoomKind> LevelBlueprint => this.levelBlueprint;
         public RoomProvider RoomProvider => this.roomProvider;
 
@@ -22,19 +24,24 @@ namespace Treep.Level {
             // level is not solvable
             if (!evolver.EvolveRoot(rng)) return null;
 
-            this.PlaceLevelRooms(evolver.PlacedRooms);
-
             if (evolver.SpawnPoints.Count == 0) {
                 Debug.LogError("No spawn point");
                 return null;
             }
 
+            this.PlaceLevelRooms(evolver.PlacedRooms);
+
+            // place enemies
+            var enemyContainer = new GameObject("Enemies");
+            enemyContainer.transform.parent = this.transform;
             foreach (var enemySpawnerPos in evolver.EnemySpawners) {
-                // + Vector2.up because enemy spawn in the ground
-                Object.Instantiate(this.enemyPrefab, enemySpawnerPos + new Vector2(0, 2), Quaternion.identity);
+                // avoid spawning the enemy in the ground
+                var spawnerPos = enemySpawnerPos + Vector2.up * 2;
+                Object.Instantiate(this.enemyPrefab, spawnerPos, Quaternion.identity, enemyContainer.transform);
             }
 
-            foreach (var enemySpawnerPos in evolver.ExitPoints) {
+            // place end doors
+            foreach (var exitDoorPos in evolver.ExitPoints) {
                 // TODO: make door that ticks GameStateManager
             }
 
@@ -50,7 +57,11 @@ namespace Treep.Level {
         private void PlaceLevelRooms(IEnumerable<PlacedRoom> rooms) {
             this.ClearChildren();
             foreach (var room in rooms) {
-                Object.Instantiate(room.Template, room.Position, Quaternion.identity, this.transform);
+                var roomInstance
+                    = Object.Instantiate(room.Template, room.Position, Quaternion.identity, this.transform);
+                var outerMask = Object.Instantiate(this.levelOuterMask, roomInstance.transform);
+                outerMask.position = room.Area.center;
+                outerMask.localScale = room.Area.size;
             }
         }
     }
