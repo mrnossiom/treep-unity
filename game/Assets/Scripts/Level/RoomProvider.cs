@@ -11,7 +11,7 @@ namespace Treep.Level {
         public Dictionary<RoomKind, List<RoomData>> CollectRooms() {
             var providers = this.roomProviders.ToActualDictionary();
 
-            return providers.ToDictionary(provider => provider.Key, provider => provider.Value.rooms);
+            return providers.ToDictionary(provider => provider.Key, provider => provider.Value?.rooms);
         }
     }
 }

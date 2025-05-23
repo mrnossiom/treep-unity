@@ -1137,7 +1137,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: {x: 150, y: 70}
-  doors: []
+  doors:
+  - position: {x: 0, y: 0}
+    size: 0
   enemySpawners: []
   spawnPoints:
   - {x: 10, y: 44}

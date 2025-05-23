@@ -19,7 +19,7 @@ namespace Treep.Editor {
 
             if (GUILayout.Button("Generate Level")) {
                 this._seed = new System.Random().Next();
-                Debug.Log($"Seed = {this._seed}");
+                Debug.Log($"Seed: {this._seed}");
                 if (levelAssembler.GenerateLevel(this._seed) is null) {
                     Debug.LogError($"Level `{levelAssembler.name}` is not solvable!");
                 }
@@ -28,7 +28,6 @@ namespace Treep.Editor {
             if (GUILayout.Button("Clear")) {
                 levelAssembler.ClearChildren();
             }
-
 
             GUILayout.EndHorizontal();
         }
