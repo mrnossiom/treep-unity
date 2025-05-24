@@ -5347,7 +5347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22d951fbf7572bf438c321aa6a505e6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joinMenu: {fileID: 0}
+  joinMenu: {fileID: 1001777705}
   inputFieldIPPort: {fileID: 1555125280}
   connectButton: {fileID: 7077324}
   cancelButton: {fileID: 1052814824}

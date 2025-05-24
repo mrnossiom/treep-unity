@@ -42,15 +42,17 @@ namespace Treep.Interface {
             musicSlider.onValueChanged.AddListener(Settings.Singleton.SetMusicVolume);
             sfxSlider.onValueChanged.AddListener(Settings.Singleton.SetSfxVolume);
             this.mainSlider.onValueChanged.AddListener(Settings.Singleton.SetMasterVolume);
-            
-            startServerButton.onClick.AddListener(() =>
-            {
-                DontDestroyOnLoad(Instantiate(networkControllerPrefab));
-                NetworkManager.singleton.StartServer();
-                this.audioMixer.GetFloat("SFXVolume", out var soundLevel);
-                soundLevel = (soundLevel + 80) / 100;
-                SoundFXManager.Instance.PlaySoundFXClip(this.buttonPress, this.transform, soundLevel);
-            });
+
+            if (this.startServerButton is not null) {
+                startServerButton.onClick.AddListener(() =>
+                {
+                    DontDestroyOnLoad(Instantiate(networkControllerPrefab));
+                    NetworkManager.singleton.StartServer();
+                    this.audioMixer.GetFloat("SFXVolume", out var soundLevel);
+                    soundLevel = (soundLevel + 80) / 100;
+                    SoundFXManager.Instance.PlaySoundFXClip(this.buttonPress, this.transform, soundLevel);
+                });
+            }
         }
     }
 }
