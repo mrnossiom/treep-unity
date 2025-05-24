@@ -82,7 +82,7 @@ SpriteRenderer:
   m_SortingOrder: 7
   m_Sprite: {fileID: -6248741079362886434, guid: ca66391473ee2c543a288631ac48753f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 3.875, y: 7.625}
@@ -199,7 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToSpawn: {fileID: 3305709912223100169, guid: 862e856ebba537906ac068a75afbcdd9, type: 3}
+  specialObjectToSpawn: {fileID: 2280064040173770716, guid: b930ea2116f47d92b98ff5357c893789, type: 3}
   minXDistance: 3
   maxXDistance: 10
   spawnHeight: 10
-  spawnRatePerSecond: 5
