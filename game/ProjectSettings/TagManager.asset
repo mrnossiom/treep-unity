@@ -8,6 +8,8 @@ TagManager:
   - PlayerVirtualCamera
   - Background
   - Spikes
+  - Boss
+  - Wall
   layers:
   - Default
   - TransparentFX
