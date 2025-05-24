@@ -100,8 +100,7 @@ namespace Treep.Player {
             
             var enemiesToHit = GetEnemyIn(this._weaponManager.HitBox);
             foreach (var enemy in enemiesToHit) {
-                Debug.Log($"{enemy.name} took {this._weaponManager.Damage} damage");
-                enemy.GetComponent<IEnemy>().Hit(this._weaponManager.Damage);
+                enemy.GetComponent<BasicEnemy>().Hit(this._weaponManager.Damage);
             }
         }
 
@@ -133,7 +132,8 @@ namespace Treep.Player {
             else {
                 Debug.LogWarning("unknown shape");
             }
-
+            
+            Debug.Log($"Enemies detected: {count}");
             return results.Take(count).ToArray();
         }
 

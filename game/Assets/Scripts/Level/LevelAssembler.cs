@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Object = UnityEngine.Object;
+using Mirror;
 
 namespace Treep.Level {
     public class LevelAssembler : MonoBehaviour {
@@ -42,7 +43,8 @@ namespace Treep.Level {
             foreach (var enemySpawnerPos in evolver.EnemySpawners) {
                 // avoid spawning the enemy in the ground
                 var spawnerPos = enemySpawnerPos + Vector2.up * 2;
-                Object.Instantiate(this.enemyPrefab, spawnerPos, Quaternion.identity, enemyContainer.transform);
+                var enemyInstance = Object.Instantiate(this.enemyPrefab, spawnerPos, Quaternion.identity, enemyContainer.transform);
+                NetworkServer.Spawn(enemyInstance);
             }
 
             // place end doors
