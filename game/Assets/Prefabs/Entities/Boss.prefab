@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 324549141049124417}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.29, y: 11.03, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -204,12 +204,16 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   pvMax: 100
-  isAlive: 0
   objectToSpawn: {fileID: 3305709912223100169, guid: 862e856ebba537906ac068a75afbcdd9, type: 3}
   specialObjectToSpawn: {fileID: 2280064040173770716, guid: b930ea2116f47d92b98ff5357c893789, type: 3}
   minXDistance: 3
   maxXDistance: 10
   spawnHeight: 10
+  _triggerZonePos: {x: -15, y: 3}
+  playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 1152
+  loot: 100
   body: {fileID: 0}
   spriteRenderer: {fileID: 0}
 --- !u!114 &6707392499608648434
