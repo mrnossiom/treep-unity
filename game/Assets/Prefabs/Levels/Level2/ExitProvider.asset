@@ -10,10 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bafe20d2363848a395214b603e38ac16, type: 3}
-  m_Name: NormalProvider
+  m_Name: ExitProvider
   m_EditorClassIdentifier: 
-  kind: 1
+  kind: 3
   rooms:
-  - {fileID: -8587844632787652279, guid: ad52b31a878945848bc4efe840fe4e0d, type: 3}
-  - {fileID: -8587844632787652279, guid: 2acf3f3a638bae94caf93c2213daaedb, type: 3}
-  - {fileID: -8587844632787652279, guid: 0d7c256b93c9c8f4081de78fe01bcf31, type: 3}
+  - {fileID: -8587844632787652279, guid: 95bdcb11292f7c34e89f5c9cfdfe7ccd, type: 3}

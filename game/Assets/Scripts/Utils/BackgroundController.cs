@@ -11,6 +11,7 @@ namespace Treep.Utils {
         private void Start() {
             this._startPos = this.transform.position;
             this._length = 64;
+            this.cam = GameObject.FindWithTag("MainCamera");
         }
 
         private void FixedUpdate() {

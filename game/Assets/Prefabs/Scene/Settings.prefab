@@ -47,4 +47,5 @@ MonoBehaviour:
   username: 
   musicVolume: 0.75
   sfxVolume: 0.75
+  masterVolume: 1
   audioMixer: {fileID: 24100000, guid: ae3cf3e0636b64e409bc8cc3cd6fdbff, type: 2}
