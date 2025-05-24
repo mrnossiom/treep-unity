@@ -16,14 +16,14 @@ namespace Treep.IA
 
         void Update()
         {
-            transform.position += Vector3.left * speed * Time.deltaTime;
+            transform.position += Vector3.left * (this.speed * Time.deltaTime);
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+        private void OnCollisionEnter2D(Collision2D other)
         {
-            if (collision.gameObject.CompareTag("Player"))
+            if (other.gameObject.CompareTag("Player"))
             {
-                var player = collision.gameObject.GetComponent<Player.Player>();
+                var player = other.gameObject.GetComponent<Player.Player>();
                 if (player != null)
                 {
                     player.CmdTakeDamage(damage);
