@@ -7,6 +7,7 @@ namespace Treep.Level {
         Spawn,
         Normal,
         Shop,
+        Boss,
         Exit,
     }
 
