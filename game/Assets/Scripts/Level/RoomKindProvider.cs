@@ -5,10 +5,8 @@ namespace Treep.Level {
     [System.Serializable]
     public enum RoomKind {
         Spawn,
-
         Normal,
         Shop,
-
         Exit,
     }
 

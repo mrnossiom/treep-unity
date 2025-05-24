@@ -9,7 +9,7 @@ namespace Treep.Level {
         [SerializeField] private RoomProvider roomProvider;
         [SerializeField] private GameObject enemyPrefab;
 
-        private Bounds bounds;
+        public Bounds bounds;
 
         // TODO: non-linear level blueprint and evolver
         [SerializeField] private List<RoomKind> levelBlueprint;

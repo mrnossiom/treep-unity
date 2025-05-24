@@ -7,6 +7,7 @@ namespace Treep.State.GameStates {
     [Serializable]
     public class GameStateLevel : IGameState {
         public System.Random Rng;
+        
 
         private LevelAssembler _container;
 
@@ -24,7 +25,22 @@ namespace Treep.State.GameStates {
             player.GetComponent<Player.Player>().SetSimulated(true);
 
             this._container = target;
+
+            this.SetupAstarPath(target.bounds);
+
+
         }
+
+        private void SetupAstarPath(Bounds bounds) {
+            var astarPath = UnityEngine.Object.FindAnyObjectByType<AstarPath>();
+
+            astarPath.data.gridGraph.center = bounds.center;
+            astarPath.data.gridGraph.SetDimensions((int)bounds.size.x, (int)bounds.size.y, 1f);
+
+            astarPath.Scan();
+        }
+        
+        
 
         public void OnExit() {
             UnityEngine.Object.Destroy(this._container.gameObject);
