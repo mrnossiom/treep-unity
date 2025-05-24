@@ -24,6 +24,9 @@ namespace Treep.State {
 
         private IGameState _currentState;
         private bool _shouldEnterState;
+        
+        [SyncVar(hook = nameof(OnSeedChanged))]
+        private int _seed;
 
         public GameStateKind StateKind => this._stateKind;
 
@@ -36,6 +39,18 @@ namespace Treep.State {
         private void Awake() {
             this._stateKind = GameStateKind.Lobby;
             this._currentState = new GameStateLobby();
+        }
+        
+        [Server]
+        public void GenerateAndSetSeed() {
+            _seed = new System.Random().Next();
+            Debug.Log($"Generated seed: {_seed}");
+        }
+
+        private void OnSeedChanged(int oldSeed, int newSeed) {
+            if (_stateKind == GameStateKind.Level && newSeed != 0) {
+                ChangeState(new GameStateLevel(newSeed));
+            }
         }
 
         public override void OnStartClient() {
@@ -51,18 +66,27 @@ namespace Treep.State {
         }
         
         public void TriggerState(GameStateKind gameState) {
+            if (isServer && gameState == GameStateKind.Level) {
+                GenerateAndSetSeed();
+            }
             this._stateKind = gameState;
         }
 
         private void StateKindHook(GameStateKind oldStateKind, GameStateKind newStateKind) {
-            IGameState newState = newStateKind switch {
-                GameStateKind.Lobby => new GameStateLobby(),
-                GameStateKind.Level => new GameStateLevel(5),
-                GameStateKind.End => new GameStateEnd(),
-                _ => throw new ArgumentOutOfRangeException(nameof(newStateKind), newStateKind, null)
-            };
-
-            this.ChangeState(newState);
+            if (newStateKind == GameStateKind.Level) {
+                if (_seed == 0) {
+                    return;
+                }
+                ChangeState(new GameStateLevel(_seed));
+            }
+            else {
+                IGameState newState = newStateKind switch {
+                    GameStateKind.Lobby => new GameStateLobby(),
+                    GameStateKind.End => new GameStateEnd(),
+                    _ => throw new ArgumentOutOfRangeException(nameof(newStateKind), newStateKind, null)
+                };
+                ChangeState(newState);
+            }
         }
 
         private void ChangeState(IGameState newState) {
