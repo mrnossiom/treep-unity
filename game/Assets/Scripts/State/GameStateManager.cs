@@ -32,9 +32,11 @@ namespace Treep.State {
 
         [SerializeField] private LevelAssembler lobbyLevel;
         [SerializeField] private LevelAssembler worldOneLevel;
+        [SerializeField] private GameObject aStarPrefab;
 
         public LevelAssembler UglyLobbyAccessorToRemoveLater => this.lobbyLevel;
         public LevelAssembler UglyLevelAccessorToRemoveLater => this.worldOneLevel;
+        public GameObject AStarPrefab => this.aStarPrefab;
 
         private void Awake() {
             this._stateKind = GameStateKind.Lobby;

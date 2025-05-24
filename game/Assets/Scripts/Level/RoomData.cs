@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Treep.Level {
     [Serializable]
     public enum DoorSize {
-        Vertical6
+        Vertical6,
     }
 
     internal static class DoorSizeMethods {

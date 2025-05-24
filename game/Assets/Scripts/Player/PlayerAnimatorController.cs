@@ -148,14 +148,7 @@ namespace Treep {
             //legacy
             Debug.Log($"Set float {id} {value}");
         }
-
-
-        //New Animation System
-        public void TriggerJump() {
-            this._headAnimator.SetTrigger("Jump");
-            this._bodyAnimator.SetTrigger("Jump");
-            this.WeaponAnimator.SetTrigger("Jump");
-        }
+        
 
         public void TriggerAttack(LookDirection lookDirection) {
             if (lookDirection is LookDirection.Left or LookDirection.Right) {
@@ -181,8 +174,14 @@ namespace Treep {
             }
         }
 
+        public void TriggerJump() {
+            //this._headAnimator.SetTrigger("Jump");
+            //this.WeaponAnimator.SetTrigger("Jump");
+            //this._bodyAnimator.SetTrigger("Jump");
+        }
 
-        public void TriggerDash() {
+
+    public void TriggerDash() {
             this._headAnimator.SetTrigger("Dash");
             this.WeaponAnimator.SetTrigger("Dash");
             this._bodyAnimator.SetTrigger("Dash");

@@ -1,11 +1,16 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Object = UnityEngine.Object;
+using Mirror;
 
 namespace Treep.Level {
     public class LevelAssembler : MonoBehaviour {
         [SerializeField] private RoomProvider roomProvider;
         [SerializeField] private GameObject enemyPrefab;
+
+        public Bounds bounds;
 
         // TODO: non-linear level blueprint and evolver
         [SerializeField] private List<RoomKind> levelBlueprint;
@@ -23,6 +28,7 @@ namespace Treep.Level {
             var evolver = new LevelEvolver(this.levelBlueprint, roomsBook);
             // level is not solvable
             if (!evolver.EvolveRoot(rng)) return null;
+            this.bounds = evolver.Bounds;
 
             if (evolver.SpawnPoints.Count == 0) {
                 Debug.LogError("No spawn point");
@@ -37,7 +43,8 @@ namespace Treep.Level {
             foreach (var enemySpawnerPos in evolver.EnemySpawners) {
                 // avoid spawning the enemy in the ground
                 var spawnerPos = enemySpawnerPos + Vector2.up * 2;
-                Object.Instantiate(this.enemyPrefab, spawnerPos, Quaternion.identity, enemyContainer.transform);
+                var enemyInstance = Object.Instantiate(this.enemyPrefab, spawnerPos, Quaternion.identity, enemyContainer.transform);
+                NetworkServer.Spawn(enemyInstance);
             }
 
             // place end doors
@@ -63,6 +70,10 @@ namespace Treep.Level {
                 outerMask.position = room.Area.center;
                 outerMask.localScale = room.Area.size;
             }
+        }
+
+        private void OnDrawGizmos() {
+            Gizmos.DrawWireCube(this.bounds.center, this.bounds.center);
         }
     }
 }
