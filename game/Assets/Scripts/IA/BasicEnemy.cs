@@ -1,10 +1,16 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using JetBrains.Annotations;
 using Mirror;
 using Pathfinding;
 using Treep.Player;
 using Treep.SFX;
+using Treep.Weapon;
 using UnityEngine;
 using UnityEngine.Audio;
+using Object = UnityEngine.Object;
+using Rect = UnityEngine.Rect;
 
 namespace Treep.IA {
     public class BasicEnemy : NetworkBehaviour {
@@ -19,6 +25,9 @@ namespace Treep.IA {
         public int radiusDetectPlayer = 20;
         public float delayDetectPlayer = 1f;
         public bool isAlive = true;
+        public int loot = 2;
+        public float damage = 5f;
+        public Vector2 hitBoxToPlayer = new Vector2(2f, 3.5f);
 
         [SyncVar(hook = nameof(OnPVChanged))]
         private float _pv;
@@ -45,6 +54,9 @@ namespace Treep.IA {
         private bool _reachedEndOfPath = false;
         private float _jumpDeltaTime;
         private float _jumpDelay = 1f;
+        
+        private float _attackDeltaTime;
+        private float _attackDelay = 1f;
 
         private readonly Vector2 _moveDirection = Vector2.right;
         private Transform Target => Player.Player.Singleton.gameObject.transform;
@@ -141,6 +153,7 @@ namespace Treep.IA {
             if (this._moveEnabled && this.isAlive && this.isTriggerByPlayer) {
                 this.UpdatePathFinding();
                 this.UpdateJump();
+                this.UpdateAttack();
                 this.animator.SetBool(BasicEnemy.GetHit, false);
 
                 if (this.body.linearVelocity.x > 0) {
@@ -152,17 +165,18 @@ namespace Treep.IA {
             }
         }
         
-        public void Hit(float damageTook) {
-            Debug.Log($"Hit called on {gameObject.name} - isServer = {isServer}, isClient = {isClient}, isLocalPlayer = {isLocalPlayer}");
-            if (!isServer) return;
+        public int Hit(float damageTook) {
+            if (!isServer) return 0;
 
             this.PV -= damageTook;
 
             if (this.PV <= 0) {
                 this.Die();
+                return this.loot;
             }
             else {
                 RpcPlayHitAnimationAndSound();
+                return 0;
             }
         }
         
@@ -180,6 +194,45 @@ namespace Treep.IA {
             SoundFXManager.Instance.PlaySoundFXClip(this.damageSoundClip, this.transform, soundLevel);
         }
 
+        public void UpdateAttack() {
+            if (Time.time - this._attackDeltaTime > this._attackDelay) {
+                Player.Player[] players = DetectPlayerIsCollidingZone();
+                if (players.Length > 0) {
+                    this._attackDeltaTime = Time.time;
+                    this.Attack(players);
+                }
+            }
+            
+        }
+
+        public void Attack(Player.Player[] players) {
+            foreach (var player in players) {
+                this.GiveDamage(player);
+            }
+        }
+
+
+        public Player.Player[] DetectPlayerIsCollidingZone() {
+        
+            var results = new Collider2D[50];
+            var count = 0;
+
+            var filter = new ContactFilter2D();
+            filter.SetLayerMask(this.playerLayerMask);
+            filter.useTriggers = true;
+
+            
+            count = Physics2D.OverlapBox(this.body.position, this.hitBoxToPlayer, 0f, filter, results);
+
+            
+            return (from collider2d in results.Take(count)
+                select collider2d.GetComponent<Player.Player>()).ToArray();
+        }
+
+        public void GiveDamage(Player.Player player) {
+            player.TakeDamage(this.damage);
+        }
+
         private bool IsWall() {
             var hits = new RaycastHit2D[16];
             var count = this.body.Cast(this._moveDirection, hits, this.detectionDistance);
@@ -188,33 +241,41 @@ namespace Treep.IA {
         }
 
         public void Die() {
-            if (!isServer) return;
-            
             this.isAlive = false;
-            RpcDie();
-            
-            this.spriteRenderer.enabled = false;
-            this._collider.enabled = false;
-            this.enabled = false;
+            this.RpcDie();
+            //Object.Destroy(this);
         }
+
+        
 
         [ClientRpc]
         private void RpcDie() {
             if (!this.isActiveAndEnabled) return;
 
-            audioMixer.GetFloat("SFXVolume", out var soundLevel);
+            this.audioMixer.GetFloat("SFXVolume", out var soundLevel);
             soundLevel = (soundLevel + 80) / 100;
             SoundFXManager.Instance.PlaySoundFXClip(this.deathSoundClip, this.transform, soundLevel);
+            
+            this.animator.SetTrigger("Die");
+            this.body.simulated = false;
+            //this.Invoke(nameof(this.InvokeDie), 5f);
+        }
+        
+        private void InvokeDie() {
+            Debug.Log("Et boum il est DESTROY");
 
-            this.spriteRenderer.enabled = false;
-            this._collider.enabled = false;
-            this.enabled = false;
+            Object.Destroy(this.gameObject);
         }
 
         private void OnDrawGizmos() {
+            if (this.body == null) return;
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(this.body.position, this.radiusDetectPlayer);
             Gizmos.color = Color.red;
-            if (this.body != null)
-                Gizmos.DrawWireSphere(this.body.position, this.radiusDetectPlayer);
+            Gizmos.DrawWireCube(this.body.position, this.hitBoxToPlayer);
+
+
+            
         }
     }
 }

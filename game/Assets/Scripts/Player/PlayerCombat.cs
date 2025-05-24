@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Mirror;
 using Treep.IA;
@@ -35,6 +34,11 @@ namespace Treep.Player {
         private LookDirection _currentLookDirection;
 
         private float _nextAttackTime;
+
+        private int _money {
+            get => this.GetComponent<Player>().money;
+            set => this.GetComponent<Player>().money = value;
+        }
 
         [SerializeField] private AudioClip slashSoundClip;
         [SerializeField] private AudioMixer audioMixer;
@@ -100,7 +104,7 @@ namespace Treep.Player {
             
             var enemiesToHit = GetEnemyIn(this._weaponManager.HitBox);
             foreach (var enemy in enemiesToHit) {
-                enemy.GetComponent<BasicEnemy>().Hit(this._weaponManager.Damage);
+                this._money += enemy.GetComponent<BasicEnemy>().Hit(this._weaponManager.Damage);
             }
         }
 
@@ -133,7 +137,6 @@ namespace Treep.Player {
                 Debug.LogWarning("unknown shape");
             }
             
-            Debug.Log($"Enemies detected: {count}");
             return results.Take(count).ToArray();
         }
 
