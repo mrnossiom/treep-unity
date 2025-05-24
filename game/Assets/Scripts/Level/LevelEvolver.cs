@@ -163,7 +163,7 @@ namespace Treep.Level {
                 }
                 
                 foreach (var bossSpawner in placedRoom.Template.bossSpawners) {
-                    this._enemySpawners.Add(placedRoom.Position + bossSpawner);
+                    this._bossSpawners.Add(placedRoom.Position + bossSpawner);
                 }
 
                 foreach (var spawnPoint in placedRoom.Template.spawnPoints) {

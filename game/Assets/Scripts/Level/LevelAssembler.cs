@@ -56,10 +56,12 @@ namespace Treep.Level {
                 var enemyInstance = Object.Instantiate(enemyprefabToSpawn, spawnerPos, Quaternion.identity, enemyContainer.transform);
                 NetworkServer.Spawn(enemyInstance);
             }
+            
+            Debug.Log("il y a " + evolver.BossSpawners.Count + " spawn poin de boss");
 
-            foreach (var bossySpawnerPos in evolver.BossSpawners) {
-                var enemyInstance = Object.Instantiate(this.bossPrefab, bossySpawnerPos, Quaternion.identity, enemyContainer.transform);
-                NetworkServer.Spawn(enemyInstance);
+            foreach (var bossSpawnerPos in evolver.BossSpawners) {
+                var bossInstance = Object.Instantiate(this.bossPrefab, bossSpawnerPos, Quaternion.identity, enemyContainer.transform);
+                NetworkServer.Spawn(bossInstance);
             }
             
             

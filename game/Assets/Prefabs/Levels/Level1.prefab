@@ -47,6 +47,7 @@ MonoBehaviour:
   roomProvider: {fileID: 11400000, guid: 801048306d47cb838b12409ed7e4663e, type: 2}
   enemy1Prefab: {fileID: 6615744716052060427, guid: 99da362170ba271efbfc5c4481638faf, type: 3}
   enemy2Prefab: {fileID: 6615744716052060427, guid: 4f239b42c2288b117b5b7072886ec34a, type: 3}
+  bossPrefab: {fileID: 324549141049124417, guid: 206a10eb110aa590eabfefe0d3c385b0, type: 3}
   percentageEnemy1: 100
   bounds:
     m_Center: {x: 0, y: 0, z: 0}
