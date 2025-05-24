@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 1031267038825304}
   - component: {fileID: -8019814555335371397}
   - component: {fileID: 898301627998437776}
+  - component: {fileID: 6707392499608648434}
+  - component: {fileID: -6284670707612316445}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Boss
@@ -198,8 +200,65 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87f881c74cb92a83096bfbf7cbdceba1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  pvMax: 100
+  isAlive: 0
   objectToSpawn: {fileID: 3305709912223100169, guid: 862e856ebba537906ac068a75afbcdd9, type: 3}
   specialObjectToSpawn: {fileID: 2280064040173770716, guid: b930ea2116f47d92b98ff5357c893789, type: 3}
   minXDistance: 3
   maxXDistance: 10
   spawnHeight: 10
+  body: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+--- !u!114 &6707392499608648434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324549141049124417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  _assetId: 3583016408
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
+--- !u!114 &-6284670707612316445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324549141049124417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ff3ba0becae47b8b9381191598957c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0
+  target: {fileID: 8839068735111773853}
+  syncPosition: 1
+  syncRotation: 0
+  syncScale: 0
+  onlySyncOnChange: 1
+  compressRotation: 1
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 1
+  coordinateSpace: 0
+  timelineOffset: 1
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  onlySyncOnChangeCorrectionMultiplier: 2
+  rotationSensitivity: 0.01
+  positionPrecision: 0.01
+  scalePrecision: 0.01

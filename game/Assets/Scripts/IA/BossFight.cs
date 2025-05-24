@@ -20,11 +20,12 @@ namespace Treep.IA
         public float minXDistance = 3f;
         public float maxXDistance = 10f;
         public float spawnHeight = 10f;
-        [SyncVar(hook = nameof(OnPVChanged))] 
+        
+        [SyncVar(hook = nameof(OnPVChanged))]
         private float _pv;
 
         public float PV {
-            get => this._pv;
+            get => _pv;
             set {
                 if (isServer) {
                     _pv = value;
@@ -72,12 +73,11 @@ namespace Treep.IA
                 this._vulnerable = true;
                 this._animator.SetBool(Vulnerable, true);
             }
-
-            if (this._fightTimer < 20f || (this._fightTimer > 29f && this._fightTimer < 50f) || (this._fightTimer > 59f && this._fightTimer < 80f)) {
+            else {
                 this._vulnerable = false;
                 this._animator.SetBool(Vulnerable, false);
             }
-            else if (this._fightTimer > 30f && this._secondPhaseTimer <= 20f)
+            if (this._fightTimer > 30f && this._secondPhaseTimer <= 20f)
             {
                 this._secondPhaseTimer += Time.deltaTime;
 
@@ -131,8 +131,8 @@ namespace Treep.IA
             NetworkServer.Spawn(obj);
         }
 
-        private void OnPVChanged(float newPv) {
-            this.PV = newPv;
+        private void OnPVChanged(float odlPV, float newPV) {
+            this.PV = newPV;
         }
 
         public int Hit(float damageTook) {
