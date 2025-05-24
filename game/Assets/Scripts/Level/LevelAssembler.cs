@@ -8,7 +8,9 @@ using Mirror;
 namespace Treep.Level {
     public class LevelAssembler : MonoBehaviour {
         [SerializeField] private RoomProvider roomProvider;
-        [SerializeField] private GameObject enemyPrefab;
+        [SerializeField] private GameObject enemy1Prefab;
+        [SerializeField] private GameObject enemy2Prefab;
+        [SerializeField] private int percentageEnemy1 = 100;
 
         public Bounds bounds;
 
@@ -43,7 +45,14 @@ namespace Treep.Level {
             foreach (var enemySpawnerPos in evolver.EnemySpawners) {
                 // avoid spawning the enemy in the ground
                 var spawnerPos = enemySpawnerPos + Vector2.up * 2;
-                var enemyInstance = Object.Instantiate(this.enemyPrefab, spawnerPos, Quaternion.identity, enemyContainer.transform);
+                GameObject enemyprefabToSpawn;
+                if (rng.Next() % 100 >= this.percentageEnemy1 - 1) {
+                    enemyprefabToSpawn =  this.enemy2Prefab;
+                }
+                else {
+                    enemyprefabToSpawn =  this.enemy1Prefab;
+                }
+                var enemyInstance = Object.Instantiate(enemyprefabToSpawn, spawnerPos, Quaternion.identity, enemyContainer.transform);
                 NetworkServer.Spawn(enemyInstance);
             }
 
