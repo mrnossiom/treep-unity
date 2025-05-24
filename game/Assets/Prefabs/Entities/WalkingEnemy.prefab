@@ -75,7 +75,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1782558191
-  m_SortingLayer: -1
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 3764837823669207914, guid: 1b653b54c61aae168a4442aee95f7ef7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -201,8 +201,8 @@ MonoBehaviour:
   radiusDetectPlayer: 30
   delayDetectPlayer: 1
   isAlive: 1
-  loot: 2
-  damage: 0
+  loot: 5
+  damage: 2
   hitBoxToPlayer: {x: 2.75, y: 3.5}
   body: {fileID: 1579360374741890482}
   spriteRenderer: {fileID: 457250653687726360}

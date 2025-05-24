@@ -157,10 +157,10 @@ namespace Treep.Player {
         }
 
         public void IncreaseVision() {
-            var visionMask = GameObject.FindGameObjectWithTag("PlayerVirtualCamera").transform.Find("Vision");
+            var visionMask = GameObject.FindGameObjectWithTag("PlayerVirtualCamera").transform.Find("VisionMask");
             visionMask.localScale *= this.visionMultiplier;
 
-            var shader = GameObject.FindGameObjectWithTag("PlayerVirtualCamera").transform.Find("BlackLayer")
+            var shader = GameObject.FindGameObjectWithTag("PlayerVirtualCamera").transform.Find("ShadowLayer")
                 .GetComponent<Renderer>().material;
             shader.SetFloat("_Width", shader.GetFloat("_Width") * this.visionMultiplier);
             shader.SetFloat("_Height", shader.GetFloat("_Height") * this.visionMultiplier);
