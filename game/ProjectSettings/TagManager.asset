@@ -8,6 +8,8 @@ TagManager:
   - PlayerVirtualCamera
   - Background
   - Spikes
+  - Boss
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -50,6 +52,9 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Stone
+    uniqueID: 488374033
     locked: 0
   - name: Enemy
     uniqueID: 2512409105

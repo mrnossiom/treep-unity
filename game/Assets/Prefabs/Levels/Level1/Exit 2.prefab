@@ -51,6 +51,7 @@ MonoBehaviour:
     size: 0
   enemySpawners: []
   spawnPoints: []
+  exitPoints: []
 --- !u!1 &2635150134697267651
 GameObject:
   m_ObjectHideFlags: 0
