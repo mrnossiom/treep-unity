@@ -104,7 +104,7 @@ namespace Treep.Player {
             
             var enemiesToHit = GetEnemyIn(this._weaponManager.HitBox);
             foreach (var enemy in enemiesToHit) {
-                this._money += enemy.GetComponent<BasicEnemy>().Hit(this._weaponManager.Damage);
+                this._money += enemy.GetComponent<IEnemy>().Hit(this._weaponManager.Damage);
             }
         }
 

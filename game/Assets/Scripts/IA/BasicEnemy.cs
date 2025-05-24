@@ -13,7 +13,7 @@ using Object = UnityEngine.Object;
 using Rect = UnityEngine.Rect;
 
 namespace Treep.IA {
-    public class BasicEnemy : NetworkBehaviour {
+    public class BasicEnemy : NetworkBehaviour, IEnemy {
         private static readonly int GetHit = Animator.StringToHash("GetHit");
 
         public int PVMax;
@@ -243,10 +243,7 @@ namespace Treep.IA {
         public void Die() {
             this.isAlive = false;
             this.RpcDie();
-            //Object.Destroy(this);
         }
-
-        
 
         [ClientRpc]
         private void RpcDie() {
@@ -258,13 +255,6 @@ namespace Treep.IA {
             
             this.animator.SetTrigger("Die");
             this.body.simulated = false;
-            //this.Invoke(nameof(this.InvokeDie), 5f);
-        }
-        
-        private void InvokeDie() {
-            Debug.Log("Et boum il est DESTROY");
-
-            Object.Destroy(this.gameObject);
         }
 
         private void OnDrawGizmos() {
@@ -273,9 +263,6 @@ namespace Treep.IA {
             Gizmos.DrawWireSphere(this.body.position, this.radiusDetectPlayer);
             Gizmos.color = Color.red;
             Gizmos.DrawWireCube(this.body.position, this.hitBoxToPlayer);
-
-
-            
         }
     }
 }
