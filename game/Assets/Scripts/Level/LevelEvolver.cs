@@ -58,6 +58,7 @@ namespace Treep.Level {
 
         private List<PlacedRoom> _placedRooms = new();
         private readonly List<Vector2> _enemySpawners = new();
+        private readonly List<Vector2> _bossSpawners = new();
         private readonly List<Vector2> _spawnPoints = new();
         private readonly List<Vector2> _exitPoints = new();
 
@@ -65,6 +66,7 @@ namespace Treep.Level {
 
         public ReadOnlyCollection<PlacedRoom> PlacedRooms => this._placedRooms.AsReadOnly();
         public ReadOnlyCollection<Vector2> EnemySpawners => this._enemySpawners.AsReadOnly();
+        public ReadOnlyCollection<Vector2> BossSpawners => this._bossSpawners.AsReadOnly();
         public ReadOnlyCollection<Vector2> SpawnPoints => this._spawnPoints.AsReadOnly();
         public ReadOnlyCollection<Vector2> ExitPoints => this._exitPoints.AsReadOnly();
 
@@ -158,6 +160,10 @@ namespace Treep.Level {
 
                 foreach (var enemySpawner in placedRoom.Template.enemySpawners) {
                     this._enemySpawners.Add(placedRoom.Position + enemySpawner);
+                }
+                
+                foreach (var bossSpawner in placedRoom.Template.bossSpawners) {
+                    this._bossSpawners.Add(placedRoom.Position + bossSpawner);
                 }
 
                 foreach (var spawnPoint in placedRoom.Template.spawnPoints) {

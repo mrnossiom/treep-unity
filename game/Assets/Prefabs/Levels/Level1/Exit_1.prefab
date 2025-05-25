@@ -50,10 +50,9 @@ MonoBehaviour:
   doors:
   - position: {x: 0, y: 1}
     size: 0
-  enemySpawners:
-  - {x: 3, y: 9}
-  - {x: 17, y: 5}
+  enemySpawners: []
   spawnPoints: []
+  bossSpawners: []
   exitPoints:
   - {x: 12, y: 3}
 --- !u!1 &2635150134697267651
@@ -3188,7 +3187,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 506119775
-  m_SortingLayer: -2
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 4560120827998307343, guid: 670c6c1629e137f439585714a44a286c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

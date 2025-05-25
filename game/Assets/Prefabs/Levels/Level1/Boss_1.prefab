@@ -54,6 +54,8 @@ MonoBehaviour:
     size: 0
   enemySpawners: []
   spawnPoints: []
+  bossSpawners:
+  - {x: 40, y: 8}
   exitPoints: []
 --- !u!1 &2635150134697267651
 GameObject:
@@ -692,7 +694,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 29
-      m_TileSpriteIndex: 27
+      m_TileSpriteIndex: 47
       m_TileMatrixIndex: 4
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1142,7 +1144,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 28
-      m_TileSpriteIndex: 26
+      m_TileSpriteIndex: 27
       m_TileMatrixIndex: 4
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -2182,7 +2184,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 21
-      m_TileSpriteIndex: 19
+      m_TileSpriteIndex: 26
       m_TileMatrixIndex: 4
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -4661,8 +4663,8 @@ Tilemap:
     m_Data: {fileID: 628151615, guid: dc457d45d2d805b4fa8062ced6b24913, type: 3}
   - m_RefCount: 4
     m_Data: {fileID: -702075660, guid: dc457d45d2d805b4fa8062ced6b24913, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: -170214861, guid: dc457d45d2d805b4fa8062ced6b24913, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 15
     m_Data: {fileID: -412883639, guid: dc457d45d2d805b4fa8062ced6b24913, type: 3}
   - m_RefCount: 8
@@ -4676,9 +4678,9 @@ Tilemap:
   - m_RefCount: 11
     m_Data: {fileID: -126973099, guid: dc457d45d2d805b4fa8062ced6b24913, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: -1194617511, guid: dc457d45d2d805b4fa8062ced6b24913, type: 3}
+    m_Data: {fileID: -170214861, guid: dc457d45d2d805b4fa8062ced6b24913, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: 1903617453, guid: dc457d45d2d805b4fa8062ced6b24913, type: 3}
+    m_Data: {fileID: -1194617511, guid: dc457d45d2d805b4fa8062ced6b24913, type: 3}
   - m_RefCount: 5
     m_Data: {fileID: 2042671887, guid: dc457d45d2d805b4fa8062ced6b24913, type: 3}
   - m_RefCount: 3
@@ -4717,8 +4719,8 @@ Tilemap:
     m_Data: {fileID: -1539654615, guid: dc457d45d2d805b4fa8062ced6b24913, type: 3}
   - m_RefCount: 3
     m_Data: {fileID: -815668679, guid: dc457d45d2d805b4fa8062ced6b24913, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 1903617453, guid: dc457d45d2d805b4fa8062ced6b24913, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: -1766189282, guid: dc457d45d2d805b4fa8062ced6b24913, type: 3}
   - m_RefCount: 2

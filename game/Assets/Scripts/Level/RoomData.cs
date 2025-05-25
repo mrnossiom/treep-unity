@@ -41,6 +41,7 @@ namespace Treep.Level {
 
         public List<Vector2> enemySpawners = new();
         public List<Vector2> spawnPoints = new();
+        public List<Vector2> bossSpawners = new();
         public List<Vector2> exitPoints = new();
 
         private void OnDrawGizmos() {
@@ -58,6 +59,10 @@ namespace Treep.Level {
             Gizmos.color = Color.magenta;
             foreach (var enemySpawner in this.enemySpawners) {
                 Gizmos.DrawWireSphere(this.transform.position + (Vector3)enemySpawner, .5f);
+            }
+            Gizmos.color = Color.blue;
+            foreach (var bossSpawner in this.bossSpawners) {
+                Gizmos.DrawWireSphere(this.transform.position + (Vector3)bossSpawner, .5f);
             }
 
             Gizmos.color = Color.green;

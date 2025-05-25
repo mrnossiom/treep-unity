@@ -10,6 +10,7 @@ namespace Treep.Level {
         [SerializeField] private RoomProvider roomProvider;
         [SerializeField] private GameObject enemy1Prefab;
         [SerializeField] private GameObject enemy2Prefab;
+        [SerializeField] private GameObject bossPrefab;
         [SerializeField] private int percentageEnemy1 = 100;
 
         public Bounds bounds;
@@ -55,6 +56,15 @@ namespace Treep.Level {
                 var enemyInstance = Object.Instantiate(enemyprefabToSpawn, spawnerPos, Quaternion.identity, enemyContainer.transform);
                 NetworkServer.Spawn(enemyInstance);
             }
+            
+            Debug.Log("il y a " + evolver.BossSpawners.Count + " spawn poin de boss");
+
+            foreach (var bossSpawnerPos in evolver.BossSpawners) {
+                var bossInstance = Object.Instantiate(this.bossPrefab, bossSpawnerPos, Quaternion.identity, enemyContainer.transform);
+                NetworkServer.Spawn(bossInstance);
+            }
+            
+            
 
             // place end doors
             foreach (var exitDoorPos in evolver.ExitPoints) {
