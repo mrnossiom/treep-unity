@@ -1,16 +1,20 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Mirror;
+using Treep.Utils;
 
 namespace Treep.Level {
-    public class LevelAssembler : MonoBehaviour {
+    public class LevelAssembler : NetworkBehaviour {
         [SerializeField] private RoomProvider roomProvider;
         [SerializeField] private GameObject enemy1Prefab;
         [SerializeField] private GameObject enemy2Prefab;
         [SerializeField] private GameObject bossPrefab;
+        [SerializeField] private ExitLevelTrigger exitPrefab;
+
         [SerializeField] private int percentageEnemy1 = 100;
 
         public Bounds bounds;
@@ -19,6 +23,11 @@ namespace Treep.Level {
         [SerializeField] private List<RoomKind> levelBlueprint;
 
         [SerializeField] private Transform levelOuterMask;
+
+
+        public delegate void ExitCallback();
+
+        [CanBeNull] public ExitCallback exitCallback;
 
         public List<RoomKind> LevelBlueprint => this.levelBlueprint;
         public RoomProvider RoomProvider => this.roomProvider;
@@ -48,27 +57,37 @@ namespace Treep.Level {
                 var spawnerPos = enemySpawnerPos + Vector2.up * 2;
                 GameObject enemyprefabToSpawn;
                 if (rng.Next() % 100 >= this.percentageEnemy1 - 1) {
-                    enemyprefabToSpawn =  this.enemy2Prefab;
+                    enemyprefabToSpawn = this.enemy2Prefab;
                 }
                 else {
-                    enemyprefabToSpawn =  this.enemy1Prefab;
+                    enemyprefabToSpawn = this.enemy1Prefab;
                 }
-                var enemyInstance = Object.Instantiate(enemyprefabToSpawn, spawnerPos, Quaternion.identity, enemyContainer.transform);
+
+                // if (this.isServer) {
+                var enemyInstance = Object.Instantiate(enemyprefabToSpawn, spawnerPos, Quaternion.identity,
+                    enemyContainer.transform);
                 NetworkServer.Spawn(enemyInstance);
+                // }
             }
-            
-            Debug.Log("il y a " + evolver.BossSpawners.Count + " spawn poin de boss");
+
+            Debug.Log("Il y a " + evolver.BossSpawners.Count + " spawn point de boss");
 
             foreach (var bossSpawnerPos in evolver.BossSpawners) {
-                var bossInstance = Object.Instantiate(this.bossPrefab, bossSpawnerPos, Quaternion.identity, enemyContainer.transform);
+                // if (this.isServer) {
+                var bossInstance = Object.Instantiate(this.bossPrefab, bossSpawnerPos, Quaternion.identity,
+                    enemyContainer.transform);
                 NetworkServer.Spawn(bossInstance);
+                // }
             }
-            
-            
+
 
             // place end doors
             foreach (var exitDoorPos in evolver.ExitPoints) {
-                // TODO: make door that ticks GameStateManager
+                // if (this.isServer) {
+                var obj = Object.Instantiate(this.exitPrefab, exitDoorPos, Quaternion.identity,
+                    enemyContainer.transform);
+                obj.cb = this.exitCallback;
+                // }
             }
 
             return evolver.SpawnPoints.First();

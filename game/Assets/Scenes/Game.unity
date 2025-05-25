@@ -4081,6 +4081,7 @@ MonoBehaviour:
   syncInterval: 0
   lobbyLevel: {fileID: 3660792868845834921, guid: 29bdd20315cb0a70888602fbfea1697b, type: 3}
   worldOneLevel: {fileID: 3660792868845834921, guid: 302a742a174d35105b9285e282cfc63a, type: 3}
+  worldTwoLevel: {fileID: 3660792868845834921, guid: e4bbfe0f6f5936de1b566eed4cacb81d, type: 3}
   aStarPrefab: {fileID: 0}
 --- !u!4 &585743550
 Transform:
