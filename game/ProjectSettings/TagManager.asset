@@ -65,5 +65,8 @@ TagManager:
   - name: OuterLevelMask
     uniqueID: 2068922007
     locked: 0
+  - name: ShadowLayer
+    uniqueID: 3457874829
+    locked: 0
   m_RenderingLayers:
   - Default

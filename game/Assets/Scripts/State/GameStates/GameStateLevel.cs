@@ -24,6 +24,23 @@ namespace Treep.State.GameStates {
                 _ => null
             };
 
+            if (this._level == 2) {
+                manager.background2.SetActive(true);
+                manager.background1.SetActive(false);
+            }
+            else {
+                manager.background1.SetActive(true);
+                manager.background2.SetActive(false);
+            }
+
+            if (this._level == 2) {
+                manager.outerLayer.color = new Color(0.13725490196078431373f, 0.11764705882352941176f,
+                    0.07843137254901960784f);
+            }
+            else {
+                manager.outerLayer.color = Color.black;
+            }
+
             if (levelPrefab is null) {
                 manager.TriggerState(GameStateKind.Lobby);
                 return;

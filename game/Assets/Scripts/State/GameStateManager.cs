@@ -37,6 +37,12 @@ namespace Treep.State {
         [SerializeField] private LevelAssembler worldTwoLevel;
         [SerializeField] private GameObject aStarPrefab;
 
+        [SerializeField] public GameObject background1;
+        [SerializeField] public GameObject background2;
+
+        [SerializeField] public SpriteRenderer outerLayer;
+
+
         public LevelAssembler UglyLobbyAccessorToRemoveLater => this.lobbyLevel;
         public LevelAssembler UglyLevel1AccessorToRemoveLater => this.worldOneLevel;
         public LevelAssembler UglyLevel2AccessorToRemoveLater => this.worldTwoLevel;

@@ -53,6 +53,7 @@ MonoBehaviour:
     size: 0
   enemySpawners: []
   spawnPoints: []
+  bossSpawners: []
   exitPoints: []
 --- !u!1 &2635150134697267651
 GameObject:
@@ -19547,7 +19548,7 @@ GameObject:
   - component: {fileID: 7230212659253780827}
   m_Layer: 0
   m_Name: Spades
-  m_TagString: Background
+  m_TagString: Spikes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
