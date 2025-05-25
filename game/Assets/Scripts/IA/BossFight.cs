@@ -40,8 +40,6 @@ namespace Treep.IA
 
         public int loot = 100;
 
-        public int loot = 100;
-
         public float PV {
             get => _pv;
             set {
@@ -149,17 +147,7 @@ namespace Treep.IA
             OnTriggerPlayerEnter();
             this._isTrigger = true;
         }
-
-        public void UpdateTriggerZone() {
-            Player.Player[] players = DetectPlayerinTriggerZone();
-            if (players.Length == 0) {
-                return;
-            }
-
-            OnTriggerPlayerEnter();
-            this._isTrigger = true;
-        }
-
+        
         
         public Player.Player[] DetectPlayerinTriggerZone() {
         
@@ -178,22 +166,6 @@ namespace Treep.IA
                 select collider2d.GetComponent<Player.Player>()).ToArray();
         }
         
-        public Player.Player[] DetectPlayerinTriggerZone() {
-        
-            var results = new Collider2D[50];
-            var count = 0;
-
-            var filter = new ContactFilter2D();
-            filter.SetLayerMask(this.playerLayerMask);
-            filter.useTriggers = true;
-
-            
-            count = Physics2D.OverlapBox((Vector2)this.transform.position + this._triggerZonePos, this._triggerZoneSize, 0f, filter, results);
-
-            
-            return (from collider2d in results.Take(count)
-                select collider2d.GetComponent<Player.Player>()).ToArray();
-        }
         
         void SpawnFallingRock()
         {
