@@ -214,6 +214,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1152
   _pv: 0
+  bossMusicClip: {fileID: 8300000, guid: b83b12f94d9ff71e1810fe6b5a6fc962, type: 3}
+  bossDamageClip: {fileID: 8300000, guid: aab7ddafd1d5675f59097baed312fcd9, type: 3}
+  audioMixer: {fileID: 24100000, guid: ae3cf3e0636b64e409bc8cc3cd6fdbff, type: 2}
   loot: 100
   body: {fileID: 0}
   spriteRenderer: {fileID: 0}
