@@ -10,6 +10,7 @@ using Treep.Weapon;
 using UnityEngine;
 using UnityEngine.Audio;
 using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 using Rect = UnityEngine.Rect;
 
 namespace Treep.IA {
@@ -154,15 +155,12 @@ namespace Treep.IA {
                 this.UpdatePathFinding();
                 this.UpdateJump();
                 this.UpdateAttack();
-                this.animator.SetBool(BasicEnemy.GetHit, false);
-
-                if (this.body.linearVelocity.x > 0) {
-                    this.spriteRenderer.flipX = false;
-                }
-                else {
-                    this.spriteRenderer.flipX = true;
-                }
+                this.UpdateFlipX();
             }
+        }
+        
+        public void UpdateFlipX() {
+            this.spriteRenderer.flipX =  this.body.position.x > Target.position.x;
         }
         
         public int Hit(float damageTook) {
@@ -175,7 +173,7 @@ namespace Treep.IA {
                 return this.loot;
             }
             else {
-                RpcPlayHitAnimationAndSound();
+                this.RpcPlayHitAnimationAndSound();
                 return 0;
             }
         }
@@ -187,7 +185,7 @@ namespace Treep.IA {
         [ClientRpc]
         private void RpcPlayHitAnimationAndSound() {
             if (!this.isActiveAndEnabled) return;
-            this.animator.SetBool(BasicEnemy.GetHit, true);
+            this.animator.SetTrigger("GetHitted");
 
             audioMixer.GetFloat("SFXVolume", out var soundLevel);
             soundLevel = (soundLevel + 80) / 100;
@@ -252,12 +250,12 @@ namespace Treep.IA {
             this.audioMixer.GetFloat("SFXVolume", out var soundLevel);
             soundLevel = (soundLevel + 80) / 100;
             SoundFXManager.Instance.PlaySoundFXClip(this.deathSoundClip, this.transform, soundLevel);
-            
+            this.animator.SetInteger("RNG", new System.Random().Next(2));
             this.animator.SetTrigger("Die");
             this.body.simulated = false;
         }
 
-        private void OnDrawGizmos() {
+        private void OnDrawGizmosSelected() {
             if (this.body == null) return;
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(this.body.position, this.radiusDetectPlayer);

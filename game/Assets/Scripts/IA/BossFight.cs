@@ -1,14 +1,17 @@
-using System;
 using System.Linq;
-using Treep.IA;
-using UnityEngine;
-using Mirror;
-using UnityEngine.Serialization;
+
 
 namespace Treep.IA
 {
+
+    
     using UnityEngine;
     using Mirror;
+    public enum PhaseBossType {
+        Phase1,
+        Phase2,
+        Phase3,
+    }
 
     public class BossFight : NetworkBehaviour , IEnemy {
         private static readonly int GetHitted = Animator.StringToHash("GetHitted");
@@ -18,8 +21,8 @@ namespace Treep.IA
         private bool _isAlive = true;
         public GameObject objectToSpawn;
         public GameObject specialObjectToSpawn;
-        public float minXDistance = 3f;
-        public float maxXDistance = 10f;
+        public float minXDistance = 1f;
+        public float maxXDistance = 40f;
         public float spawnHeight = 10f;
         private bool _isTrigger;
         private Vector2 _triggerZoneSize = new (45f, 30f);
@@ -27,14 +30,14 @@ namespace Treep.IA
         public LayerMask playerLayerMask;
         
         [SyncVar(hook = nameof(OnPVChanged))]
-        private float _pv;
+        [SerializeField]private float _pv;
 
         public int loot = 100;
 
         public float PV {
             get => _pv;
             set {
-                if (isServer) {
+                if (this.isServer) {
                     _pv = value;
                 }
             }
@@ -52,6 +55,8 @@ namespace Treep.IA
         private float _secondPhaseTimer = 0f;
         private float _thirdPhaseTimer = 0f;
         private bool _vulnerable = false;
+        private float _spawnRatePhase1 = 1f;
+        private float _spawnRatePhase2 = 1f;
 
         public void Awake() {
             this.body = this.GetComponent<Rigidbody2D>();
@@ -64,58 +69,68 @@ namespace Treep.IA
         }
 
         void FixedUpdate() {
-            
             if (!this._isAlive ) return;
             
             if (!this._isTrigger ) {
                 UpdateTriggerZone();
                 return;
             }
+            
+            
             this._fightTimer += Time.deltaTime;
-
-            if (this._fightTimer <= 20f)
-            {
-                if (Time.time >= this._nextSpawnTimeFall)
-                {
-                    SpawnFallingRock();
-                    this._nextSpawnTimeFall = Time.time + Random.Range(0.2f, 2f);
-                }
-            }
-
-            if ((this._fightTimer > 20f && this._fightTimer < 29f) || (this._fightTimer > 50f && this._fightTimer < 59f) || this._fightTimer > 80f) {
-                this._vulnerable = true;
+            UpdateVulnerability();
+            
+            if (this._vulnerable) {
                 this._animator.SetBool(Vulnerable, true);
+                return;
+            }
+            this._animator.SetBool(Vulnerable, false);
+            
+            
+            if (this.PV > this.pvMax * 0.6) // Phase 1
+            {
+                this.UpdatePhase1();
+                Debug.Log($"Phase 1 koikoube");
+            } 
+            else if (this.PV > this.pvMax * 0.3){
+                Debug.Log($"Phase 2 koikoube");
+                this.UpdatePhase2();
             }
             else {
-                this._vulnerable = false;
-                this._animator.SetBool(Vulnerable, false);
-            }
-            if (this._fightTimer > 30f && this._secondPhaseTimer <= 20f)
-            {
-                this._secondPhaseTimer += Time.deltaTime;
-
-                if (Time.time >= this._nextSpawnTimeRoll)
-                {
-                    SpawnSpecialObject();
-                    this._nextSpawnTimeRoll = Time.time + 2f;
-                }
-            }
-
-            if (this._fightTimer > 60f && this._thirdPhaseTimer <= 20f) {
-                
-                this._thirdPhaseTimer += Time.deltaTime;
-                if (Time.time >= this._nextSpawnTimeFall)
-                {
-                    SpawnFallingRock();
-                    this._nextSpawnTimeFall = Time.time + Random.Range(0.2f, 2f);
-                }
-                if (Time.time >= this._nextSpawnTimeRoll)
-                {
-                    SpawnSpecialObject();
-                    this._nextSpawnTimeRoll = Time.time + 2f;
-                }
+                Debug.Log($"Phase 3 koikoube");
+                this.UpdatePhase3();
             }
         }
+
+
+        public void UpdateVulnerability() {
+            this._vulnerable = this._fightTimer % 30 > 20;
+        }
+
+
+        public void UpdatePhase1() {
+            if (Time.time >= this._nextSpawnTimeFall)
+            {
+                this.SpawnFallingRock();
+                this._nextSpawnTimeFall = Time.time + Random.Range(0.2f, this._spawnRatePhase1);
+            }
+        }
+            
+        
+        public void UpdatePhase2() {
+
+            if (Time.time >= this._nextSpawnTimeRoll)
+            {
+                SpawnSpecialObject();
+                this._nextSpawnTimeRoll = Time.time + this._spawnRatePhase2;
+            }
+        }
+        public void UpdatePhase3() {
+
+            this.UpdatePhase1();
+            this.UpdatePhase2();
+        }
+        
 
         public void UpdateTriggerZone() {
             Player.Player[] players = DetectPlayerinTriggerZone();
@@ -209,6 +224,8 @@ namespace Treep.IA
         }
 
         private void OnTriggerPlayerEnter() {
+            // Boum musique du boss
+            
         }
 
 

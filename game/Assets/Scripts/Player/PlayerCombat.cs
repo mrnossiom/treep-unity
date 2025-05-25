@@ -136,7 +136,7 @@ namespace Treep.Player {
             else {
                 Debug.LogWarning("unknown shape");
             }
-            
+            Debug.Log("Found " + count + " enemy in the attack");
             return results.Take(count).ToArray();
         }
 

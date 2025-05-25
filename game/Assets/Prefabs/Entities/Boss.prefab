@@ -203,16 +203,17 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  pvMax: 100
+  pvMax: 180
   objectToSpawn: {fileID: 3305709912223100169, guid: 862e856ebba537906ac068a75afbcdd9, type: 3}
   specialObjectToSpawn: {fileID: 2280064040173770716, guid: b930ea2116f47d92b98ff5357c893789, type: 3}
-  minXDistance: 3
-  maxXDistance: 10
+  minXDistance: 1
+  maxXDistance: 20
   spawnHeight: 10
   _triggerZonePos: {x: -15, y: 3}
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 1152
+  _pv: 0
   loot: 100
   body: {fileID: 0}
   spriteRenderer: {fileID: 0}

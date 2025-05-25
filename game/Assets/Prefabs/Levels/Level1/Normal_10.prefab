@@ -63,6 +63,7 @@ MonoBehaviour:
   - {x: 10, y: 64}
   - {x: 18, y: 65}
   spawnPoints: []
+  bossSpawners: []
   exitPoints: []
 --- !u!1 &2635150134697267651
 GameObject:
@@ -25917,8 +25918,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 578752671
-  m_SortingLayer: -3
+  m_SortingLayerID: 506119775
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 8538023874534752937, guid: 30826f9a34e87b74884aa712ab5fc0c4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -26432,7 +26433,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 506119775
-  m_SortingLayer: -2
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: -8825894373637709660, guid: c5cbcfd512292f0438b46221b6d8ea4b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -26566,7 +26567,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 506119775
-  m_SortingLayer: -2
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: -873905259467351567, guid: 398c59db254ff3c4f981938fbad720e8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

@@ -48,9 +48,9 @@ MonoBehaviour:
   enemy1Prefab: {fileID: 6615744716052060427, guid: 99da362170ba271efbfc5c4481638faf, type: 3}
   enemy2Prefab: {fileID: 6615744716052060427, guid: 4f239b42c2288b117b5b7072886ec34a, type: 3}
   bossPrefab: {fileID: 324549141049124417, guid: 206a10eb110aa590eabfefe0d3c385b0, type: 3}
-  percentageEnemy1: 100
+  percentageEnemy1: 95
   bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
-  levelBlueprint: 000000000300000004000000
+  levelBlueprint: 000000000100000001000000010000000100000001000000010000000300000004000000
   levelOuterMask: {fileID: 6012961412606618303, guid: 6c337f00efa91372095a03e52587288b, type: 3}
