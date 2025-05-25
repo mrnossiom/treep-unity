@@ -70,12 +70,15 @@ namespace Treep.Player {
         }
 
         public void Update() {
-#if UNITY_EDITOR
             if (!this.isLocalPlayer) return;
+            
             if (Input.GetKeyDown(KeyCode.K)) {
-                Player.Singleton.CmdTakeDamage(50f);
+                CmdTakeDamage(50f);
             }
-#endif
+            
+            if (Input.GetKeyDown(KeyCode.P)) {
+                money += 100;
+            }
         }
 
         public void SetSimulated(bool simulated) {
