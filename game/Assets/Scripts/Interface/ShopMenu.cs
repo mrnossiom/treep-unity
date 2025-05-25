@@ -53,8 +53,8 @@ namespace Treep {
 
         private void Start() {
             this._stickPrice = 10;
-            this._spearPrice = 20;
-            this._swordPrice = 25;
+            this._spearPrice = 40;
+            this._swordPrice = 50;
             this._healthPrice = 15;
             this._visionPrice = 10;
             this._damagePrice = 15;

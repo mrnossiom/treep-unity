@@ -4,6 +4,8 @@ using System.Linq;
 using Treep.IA;
 using UnityEngine;
 using Mirror;
+using Treep.SFX;
+using UnityEngine.Audio;
 using UnityEngine.Serialization;
 
 
@@ -37,6 +39,12 @@ namespace Treep.IA
         
         [SyncVar(hook = nameof(OnPVChanged))]
         [SerializeField]private float _pv;
+        
+        [SerializeField] private AudioClip bossMusicClip;
+        [SerializeField] private AudioClip bossDamageClip;
+        private AudioSource BossAudioSource;
+        [SerializeField] private AudioMixer audioMixer;
+
 
         public int loot = 100;
 
@@ -63,6 +71,8 @@ namespace Treep.IA
         private bool _vulnerable = false;
         private float _spawnRatePhase1 = 1f;
         private float _spawnRatePhase2 = 1f;
+        
+        
 
         public void Awake() {
             this.body = this.GetComponent<Rigidbody2D>();
@@ -210,6 +220,9 @@ namespace Treep.IA
                 }
                 else {
                     this._animator.SetTrigger(GetHitted);
+                    this.audioMixer.GetFloat("SFXVolume", out var soundLevel);
+                    soundLevel = (soundLevel + 80) / 100;
+                    SoundFXManager.Instance.PlaySoundFXClip(this.bossDamageClip, this.transform, soundLevel);
                     return 0;
                 }
             }
@@ -221,6 +234,7 @@ namespace Treep.IA
             this._isAlive = false;
             this._animator.SetBool(IsAlive, false);
             this.RpcDie();
+            SoundFXManager.Instance.StopLoopingSound(this.BossAudioSource);
         }
 
         [ClientRpc]
@@ -231,7 +245,14 @@ namespace Treep.IA
         }
 
         private void OnTriggerPlayerEnter() {
-            // Boum musique du boss
+            
+            GameObject oldMusic = GameObject.Find("MusicManager");
+            if (oldMusic != null) {
+                Destroy(oldMusic);
+            }
+            this.audioMixer.GetFloat("MusicVolume", out var soundLevel);
+            soundLevel = (soundLevel + 80) / 100;
+            this.BossAudioSource = SoundFXManager.Instance.PlayLoopingSound(bossMusicClip, transform, soundLevel);
         }
 
 
