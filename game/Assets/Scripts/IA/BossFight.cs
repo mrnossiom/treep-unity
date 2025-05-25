@@ -1,4 +1,10 @@
+
+using System;
 using System.Linq;
+using Treep.IA;
+using UnityEngine;
+using Mirror;
+using UnityEngine.Serialization;
 
 
 namespace Treep.IA
@@ -31,6 +37,8 @@ namespace Treep.IA
         
         [SyncVar(hook = nameof(OnPVChanged))]
         [SerializeField]private float _pv;
+
+        public int loot = 100;
 
         public int loot = 100;
 
@@ -142,6 +150,33 @@ namespace Treep.IA
             this._isTrigger = true;
         }
 
+        public void UpdateTriggerZone() {
+            Player.Player[] players = DetectPlayerinTriggerZone();
+            if (players.Length == 0) {
+                return;
+            }
+
+            OnTriggerPlayerEnter();
+            this._isTrigger = true;
+        }
+
+        
+        public Player.Player[] DetectPlayerinTriggerZone() {
+        
+            var results = new Collider2D[50];
+            var count = 0;
+
+            var filter = new ContactFilter2D();
+            filter.SetLayerMask(this.playerLayerMask);
+            filter.useTriggers = true;
+
+            
+            count = Physics2D.OverlapBox((Vector2)this.transform.position + this._triggerZonePos, this._triggerZoneSize, 0f, filter, results);
+
+            
+            return (from collider2d in results.Take(count)
+                select collider2d.GetComponent<Player.Player>()).ToArray();
+        }
         
         public Player.Player[] DetectPlayerinTriggerZone() {
         
@@ -225,7 +260,6 @@ namespace Treep.IA
 
         private void OnTriggerPlayerEnter() {
             // Boum musique du boss
-            
         }
 
 

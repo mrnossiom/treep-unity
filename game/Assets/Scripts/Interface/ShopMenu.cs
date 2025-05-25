@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using Treep.SFX;
 using Treep.Weapon;
@@ -192,6 +193,10 @@ namespace Treep {
                 this._currentPlayer.money -= this._dashPrice;
                 this._dashPrice += this._inflation;
             });
+        }
+
+        public void Awake() {
+            this.moneyText.text = $"Bones (money): {this._currentPlayer.money.ToString()}";
         }
 
         public void SetActive(bool active) {

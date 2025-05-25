@@ -52,5 +52,5 @@ MonoBehaviour:
   bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
-  levelBlueprint: 000000000100000001000000010000000100000001000000010000000300000004000000
+  levelBlueprint: 000000000300000004000000
   levelOuterMask: {fileID: 6012961412606618303, guid: 6c337f00efa91372095a03e52587288b, type: 3}
