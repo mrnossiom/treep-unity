@@ -54,21 +54,42 @@ nav {
 
 /* Banner style */
 .banner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  height: 80vh;
-  color: #ffffff;
-  background-blend-mode: overlay;
+  position: relative;
+  overflow: hidden;
 
-  .content h1 {
-    font-size: 5rem;
+  text-align: center;
+  height: 95vh;
+  color: #ffffff;
+
+  .main-title {
+    margin-top: 12.5vh;
   }
 
-  .content p {
-    font-size: 2rem;
-    margin-bottom: 3rem;
+  .blured-image {
+    height: 100%;
+    /* backdrop-filter: blur(0.5rem); */
+    filter: blur(0.3rem);
+  }
+
+  .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    display: flex-column;
+    align-items: center;
+    justify-content: center;
+
+    h1 {
+      font-size: 5rem;
+    }
+
+    p {
+      font-size: 2rem;
+      margin-bottom: 3rem;
+    }
   }
 }
 

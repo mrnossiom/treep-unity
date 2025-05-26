@@ -14,7 +14,7 @@
 <body>
   <nav>
     <a class="game" href="index.html">
-      <img src="static/media/treep.gif" alt="Treep logo" />
+      <img src="static/media/Logokrommstudio.png" alt="Kromm logo" />
     </a>
 
     <div class="game">
@@ -25,7 +25,7 @@
   </nav>
 
   <section class="chronology">
-    <h1>Technical support two's chart</h1>
+    <h1>Technical support three's chart</h1>
     <div class="chart">
       <div class="percentage-line">
         <div class="percentage">0%</div>
@@ -37,13 +37,13 @@
       <div class="row">
         <div class="label">Movements</div>
         <div class="bar">
-          <div class="progress green" style="width: 75%;">Mahé</div>
+          <div class="progress green" style="width: 100%;">Mahé</div>
         </div>
       </div>
       <div class="row">
         <div class="label">Multiplayer</div>
         <div class="bar">
-          <div class="progress green" style="width: 80%;">Kristen</div>
+          <div class="progress orange" style="width: 95%;">Kristen</div>
         </div>
       </div>
       <div class="row">
@@ -55,7 +55,7 @@
       <div class="row">
         <div class="label">Assets</div>
         <div class="bar">
-          <div class="progress green" style="width: 75%;">Romain</div>
+          <div class="progress green" style="width: 100%;">Romain</div>
         </div>
       </div>
       <div class="row">
@@ -67,36 +67,36 @@
       <div class="row">
         <div class="label">Fighting mechanics</div>
         <div class="bar">
-          <div class="progress orange" style="width: 30%;">Oscar</div>
+          <div class="progress orange" style="width: 90%;">Oscar</div>
         </div>
       </div>
       <div class="row">
         <div class="label">Level Design</div>
         <div class="bar">
-          <div class="progress orange" style="width: 60%;">Romain</div>
+          <div class="progress orange" style="width: 90%;">Romain</div>
         </div>
       </div>
       <div class="row">
         <div class="label">Music composition</div>
         <div class="bar">
-          <div class="progress green" style="width: 50%;">Mahé</div>
+          <div class="progress green" style="width: 100%;">Mahé</div>
         </div>
       </div>
       <div class="row">
         <div class="label">HUD / UI</div>
         <div class="bar">
-          <div class="progress orange" style="width: 50%;">Romain</div>
+          <div class="progress green" style="width: 100%;">Romain</div>
         </div>
       </div>
       <div class="row">
         <div class="label">Sound design</div>
         <div class="bar">
-          <div class="progress orange" style="width: 25%;">Mahé</div>
+          <div class="progress green" style="width: 100%;">Mahé</div>
         </div>
       </div>
     </div>
     <p>
-      Development progress as the second technical presentation approaches
+      Development progress as the final technical presentation approaches
     </p>
   </section>
 
@@ -107,21 +107,77 @@
         <details>
           <summary>Movements</summary>
           <p>
-            As the movements had to be usable for each of the game's levels, we had to think in terms of how to make
-            them work.
-            In addition, we had to avoid action problems that could prevent another action from working, and adapt the
-            code to the tilemap operation of the levels. and adapt the code to the tilemap operation of the levels.
+            Since movement is an essential part of a game, we spent a lot of time working on its features and
+            consequently encountered several issues.
+
+            At the beginning of development, the character moved too quickly and jumped too far. By reducing the
+            character's velocity, the gameplay felt more natural. Additionally, a “sliding” sensation occurred when
+            running fast, which we removed to make the player feel like they were running on dry wood, not ice.
+
+            We also encountered abnormal behavior when jumping while sticking to a wall. The player would get stuck. The
+            issue came from a loop that forced the player downward whenever their collision box touched a wall or
+            ceiling. Removing this loop introduced another, less problematic bug where the player would stay stuck to
+            the ceiling during their jump. We later fixed this by checking whether the player was touching the ceiling
+            during the jump.
+
+            The ladder implementation was revised multiple times to fix bugs, such as missing collisions in certain
+            areas. Additionally, the character was supposed to cling to the wall with a ladder in order to climb it, but
+            a collision issue allowed the player to climb without actually touching the ladder. We resolved this by
+            creating a specific tilemap for ladders. A check was added to ensure that the player could only stand up if
+            there was enough space above them. This check detects if a ceiling prevents standing up, which ensures more
+            realistic behavior and avoids collision problems.
+
+            Initially, the crouch system did not account for the environment above the player. This meant the character
+            could occasionally stand up even when there was an obstacle (like a low ceiling) directly overhead, leading
+            to collision issues and the player potentially getting stuck in the level geometry.
+
+            Synchronizing animations, such as jump and its associated animation, was also challenging, as the jump
+            consists of different states (e.g., takeoff, in-air, landing, etc.). On top of that, attack and dash
+            animations could overlap with the jump, further complicating synchronization.
+
+            Jumping also had other issues—one bug allowed the player to convert their jump velocity into an upward
+            propulsion. This was due to Unity's automatic generation of hitboxes, which didn’t always precisely match
+            the shape of the level’s blocks.
+
+            Instead of using the automatically generated hitboxes, we manually defined one. This allowed better control
+            over the character’s interactions with the environment and prevented abnormal behaviors, like being launched
+            into the air.
+
+            Similarly, another bug occurred when jumping in a certain way into the ceiling, breaking immersion by
+            causing collision issues and letting the player clip through it.
+
+            The use of dash was also a source of bugs—players could sometimes dash through walls, which was a major
+            problem. This happened mainly because the high speed of the dash allowed the player to bypass Unity’s
+            automatic collision detection.
           </p>
         </details>
         <details>
           <summary>Assets</summary>
           <p>
-            When designing the assets, a number of challenges arose.
-            Firstly, the animations took a long time to create, as Pixel Studio's default mode didn't allow for fast
-            animation. But we found a more advanced mode that optimized the realization of these animations, reducing
-            the time spent on them.
-            Secondly, the assets were too dark. Indeed, without assembling the assets created, we hadn't noticed that
-            the whole was very dark and the colors not very diverse, often tending towards a bark brown.
+            During the creation of the assets, many challenges emerged.
+
+            First, the animations took a long time to produce because the default mode in Pixel Studio didn’t allow for
+            efficient animation workflows. However, we discovered a more advanced mode that optimized the animation
+            process and significantly reduced the time required. That said, when we later decided to slice all the
+            animations, it meant reworking every single one of them—an effort that was quite time-consuming.
+            Additionally, in pursuit of realism, several animations had to be modified multiple times to better match
+            the game's artistic direction.
+
+            Second, the tiles for zone 1 were too dark. Without assembling the created assets in the game environment,
+            we didn’t initially notice how overall gloomy the result was. The colors lacked variety and skewed toward a
+            dull, bark-brown tone that not only discouraged gameplay but also strained the eyes over time. Furthermore,
+            it was particularly difficult to find an effective way to depict termite tunnels, and the final result
+            wasn’t obvious during development.
+
+            Third, by default, Unity smooths out images to blur the pixel edges. However, in our case, having large,
+            visible pixels was an intentional stylistic choice. We had to manually change Unity’s rendering settings to
+            ensure that our pixel art remained crisp and properly displayed.
+
+            Finally, there was an issue with seams appearing between certain tiles in the level, which became noticeable
+            as the character moved. To fix this, we used a Sprite Atlas to group our assets together. This not only
+            improved performance but also resolved certain positional rendering issues at runtime. However, the Sprite
+            Atlas wasn’t fully functional when we created the bark textures, and even in the latest version of the game,
+            we occasionally encounter unpredictable Sprite Atlas bugs that appear and disappear without clear cause.
           </p>
         </details>
         <details>
@@ -133,20 +189,66 @@
 
         <details>
           <summary>Multiplayer</summary>
-          <p>When we integrated multiplayer into our game, we quickly noticed that the client position that was not in
-            the game was reset to zero as soon as we tried to move. It turns out that the problem lay in Mirror's
-            multiplayer architecture. In this architecture, the host has authority over all game data and controls the
-            movements of other players, who are not allowed to move as they wish. This authority can be delegated to all
-            clients.
+          <p>
+            When integrating multiplayer into our game, we quickly noticed that the position of the client who was not
+            the host was reset to zero every time they tried to move. It turned out that the issue stemmed from how
+            multiplayer works in *Mirror*.
+
+            There are two main ways to structure multiplayer in a game. In the first approach, the client has authority:
+            it moves its own character, and the server simply relays that information to the other players. In the
+            second approach, the server must validate every action, including player movements and any data exchanged
+            between players.
+
+            In our initial implementation, we designed the movement script to run locally under the assumption that each
+            client would control their own character freely. In reality, only the host player's movements were
+            accepted—any movement from the other clients was overridden (and effectively canceled) by the server.
+
+            To address this, we had to rethink how player movements were handled and how they interacted with *Mirror*.
+            The simplest solution was to assign authority over each player's objects to the client controlling them.
+
+            We also faced difficulties transitioning from a locally functioning game to one with synchronized clients.
+            First, we switched tools to better synchronize Unity clients. We had to manage both a solo mode, which runs
+            on a local server, and a multiplayer mode structured around a remote server.
+
+            We chose to use a *state machine* to manage the game state, load levels, trigger procedural generation with
+            the same seed for all clients, and teleport players. Learning how to use the various components of Mirror to
+            send such information was one of the main challenges. While the library appears easy to use at first,
+            synchronizing more complex states requires a deep understanding of all the tools it offers.
+
+            Additionally, the “host client” concept—where a player acts as both client and server—added more complexity.
+
+            Our organizational decision to designate a single person in charge of multiplayer also caused issues. Game
+            features were often designed and programmed without considering how they would be implemented in
+            multiplayer, making later integration more difficult and leading to frequent synchronization problems.
+
+            For example, after developing the player's movement system, we had to rework the script to make it
+            multiplayer-compatible. The same applied to the enemies and, more broadly, to the combat system.
+
+            The most difficult element to synchronize—and one that can still malfunction—is enemy synchronization. We
+            had to ensure that all clients saw the same enemy health, targeted player, movement, animations, and so on.
+            Movement synchronization was especially challenging because the pathfinding algorithm was running locally
+            for each client rather than on the server, which complicated coordination.
+
+            Unfortunately, due to time constraints and organizational challenges, we weren’t able to fully redesign our
+            multiplayer architecture to be more server-centered. While this would have made development more demanding,
+            it would also have allowed for a more stable and functional multiplayer system.
           </p>
         </details>
         <details>
           <summary>Level design</summary>
-          <p>By default, Unity smoothes images so that pixels are not visible. However, in our case, having large pixels
-            is a choice. We had to tell Unity to change the rendering method for our assets.
-            There was also a problem with gaps between certain tiles in the level, which appeared when the character
-            moved. To solve this problem, we used an Atlas Sprite, which allowed us to assemble our assets to optimize
-            performance and solve position calculation problems at runtime.
+          <p>
+            Creating the rooms took longer than expected, as each one required careful planning beforehand—a process
+            detailed in the progress description for this part of the project.
+
+            Additionally, with an average size of 80 by 40 *tiles*, and each *tile* being 16 by 16 pixels, a large
+            number of tiles had to be thoughtfully placed to design a level that was both original and optimized.
+
+            Finally, as the game evolved, along with our thinking and the development of our skills, some of the earlier
+            rooms became obsolete, as they no longer met the new standards we had set for ourselves. This led to their
+            removal from the project.
+
+            As for the rooms in level 2, several were created, but the level itself couldn’t be implemented due to a
+            lack of time.
           </p>
         </details>
         <details>
@@ -167,7 +269,7 @@
   <footer>
     <p>&copy; 2025 KROMM Studio - All rights reserved</p>
     <p>
-      Contact: <a href="mailto:treep@gmail.com">treep@gmail.com</a>
+      Contact: <a href="mailto:contact@treep.world">contact@treep.world</a>
     </p>
   </footer>
 </body>
