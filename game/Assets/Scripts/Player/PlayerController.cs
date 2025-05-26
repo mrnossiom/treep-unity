@@ -522,7 +522,7 @@ namespace Treep.Player {
             }
 
             if (other.CompareTag("Spikes")) {
-                Player.Singleton.CmdTakeDamage(50f);
+                Player.Singleton.CmdTakeDamage(5000f);
             }
         }
 
