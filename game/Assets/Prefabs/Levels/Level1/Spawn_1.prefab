@@ -53,6 +53,7 @@ MonoBehaviour:
   enemySpawners: []
   spawnPoints:
   - {x: 5, y: 3}
+  bossSpawners: []
   exitPoints: []
 --- !u!1 &1910137672820649358
 GameObject:
@@ -508,7 +509,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 15
-      m_TileSpriteIndex: 32
+      m_TileSpriteIndex: 8
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -818,7 +819,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 11
-      m_TileSpriteIndex: 30
+      m_TileSpriteIndex: 13
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -828,7 +829,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 23
-      m_TileSpriteIndex: 16
+      m_TileSpriteIndex: 14
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -838,7 +839,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 18
-      m_TileSpriteIndex: 19
+      m_TileSpriteIndex: 15
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1073,8 +1074,8 @@ Tilemap:
     m_Data: {fileID: 546858014, guid: dc457d45d2d805b4fa8062ced6b24913, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 811665216, guid: dc457d45d2d805b4fa8062ced6b24913, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 1321323420, guid: dc457d45d2d805b4fa8062ced6b24913, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 8490642196906846815, guid: dc457d45d2d805b4fa8062ced6b24913, type: 3}
   - m_RefCount: 1
@@ -1083,46 +1084,12 @@ Tilemap:
     m_Data: {fileID: -557693015, guid: dc457d45d2d805b4fa8062ced6b24913, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -1766189282, guid: dc457d45d2d805b4fa8062ced6b24913, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: -371320787, guid: dc457d45d2d805b4fa8062ced6b24913, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: -702075660, guid: dc457d45d2d805b4fa8062ced6b24913, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 2116238288, guid: dc457d45d2d805b4fa8062ced6b24913, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   - m_RefCount: 1
-    m_Data: {fileID: 1321323420, guid: dc457d45d2d805b4fa8062ced6b24913, type: 3}
+    m_Data: {fileID: -371320787, guid: dc457d45d2d805b4fa8062ced6b24913, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: -702075660, guid: dc457d45d2d805b4fa8062ced6b24913, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 76
     m_Data:
@@ -1150,60 +1117,6 @@ Tilemap:
       e03: 0
       e10: -1
       e11: 0
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-  - m_RefCount: 0
-    m_Data:
-      e00: 0
-      e01: -1
-      e02: 0
-      e03: 0
-      e10: 1
-      e11: 0
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-  - m_RefCount: 0
-    m_Data:
-      e00: -1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: -1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-  - m_RefCount: 0
-    m_Data:
-      e00: -1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
       e12: 0
       e13: 0
       e20: 0

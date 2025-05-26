@@ -59,6 +59,7 @@ MonoBehaviour:
   - {x: 44, y: 7}
   - {x: 38, y: 7}
   spawnPoints: []
+  bossSpawners: []
   exitPoints: []
 --- !u!1 &2635150134697267651
 GameObject:
@@ -13174,7 +13175,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 506119775
-  m_SortingLayer: -2
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: -8181069941672061053, guid: c8897ee17bad06047904a8fcfbd20a1a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
