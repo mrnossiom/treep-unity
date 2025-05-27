@@ -14,6 +14,9 @@ namespace Treep.Interface
         [SerializeField] private Button joinGameButton;
         [SerializeField] private NetworkController networkControllerPrefab;
         [SerializeField] private Button settingsButton;
+        [SerializeField] private Button creditsButton;
+        [SerializeField] private Button creditsButtonExit;
+        [SerializeField] private GameObject creditsPanel;
         [SerializeField] private SettingsMenu settingsPanel;
         [SerializeField] private JoinGameMenu joinGameMenu;
         [SerializeField] private Button quitButton;
@@ -51,6 +54,20 @@ namespace Treep.Interface
                 soundLevel = (soundLevel + 80) / 100;
                 SoundFXManager.Instance.PlaySoundFXClip(this.buttonPress, this.transform, soundLevel);
                 Application.Quit();
+            });
+            
+            this.creditsButton.onClick.AddListener(() => {
+                this.audioMixer.GetFloat("SFXVolume", out var soundLevel);
+                soundLevel = (soundLevel + 80) / 100;
+                SoundFXManager.Instance.PlaySoundFXClip(this.buttonPress, this.transform, soundLevel);
+                creditsPanel.SetActive(true);
+            });
+            
+            this.creditsButtonExit.onClick.AddListener(() => {
+                this.audioMixer.GetFloat("SFXVolume", out var soundLevel);
+                soundLevel = (soundLevel + 80) / 100;
+                SoundFXManager.Instance.PlaySoundFXClip(this.buttonPress, this.transform, soundLevel);
+                creditsPanel.SetActive(false);
             });
         }
     }
